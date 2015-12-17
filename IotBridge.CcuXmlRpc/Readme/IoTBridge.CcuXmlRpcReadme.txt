@@ -1,0 +1,10 @@
+Project:- IotBridge.CcuXmlRpc
+
+Summary:-
+			Class "CcuXmlRpc" Derived class from Iot Bridge interface.
+			
+Important APIs:-
+		Receive()	: This API is used to pull the value(get the value) from XMLRPCLib(internally from CCU).
+		Send()		: This API is used to push the value(set the value) XMLRPCLib(internally from CCU).
+					
+			

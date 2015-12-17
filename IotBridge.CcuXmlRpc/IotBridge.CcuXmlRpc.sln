@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotBridge.CcuXmlRpc", "IotBridge.CcuXmlRpc\IotBridge.CcuXmlRpc.csproj", "{3ABFF9D0-914F-4072-AFCE-051947597C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLRPCLib", "..\XMLRPCLib\XMLRPCLib\XMLRPCLib.csproj", "{C852CCBC-CBCA-47B3-9DE2-01059AB465BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTBridge", "..\IoTBridge\IoTBridge\IoTBridge.csproj", "{B231F913-2C4C-49B2-B78E-151E9C40C78C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ABFF9D0-914F-4072-AFCE-051947597C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ABFF9D0-914F-4072-AFCE-051947597C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ABFF9D0-914F-4072-AFCE-051947597C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ABFF9D0-914F-4072-AFCE-051947597C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C852CCBC-CBCA-47B3-9DE2-01059AB465BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C852CCBC-CBCA-47B3-9DE2-01059AB465BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C852CCBC-CBCA-47B3-9DE2-01059AB465BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C852CCBC-CBCA-47B3-9DE2-01059AB465BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B231F913-2C4C-49B2-B78E-151E9C40C78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B231F913-2C4C-49B2-B78E-151E9C40C78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B231F913-2C4C-49B2-B78E-151E9C40C78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B231F913-2C4C-49B2-B78E-151E9C40C78C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
