@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/IoTBridge_pubsub/IoTBridge/Readme
+/IoTBridge_pubsub/IotBridge.CcuXmlRpc/Readme
+/IoTBridge_pubsub/IotBridge.SbTransport/Readme
+/IoTBridge_pubsub/Receiver (CCU)/Readme
+/IoTBridge_pubsub/Sender (Console App)/Readme
+/IoTBridge_pubsub/XMLRPCLib/Readme
