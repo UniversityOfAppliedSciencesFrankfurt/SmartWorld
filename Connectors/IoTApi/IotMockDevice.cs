@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotBridge
+namespace Daenet.Iot
 {
     /// <summary>
     /// Mock device which supports specific protocol.This device is very useful for testing of protocols.
@@ -18,7 +18,7 @@ namespace IotBridge
     /// </summary>
     public class IotMockDevice
     {
-        private IIoTTransport m_Transport;
+        private IIotApi m_Transport;
         private Dictionary<string, object> m_RcvAckArgs;
         private Dictionary<string, object> m_OnMsgRcvArg;
         private Dictionary<string, object> m_SndAckArgs;
@@ -31,7 +31,7 @@ namespace IotBridge
 
         private string m_Id = "MockDevice" + new Guid().ToString();
 
-        public IotMockDevice(IIoTTransport deviceTransport,
+        public IotMockDevice(IIotApi deviceTransport,
             Dictionary<string, object> rcvAckArgs,
             Dictionary<string, object> onMsgRcvArgs,
             Dictionary<string, object> sndArgs,
@@ -55,11 +55,13 @@ namespace IotBridge
             Task t = new Task(() =>
             {
 
-                m_Transport.OnMessage((msg) =>
+                m_Transport.OnMessage((sensorMessage) =>
                 {
+                    dynamic msg = sensorMessage as dynamic;
+
                     m_TraceMethod(String.Format("Message: {0}", msg.MessageId));
 
-                    m_Transport.SendReceiveAckonwledgeResult(msg.MessageId, null, m_RcvAckArgs);
+                    m_Transport.AcknowledgeReceivedMessage(msg.MessageId, null, m_RcvAckArgs);
 
                     if (msg.Properties.ContainsKey("Start"))
                     {
@@ -90,28 +92,30 @@ namespace IotBridge
             }
         }
 
-        private void startTelemetryLoop(Message msg)
+        private void startTelemetryLoop(object msg)
         {
             m_TelemetryTask = new Task(() =>
             {
-                m_Transport.OnSendAcknowledgeResult((msgId, err) =>
+                m_Transport.RegisterAcknowledge((msgId, err) =>
                 {
-                    m_TraceMethod(String.Format("Ackowledged send of telemetry data for MessageId: {0}", msgId));
+                    m_TraceMethod(String.Format("Ackowledge of message received for MessageId: {0}", msgId));
                 });
 
                 while (m_IsStopRequested == false)
                 {
-                    Task.Delay((int)msg.Properties["Start"]);
+                    Task.Delay(5000);
 
-                    TelemetryData data = new TelemetryData()
+                    TelemetryData sensorEvent = new TelemetryData()
                     {
                         Device = m_Id,
                         Temperature = DateTime.Now.Minute,
                     };
 
-                    Message telemetryData = new Message(data);
 
-                    m_Transport.Send(telemetryData, m_SndAckArgs);
+                    m_Transport.SendAsync(sensorEvent,
+                        (sentMessages) => { },
+                        (failedMessages, err) => { },
+                        m_SndAckArgs).Wait();
                 }
 
                 m_IsStopRequested = false;
@@ -126,9 +130,9 @@ namespace IotBridge
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        protected virtual string ReadMessage(Message msg)
+        protected virtual string ReadMessage(object msg)
         {
-            return msg.MessageId;
+            return msg.ToString();
         }
     }
 

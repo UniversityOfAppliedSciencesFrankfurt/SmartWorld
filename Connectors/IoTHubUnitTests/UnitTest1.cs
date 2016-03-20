@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Azure.IotHubConnector;
 using System.Collections.Generic;
 using System.Configuration;
+using Daenet.Iot;
 
 namespace IoTHubUnitTests
 {

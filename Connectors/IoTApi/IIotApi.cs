@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IotBridge
+namespace Daenet.Iot
 {
     /// <summary>
     /// Interface which defines operation which IoT transports have to implement.
     /// </summary>
-    public interface IIoTTransport
+    public interface IIotApi
     {
         /// <summary>
         /// Performs initialization of transport implementation.
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        Task Initialize(Dictionary<string, object> args);
-        
+        Task Open(Dictionary<string, object> args);
+
         /// <summary>
         /// Gets the name of transport library.
         /// </summary>
@@ -30,7 +30,7 @@ namespace IotBridge
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        void OnMessage(Action<Message> onReceiveMsg, Dictionary<string, object> args = null);
+        void OnMessage(Action<object> onReceiveMsg, Dictionary<string, object> args = null);
 
         /// <summary>
         /// Receievs the message.
@@ -39,56 +39,66 @@ namespace IotBridge
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
         /// <returns></returns>
-        Message Receive(Dictionary<string, object> args = null);
+        object Receive(Dictionary<string, object> args = null);
 
         /// <summary>
-        /// After the message is receieved the business code, whic h uses this transport,
-        /// MUST invoke this method to commit receiving of the message. 
+        /// After the message is receieved the business code, whic huses this transport,
+        /// SHOULD/MUST (depends on concrete implementation) invoke this method to commit receiving of the message. 
         /// If the transport does not support commit of the message, then implementation should 
         /// return without any action.
         /// </summary>
-        /// <param name="msgId">Identifier of the message, which should be commited.</param>
-        /// <param name="error">If no error ocurred this MUST BE null.
-        /// Otherwise this argument is instance of exception which has ocurred.</param>
+        /// <param name="msgId">Identifier of the message, which should be acknowledged.</param>
+        /// <param name="error">If no error ocurred this MUST BE null. If no error ocurred, message can be commited.
+        /// Otherwise this argument is instance of exception which has ocurred. In that case message is abandoned and can be
+        /// resent again. Exact behavior depends on the concrete implementation.</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        void SendReceiveAckonwledgeResult(string msgId, Exception error, Dictionary<string, object> args = null);
+        void AcknowledgeReceivedMessage(string msgId, Exception error = null, Dictionary<string, object> args = null);
+
+
+        void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived);
+
 
         /// <summary>
-        /// Sends a message.
+        /// Sends the message to service or device. 
         /// </summary>
-        /// <param name="msg">Message which will be sent.</param>
-        /// <param name="args">List of arguments which can be internally used by transports.
-        /// Because transports will use different argumens
-        /// this parameter provides a generic dictionary of arguments.</param>
-        void Send(Message msg, Dictionary<string, object> args = null);
-
-        /// <summary>
-        /// After sending of the message by using <see cref="Send"/> method, the transport will invoke
-        /// this method to notify business code about result of sending of the message.
-        /// If the transport does not support reliable messaging it should invoke this method without providing an exception.
-        /// First argument of type <see cref="string"/> specifyies the message identifier (used for correlation) and
-        /// second argument describes the error if some ocurred. If nmo error ocurred, second argument is null.
-        /// </summary>
-        /// <param name="onMsgSendResult"></param>
-        /// <param name="args">List of arguments which can be internally used by transports.
-        /// Because transports will use different argumens
-        /// this parameter provides a generic dictionary of arguments.</param>
-        void OnSendAcknowledgeResult(Action<string, Exception> onMsgSendResult, Dictionary<string, object> args = null);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg">Sends a message.</param>
+        /// <param name="sensorMessage">The message to be sent.</param>
         /// <param name="onSuccess">On success delegate method (promise).</param>
         /// <param name="onError">>On error delegate method (promise).</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        /// <returns></returns>
-        Task SendAsync(Message msg, Action<Message> onSuccess = null,
-          Action<Exception> onError = null,
-          Dictionary<string, object> args = null);
+        /// <returns>Task</returns>
+        /// <remarks>
+        /// Note, the exact behavior of sending of the
+        /// message is defined by concrete implementation.
+        /// </remarks>
+
+        Task SendAsync(object sensorMessage,
+                                  Action<IList<object>> onSuccess = null,
+                                  Action<IList<object>, Exception> onError = null,
+                                  Dictionary<string, object> args = null);
+
+
+
+        /// <summary>
+        /// Sends the message to service or device. 
+        /// </summary>
+        /// <param name="sensorMessages">Batch pof messages.</param>
+        /// <param name="onSuccess">On success delegate method (promise).</param>
+        /// <param name="onError">>On error delegate method (promise).</param>
+        /// <param name="args">List of arguments which can be internally used by transports.
+        /// Because transports will use different argumens
+        /// this parameter provides a generic dictionary of arguments.</param>
+        /// <returns>Task</returns>
+        /// <remarks>
+        /// Note, the exact behavior of sending of the
+        /// message is defined by concrete implementation.
+        /// </remarks>
+        Task SendAsync(IList<object> sensorMessages,
+           Action<IList<object>> onSuccess = null,
+           Action<IList<object>, Exception> onError = null,
+           Dictionary<string, object> args = null);
     }
 }

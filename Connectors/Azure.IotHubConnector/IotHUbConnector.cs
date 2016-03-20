@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
-namespace Azure.IotHubConnector
+namespace Daenet.Iot
 {
-    public class IotHubConnector
+    public class IotHubConnector : IIotApi
     {
         /// <summary>
         /// Message as serialized for IotHub and original message s sobject.
@@ -93,7 +93,7 @@ namespace Azure.IotHubConnector
             });
         }
 
-        #region Defaul Services
+        #region Default Services
 
         /// <summary>
         /// Default serislization function is JSON with UTF8 encoding.
@@ -120,7 +120,7 @@ namespace Azure.IotHubConnector
         #endregion
 
 
-        public void OnMessage(Action<IotBridge.Message> onReceiveMsg, Dictionary<string, object> args = null)
+        public void OnMessage(Action<object> onReceiveMsg, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
@@ -130,15 +130,22 @@ namespace Azure.IotHubConnector
             throw new NotImplementedException();
         }
 
-        public IotBridge.Message Receive(Dictionary<string, object> args = null)
+        public object Receive(Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
 
-        public void Send(IotBridge.Message msg, Dictionary<string, object> args = null)
+
+        public void AcknowledgeReceivedMessage(string msgId, Exception error, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
+
+        public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public async Task SendAsync(object sensorMessage,
                                     Action<IList<object>> onSuccess = null,
@@ -151,7 +158,7 @@ namespace Azure.IotHubConnector
 
 
 
-        public async Task SendAsync(ICollection<object> sensorMessages,
+        public async Task SendAsync(IList<object> sensorMessages,
             Action<IList<object>> onSuccess = null,
             Action<IList<object>, Exception> onError = null,
             Dictionary<string, object> args = null)
@@ -212,5 +219,6 @@ namespace Azure.IotHubConnector
                 throw ex;
             }
         }
+
     }
 }

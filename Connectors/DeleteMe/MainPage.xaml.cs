@@ -1,4 +1,5 @@
-﻿using Azure.IotHubConnector;
+﻿
+using Daenet.Iot;
 using System;
 using System.Collections.Generic;
 using System.IO;

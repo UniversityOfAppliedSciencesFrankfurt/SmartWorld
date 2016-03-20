@@ -43,9 +43,9 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IIoTTransport.cs" />
+    <Compile Include="IIotApi.cs" />
     <Compile Include="IotMockDevice.cs" />
-    <Compile Include="Message.cs" />
+    <None Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
