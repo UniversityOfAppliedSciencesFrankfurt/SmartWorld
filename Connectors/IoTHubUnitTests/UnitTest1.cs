@@ -93,7 +93,7 @@ namespace IoTHubUnitTests
             string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};{ConfigurationManager.AppSettings["DeviceId"]}";
             IotHubConnector conn = new IotHubConnector();
             conn.Open(new Dictionary<string, object>() {
-                { "ConnStr", "DeviceId=PI2-01;HostName=DRoth-IotHub-01.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=G0ddVsZb5UYFIt2iVTnN+psldF0qRHHxKMUcAo1tdWE=" },
+                { "ConnStr",conStr }
             }).Wait();
             return conn;
         }
