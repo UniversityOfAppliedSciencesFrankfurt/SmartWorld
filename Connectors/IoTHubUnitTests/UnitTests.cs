@@ -126,15 +126,24 @@ namespace IoTHubUnitTests
 
             ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
 
-            //svcClient.SendAsync(deviceId, createServiceMessage(new { Command = "testrcv", Value = "msg1" })).Wait();
+            int msgId = new Random().Next();
+
+            svcClient.SendAsync(deviceId, createServiceMessage(new { Command = "testrcv", Value = "msg1", MessageId = msgId })).Wait();
 
             conn.ReceiveAsync((msg) =>
             {
-               dynamic obj = JsonConvert.DeserializeObject(Encoding.UTF8.GetString((byte[])msg));
+                if (msg != null)
+                {
+                    dynamic obj = JsonConvert.DeserializeObject(Encoding.UTF8.GetString((byte[])msg));
 
-                Assert.IsTrue(obj.Command == "testrcv");
+                    Assert.IsTrue(obj.Command == "testrcv");
 
-                Assert.IsTrue(obj.Value == "msg1");
+                    Assert.IsTrue(obj.Value == "msg1");
+
+                    Assert.IsTrue(obj.MessageId == msgId);
+                }
+                else
+                    Assert.Inconclusive("No message received during test. This might be typically timeout issue. Please restart test.");
             },
             (err) => 
             {

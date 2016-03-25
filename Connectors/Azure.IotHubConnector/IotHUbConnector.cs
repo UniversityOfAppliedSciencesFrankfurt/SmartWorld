@@ -64,7 +64,7 @@ namespace Daenet.Iot
                     m_OnRetryCallback = onRetryCallback;
 
                 if (args.ContainsKey("NumOfRetries"))
-                    m_NumOfRetries  = (int)args["NumOfRetries"];
+                    m_NumOfRetries = (int)args["NumOfRetries"];
 
 
                 string connStr = null;
@@ -178,13 +178,13 @@ namespace Daenet.Iot
                     {
                         try
                         {
-                            await m_DeviceClient.SendEventBatchAsync(m_SensorMessages.Select(m=>m.Item1));
+                            await m_DeviceClient.SendEventBatchAsync(m_SensorMessages.Select(m => m.Item1));
 
                             Debug.WriteLine($"Sent {m_SensorMessages.Count} events to cloud.");
 
                             try
                             {
-                                onSuccess?.Invoke(new List<object>(m_SensorMessages.Select(m=>m.Item2)));
+                                onSuccess?.Invoke(new List<object>(m_SensorMessages.Select(m => m.Item2)));
                             }
                             catch (Exception callerException)
                             {
@@ -220,20 +220,31 @@ namespace Daenet.Iot
             }
         }
 
-        public async Task ReceiveAsync(Action<object> onSuccess = null, 
-            Action<Exception> onError = null, int timeout = 60000,
+        public async Task ReceiveAsync(Action<object> onSuccess = null,
+            Action<Exception> onError = null,
+            int timeout = 60000,
+            bool autoComplete = true,
             Dictionary<string, object> args = null)
         {
+            Message msg = null;
+
             try
             {
-                var msg = await m_DeviceClient.ReceiveAsync(TimeSpan.FromMilliseconds(timeout));
-               
-                onSuccess?.Invoke(msg.GetBytes());
+                msg = await m_DeviceClient.ReceiveAsync(TimeSpan.FromMilliseconds(timeout));
+
+                onSuccess?.Invoke(msg == null? null : msg.GetBytes());
+
+                if (autoComplete)
+                    await m_DeviceClient.CompleteAsync(msg);
             }
             catch (Exception ex)
             {
+                if (autoComplete && msg != null)
+                    await m_DeviceClient.CompleteAsync(msg);
+
                 onError?.Invoke(ex);
             }
+
             return;
         }
     }

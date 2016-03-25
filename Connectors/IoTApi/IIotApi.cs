@@ -37,22 +37,27 @@ namespace Daenet.Iot
         /// </summary>
         /// <param name="onSuccess">On success delegate method (promise).</param>
         /// <param name="onError">>On error delegate method (promise).</param>
+        /// <param name="autoComplete">True if the message should be completed automatically.
+        /// In that case it is completted as successful after successful invoke of onSuccess callback function or it 
+        /// is completed as failed if onSuccess callback failes.
+        /// If this is set on NULL, <see cref="AcknowledgeReceivedMessage" /> should explicitelly be called.
+        /// If some APIs do not support message completion, this parameter can be ignored.</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
         /// <returns>List of messages.</returns>
         Task ReceiveAsync(Action<object> onSuccess = null,
-        Action<Exception> onError = null, int timeout = 60000,
+        Action<Exception> onError = null, int timeout = 60000, bool autoComplete = true,
         Dictionary<string, object> args = null);
 
         /// <summary>
-        /// After the message is receieved the business code, whic huses this transport,
+        /// After the message is receieved the business code, which huses this transport,
         /// SHOULD/MUST (depends on concrete implementation) invoke this method to commit receiving of the message. 
         /// If the transport does not support commit of the message, then implementation should 
         /// return without any action.
         /// </summary>
         /// <param name="msgId">Identifier of the message, which should be acknowledged.</param>
-        /// <param name="error">If no error ocurred this MUST BE null. If no error ocurred, message can be commited.
+        /// <param name="error">If no error ocurred this MUST BE null. If no error ocurred, message will be completed as successful.
         /// Otherwise this argument is instance of exception which has ocurred. In that case message is abandoned and can be
         /// resent again. Exact behavior depends on the concrete implementation.</param>
         /// <param name="args">List of arguments which can be internally used by transports.
