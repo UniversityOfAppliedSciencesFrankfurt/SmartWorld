@@ -3,12 +3,36 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Configuration;
 using Daenet.Iot;
+using Microsoft.Azure.Devices;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace IoTHubUnitTests
 {
     [TestClass]
-    public class UnitTest1
-    { 
+    public class UnitTests
+    {
+
+        private static IotHubConnector getConnector()
+        {
+            string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};{ConfigurationManager.AppSettings["DeviceId"]}";
+            IotHubConnector conn = new IotHubConnector();
+            conn.Open(new Dictionary<string, object>() {
+                { "ConnStr",conStr }
+            }).Wait();
+            return conn;
+        }
+
+
+        private static Microsoft.Azure.Devices.Message createServiceMessage(object sensorMessage)
+        {
+            var messageString = JsonConvert.SerializeObject(sensorMessage);
+
+            var message = new Microsoft.Azure.Devices.Message(Encoding.UTF8.GetBytes(messageString));
+
+            return message;
+        }
+
         [TestMethod]
         public void InitWithExpliciteDeviceId_Test()
         {
@@ -19,7 +43,7 @@ namespace IoTHubUnitTests
             }).Wait();
 
             conn.SendAsync(
-                new { temperature = 22.0, sensor="unittest", messageId="1"},
+                new { temperature = 22.0, sensor = "unittest", messageId = "1" },
                 (msgs) =>
                 {
                     Assert.IsTrue(msgs.Count == 1);
@@ -34,11 +58,11 @@ namespace IoTHubUnitTests
         }
 
 
-             [TestMethod]
+        [TestMethod]
         public void InitWithDeviceIdInConnStr_Test()
         {
             string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};DeviceId={ConfigurationManager.AppSettings["DeviceId"]}";
-            IotHubConnector conn = new IotHubConnector();
+            IIotApi conn = new IotHubConnector();
             conn.Open(new Dictionary<string, object>() {
                  { "ConnStr", conStr },
             }).Wait();
@@ -62,14 +86,14 @@ namespace IoTHubUnitTests
         [TestMethod]
         public void SendBatch_Test()
         {
-            IotHubConnector conn = new IotHubConnector();
+            IIotApi conn = new IotHubConnector();
             conn.Open(new Dictionary<string, object>() {
                { "ConnStr", ConfigurationManager.AppSettings["ConnStr"] },
                { "DeviceId", ConfigurationManager.AppSettings["DeviceId"] },
                { "NumOfMessagesPerBatch", 100 }
             }).Wait();
 
-            
+
             for (int i = 0; i < 100; i++)
             {
                 conn.SendAsync(
@@ -88,14 +112,34 @@ namespace IoTHubUnitTests
             }
         }
 
-        private static IotHubConnector getConnector()
+        [TestMethod]
+        public void ReceiveBatch_Test()
         {
-            string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};{ConfigurationManager.AppSettings["DeviceId"]}";
-            IotHubConnector conn = new IotHubConnector();
+            string deviceId = ConfigurationManager.AppSettings["DeviceId"];
+
+            IIotApi conn = new IotHubConnector();
             conn.Open(new Dictionary<string, object>() {
-                { "ConnStr",conStr }
+               { "ConnStr", ConfigurationManager.AppSettings["ConnStr"] },
+               { "DeviceId", deviceId },
+               { "NumOfMessagesPerBatch", 100 }
             }).Wait();
-            return conn;
+
+            ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
+
+            //svcClient.SendAsync(deviceId, createServiceMessage(new { Command = "testrcv", Value = "msg1" })).Wait();
+
+            conn.ReceiveAsync((msg) =>
+            {
+               dynamic obj = JsonConvert.DeserializeObject(Encoding.UTF8.GetString((byte[])msg));
+
+                Assert.IsTrue(obj.Command == "testrcv");
+
+                Assert.IsTrue(obj.Value == "msg1");
+            },
+            (err) => 
+            {
+                throw err;
+            }, 0).Wait();
         }
     }
 }

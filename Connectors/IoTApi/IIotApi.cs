@@ -35,11 +35,15 @@ namespace Daenet.Iot
         /// <summary>
         /// Receievs the message.
         /// </summary>
+        /// <param name="onSuccess">On success delegate method (promise).</param>
+        /// <param name="onError">>On error delegate method (promise).</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        /// <returns></returns>
-        object Receive(Dictionary<string, object> args = null);
+        /// <returns>List of messages.</returns>
+        Task ReceiveAsync(Action<object> onSuccess = null,
+        Action<Exception> onError = null, int timeout = 60000,
+        Dictionary<string, object> args = null);
 
         /// <summary>
         /// After the message is receieved the business code, whic huses this transport,

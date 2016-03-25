@@ -15,7 +15,7 @@ namespace Daenet.Iot
         /// <summary>
         /// Message as serialized for IotHub and original message s sobject.
         /// </summary>
-        private List<Tuple<Message, object>> m_SensorMessages = new List<Tuple<Message, object>>();
+        private List<Tuple<Microsoft.Azure.Devices.Client.Message, object>> m_SensorMessages = new List<Tuple<Microsoft.Azure.Devices.Client.Message, object>>();
 
         /// <summary>
         /// Number of retries when sending message(s).
@@ -31,7 +31,7 @@ namespace Daenet.Iot
         /// <summary>
         /// Action which can be used to serialize sensor Event to Message.
         /// </summary>
-        private Func<object, Message> m_SerializationFunction;
+        private Func<object, Microsoft.Azure.Devices.Client.Message> m_SerializationFunction;
 
 
         /// <summary>
@@ -100,11 +100,11 @@ namespace Daenet.Iot
         /// </summary>
         /// <param name="sensorMessage"></param>
         /// <returns></returns>
-        private static Message jsonSerializeFunc(object sensorMessage)
+        private static Microsoft.Azure.Devices.Client.Message jsonSerializeFunc(object sensorMessage)
         {
             var messageString = JsonConvert.SerializeObject(sensorMessage);
 
-            var message = new Message(Encoding.UTF8.GetBytes(messageString));
+            var message = new Microsoft.Azure.Devices.Client.Message(Encoding.UTF8.GetBytes(messageString));
 
             return message;
         }
@@ -167,7 +167,7 @@ namespace Daenet.Iot
             {
                 foreach (var msg in sensorMessages)
                 {
-                    m_SensorMessages.Add(new Tuple<Message, object>(jsonSerializeFunc(msg), msg));
+                    m_SensorMessages.Add(new Tuple<Microsoft.Azure.Devices.Client.Message, object>(jsonSerializeFunc(msg), msg));
                 }
 
                 if (m_SensorMessages.Count >= m_NumOfMessagesPerBatch)
@@ -220,5 +220,21 @@ namespace Daenet.Iot
             }
         }
 
+        public async Task ReceiveAsync(Action<object> onSuccess = null, 
+            Action<Exception> onError = null, int timeout = 60000,
+            Dictionary<string, object> args = null)
+        {
+            try
+            {
+                var msg = await m_DeviceClient.ReceiveAsync(TimeSpan.FromMilliseconds(timeout));
+               
+                onSuccess?.Invoke(msg.GetBytes());
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(ex);
+            }
+            return;
+        }
     }
 }

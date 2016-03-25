@@ -22,7 +22,7 @@ namespace Daenet.Iot
         private Dictionary<string, object> m_RcvAckArgs;
         private Dictionary<string, object> m_OnMsgRcvArg;
         private Dictionary<string, object> m_SndAckArgs;
-        private Dictionary<string, object> m_SndArgs;
+       // private Dictionary<string, object> m_SndArgs;
         private Action<string> m_TraceMethod;
 
         private bool m_IsStopRequested = false;
