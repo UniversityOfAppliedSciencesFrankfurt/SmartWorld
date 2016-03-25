@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Daenet.Iot
 {
@@ -46,7 +47,8 @@ namespace Daenet.Iot
         {
             get
             {
-                return "IotHubConnector";
+                string n = m_DeviceClient == null ? "" : Enum.GetName(typeof(TransportType), m_DeviceClient.TransportTypeInUse);
+                return $"IotHubConnector-{n}";
             }
         }
 
@@ -120,26 +122,41 @@ namespace Daenet.Iot
         #endregion
 
 
-        public void OnMessage(Action<object> onReceiveMsg, Dictionary<string, object> args = null)
+        /// <summary>
+        /// Starts message receiver loop.
+        /// </summary>
+        /// <param name="onReceiveMsg"></param>
+        /// <param name="cancelationToken"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+           return Task.Run(() => {
+
+                while (cancelationToken.IsCancellationRequested == false)
+                {
+                   var msg = m_DeviceClient.ReceiveAsync().Result;
+
+                   bool completionState = (bool)onReceiveMsg?.Invoke(msg);
+
+                   if (msg != null)
+                   {
+                       if (completionState)
+                           m_DeviceClient.CompleteAsync(msg).Wait();
+                       else
+                           m_DeviceClient.AbandonAsync(msg).Wait();
+                   }
+               }
+
+            }, cancelationToken);        
+      
         }
 
         public void OnSendAcknowledgeResult(Action<string, Exception> onMsgSendResult, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
-
-        public object Receive(Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public void AcknowledgeReceivedMessage(string msgId, Exception error, Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
         {
@@ -147,6 +164,14 @@ namespace Daenet.Iot
         }
 
 
+        /// <summary>
+        /// Sends telemetry message to IoTHub.
+        /// </summary>
+        /// <param name="sensorMessage"></param>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task SendAsync(object sensorMessage,
                                     Action<IList<object>> onSuccess = null,
                                     Action<IList<object>, Exception> onError = null,
@@ -155,9 +180,15 @@ namespace Daenet.Iot
             await SendAsync(new List<object> { sensorMessage }, onSuccess, onError, args);
         }
 
-
-
-
+        
+        /// <summary>
+        /// Sends telemetry message to IoTHub.
+        /// </summary>
+        /// <param name="sensorMessages"></param>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task SendAsync(IList<object> sensorMessages,
             Action<IList<object>> onSuccess = null,
             Action<IList<object>, Exception> onError = null,
@@ -220,10 +251,17 @@ namespace Daenet.Iot
             }
         }
 
-        public async Task ReceiveAsync(Action<object> onSuccess = null,
-            Action<Exception> onError = null,
+        /// <summary>
+        /// Receives the command from IoTHub.
+        /// </summary>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="timeout"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public async Task ReceiveAsync(Func<object, bool> onSuccess = null,
+            Func<Exception, bool> onError = null,
             int timeout = 60000,
-            bool autoComplete = true,
             Dictionary<string, object> args = null)
         {
             Message msg = null;
@@ -232,17 +270,27 @@ namespace Daenet.Iot
             {
                 msg = await m_DeviceClient.ReceiveAsync(TimeSpan.FromMilliseconds(timeout));
 
-                onSuccess?.Invoke(msg == null? null : msg.GetBytes());
+                bool completionState = (bool)onSuccess?.Invoke(msg == null ? null : msg.GetBytes());
 
-                if (autoComplete)
-                    await m_DeviceClient.CompleteAsync(msg);
+                if (msg != null)
+                {
+                    if (completionState)
+                        await m_DeviceClient.CompleteAsync(msg);
+                    else
+                        await m_DeviceClient.AbandonAsync(msg);
+                }
             }
             catch (Exception ex)
             {
-                if (autoComplete && msg != null)
-                    await m_DeviceClient.CompleteAsync(msg);
+                bool completionState = (bool)onError?.Invoke(ex);
 
-                onError?.Invoke(ex);
+                if (msg != null)
+                {
+                    if (completionState)
+                        await m_DeviceClient.CompleteAsync(msg);
+                    else
+                        await m_DeviceClient.AbandonAsync(msg);
+                }
             }
 
             return;

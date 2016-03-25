@@ -55,24 +55,24 @@ namespace Daenet.Iot
             Task t = new Task(() =>
             {
 
-                m_Transport.OnMessage((sensorMessage) =>
+            m_Transport.OnMessage((sensorMessage) =>
+            {
+                dynamic msg = sensorMessage as dynamic;
+
+                m_TraceMethod(String.Format("Message: {0}", msg.MessageId));
+
+                if (msg.Properties.ContainsKey("Start"))
                 {
-                    dynamic msg = sensorMessage as dynamic;
+                    startTelemetryLoop(msg);
+                }
+                else if (msg.Properties.ContainsKey("Stop"))
+                {
+                    stopTelemetryLoop();
+                }
 
-                    m_TraceMethod(String.Format("Message: {0}", msg.MessageId));
+                return true;
 
-                    m_Transport.AcknowledgeReceivedMessage(msg.MessageId, null, m_RcvAckArgs);
-
-                    if (msg.Properties.ContainsKey("Start"))
-                    {
-                        startTelemetryLoop(msg);
-                    }
-                    else if (msg.Properties.ContainsKey("Stop"))
-                    {
-                        stopTelemetryLoop();
-                    }
-
-                }, m_OnMsgRcvArg);
+            }, new System.Threading.CancellationToken(), m_OnMsgRcvArg);
             });
 
             t.Start();

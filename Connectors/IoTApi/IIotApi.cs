@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Daenet.Iot
@@ -26,11 +27,12 @@ namespace Daenet.Iot
         /// <summary>
         /// Invoked by transport when a message is received.
         /// </summary>
-        /// <param name="onReceiveMsg">The method which is invoked when the message is received.</param>
+        /// <param name="onReceiveMsg">The method which is invoked when the message is received.
+        /// Return value shoul d be set on true if message needs to be acknowledged.</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        void OnMessage(Action<object> onReceiveMsg, Dictionary<string, object> args = null);
+        Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null);
 
         /// <summary>
         /// Receievs the message.
@@ -46,24 +48,27 @@ namespace Daenet.Iot
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
         /// <returns>List of messages.</returns>
-        Task ReceiveAsync(Action<object> onSuccess = null,
-        Action<Exception> onError = null, int timeout = 60000, bool autoComplete = true,
-        Dictionary<string, object> args = null);
+        Task ReceiveAsync(Func<object, bool> onSuccess = null,
+            Func<Exception, bool> onError = null,
+            int timeout = 60000,
+            Dictionary<string, object> args = null);
 
         /// <summary>
-        /// After the message is receieved the business code, which huses this transport,
-        /// SHOULD/MUST (depends on concrete implementation) invoke this method to commit receiving of the message. 
-        /// If the transport does not support commit of the message, then implementation should 
+        /// After the message is receieved the business code, 
+        /// SHOULD/MUST/CAN (depends on concrete implementation) invoke this method to acknowledge receiving of the message. 
+        /// If the transport does not support acknowledge of the message, then implementation should 
         /// return without any action.
         /// </summary>
-        /// <param name="msgId">Identifier of the message, which should be acknowledged.</param>
-        /// <param name="error">If no error ocurred this MUST BE null. If no error ocurred, message will be completed as successful.
-        /// Otherwise this argument is instance of exception which has ocurred. In that case message is abandoned and can be
-        /// resent again. Exact behavior depends on the concrete implementation.</param>
+        /// <param name="msg">Message, which should be acknowledged.</param>
+        /// <param name="error">If no error ocurred this MUST BE null. If no error ocurred, message will be acknowledged (completed)
+        /// as successful.
+        /// Otherwise this argument is instance of exception which has ocurred. In that case message is acknowledged as failed (abandoned)
+        /// and can be resent again. 
+        /// Exact behavior depends on the concrete implementation.</param>
         /// <param name="args">List of arguments which can be internally used by transports.
         /// Because transports will use different argumens
         /// this parameter provides a generic dictionary of arguments.</param>
-        void AcknowledgeReceivedMessage(string msgId, Exception error = null, Dictionary<string, object> args = null);
+        //Task AcknowledgeReceivedMessageAsync(object msg, Exception error = null, Dictionary<string, object> args = null);
 
 
         void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived);

@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IoTApi\IoTApi.csproj">
+    <ProjectReference Include="..\..\IoTApi\IoTApi.csproj">
       <Project>{d7de4507-cbdf-4620-9ab7-25a403efab47}</Project>
       <Name>IoTApi</Name>
     </ProjectReference>

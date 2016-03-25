@@ -6,6 +6,7 @@ using Daenet.Iot;
 using Microsoft.Azure.Devices;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading;
 
 namespace IoTHubUnitTests
 {
@@ -13,9 +14,9 @@ namespace IoTHubUnitTests
     public class UnitTests
     {
 
-        private static IotHubConnector getConnector()
+        private static IIotApi getConnector()
         {
-            string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};{ConfigurationManager.AppSettings["DeviceId"]}";
+            string conStr = $"{ConfigurationManager.AppSettings["ConnStr"]};DeviceId={ConfigurationManager.AppSettings["DeviceId"]}";
             IotHubConnector conn = new IotHubConnector();
             conn.Open(new Dictionary<string, object>() {
                 { "ConnStr",conStr }
@@ -117,12 +118,7 @@ namespace IoTHubUnitTests
         {
             string deviceId = ConfigurationManager.AppSettings["DeviceId"];
 
-            IIotApi conn = new IotHubConnector();
-            conn.Open(new Dictionary<string, object>() {
-               { "ConnStr", ConfigurationManager.AppSettings["ConnStr"] },
-               { "DeviceId", deviceId },
-               { "NumOfMessagesPerBatch", 100 }
-            }).Wait();
+            IIotApi conn = getConnector();
 
             ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
 
@@ -144,11 +140,118 @@ namespace IoTHubUnitTests
                 }
                 else
                     Assert.Inconclusive("No message received during test. This might be typically timeout issue. Please restart test.");
+
+                return true;
             },
-            (err) => 
+            (err) =>
             {
                 throw err;
             }, 0).Wait();
         }
+
+
+        [TestMethod]
+        public void Acknowledge_Test()
+        {
+            string deviceId = ConfigurationManager.AppSettings["DeviceId"];
+
+            IIotApi conn = getConnector();
+
+            ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
+
+            int msgId = new Random().Next();
+
+            svcClient.SendAsync(deviceId, createServiceMessage(new { Command = "testrcv", Value = "msg1", MessageId = msgId })).Wait();
+
+            for (int i = 0; i < 5; i++)
+            {
+                conn.ReceiveAsync((msg) =>
+                {
+                    if (msg != null)
+                    {
+                        dynamic obj = JsonConvert.DeserializeObject(Encoding.UTF8.GetString((byte[])msg));
+
+                        // This will remove unexpected messages from queue.
+                        if (obj.MessageId != msgId)
+                            return true;
+
+                        if (i < 3)
+                        {
+                            return false;
+                        }
+                        else
+                            return true;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                },
+                (err) =>
+                {
+                    throw err;
+                }, 0).Wait();
+            }
+        }
+
+
+
+        [TestMethod]
+        public void OnMessage_Test()
+        {
+            ClearQueue_Test();
+
+            string deviceId = ConfigurationManager.AppSettings["DeviceId"];
+
+            IIotApi conn = getConnector();
+
+            ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
+
+            for (int i = 0; i < 10; i++)
+            {
+                svcClient.SendAsync(deviceId, createServiceMessage(new { MessageId = i.ToString() })).Wait();
+            }
+
+            int cnt = 0;
+            var tokenSource = new CancellationTokenSource();
+
+            conn.OnMessage((msg) => {
+
+                cnt++;
+
+                if (cnt == 10)
+                    tokenSource.Cancel();
+                
+                return true;
+
+            }, tokenSource.Token);
+            
+        }
+
+
+
+        [TestMethod]
+        public void ClearQueue_Test()
+        {
+            string deviceId = ConfigurationManager.AppSettings["DeviceId"];
+
+            IIotApi conn = getConnector();
+
+            ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
+
+           int cnt = 0;
+            var tokenSource = new CancellationTokenSource();
+
+            conn.OnMessage((msg) => {
+
+                if (msg == null)
+                    tokenSource.Cancel();
+
+                return true;
+
+            }, tokenSource.Token).Wait();
+
+        }
+
     }
 }
