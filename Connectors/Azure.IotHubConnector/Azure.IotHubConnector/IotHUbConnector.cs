@@ -131,14 +131,24 @@ namespace Daenet.Iot
         /// <returns></returns>
         public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
         {
+            TimeSpan timeout = TimeSpan.FromMilliseconds(60000);
+
+            if (args != null)
+            {
+                if (args.ContainsKey("TimeoutInMs"))
+                {
+                    timeout = TimeSpan.FromMilliseconds((int)args["TimeoutInMs"]);
+                }
+            }
+
            return Task.Run(() => {
 
                 while (cancelationToken.IsCancellationRequested == false)
                 {
                    var msg = m_DeviceClient.ReceiveAsync().Result;
 
-                   bool completionState = (bool)onReceiveMsg?.Invoke(msg);
-
+                   bool completionState = (bool)onReceiveMsg?.Invoke(msg == null ? null : msg.GetBytes());
+           
                    if (msg != null)
                    {
                        if (completionState)
@@ -146,6 +156,8 @@ namespace Daenet.Iot
                        else
                            m_DeviceClient.AbandonAsync(msg).Wait();
                    }
+                   else
+                       Task.Delay(timeout).Wait();
                }
 
             }, cancelationToken);        
