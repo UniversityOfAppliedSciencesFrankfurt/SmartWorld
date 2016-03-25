@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -33,11 +35,31 @@ namespace DeleteMe
 
         private void run()
         {
-            IotHubConnector conn = new IotHubConnector();
-            conn.Open(new Dictionary<string, object>() {
+            Task.Run(() =>
+            {
+                IotHubConnector conn = new IotHubConnector();
+                conn.Open(new Dictionary<string, object>() {
                 { "ConnStr", "HostName=DRoth-IotHub-01.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=G0ddVsZb5UYFIt2iVTnN+psldF0qRHHxKMUcAo1tdWE=" },
                 { "DeviceId", "PI2-01" },
             }).Wait();
+
+
+                int cnt = 0;
+                var tokenSource = new CancellationTokenSource();
+
+                conn.OnMessage((msg) =>
+                {
+
+                    cnt++;
+
+                    if (cnt == 10)
+                        tokenSource.Cancel();
+
+                    return true;
+
+                }, tokenSource.Token);
+
+            });
         }
     }
 }

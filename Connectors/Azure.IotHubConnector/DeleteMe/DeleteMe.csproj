@@ -127,10 +127,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Azure.IotHubConnector\Azure.IotHubConnector.csproj">
-      <Project>{b24bbf0a-07bf-4da8-a714-8c37309d70f6}</Project>
-      <Name>Azure.IotHubConnector</Name>
-    </ProjectReference>
+    <Reference Include="Azure.IotHubConnector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\Azure.IotHubConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="IoTApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Assemblies\IoTApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assemblies\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
