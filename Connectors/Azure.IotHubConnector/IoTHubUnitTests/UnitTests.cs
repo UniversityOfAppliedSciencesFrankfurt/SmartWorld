@@ -231,6 +231,27 @@ namespace IoTHubUnitTests
 
 
         [TestMethod]
+        public void MessagePump_Test()
+        {
+            string deviceId = ConfigurationManager.AppSettings["DeviceId"];
+
+            IIotApi conn = getConnector();
+
+            ServiceClient svcClient = ServiceClient.CreateFromConnectionString(ConfigurationManager.AppSettings["ServiceConnStr"]);
+
+            for (int j = 0; j < 1000; j++)
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    svcClient.SendAsync(deviceId, createServiceMessage(new { MessageId = i.ToString() })).Wait();
+                }
+
+                Thread.Sleep(60000);
+            }
+        }
+
+
+        [TestMethod]
         public void ClearQueue_Test()
         {
             string deviceId = ConfigurationManager.AppSettings["DeviceId"];

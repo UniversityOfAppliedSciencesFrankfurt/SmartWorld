@@ -276,7 +276,7 @@ namespace Daenet.Iot
             int timeout = 60000,
             Dictionary<string, object> args = null)
         {
-            Message msg = null;
+            Microsoft.Azure.Devices.Client.Message msg = null;
 
             try
             {
