@@ -145,19 +145,26 @@ namespace Daenet.Iot
 
                 while (cancelationToken.IsCancellationRequested == false)
                 {
-                   var msg = m_DeviceClient.ReceiveAsync().Result;
-
-                   bool completionState = (bool)onReceiveMsg?.Invoke(msg == null ? null : msg.GetBytes());
-           
-                   if (msg != null)
+                   try
                    {
-                       if (completionState)
-                           m_DeviceClient.CompleteAsync(msg).Wait();
+                       var msg = m_DeviceClient.ReceiveAsync().Result;
+
+                       bool completionState = (bool)onReceiveMsg?.Invoke(msg == null ? null : msg.GetBytes());
+
+                       if (msg != null)
+                       {
+                           if (completionState)
+                               m_DeviceClient.CompleteAsync(msg).Wait();
+                           else
+                               m_DeviceClient.AbandonAsync(msg).Wait();
+                       }
                        else
-                           m_DeviceClient.AbandonAsync(msg).Wait();
+                           Task.Delay(timeout).Wait();
                    }
-                   else
-                       Task.Delay(timeout).Wait();
+                   catch (Exception ex)
+                   {
+                       Debug.WriteLine(ex.Message);
+                   }
                }
 
             }, cancelationToken);        
@@ -239,7 +246,7 @@ namespace Daenet.Iot
                             m_SensorMessages.Clear();
 
                             break;
-                        }
+                        }                       
                         catch (Exception ex)
                         {
                             Debug.WriteLine("Warning sending to hub!" + ex.Message);

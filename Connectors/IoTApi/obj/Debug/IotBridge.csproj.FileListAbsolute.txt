@@ -1,0 +1,5 @@
+C:\tfs\vsservice\SE-2015-2016\StudentProjects\IOTBridge\IOT-BRIDGE-DD\IotBridge\bin\Debug\IotBridge.dll
+C:\tfs\vsservice\SE-2015-2016\StudentProjects\IOTBridge\IOT-BRIDGE-DD\IotBridge\bin\Debug\IotBridge.pdb
+C:\tfs\vsservice\SE-2015-2016\StudentProjects\IOTBridge\IOT-BRIDGE-DD\IotBridge\obj\Debug\IotBridge.dll
+C:\tfs\vsservice\SE-2015-2016\StudentProjects\IOTBridge\IOT-BRIDGE-DD\IotBridge\obj\Debug\IotBridge.pdb
+C:\tfs\vsservice\SE-2015-2016\StudentProjects\IOTBridge\IOT-BRIDGE-DD\IotBridge\obj\Debug\IotBridge.csprojResolveAssemblyReference.cache

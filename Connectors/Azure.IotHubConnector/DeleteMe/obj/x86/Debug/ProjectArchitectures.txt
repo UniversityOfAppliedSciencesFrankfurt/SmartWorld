@@ -1,0 +1,1 @@
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\DeleteMe\DeleteMe.csproj;x86

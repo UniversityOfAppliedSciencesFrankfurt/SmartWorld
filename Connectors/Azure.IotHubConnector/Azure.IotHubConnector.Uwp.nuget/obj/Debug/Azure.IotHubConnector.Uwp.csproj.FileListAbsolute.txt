@@ -1,0 +1,17 @@
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\Azure.IotHubConnector.Uwp.csprojResolveAssemblyReference.cache
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\bin\Debug\Azure.IotHubConnector.Uwp.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\bin\Debug\Azure.IotHubConnector.Uwp.pdb
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\bin\Debug\Azure.IotHubConnector.Uwp.pri
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\Azure.IotHubConnector.Uwp.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\Azure.IotHubConnector.Uwp.pdb
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\priconfig.xml
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\priconfig.xml.intermediate
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\layout.resfiles
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\layout.resfiles.intermediate
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\resources.resfiles
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\resources.resfiles.intermediate
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\pri.resfiles
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\pri.resfiles.intermediate
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\qualifiers.txt
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\qualifiers.txt.intermediate
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Uwp\obj\Debug\MultipleQualifiersPerDimensionFound.txt

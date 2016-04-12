@@ -243,7 +243,14 @@ namespace IoTHubUnitTests
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    svcClient.SendAsync(deviceId, createServiceMessage(new { MessageId = i.ToString() })).Wait();
+                    svcClient.SendAsync(deviceId, createServiceMessage(
+                        new {CommandType="UnitTest", MessageId = i.ToString(),
+                            Data = new
+                            {
+                                Prop1 = "prop1",
+                                Prop2 = "prop2"
+                            }
+                        })).Wait();
                 }
 
                 Thread.Sleep(60000);

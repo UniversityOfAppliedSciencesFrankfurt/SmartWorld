@@ -1,0 +1,5 @@
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Nuget\bin\Debug\Azure.IotHubConnector.Nuget.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Nuget\bin\Debug\Azure.IotHubConnector.Nuget.pdb
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Nuget\obj\Debug\Azure.IotHubConnector.Nuget.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Nuget\obj\Debug\Azure.IotHubConnector.Nuget.pdb
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IotHubConnector.Nuget\obj\Debug\Azure.IotHubConnector.Nuget.csprojResolveAssemblyReference.cache

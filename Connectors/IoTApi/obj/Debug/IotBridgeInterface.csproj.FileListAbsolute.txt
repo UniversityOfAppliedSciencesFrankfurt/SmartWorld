@@ -1,0 +1,4 @@
+C:\tfs\git\iotrepos\smartworld\Connectors\IotBridgeInterface\bin\Debug\IotBridge.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\IotBridgeInterface\bin\Debug\IotBridge.pdb
+C:\tfs\git\iotrepos\smartworld\Connectors\IotBridgeInterface\obj\Debug\IotBridge.dll
+C:\tfs\git\iotrepos\smartworld\Connectors\IotBridgeInterface\obj\Debug\IotBridge.pdb
