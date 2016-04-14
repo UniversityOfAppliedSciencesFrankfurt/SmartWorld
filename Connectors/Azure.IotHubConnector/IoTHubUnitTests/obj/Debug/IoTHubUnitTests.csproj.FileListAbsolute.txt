@@ -27,7 +27,6 @@ C:\tfs\git\iotrepos\smartworld\Connectors\IoTHubUnitTests\bin\Debug\Microsoft.Az
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTHubUnitTests\bin\Debug\Newtonsoft.Json.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTHubUnitTests\bin\Debug\System.Net.Http.Formatting.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTHubUnitTests\bin\Debug\System.Web.Http.xml
-C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\AppConfig.Secret.config
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\IoTHubUnitTests.dll.config
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\IoTHubUnitTests.dll
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\IoTHubUnitTests.pdb
@@ -54,3 +53,4 @@ C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\System.Net.Http.Formatting.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\System.Web.Http.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\Validation.xml
+C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\AppConfig.Secret.config

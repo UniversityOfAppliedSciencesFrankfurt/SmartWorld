@@ -224,11 +224,14 @@ namespace Daenet.Iot
                 {
                     int retries = 0;
 
+                    
                     while (retries < m_NumOfRetries)
                     {
                         try
                         {
-                            await m_DeviceClient.SendEventBatchAsync(m_SensorMessages.Select(m => m.Item1));
+                            var messagesToSend = m_SensorMessages.Select(m => m.Item1);
+
+                            await m_DeviceClient.SendEventBatchAsync(messagesToSend);
 
                             Debug.WriteLine($"Sent {m_SensorMessages.Count} events to cloud.");
 
@@ -254,12 +257,24 @@ namespace Daenet.Iot
 
                             if (retries >= m_NumOfRetries)
                             {
+                                var msgToSend = m_SensorMessages.Select(m => m.Item1);
                                 onError?.Invoke(new List<object>(m_SensorMessages), ex);
                             }
+                            else
+                            {
+                                var newList = new List<Tuple<Message, object>>(m_SensorMessages);
 
-                            m_OnRetryCallback?.Invoke(ex, m_SensorMessages.Select(m => m.Item2).ToList(), retries);
+                                m_SensorMessages.Clear();
 
-                            await Task.Delay(1000);
+                                foreach (var msgPair in newList)
+                                {
+                                    m_SensorMessages.Add(new Tuple<Microsoft.Azure.Devices.Client.Message, object>(jsonSerializeFunc(msgPair.Item2), msgPair.Item1));
+                                }
+
+                                await Task.Delay(1000);
+
+                                m_OnRetryCallback?.Invoke(ex, m_SensorMessages.Select(m => m.Item2).ToList(), retries);
+                            }
                         }
                     }
                 }

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugetbuild", "nugetbuild", 
 		..\nugetbuild\IoTApi.1.0.0.symbols.nupkg = ..\nugetbuild\IoTApi.1.0.0.symbols.nupkg
 		..\..\nugetbuild\ModbusApi.1.0.0.nupkg = ..\..\nugetbuild\ModbusApi.1.0.0.nupkg
 		..\..\nugetbuild\ModbusApi.1.0.0.symbols.nupkg = ..\..\nugetbuild\ModbusApi.1.0.0.symbols.nupkg
-	EndProjectSection
+	EndProjectSection  
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTApi", "..\IoTApi\IoTApi.csproj", "{D7DE4507-CBDF-4620-9AB7-25A403EFAB47}"
 EndProject
