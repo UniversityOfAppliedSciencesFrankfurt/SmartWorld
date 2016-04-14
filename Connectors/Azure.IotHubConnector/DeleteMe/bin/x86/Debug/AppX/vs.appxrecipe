@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\DeleteMe\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-03-26T10:00:41.725</Modified>
+      <Modified>2016-04-01T17:27:54.104</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\DeleteMe\bin\x86\Debug\DeleteMe.exe">
       <PackagePath>entrypoint\DeleteMe.exe</PackagePath>
-      <Modified>2016-03-26T10:00:38.041</Modified>
+      <Modified>2016-04-01T17:27:51.356</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ddobric.DAENET\.nuget\packages\Microsoft.Azure.Devices.Client.PCL\1.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Microsoft.Azure.Devices.Client.PCL.dll">
       <PackagePath>Microsoft.Azure.Devices.Client.PCL.dll</PackagePath>
@@ -510,11 +510,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\DeleteMe\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-03-26T10:00:40.966</Modified>
+      <Modified>2016-04-01T17:27:53.396</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\DeleteMe\bin\x86\Debug\Core\DeleteMe.exe">
       <PackagePath>DeleteMe.exe</PackagePath>
-      <Modified>2016-03-26T10:00:41.708</Modified>
+      <Modified>2016-04-01T17:27:54.092</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
