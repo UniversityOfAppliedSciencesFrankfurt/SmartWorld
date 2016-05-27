@@ -53,4 +53,3 @@ C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\System.Net.Http.Formatting.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\System.Web.Http.xml
 C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\Validation.xml
-C:\tfs\git\iotrepos\smartworld\Connectors\Azure.IoTHubConnector\IoTHubUnitTests\bin\Debug\AppConfig.Secret.config
