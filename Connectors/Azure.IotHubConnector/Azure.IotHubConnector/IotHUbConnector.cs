@@ -223,6 +223,7 @@ namespace Daenet.Iot
                 if (m_SensorMessages.Count >= m_NumOfMessagesPerBatch)
                 {
                     int retries = 0;
+
                     
                     while (retries < m_NumOfRetries)
                     {
@@ -230,32 +231,28 @@ namespace Daenet.Iot
                         {
                             var messagesToSend = m_SensorMessages.Select(m => m.Item1);
 
-                            if (messagesToSend.Count() > 0)
+                            await m_DeviceClient.SendEventBatchAsync(messagesToSend);
+
+                            Debug.WriteLine($"Sent {m_SensorMessages.Count} events to cloud.");
+
+                            try
                             {
-                                await m_DeviceClient.SendEventBatchAsync(messagesToSend);
-
-                                // Debug.WriteLine($"Sent {m_SensorMessages.Count} events to cloud.");
-                                m_SensorMessages.Clear();
-                               
-                                try
-                                {
-                                    onSuccess?.Invoke(new List<object>(m_SensorMessages.Select(m => m.Item2)));
-                                }
-                                catch (Exception callerException)
-                                {
-                                    // This ensures that error will be thrown without retry.
-                                    retries = m_NumOfRetries + 1;
-                                    throw callerException;
-                                }
-
-                                m_SensorMessages.Clear();
+                                onSuccess?.Invoke(new List<object>(m_SensorMessages.Select(m => m.Item2)));
                             }
+                            catch (Exception callerException)
+                            {
+                                // This ensures that error will be thrown without retry.
+                                retries = m_NumOfRetries + 1;
+                                throw callerException;
+                            }
+
+                            m_SensorMessages.Clear();
 
                             break;
                         }                       
                         catch (Exception ex)
                         {
-                            //Debug.WriteLine("Warning sending to hub!" + ex.Message);
+                            Debug.WriteLine("Warning sending to hub!" + ex.Message);
                             retries++;
 
                             if (retries >= m_NumOfRetries)
