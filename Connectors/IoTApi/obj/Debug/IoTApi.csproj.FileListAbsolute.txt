@@ -7,4 +7,3 @@ C:\tfs\git\iotrepos\smartworld\Connectors\IoTApi\bin\Debug\IoTApi.dll
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTApi\bin\Debug\IoTApi.pdb
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTApi\obj\Debug\IoTApi.dll
 C:\tfs\git\iotrepos\smartworld\Connectors\IoTApi\obj\Debug\IoTApi.pdb
-C:\tfs\git\iotrepos\smartworld\Connectors\IoTApi\obj\Debug\IoTApi.csprojResolveAssemblyReference.cache
