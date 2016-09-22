@@ -44,7 +44,7 @@ namespace Daenet.IoT.Services
         public async Task SendAsync(object sensorMessage,
             Action<IList<object>> onSuccess = null,
             Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
-        {
+        { 
             await NextModule.SendAsync(sensorMessage, (msgs) =>
             {
                 onSuccess?.Invoke(new List<object> { sensorMessage });
