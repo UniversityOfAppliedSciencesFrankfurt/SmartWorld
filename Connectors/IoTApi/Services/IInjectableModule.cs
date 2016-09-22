@@ -9,9 +9,11 @@ namespace Daenet.IoT.Services
 {
     public interface IInjectableModule
     {
-        Task Open(IIotApi connector, Dictionary<string, object> args = null);
+        IInjectableModule NextModule { set; get; }
 
-        Task<bool> Send(IIotApi connector, object sensorMessage,
+        //Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null);
+
+       Task SendAsync(object sensorMessage,
        Action<IList<object>> onSuccess = null,
        Action<IList<object>, Exception> onError = null,
        Dictionary<string, object> args = null);
@@ -19,14 +21,14 @@ namespace Daenet.IoT.Services
 
 
 
-  
+
     public interface IBeforeReceive : IInjectableModule
     {
         bool BeforeReceive(IIotApi connector, object sensorMessage, Dictionary<string, object> args = null);
     }
 
     public interface IAfterReceive : IInjectableModule
-    {   
+    {
         bool AfterReceive(IIotApi connector, object sensorMessage, Dictionary<string, object> args = null);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Daenet.IoT.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Daenet.Iot
     /// <summary>
     /// Interface which defines operation which IoT transports have to implement.
     /// </summary>
-    public interface IIotApi
+    public interface IIotApi : IInjectableModule
     {
         /// <summary>
         /// Performs initialization of transport implementation.
@@ -89,10 +90,10 @@ namespace Daenet.Iot
         /// message is defined by concrete implementation.
         /// </remarks>
 
-        Task SendAsync(object sensorMessage,
-                                  Action<IList<object>> onSuccess = null,
-                                  Action<IList<object>, Exception> onError = null,
-                                  Dictionary<string, object> args = null);
+        //Task< SendAsync(object sensorMessage,
+        //                          Action<IList<object>> onSuccess = null,
+        //                          Action<IList<object>, Exception> onError = null,
+        //                          Dictionary<string, object> args = null);
 
 
 
@@ -110,9 +111,10 @@ namespace Daenet.Iot
         /// Note, the exact behavior of sending of the
         /// message is defined by concrete implementation.
         /// </remarks>
-        Task SendAsync(IList<object> sensorMessages,
-           Action<IList<object>> onSuccess = null,
-           Action<IList<object>, Exception> onError = null,
-           Dictionary<string, object> args = null);
-    }
+        //Task SendAsync(IList<object> sensorMessages,
+        //   Action<IList<object>> onSuccess = null,
+        //   Action<IList<object>, Exception> onError = null,
+        //   Dictionary<string, object> args = null);
+
+        }
 }

@@ -7,23 +7,36 @@ using System.Threading.Tasks;
 using System.Threading;
 using Daenet.IoT.Services;
 
+
 namespace Daenet.Iot
 {
-    public class IotApi : IIotApi
+    public class IotApi 
     {
+        private bool m_IsOpenCalled = false;
+
         private IIotApi m_Connector;
 
         private List<IInjectableModule> m_Modules = new List<IInjectableModule>();
 
 
-        public IotApi(IIotApi connector, ICollection<IInjectableModule> injectableModules)
+        public IotApi(ICollection<IInjectableModule> injectableModules = null)
         {
+            if (injectableModules == null)
+            {
+                injectableModules = new List<IInjectableModule>();
+               // injectableModules.Add(new IoT.Services.ConnectorSink());
+            }
+
             foreach (var svc in injectableModules)
             {
                 m_Modules.Add(svc);
             }
+        }
 
-            m_Connector = connector;
+        public IotApi RegisterModule(IInjectableModule module)
+        {
+            m_Modules.Add(module);
+            return this;
         }
 
         private IEnumerable<T> getServices<T>()
@@ -35,31 +48,63 @@ namespace Daenet.Iot
 
         public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
         {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
             return m_Connector.OnMessage(onReceiveMsg, cancelationToken, args);
         }
 
-        public Task Open(Dictionary<string, object> args)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args">COntains list of all configuration parameters for all injectable modules.</param>
+        /// <returns></returns>
+        public void Open(Dictionary<string, object> args)
         {
-            return m_Connector.Open(args);
+            int cnt = 1;
+            foreach (var module in m_Modules)
+            {
+                module.NextModule = m_Modules.Count > cnt ? m_Modules[cnt] : null;
+                cnt++;
+            }
+
+            m_IsOpenCalled = true;
         }
 
         public Task ReceiveAsync(Func<object, bool> onSuccess = null, Func<Exception, bool> onError = null, int timeout = 60000, Dictionary<string, object> args = null)
         {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
             return m_Connector.ReceiveAsync(onSuccess, onError, timeout, args);
         }
 
         public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
         {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
             m_Connector.RegisterAcknowledge(onAcknowledgeReceived);
         }
 
         public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
             try
             {
                 foreach (var msg in sensorMessages)
                 {
-                    await m_Connector.SendAsync(sensorMessages, null, null, args);
+                    await this.SendAsync(sensorMessages, (msgs)=> {
+
+                    },
+                    (msgs, err) =>
+                    {
+                        onError?.Invoke(new List<object> { msg }, err);
+                        return;
+                    },
+                    args);
                 }
 
                 onSuccess?.Invoke(sensorMessages);
@@ -71,13 +116,38 @@ namespace Daenet.Iot
         }
 
 
-        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, 
+            Action<IList<object>> onSuccess = null, Action<IList<object>, 
+                Exception> onError = null, Dictionary<string, object> args = null)
         {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
             try
             {
-                foreach (var service in getServices<IInjectableModule>())
+                var module = getServices<IInjectableModule>().FirstOrDefault();
+                if (module != null)
                 {
-                    if (await service.Send(m_Connector, sensorMessage, (msgs)=> 
+                   // while(module != null)
+                   // {
+                        await module.SendAsync(sensorMessage,
+                        (msgs) =>
+                        {
+
+                        },
+                        (msgs, err) =>
+                        {
+                            onError?.Invoke(new List<object> { sensorMessage }, err);
+                        },
+                        args);
+                   // };
+
+                }
+
+                /*
+                foreach (var module in getServices<IInjectableModule>())
+                {
+                    if (await module.Send(sensorMessage, (msgs)=> 
                     {
 
                     },
@@ -90,12 +160,12 @@ namespace Daenet.Iot
                 }
 
                 onSuccess?.Invoke(new List<object> { sensorMessage } );
+                */
             }
             catch (Exception ex)
             {
                 onError?.Invoke(new List<object> { sensorMessage }, ex);
             }
         }
-
     }
 }

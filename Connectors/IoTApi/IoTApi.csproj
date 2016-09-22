@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IInjectableModule.cs" />
     <Compile Include="Services\ConnectorSink.cs" />
+    <Compile Include="Services\PersistModule.cs" />
     <Compile Include="Services\RetryModule.cs" />
   </ItemGroup>
   <ItemGroup />

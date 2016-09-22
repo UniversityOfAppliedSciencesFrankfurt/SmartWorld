@@ -8,16 +8,33 @@ using Daenet.IoT.Services;
 
 namespace Daenet.IoT.Services
 {
-    public class ConnectorSink : IInjectableModule, IBeforeReceive
+    internal class ConnectorSink : IInjectableModule, IBeforeReceive
     {
         private IIotApi m_Connector;
 
-        public async Task Open(IIotApi connector, Dictionary<string, object> args = null)
+        private IInjectableModule m_NextModule;
+
+        public IInjectableModule NextModule
         {
-            if (m_Connector == null)
+            get
+            {
+                return m_NextModule;
+            }
+
+            set
+            {
+                m_NextModule = value;
+            }
+        }
+
+        public async Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null)
+        {
+            if (connector == null)
                 throw new IotApiException("Connector must be specified!");
 
             await connector.Open(args);
+
+            m_NextModule = nextModule;
 
             m_Connector = connector;
         }
@@ -28,15 +45,14 @@ namespace Daenet.IoT.Services
         }
 
 
-        public async Task<bool> Send(IIotApi connector, object sensorMessage, Action<IList<object>> onSuccess = null,
+        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null,
            Action<IList<object>, Exception> onError = null,
            Dictionary<string, object> args = null)
         {
-            return await Task.Run(() =>
+            await Task.Run(() =>
             {
                 m_Connector.SendAsync(sensorMessage, onSuccess, onError, args).Wait();
 
-                return true;
             });
         }
 

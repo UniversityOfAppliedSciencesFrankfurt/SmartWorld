@@ -1,4 +1,5 @@
 ﻿using Daenet.Iot;
+using Daenet.IoT.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace Daenet.IoTApi
 {
     /// <summary>
-    /// Demonstrates how to implement a sample connector to a ficive device.
+    /// Demonstrates how to implement a sample connector.
     /// </summary>
     public class SampleConnector : IIotApi
     {
@@ -20,6 +21,26 @@ namespace Daenet.IoTApi
             {
                 return "SampleConnector";
             }
+        }
+
+        public IInjectableModule NextModule
+        {
+            get
+            {
+                return null;
+            }
+
+            set
+            {
+                
+            }
+        }
+
+        private bool m_SimulateErrorOnSend;
+
+        public SampleConnector(bool simulateErrorOnSend = false)
+        {
+            m_SimulateErrorOnSend = simulateErrorOnSend;
         }
 
         public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
@@ -42,14 +63,37 @@ namespace Daenet.IoTApi
             throw new NotImplementedException();
         }
 
-        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+            foreach (var msg in sensorMessages)
+            {
+                await this.SendAsync(msg, (msgs) =>
+                {
+                   
+                },
+                (msgs, err) =>
+                {
+                    onError?.Invoke(new List<object> { msg }, err);
+                },
+                args) ;
+            }
+
+            onSuccess?.Invoke(sensorMessages);
         }
 
-        public Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                if (m_SimulateErrorOnSend)
+                {
+                    onError?.Invoke(new List<object> { sensorMessage }, new Exception("Simulated error."));
+                }
+                else
+                {
+                    onSuccess?.Invoke(new List<object> { sensorMessage });
+                }
+            });
         }
     }
 }
