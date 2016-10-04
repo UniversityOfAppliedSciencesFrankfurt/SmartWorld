@@ -65,6 +65,7 @@ namespace Daenet.Iot
             foreach (var module in m_Modules)
             {
                 module.NextModule = m_Modules.Count > cnt ? m_Modules[cnt] : null;
+                module.Open(args);
                 cnt++;
             }
 

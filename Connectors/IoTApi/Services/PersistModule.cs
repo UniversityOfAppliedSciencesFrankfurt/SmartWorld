@@ -35,6 +35,11 @@ namespace Daenet.IoT.Services
             }
         }
 
+        public void Open(Dictionary<string, object> args)
+        {
+           
+        }
+
 
         //public Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null)
         //{

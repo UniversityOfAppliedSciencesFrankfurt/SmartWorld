@@ -9,6 +9,13 @@ namespace Daenet.IoT.Services
 {
     public interface IInjectableModule
     {
+        /// <summary>
+        /// Performs initialization of transport implementation.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        void Open(Dictionary<string, object> args);
+
         IInjectableModule NextModule { set; get; }
 
         //Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null);

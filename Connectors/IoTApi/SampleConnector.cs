@@ -48,9 +48,9 @@ namespace Daenet.IoTApi
             throw new NotImplementedException();
         }
 
-        public Task Open(Dictionary<string, object> args)
+        public void Open(Dictionary<string, object> args)
         {
-            return Task.Run(() => { });
+          
         }
 
         public Task ReceiveAsync(Func<object, bool> onSuccess = null, Func<Exception, bool> onError = null, int timeout = 60000, Dictionary<string, object> args = null)

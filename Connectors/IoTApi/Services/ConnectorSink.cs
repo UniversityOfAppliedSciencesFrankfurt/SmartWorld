@@ -27,17 +27,17 @@ namespace Daenet.IoT.Services
             }
         }
 
-        public async Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null)
-        {
-            if (connector == null)
-                throw new IotApiException("Connector must be specified!");
+        //public void Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null)
+        //{
+        //    if (connector == null)
+        //        throw new IotApiException("Connector must be specified!");
 
-            await connector.Open(args);
+        //    connector.Open(args);
 
-            m_NextModule = nextModule;
+        //    m_NextModule = nextModule;
 
-            m_Connector = connector;
-        }
+        //    m_Connector = connector;
+        //}
 
         public bool BeforeReceive(IIotApi connector, object sensorMessage, Dictionary<string, object> args = null)
         {
@@ -56,6 +56,8 @@ namespace Daenet.IoT.Services
             });
         }
 
-      
+        public void Open(Dictionary<string, object> args)
+        {
+        }
     }
 }

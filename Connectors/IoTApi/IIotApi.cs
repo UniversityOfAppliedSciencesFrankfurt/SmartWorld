@@ -13,12 +13,12 @@ namespace Daenet.Iot
     /// </summary>
     public interface IIotApi : IInjectableModule
     {
-        /// <summary>
-        /// Performs initialization of transport implementation.
-        /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        Task Open(Dictionary<string, object> args);
+        ///// <summary>
+        ///// Performs initialization of transport implementation.
+        ///// </summary>
+        ///// <param name="args"></param>
+        ///// <returns></returns>
+        //Task Open(Dictionary<string, object> args);
 
         /// <summary>
         /// Gets the name of transport library.

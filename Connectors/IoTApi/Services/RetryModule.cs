@@ -87,6 +87,9 @@ namespace Daenet.IoT.Services
             }
         }
 
-
+        public void Open(Dictionary<string, object> args)
+        {
+           
+        }
     }
 }
