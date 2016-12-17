@@ -2,15 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/IoTBridge_pubsub/IoTBridge/Readme
-/IoTBridge_pubsub/IotBridge.CcuXmlRpc/Readme
-/IoTBridge_pubsub/IotBridge.SbTransport/Readme
-/IoTBridge_pubsub/Receiver (CCU)/Readme
-/IoTBridge_pubsub/Sender (Console App)/Readme
-/IoTBridge_pubsub/XMLRPCLib/Readme
-/IoTBridge_queue/IoTBridge/Readme
-/IoTBridge_queue/IotBridge.CcuXmlRpc/Readme
-/IoTBridge_queue/IotBridge.SbTransport/Readme
-/IoTBridge_queue/Receiver (CCU)/Readme
-/IoTBridge_queue/Sender (Console App)/Readme
-/IoTBridge_queue/XMLRPCLib/Readme
+/IotApi/src/IotApi/IotApi/bin/*
+/IotApi/src/IotApi/IotApi/obj/*
+/IotApi/IotApiTests/bin/*
+/IotApi/IotApiTests/obj/*
+/IotApi/IotApiTests/project.lock.json
+/IotApi/src/IotApi/bin/Debug/*
+/IotApi/src/IotApi/obj/Debug/*
