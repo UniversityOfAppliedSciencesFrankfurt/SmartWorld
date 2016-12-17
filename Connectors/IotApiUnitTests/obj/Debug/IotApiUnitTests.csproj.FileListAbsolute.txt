@@ -1,9 +1,0 @@
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\obj\Debug\IotApiUnitTests.csprojResolveAssemblyReference.cache
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\IotApiUnitTests.dll
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\IotApiUnitTests.pdb
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\IoTApi.dll
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\IoTApi.pdb
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\obj\Debug\IotApiUnitTests.dll
-C:\tfs\git\iotrepos\smartworld\Connectors\IotApiUnitTests\obj\Debug\IotApiUnitTests.pdb
