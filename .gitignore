@@ -14,3 +14,13 @@
 /IoTBridge_queue/Receiver (CCU)/Readme
 /IoTBridge_queue/Sender (Console App)/Readme
 /IoTBridge_queue/XMLRPCLib/Readme
+/IoTBridge_queue/XMLRPCLib/Readme
+/Connectors/IoTApi/bin/*
+/Connectors/IoTApi/obj/*
+/Connectors/IoTApiUnitTests/bin/*
+/Connectors/IoTApiUnitTests/obj/*
+/Connectors/IotApi/IoTBridge/Readme
+/Connectors/IotApi/IotBridge.CcuXmlRpc/Readme
+/Connectors/IotApi/IotBridge.SbTransport/Readme
+/Connectors/IotApi/Receiver (CCU)/Readme
+/Connectors/IotApi/Sender (Console App)/Readme

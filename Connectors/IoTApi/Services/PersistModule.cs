@@ -18,11 +18,11 @@ namespace Daenet.IoT.Services
         }
 
     }
-    public class PersistModule : IInjectableModule
+    public class PersistModule : ISendModule
     {
-        private IInjectableModule m_NextModule;
+        private ISendModule m_NextModule;
 
-        public IInjectableModule NextModule
+        public ISendModule NextSendModule
         {
             get
             {
@@ -40,17 +40,18 @@ namespace Daenet.IoT.Services
            
         }
 
+        public Task ReceiveAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
 
         public async Task SendAsync(object sensorMessage,
             Action<IList<object>> onSuccess = null,
             Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         { 
-            await NextModule.SendAsync(sensorMessage, (msgs) =>
+            await NextSendModule.SendAsync(sensorMessage, (msgs) =>
             {
                 onSuccess?.Invoke(new List<object> { sensorMessage });
             },

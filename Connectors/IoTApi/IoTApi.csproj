@@ -51,10 +51,9 @@
     <Compile Include="IotApi.cs" />
     <Compile Include="IotApiException.cs" />
     <Compile Include="IotMockDevice.cs" />
-    <Compile Include="SampleConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IInjectableModule.cs" />
-    <Compile Include="Services\ConnectorSink.cs" />
+    <None Include="Services\ConnectorSink.cs" />
     <Compile Include="Services\PersistModule.cs" />
     <Compile Include="Services\RetryModule.cs" />
   </ItemGroup>

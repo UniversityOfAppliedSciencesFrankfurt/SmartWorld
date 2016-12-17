@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BasicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleConnector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IoTApi\IoTApi.csproj">

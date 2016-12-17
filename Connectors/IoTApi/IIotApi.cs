@@ -11,7 +11,7 @@ namespace Daenet.Iot
     /// <summary>
     /// Interface which defines operation which IoT transports have to implement.
     /// </summary>
-    public interface IIotApi : IInjectableModule
+    public interface IIotApi : ISendModule, IReceiveModule
     {
         ///// <summary>
         ///// Performs initialization of transport implementation.

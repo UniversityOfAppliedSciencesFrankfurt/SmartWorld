@@ -13,7 +13,7 @@ namespace Daenet.IoTApi
     /// <summary>
     /// Demonstrates how to implement a sample connector.
     /// </summary>
-    public class SampleConnector : IIotApi
+    public class SampleConnector : ISendModule, IReceiveModule
     {
         public string Name
         {
@@ -23,18 +23,9 @@ namespace Daenet.IoTApi
             }
         }
 
-        public IInjectableModule NextModule
-        {
-            get
-            {
-                return null;
-            }
+        public ISendModule NextSendModule { get; set; }
 
-            set
-            {
-                
-            }
-        }
+        public IReceiveModule NextReceiveModule { get; set; }
 
         private bool m_SimulateErrorOnSend;
 
@@ -43,25 +34,37 @@ namespace Daenet.IoTApi
             m_SimulateErrorOnSend = simulateErrorOnSend;
         }
 
-        public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
+        //public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public void Open(Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+
         }
 
-        public void Open(Dictionary<string, object> args)
+        public Task<object> ReceiveAsync(Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-          
+            Task.Delay(5000);
+
+            return Task<object>.Run(() =>
+            {
+                TelemetryData sensorEvent = new TelemetryData()
+                {
+                    Device = "DEVICE001",
+                    Temperature = DateTime.Now.Minute,
+                };
+
+                return (object)sensorEvent;
+            });
+        
         }
 
-        public Task ReceiveAsync(Func<object, bool> onSuccess = null, Func<Exception, bool> onError = null, int timeout = 60000, Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
-        {
-            throw new NotImplementedException();
-        }
+        //public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
@@ -69,17 +72,18 @@ namespace Daenet.IoTApi
             {
                 await this.SendAsync(msg, (msgs) =>
                 {
-                   
+
                 },
                 (msgs, err) =>
                 {
                     onError?.Invoke(new List<object> { msg }, err);
                 },
-                args) ;
+                args);
             }
 
             onSuccess?.Invoke(sensorMessages);
         }
+
 
         public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {

@@ -10,61 +10,77 @@ using Daenet.IoT.Services;
 
 namespace Daenet.Iot
 {
-    public class IotApi 
+    public class IotApi
     {
         private bool m_IsOpenCalled = false;
 
-        private IIotApi m_Connector;
+        private List<ISendModule> m_SendModules = new List<ISendModule>();
 
-        private List<IInjectableModule> m_Modules = new List<IInjectableModule>();
-
+        private List<IReceiveModule> m_ReceiveModules = new List<IReceiveModule>();
 
         public IotApi(ICollection<IInjectableModule> injectableModules = null)
         {
-            if (injectableModules == null)
-            {
-                injectableModules = new List<IInjectableModule>();
-               // injectableModules.Add(new IoT.Services.ConnectorSink());
-            }
+            m_SendModules = new List<ISendModule>();
+            m_ReceiveModules = new List<IReceiveModule>();
 
-            foreach (var svc in injectableModules)
+            if (injectableModules != null)
             {
-                m_Modules.Add(svc);
+                foreach (var svc in injectableModules)
+                {
+                    if (svc is ISendModule)
+                        m_SendModules.Add(svc as ISendModule);
+
+                    if (svc is IReceiveModule)
+                        m_ReceiveModules.Add(svc as IReceiveModule);
+                }
             }
         }
 
         public IotApi RegisterModule(IInjectableModule module)
         {
-            m_Modules.Add(module);
+            if (module is ISendModule)
+                m_SendModules.Add(module as ISendModule);
+
+            if (module is IReceiveModule)
+                m_ReceiveModules.Add(module as IReceiveModule);
+
             return this;
         }
 
+
         private IEnumerable<T> getServices<T>()
         {
-            return m_Modules.OfType<T>();
+            return m_SendModules.OfType<T>();
         }
 
-        public string Name { get { return m_Connector.Name; } }
 
-        public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
-        {
-            if (m_IsOpenCalled == false)
-                throw new IotApiException("Method Open must be called first.");
+        //public Task OnMessage(Func<object, bool> onReceiveMsg, CancellationToken cancelationToken, Dictionary<string, object> args = null)
+        //{
+        //    if (m_IsOpenCalled == false)
+        //        throw new IotApiException("Method Open must be called first.");
 
-            return m_Connector.OnMessage(onReceiveMsg, cancelationToken, args);
-        }
+        //    return m_Connector.OnMessage(onReceiveMsg, cancelationToken, args);
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="args">COntains list of all configuration parameters for all injectable modules.</param>
         /// <returns></returns>
-        public void Open(Dictionary<string, object> args)
+        public void Open(Dictionary<string, object> args = null)
         {
             int cnt = 1;
-            foreach (var module in m_Modules)
+            foreach (var module in m_SendModules)
             {
-                module.NextModule = m_Modules.Count > cnt ? m_Modules[cnt] : null;
+                module.NextSendModule = m_SendModules.Count > cnt ? m_SendModules[cnt] : null;
+                module.Open(args);
+                cnt++;
+            }
+
+            cnt = 1;
+            foreach (var module in m_ReceiveModules)
+            {
+                module.NextReceiveModule = m_ReceiveModules.Count > cnt ? m_ReceiveModules[cnt] : null;
                 module.Open(args);
                 cnt++;
             }
@@ -72,23 +88,41 @@ namespace Daenet.Iot
             m_IsOpenCalled = true;
         }
 
-        public Task ReceiveAsync(Func<object, bool> onSuccess = null, Func<Exception, bool> onError = null, int timeout = 60000, Dictionary<string, object> args = null)
+        public async Task<object> ReceiveAsync(Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
 
-            return m_Connector.ReceiveAsync(onSuccess, onError, timeout, args);
+            try
+            {
+                var module = getServices<IReceiveModule>().FirstOrDefault();
+                if (module != null)
+                {
+                    var msg = await module.ReceiveAsync(onSuccess, onError, args);
+                    return msg;
+                }
+                else
+                    throw new InvalidOperationException("No registered IReceiveModule found.");
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(null, ex);
+                throw ex;
+            }
         }
 
-        public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
-        {
-            if (m_IsOpenCalled == false)
-                throw new IotApiException("Method Open must be called first.");
+        //public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
+        //{
+        //    if (m_IsOpenCalled == false)
+        //        throw new IotApiException("Method Open must be called first.");
 
-            m_Connector.RegisterAcknowledge(onAcknowledgeReceived);
-        }
+        //    m_Connector.RegisterAcknowledge(onAcknowledgeReceived);
+        //}
 
-        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(IList<object> sensorMessages, 
+            Action<IList<object>> onSuccess, 
+            Action<IList<object>, Exception> onError, 
+            Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -97,7 +131,8 @@ namespace Daenet.Iot
             {
                 foreach (var msg in sensorMessages)
                 {
-                    await this.SendAsync(sensorMessages, (msgs)=> {
+                    await this.SendAsync(sensorMessages, (msgs) =>
+                    {
 
                     },
                     (msgs, err) =>
@@ -116,52 +151,59 @@ namespace Daenet.Iot
             }
         }
 
+        public async Task SendAsync(object sensorMessage,
+         Dictionary<string, object> args = null)
+        {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+            try
+            {
+                var module = getServices<ISendModule>().FirstOrDefault();
+                if (module != null)
+                {
+                    await module.SendAsync(sensorMessage,
+                    (msgs) =>
+                    {
 
-        public async Task SendAsync(object sensorMessage, 
-            Action<IList<object>> onSuccess = null, Action<IList<object>, 
-                Exception> onError = null, Dictionary<string, object> args = null)
+                    },
+                    (msgs, err) =>
+                    {
+                        throw new IotApiException("Failed to send th emessage.", err);
+                    },
+                    args);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new IotApiException("Failed to send th emessage.", ex);
+            }
+        }
+
+
+
+        public async Task SendAsync(object sensorMessage,
+            Action<IList<object>> onSuccess, Action<IList<object>,
+                Exception> onError, Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
 
             try
             {
-                var module = getServices<IInjectableModule>().FirstOrDefault();
+                var module = getServices<ISendModule>().FirstOrDefault();
                 if (module != null)
                 {
-                   // while(module != null)
-                   // {
-                        await module.SendAsync(sensorMessage,
-                        (msgs) =>
-                        {
-
-                        },
-                        (msgs, err) =>
-                        {
-                            onError?.Invoke(new List<object> { sensorMessage }, err);
-                        },
-                        args);
-                   // };
-
-                }
-
-                /*
-                foreach (var module in getServices<IInjectableModule>())
-                {
-                    if (await module.Send(sensorMessage, (msgs)=> 
+                    await module.SendAsync(sensorMessage,
+                    (msgs) =>
                     {
 
                     },
-                    (msgs, err) =>                    
+                    (msgs, err) =>
                     {
                         onError?.Invoke(new List<object> { sensorMessage }, err);
-                    },                    
-                    args))
-                        break;
+                    },
+                    args);
                 }
-
-                onSuccess?.Invoke(new List<object> { sensorMessage } );
-                */
             }
             catch (Exception ex)
             {

@@ -16,26 +16,35 @@ namespace Daenet.IoT.Services
         /// <returns></returns>
         void Open(Dictionary<string, object> args);
 
-        IInjectableModule NextModule { set; get; }
 
-        //Task Open(IIotApi connector, IInjectableModule nextModule, Dictionary<string, object> args = null);
-
-       Task SendAsync(object sensorMessage,
-       Action<IList<object>> onSuccess = null,
-       Action<IList<object>, Exception> onError = null,
-       Dictionary<string, object> args = null);
     }
+    
 
-
-
-
-    public interface IBeforeReceive : IInjectableModule
+    /// <summary>
+    /// Modules which implements this interface will be invoked on Send Operation.
+    /// </summary>
+    public interface ISendModule : IInjectableModule
     {
-        bool BeforeReceive(IIotApi connector, object sensorMessage, Dictionary<string, object> args = null);
+        ISendModule NextSendModule { set; get; }
+
+        Task SendAsync(object sensorMessage,
+                        Action<IList<object>> onSuccess = null,
+                        Action<IList<object>, Exception> onError = null,
+                        Dictionary<string, object> args = null);
     }
 
-    public interface IAfterReceive : IInjectableModule
+
+    /// <summary>
+    /// Modules which implements this interface will be invoked on Receive Operation.
+    /// </summary>
+    public interface IReceiveModule : IInjectableModule
     {
-        bool AfterReceive(IIotApi connector, object sensorMessage, Dictionary<string, object> args = null);
+        IReceiveModule NextReceiveModule { set; get; }
+
+        Task<object> ReceiveAsync(
+                   Action<IList<object>> onSuccess = null,
+                   Action<IList<object>, Exception> onError = null,
+                   Dictionary<string, object> args = null);
     }
+
 }

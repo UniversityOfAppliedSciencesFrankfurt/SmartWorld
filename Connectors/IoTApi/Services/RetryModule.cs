@@ -17,17 +17,15 @@ namespace Daenet.IoT.Services
         }
     }
 
-    public class RetryModule : IInjectableModule
+    public class RetryModule : ISendModule
     {
-        private IIotApi m_Connector;
-
         private int m_NumOfRetries = 3;
 
         private TimeSpan m_DelayTime = TimeSpan.FromMilliseconds(1000);
 
-        private IInjectableModule m_NextModule;
+        private ISendModule m_NextModule;
 
-        public IInjectableModule NextModule
+        public ISendModule NextSendModule
         {
             get
             {
@@ -45,23 +43,7 @@ namespace Daenet.IoT.Services
             m_NumOfRetries = numOfRetries;
             m_DelayTime = delayTime;
         }
-
-        //public Task Open(IIotApi connector, IInjectableModule nextModule,
-        //    Dictionary<string, object> args = null)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        m_Connector = connector;
-        //        if (args.ContainsKey("NumOfRetries"))
-        //            m_NumOfRetries = (int)args["NumOfRetries"];
-
-        //        if (args.ContainsKey("DelayTimeMs"))
-        //            m_DelayTime = TimeSpan.FromMilliseconds((int)args["DelayTimeMs"]);
-
-        //    });
-        //}
-
-
+      
         public async Task SendAsync(object sensorMessage,
            Action<IList<object>> onSuccess = null,
            Action<IList<object>, Exception> onError = null,
@@ -71,7 +53,7 @@ namespace Daenet.IoT.Services
 
             while (--cnt >= 0)
             {
-                await NextModule.SendAsync(sensorMessage, (msgs) =>
+                await NextSendModule.SendAsync(sensorMessage, (msgs) =>
                 {
                     onSuccess?.Invoke(new List<object> { sensorMessage });
                     cnt = 0;
@@ -87,9 +69,14 @@ namespace Daenet.IoT.Services
             }
         }
 
-        public void Open(Dictionary<string, object> args)
+        public void Open(Dictionary<string, object> args = null)
         {
            
+        }
+
+        public Task<object> ReceiveAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        {
+            throw new NotImplementedException("Retry module should not implement retrying.");
         }
     }
 }

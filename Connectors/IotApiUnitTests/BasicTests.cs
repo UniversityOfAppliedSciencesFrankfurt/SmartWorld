@@ -10,16 +10,31 @@ namespace IotApiUnitTests
     [TestClass]
     public class BasicTests
     {
-        public IIotApi getConnector(bool simulateErrorOnSend = false)
+        public IInjectableModule getDefaultModule(bool simulateErrorOnSend = false)
         {
             return new SampleConnector(simulateErrorOnSend);
-
         }
+
         [TestMethod]
         [ExpectedException(typeof(IotApiException))]
-        public void TestInitialization()
+        public void TestInit()
         {
             IotApi api = new IotApi();
+
+            api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" }).Wait();
+        }
+
+        /// <summary>
+        /// Test positive init with NULL-send.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(IotApiException))]
+        public void TestSimpleSend()
+        {
+            IotApi api = new IotApi();
+
+            api.Open();
+
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
               (msgs) =>
               {
@@ -33,6 +48,9 @@ namespace IotApiUnitTests
             ;
         }
 
+        /// <summary>
+        /// Test sending of the message.
+        /// </summary>
         [TestMethod]
         public void TestSend()
         {
@@ -53,29 +71,18 @@ namespace IotApiUnitTests
                 null).Wait();
         }
 
+        /// <summary>
+        /// Test batched send.
+        /// </summary>
         [TestMethod]
         public void TestBatchSend()
         {
-            IotApi api = new IotApi();
-
-            api.Open(new System.Collections.Generic.Dictionary<string, object>());
-
-            api.SendAsync(new List<object>()
-            {  new { Prop1 = 1.2, Prop2 = ":)" } , new { Prop1 = 2.3, Prop2 = ":(" } },
-                (msgs) =>
-                {
-                    Assert.IsTrue(msgs.Count == 2);
-                  
-                    //Assert.IsTrue(((dynamic)msgs[0]).Prop1 == 1.2);
-                    //Assert.IsTrue(((dynamic)msgs[2]).Prop2 == ":(");
-                },
-                (msgs, err) =>
-                {
-                    throw err;
-                },
-                null).Wait();
+            //todo.
         }
 
+        /// <summary>
+        /// Test sending of the message with retry.
+        /// </summary>
         [TestMethod]
         public void TestSendWithRetry()
         {
@@ -83,17 +90,14 @@ namespace IotApiUnitTests
             api
             .RegisterRetry(2, TimeSpan.FromSeconds(1))
             .RegisterPersist(new Dictionary<string, object>())
-            .RegisterModule(getConnector(true));
-              
-
-           // api.RegisterModule((anew RetryModule()).Open(null, null, null));
+            .RegisterModule(getDefaultModule(true));
+           
             api.Open(new System.Collections.Generic.Dictionary<string, object>());
 
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
                 (msgs) =>
                 {
                     Assert.IsTrue(msgs.Count == 1);
-                    // Assert.IsTrue(((dynamic)msgs[0]).Prop1 == 1.2);
                 },
                 (msgs, err) =>
                 {
@@ -105,22 +109,23 @@ namespace IotApiUnitTests
         [TestMethod]
         public void TestReceive()
         {
-            IotApi api = new IotApi();
+            IotApi api = new IotApi()
+              .RegisterPersist(new Dictionary<string, object>())
+              .RegisterModule(getDefaultModule(true));
 
             api.Open(new System.Collections.Generic.Dictionary<string, object>());
 
             api.ReceiveAsync(
-                (msg) =>
+                (msgs) =>
                 {
-                    Assert.IsTrue(msg != null);
-                    return true;
-                    
+                   
                 },
-                (err) =>
+                (msgs, err) =>
                 {
-                    return false;
+                   
                 }).Wait();
         }
+
 
         private void testMethod(int a)
         {
