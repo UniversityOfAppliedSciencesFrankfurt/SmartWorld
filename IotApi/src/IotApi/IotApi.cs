@@ -98,7 +98,9 @@ namespace Iot
             m_IsOpenCalled = true;
         }
 
-        public async Task<object> ReceiveAsync(Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task ReceiveAsync(Action<IList<object>> onSuccess,
+            Action<IList<object>, Exception> onError = null, 
+            Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -108,8 +110,14 @@ namespace Iot
                 var module = getServices<IReceiveModule>().FirstOrDefault();
                 if (module != null)
                 {
-                    var msg = await module.ReceiveAsync(onSuccess, onError, args);
-                    return msg;
+                    await module.ReceiveAsync((msgs) =>
+                    {
+                        onSuccess?.Invoke(msgs);
+                    },
+                    (msgs, err) =>
+                    {
+                        onError?.Invoke(new List<object> { msgs }, err);
+                    }, args);                    
                 }
                 else
                     throw new InvalidOperationException("No registered IReceiveModule found.");
@@ -117,6 +125,28 @@ namespace Iot
             catch (Exception ex)
             {
                 onError?.Invoke(null, ex);
+                throw ex;
+            }
+        }
+        
+
+        public async Task<object> ReceiveAsync(Dictionary<string, object> args = null)
+        {
+            if (m_IsOpenCalled == false)
+                throw new IotApiException("Method Open must be called first.");
+
+            try
+            {
+                var module = getServices<IReceiveModule>().FirstOrDefault();
+                if (module != null)
+                {
+                    return await module.ReceiveAsync(args);
+                }
+                else
+                    throw new InvalidOperationException("No registered IReceiveModule found.");
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }
@@ -190,7 +220,7 @@ namespace Iot
                 {
                     await this.SendAsync(sensorMessages, (msgs) =>
                     {
-
+                        onSuccess?.Invoke(msgs);
                     },
                     (msgs, err) =>
                     {

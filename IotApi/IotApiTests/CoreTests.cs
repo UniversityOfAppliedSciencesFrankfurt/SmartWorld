@@ -175,7 +175,7 @@ namespace IotApiTests
         }
 
         [Fact]
-        public void TestReceive()
+        public void TestReceiveWithCallback()
         {
             IotApi api = new IotApi()
               .RegisterPersistModule(new Dictionary<string, object>())
@@ -192,6 +192,18 @@ namespace IotApiTests
                 {
 
                 }).Wait();
+        }
+
+        [Fact]
+        public void TestReceive()
+        {
+            IotApi api = new IotApi()
+              .RegisterPersistModule(new Dictionary<string, object>())
+              .RegisterModule(getDefaultModule(true));
+
+            api.Open(new System.Collections.Generic.Dictionary<string, object>());
+
+            api.ReceiveAsync().Wait();
         }
 
 

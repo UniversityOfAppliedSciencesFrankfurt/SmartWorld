@@ -43,11 +43,22 @@ namespace IotApiTests
 
         }
 
-        public Task<object> ReceiveAsync(Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
-        {
-            Task.Delay(5000);
 
-            return Task<object>.Run(() =>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args">If null, then test will succsessfully return a message.
+        /// If none null, then an error will be simulated.</param>
+        /// <returns></returns>
+        public async Task ReceiveAsync(Action<IList<object>> onSuccess = null,
+            Action<IList<object>, Exception> onError = null,
+            Dictionary<string, object> args = null)
+        {
+            await Task.Delay(5000);
+
+            await Task.Run(() =>
             {
                 TelemetryData sensorEvent = new TelemetryData()
                 {
@@ -55,16 +66,31 @@ namespace IotApiTests
                     Temperature = DateTime.Now.Minute,
                 };
 
-                return (object)sensorEvent;
+                if (args == null)
+                    onSuccess?.Invoke(new List<object> { sensorEvent });
+                else
+                    onError?.Invoke(new List<object> { sensorEvent }, new Exception("UnitTest controlled error"));
+                
             });
-        
         }
 
-        //public void RegisterAcknowledge(Action<string, Exception> onAcknowledgeReceived)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<object> ReceiveAsync(Dictionary<string, object> args = null)
+        {
+            await Task.Delay(5000);
 
+            return Task.Run(() =>
+            {
+                TelemetryData sensorEvent = new TelemetryData()
+                {
+                    Device = "DEVICE001",
+                    Temperature = DateTime.Now.Minute,
+                };
+
+                return sensorEvent;
+            });
+        }
+
+     
         public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
             foreach (var msg in sensorMessages)

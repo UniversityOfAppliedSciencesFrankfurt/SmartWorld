@@ -60,11 +60,71 @@ namespace Iot
     /// </summary>
     public interface IReceiveModule : IInjectableModule
     {
+        /// <summary>
+        /// Next receive module in the pipeline.
+        /// </summary>
         IReceiveModule NextReceiveModule { set; get; }
 
-        Task<object> ReceiveAsync(
-                   Action<IList<object>> onSuccess = null,
+        /// <summary>
+        /// Receives the message by using of JAVA Script API style.
+        /// </summary>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        Task ReceiveAsync(
+                   Action<IList<object>> onSuccess,
                    Action<IList<object>, Exception> onError = null,
                    Dictionary<string, object> args = null);
+
+        /// <summary>
+        /// Receives the message.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        Task<object> ReceiveAsync(Dictionary<string, object> args = null);
+    }
+    
+    /// <summary>
+    /// Modules which implements this interface will be invoked when acknowledge messages are sent.
+    /// Some services and devices provide reliable messaging, which require invoking
+    /// of 
+    /// </summary>
+    public interface IAcknowledgeModule : IInjectableModule
+    {
+        /// <summary>
+        /// Next acknowledge module in the pipeline.
+        /// </summary>
+        ISendModule NextAcknowledgeModule { set; get; }
+
+
+        /// <summary>
+        /// Completes the message to remote endpoint by using of JAVA Script API style.
+        /// </summary>
+        /// <param name="sensorMessage">The message to be sent.</param>
+        /// <param name="onSuccess">Callback function invoked after th emessage has been successfully
+        /// sent to endpoint.</param>
+        /// <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+        /// <param name="args">Any protocol required parameters.</param>
+        /// <returns>Task</returns>
+        Task CommitAsync(object sensorMessage,
+                        Action<IList<object>> onSuccess = null,
+                        Action<IList<object>, Exception> onError = null,
+                        Dictionary<string, object> args = null);
+
+
+        /// <summary>
+        /// Abandons the message to remote endpoint by using of JAVA Script API style.
+        /// </summary>
+        /// <param name="sensorMessage">The message to be sent.</param>
+        /// <param name="onSuccess">Callback function invoked after th emessage has been successfully
+        /// sent to endpoint.</param>
+        /// <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+        /// <param name="args">Any protocol required parameters.</param>
+        /// <returns>Task</returns>
+        Task AbandonAsync(object sensorMessage,
+                        Action<IList<object>> onSuccess = null,
+                        Action<IList<object>, Exception> onError = null,
+                        Dictionary<string, object> args = null);
     }
 }
