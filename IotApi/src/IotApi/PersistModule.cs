@@ -7,7 +7,7 @@ namespace Iot
 {
     public static class PersistExtension
     {
-        public static IotApi RegisterPersist(this IotApi api, Dictionary<string, object> args = null)
+        public static IotApi RegisterPersistModule(this IotApi api, Dictionary<string, object> args = null)
         {
             PersistModule module = new PersistModule();
             api.RegisterModule(module);
@@ -16,6 +16,11 @@ namespace Iot
         }
 
     }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class PersistModule : ISendModule
     {
         private ISendModule m_NextModule;
@@ -33,18 +38,41 @@ namespace Iot
             }
         }
 
+
+        /// <summary>
+        /// Nothing to do.
+        /// </summary>
+        /// <param name="args"></param>
         public void Open(Dictionary<string, object> args)
         {
 
         }
 
-        public Task ReceiveAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        /// <summary>
+        /// Simulate sending of a signle message.
+        /// </summary>
+        /// <param name="sensorMessages"></param>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+            foreach (var msg in sensorMessages)
+            {
+                await SendAsync(msg, onSuccess, onError, args);
+            }
         }
 
 
-
+        /// <summary>
+        /// Simulate sending of a signle message.
+        /// </summary>
+        /// <param name="sensorMessage"></param>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public async Task SendAsync(object sensorMessage,
             Action<IList<object>> onSuccess = null,
             Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)

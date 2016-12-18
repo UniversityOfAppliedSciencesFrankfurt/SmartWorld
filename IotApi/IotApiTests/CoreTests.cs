@@ -8,15 +8,27 @@ using Xunit;
 
 namespace IotApiTests
 {
+
+    /// <summary>
+    /// Set of test which ensure core IoTApi functionality.
+    /// </summary>
     public class CoreTests
     {
+        /// <summary>
+        /// Returns SampleProtocol as default module.
+        /// </summary>
+        /// <param name="simulateErrorOnSend"></param>
+        /// <returns></returns>
         public IInjectableModule getDefaultModule(bool simulateErrorOnSend = false)
         {
             return new SampleProtocol(simulateErrorOnSend);
         }
 
 
-        [Fact]      
+        /// <summary>
+        /// Makes sure that IoTApi will fail if Open is not called.
+        /// </summary>
+        [Fact]
         public void TestInit()
         {
             Assert.Throws(typeof(AggregateException), () =>
@@ -32,7 +44,6 @@ namespace IotApiTests
         /// Test positive init with NULL-send.
         /// </summary>
         [Fact]
-       // [ExpectedException(typeof(IotApiException))]
         public void TestSimpleSend()
         {
             IotApi api = new IotApi();
@@ -42,15 +53,15 @@ namespace IotApiTests
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
               (msgs) =>
               {
-
+                  throw new InvalidOperationException("This should not be executed, because no pipeline is defined!");
               },
               (msgs, err) =>
               {
-
+                  throw new InvalidOperationException("This should not be executed, because no pipeline is defined!");
               },
               null).Wait();
-            ;
         }
+
 
         /// <summary>
         /// Test sending of the message.
@@ -58,14 +69,17 @@ namespace IotApiTests
         [Fact]
         public void TestSend()
         {
-            IotApi api = new IotApi();
+            IotApi api = new IotApi().
+            RegisterModule(getDefaultModule(false));
 
             api.Open(new System.Collections.Generic.Dictionary<string, object>());
-
+            
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
                 (msgs) =>
                 {
                     Assert.True(msgs.Count == 1);
+                    Assert.True(((dynamic)msgs[0]).Prop1 == 1.2);
+                    Assert.True(((dynamic)msgs[0]).Prop2 == ":)");
                 },
                 (msgs, err) =>
                 {
@@ -73,6 +87,7 @@ namespace IotApiTests
                 },
                 null).Wait();
         }
+
 
         /// <summary>
         /// Test batched send.
@@ -80,8 +95,29 @@ namespace IotApiTests
         [Fact]
         public void TestBatchSend()
         {
-            //todo.
+            IotApi api = new IotApi().
+            RegisterModule(getDefaultModule(false));
+
+            api.Open(new System.Collections.Generic.Dictionary<string, object>());
+
+            api.SendAsync(new List<object>
+            {
+                new { Prop1 = 1.23, Prop2 = ":)" },
+                new { Prop1 = 1.2, Prop2 = ":):)" } },
+
+                (msgs) =>
+                {
+                    Assert.True(msgs.Count == 2);
+                    Assert.True(((dynamic)msgs[0]).Prop1 == 1.23);
+                    Assert.True(((dynamic)msgs[1]).Prop2 == ":):)");
+                },
+                (msgs, err) =>
+                {
+                    throw err;
+                },
+                null).Wait();
         }
+
 
         /// <summary>
         /// Test sending of the message with retry.
@@ -89,13 +125,12 @@ namespace IotApiTests
         [Fact]
         public void TestSendWithRetry()
         {
-            IotApi api = new IotApi();
-            api
-            .RegisterRetry(2, TimeSpan.FromSeconds(1))
-            .RegisterPersist(new Dictionary<string, object>())
+            IotApi api = new IotApi()
+            .RegisterRetryModule(2, TimeSpan.FromSeconds(1))
+            .RegisterPersistModule(new Dictionary<string, object>())
             .RegisterModule(getDefaultModule(false));
 
-            api.Open(new System.Collections.Generic.Dictionary<string, object>());
+            api.Open();
 
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
                 (msgs) =>
@@ -109,40 +144,41 @@ namespace IotApiTests
                 null).Wait();
         }
 
+
         /// <summary>
         /// Test sending of the message with retry.
         /// </summary>
         [Fact]
         public void TestFailSendWithRetry()
         {
-            Assert.Throws(typeof(AggregateException),() =>
-            {
-                IotApi api = new IotApi();
-                api
-                .RegisterRetry(2, TimeSpan.FromSeconds(1))
-                .RegisterPersist(new Dictionary<string, object>())
-                .RegisterModule(getDefaultModule(true));
+            Assert.Throws(typeof(AggregateException), () =>
+             {
+                 IotApi api = new IotApi();
+                 api
+                 .RegisterRetryModule(2, TimeSpan.FromSeconds(1))
+                 .RegisterPersistModule(new Dictionary<string, object>())
+                 .RegisterModule(getDefaultModule(true));
 
-                api.Open(new System.Collections.Generic.Dictionary<string, object>());
+                 api.Open(new System.Collections.Generic.Dictionary<string, object>());
 
-                api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
-                    (msgs) =>
-                    {
-                        Assert.True(msgs.Count == 1);
-                    },
-                    (msgs, err) =>
-                    {
-                        throw err;
-                    },
-                    null).Wait();
-            });
+                 api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
+                     (msgs) =>
+                     {
+                         Assert.True(msgs.Count == 1);
+                     },
+                     (msgs, err) =>
+                     {
+                         throw err;
+                     },
+                     null).Wait();
+             });
         }
 
         [Fact]
         public void TestReceive()
         {
             IotApi api = new IotApi()
-              .RegisterPersist(new Dictionary<string, object>())
+              .RegisterPersistModule(new Dictionary<string, object>())
               .RegisterModule(getDefaultModule(true));
 
             api.Open(new System.Collections.Generic.Dictionary<string, object>());

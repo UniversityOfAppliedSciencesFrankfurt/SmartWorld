@@ -7,7 +7,7 @@ namespace Iot
 {
     public static class RetryExtension
     {
-        public static IotApi RegisterRetry(this IotApi api, int numOfRetries, TimeSpan delayTime)
+        public static IotApi RegisterRetryModule(this IotApi api, int numOfRetries, TimeSpan delayTime)
         {
             RetryModule module = new RetryModule(numOfRetries, delayTime);
             api.RegisterModule(module);
@@ -36,11 +36,17 @@ namespace Iot
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numOfRetries"></param>
+        /// <param name="delayTime"></param>
         public RetryModule(int numOfRetries, TimeSpan delayTime)
         {
             m_NumOfRetries = numOfRetries;
             m_DelayTime = delayTime;
         }
+
 
         public async Task SendAsync(object sensorMessage,
            Action<IList<object>> onSuccess = null,
@@ -72,9 +78,9 @@ namespace Iot
 
         }
 
-        public Task<object> ReceiveAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException("Retry module should not implement retrying.");
+            throw new NotImplementedException();
         }
     }
 }
