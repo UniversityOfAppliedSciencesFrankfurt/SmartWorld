@@ -1,2 +1,6 @@
 #:C:\GitHub\SmartWorld\IotApi\XmlRpcCore\XmlRpcCore.xproj
 C:\GitHub\SmartWorld\IotApi\XmlRpcCore\XmlRpcCore.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+#:C:\GitHub\SmartWorld\IotApi\IotApiTests\IotApiTests.xproj
+C:\GitHub\SmartWorld\IotApi\IotApiTests\IotApiTests.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+C:\GitHub\SmartWorld\IotApi\IotApiTests\IotApiTests.xproj|C:\GitHub\SmartWorld\IotApi\XmlRpcCore\XmlRpcCore.xproj
+C:\GitHub\SmartWorld\IotApi\XmlRpcCore\XmlRpcCore.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj

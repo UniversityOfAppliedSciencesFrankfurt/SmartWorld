@@ -15,17 +15,24 @@ namespace XmlRpcCore
         /// <summary>
         /// Uri of server
         /// </summary>
-        private Uri uri;
+        private Uri m_Uri;
 
         /// <summary>
         /// Duration of time out
         /// </summary>
-        private TimeSpan timeOut;
+        private TimeSpan m_TimeOut;
 
         /// <summary>
         /// Test object
         /// </summary>
         private bool mockTest = false;
+
+        public XmlRpcProxy(Uri requestUri, TimeSpan setTimeOut, bool mock)
+        {
+            this.m_Uri = requestUri;
+            this.m_TimeOut = setTimeOut;
+            mockTest = mock;
+        }
 
         /// <summary>
         /// Creates a proxy to connect server
@@ -34,8 +41,8 @@ namespace XmlRpcCore
         /// <param name="setTimeOut">Duration of time out</param>
         public XmlRpcProxy(string requestUri, TimeSpan setTimeOut, bool mock)
         {
-            this.uri = new Uri(requestUri);
-            this.timeOut = setTimeOut;
+            this.m_Uri = new Uri(requestUri);
+            this.m_TimeOut = setTimeOut;
             mockTest = mock;
         }
 
@@ -93,7 +100,7 @@ namespace XmlRpcCore
         /// <returns>response string</returns>
         public async Task<string> SendRequest(MethodCall request)
         {
-            if (uri != null)
+            if (m_Uri != null)
             {
                 string xmlRpcString = XmlRpcSerialization.XmlRpcSerialize(request);
                 string responseString;
@@ -112,7 +119,7 @@ namespace XmlRpcCore
         /// <returns>MethodResponse object</returns>
         public async Task<MethodResponse> SendRequestAndDeserialize(MethodCall request)
         {
-            if (uri != null)
+            if (m_Uri != null)
             {
 
                 string xmlRpcString = XmlRpcSerialization.XmlRpcSerialize(request);
@@ -141,23 +148,27 @@ namespace XmlRpcCore
         /// <returns>response string</returns>
         public async Task<string> postHttp(string xmlString)
         {
-            if (uri != null)
+            string responseString;
+
+            if (m_Uri != null)
             {
                 using (var httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = uri;
+                    httpClient.BaseAddress = m_Uri;
+
+                    if (m_TimeOut != new TimeSpan())
+                        httpClient.Timeout = m_TimeOut;
+
                     HttpContent httpContent = new StringContent(xmlString);
-                    string responseString;
+                    
                     if (!mockTest)
                     {
-                        var result = await httpClient.PostAsync(uri, httpContent);
+                        var result = await httpClient.PostAsync(m_Uri, httpContent);
                         result.EnsureSuccessStatusCode();
                         responseString = await result.Content.ReadAsStringAsync();
                     }
                     else responseString = @"<methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>";
-                    //responseString = @"<methodResponse><params><param><value></value></param></params></methodResponse>";
-                    //responseString = @"<methodResponse><fault><value><struct><member><name>faultCode</name><value><i4>-1</i4></value></member><member><name>faultString</name><value>Failure</value></member></struct></value></fault></methodResponse>";
-                    //responseString = System.IO.File.ReadAllText(@"E:\Master IT\Software Engineering\fwd\list.txt");
+
                     return responseString;
                 }
             }

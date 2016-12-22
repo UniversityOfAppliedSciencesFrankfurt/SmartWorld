@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IotApi</name>
+    </assembly>
+    <members>
+        <member name="M:Iot.IInjectableModule.Open(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Performs initialization of transport implementation.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Iot.ISendModule">
+            <summary>
+            Modules which implements this interface will be invoked on Send Operation.
+            </summary>
+        </member>
+        <member name="M:Iot.ISendModule.SendAsync(System.Object,System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sends the message to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessage">The message to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Iot.ISendModule.SendAsync(System.Collections.Generic.IList{System.Object},System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sends the batch of messages to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessages">List of messages to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="T:Iot.IReceiveModule">
+            <summary>
+            Modules which implements this interface will be invoked on Receive Operation.
+            </summary>
+        </member>
+        <member name="P:Iot.IReceiveModule.NextReceiveModule">
+            <summary>
+            Next receive module in the pipeline.
+            </summary>
+        </member>
+        <member name="M:Iot.IReceiveModule.ReceiveAsync(System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Receives the message by using of JAVA Script API style.
+            </summary>
+            <param name="onSuccess"></param>
+            <param name="onError"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.IReceiveModule.ReceiveAsync(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Receives the message.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Iot.IAcknowledgeModule">
+            <summary>
+            Modules which implements this interface will be invoked when acknowledge messages are sent.
+            Some services and devices provide reliable messaging, which require invoking
+            of 
+            </summary>
+        </member>
+        <member name="P:Iot.IAcknowledgeModule.NextAcknowledgeModule">
+            <summary>
+            Next acknowledge module in the pipeline.
+            </summary>
+        </member>
+        <member name="M:Iot.IAcknowledgeModule.CommitAsync(System.Object,System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Completes the message to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessage">The message to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Iot.IAcknowledgeModule.AbandonAsync(System.Object,System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Abandons the message to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessage">The message to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="T:Iot.IotApi">
+            <summary>
+            Unified IoT Application Provider Interface.
+            </summary>
+        </member>
+        <member name="M:Iot.IotApi.#ctor(System.Collections.Generic.ICollection{Iot.IInjectableModule})">
+            <summary>
+            Creates the instance of IoT API.
+            </summary>
+            <param name="injectableModules">List of modules, which will be executed in specified order.</param>
+        </member>
+        <member name="M:Iot.IotApi.RegisterModule(Iot.IInjectableModule)">
+            <summary>
+            Use this method to register any additional module, which 
+            will be added to execution pipeline of the current instance of<see cref="!:IoTApi"/> .
+            </summary>
+            <param name="module">Instance of injectable module.</param>
+            <returns>Current instance of api.</returns>
+        </member>
+        <member name="M:Iot.IotApi.Open(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="args">COntains list of all configuration parameters for all injectable modules.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.IotApi.SendAsync(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sends the message to remote endpoint.
+            </summary>
+            <param name="sensorMessage">The message to be sent.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <exception cref="T:Iot.IotApiException">Thrown if any exception has been thrown internally.</exception>
+            <returns>Tesk</returns>
+        </member>
+        <member name="M:Iot.IotApi.SendAsync(System.Collections.Generic.IList{System.Object},System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sends the batch of messages to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessages">List of messages to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:Iot.IotApi.SendAsync(System.Object,System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Sends the message to remote endpoint by using of JAVA Script API style.
+            </summary>
+            <param name="sensorMessage">The message to be sent.</param>
+            <param name="onSuccess">Callback function invoked after th emessage has been successfully
+            sent to endpoint.</param>
+            <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
+            <param name="args">Any protocol required parameters.</param>
+            <returns>Task</returns>
+        </member>
+        <member name="T:Iot.IotApiException">
+            <summary>
+            Exception thrown inside of IotApi.
+            </summary>
+        </member>
+        <member name="P:Iot.IotApiException.ReceivedMessages">
+            <summary>
+            List of messages related to error.
+            </summary>
+        </member>
+        <member name="T:Iot.PersistModule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Iot.PersistModule.Open(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Nothing to do.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Iot.PersistModule.SendAsync(System.Collections.Generic.IList{System.Object},System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Simulate sending of a signle message.
+            </summary>
+            <param name="sensorMessages"></param>
+            <param name="onSuccess"></param>
+            <param name="onError"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.PersistModule.SendAsync(System.Object,System.Action{System.Collections.Generic.IList{System.Object}},System.Action{System.Collections.Generic.IList{System.Object},System.Exception},System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Simulate sending of a signle message.
+            </summary>
+            <param name="sensorMessage"></param>
+            <param name="onSuccess"></param>
+            <param name="onError"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.RetryModule.#ctor(System.Int32,System.TimeSpan)">
+            <summary>
+            
+            </summary>
+            <param name="numOfRetries"></param>
+            <param name="delayTime"></param>
+        </member>
+    </members>
+</doc>
