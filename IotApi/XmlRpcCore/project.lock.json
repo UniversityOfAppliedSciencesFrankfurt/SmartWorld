@@ -1067,6 +1067,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "IotApi/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netstandard1.6/IotApi.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/IotApi.dll": {}
+        }
       }
     }
   },
@@ -4013,10 +4026,16 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
       ]
+    },
+    "IotApi/1.0.0": {
+      "type": "project",
+      "path": "../src/IotApi/project.json",
+      "msbuildProject": "../src/IotApi/IotApi.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "IotApi >= 1.0.0-*",
       "NETStandard.Library >= 1.6.0"
     ],
     ".NETStandard,Version=v1.6": []
