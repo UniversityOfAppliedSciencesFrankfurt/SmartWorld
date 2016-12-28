@@ -56,19 +56,20 @@ namespace XmlRpcCore
 
         public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
-            // string response = string.Empty;
+          
             XmlRpcProxy proxy = new XmlRpcProxy(m_Uri, m_TimeOut, m_Mock);
 
             await Task.Run(() =>
              {
                  try
-            {
-                    //transfer the local request (from Console or UW Apps) into Message type
-                    var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
+                 {
+                     
+                     var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
 
                      var requestStr = proxy.SerializeRequest(sensorMsg);
-                     var res =  proxy.SendRequest(requestStr).Result;
+                     var res = proxy.SendRequest(requestStr).Result;
                      var response = proxy.DeserializeResponse(res);
+
                      onSuccess?.Invoke(new List<object>() { response });
 
                  }

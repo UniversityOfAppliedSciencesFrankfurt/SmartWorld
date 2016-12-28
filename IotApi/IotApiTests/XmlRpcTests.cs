@@ -13,15 +13,16 @@ namespace IotApiTests
         [Fact]
         public void Open_Door()
         {
-            // XmlRpcConnector.XmlRpcConnector connector = new XmlRpcConnector.XmlRpcConnector();
+
             IotApi connector = new IotApi()
                 .RegisterModule(new XmlRpc());
-            // IIotApi connector = new XmlRpcConnector.XmlRpcConnector();
+
             Dictionary<string, object> agr = new Dictionary<string, object>()
             {
                 { "Uri", "http://192.168.0.222:2001" },
                 {"Mock",true }
             };
+
             connector.Open(agr);
 
             MethodCall request = new MethodCall()

@@ -1,5 +1,5 @@
 ﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.#
 ################################################################################
 
 /IotApi/src/IotApi/IotApi/bin/*
@@ -9,3 +9,11 @@
 /IotApi/IotApiTests/project.lock.json
 /IotApi/src/IotApi/bin/Debug/*
 /IotApi/src/IotApi/obj/Debug/*
+/IotApi/CentranControlUnit/bin/*
+/IotApi/CentranControlUnit/obj/*
+/IotApi/XmlRpcCore/bin/*
+/IotApi/XmlRpcCore/obj/*
+/IotApi/Test.Desktop/bin/*
+/IotApi/Test.Desktop/obj/*
+/IotApi/Test.Uwp/bin/*
+/IotApi/Test.Uwp/obj/*
