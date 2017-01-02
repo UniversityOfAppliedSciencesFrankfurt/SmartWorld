@@ -1,4 +1,5 @@
-﻿using IoTBridge;
+﻿using CentralControlUnit;
+using Iot;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using XmlRpcCore;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,16 +27,21 @@ namespace IOTBridge_GIT
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private IIotApi m_Ccu = new CcuConnector.XMLRPCTransport();
+        private IotApi m_Ccu = new IotApi();
         int tagHeaterMode;
         int tagDimmerMode;
         public MainPage()
         {
             this.InitializeComponent();
             Settings sett = new Settings(); //default setting
-            m_Ccu.Open(new Dictionary<string, object>() {
-                    { "CcuUri", sett.CcuUrl }, { "timeOut", sett.Timeout}
-            });
+            m_Ccu.RegisterModule(new XmlRpc());
+
+            Dictionary<string, object> agr = new Dictionary<string, object>()
+            {
+                { "Uri", "http://192.168.0.222:2001" }
+            };
+
+            m_Ccu.Open(agr);
         }
 
         /// <summary>
@@ -44,21 +51,65 @@ namespace IOTBridge_GIT
         /// <param name="m_Request">Local string Request. Input format: "Sensor Action Value"</param>
         /// <param name="m_Result">Response message from server in string</param>
         /// <returns></returns>
-        private async Task<string> SendandReceive(IIotApi ccu, string m_Request)
+        private async Task<string> SendandReceive(IotApi iotApi, string request)
         {
-            string m_Result = null;
-            Message message = new Message(m_Request);
-            await m_Ccu.SendAsync(message, (responseMsg) =>
+
+            Ccu ccu = new Ccu();
+
+            var methodCall = ccu.PrepareMethodCall(request);
+            string response = "";
+
+            await iotApi.SendAsync(methodCall, (responseMsg) =>
             {
-                List<object> sensorMessage = responseMsg as List<object>;
-                if (sensorMessage.Count > 0) m_Result = (string)sensorMessage[0];
+                if (responseMsg.Count > 0)
+                {
+                    foreach (var senMgs in responseMsg)
+                    {
+                        if (MethodResponse.isMethodResponse(senMgs))
+                        {
+                            MethodResponse res = senMgs as MethodResponse;
+
+                            if (ccu.isGetList)
+                            {
+                                response = ccu.GetListDevices(res);
+                            }
+                            else
+                            {
+                                if (!ccu.isGetMethod)
+                                {
+                                    // Set Methods do not return any value. Detecting no value means the operation is done
+                                    if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
+
+                                    // Set methods can not return any value
+                                    else throw new InvalidOperationException("The operation cannot return any value!");
+                                }
+                                else
+                                {
+                                    // Get methods must return a value, if not it must be an error
+                                    if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
+
+                                    // Collecting the returned value
+                                    else response = res.ReceiveParams.First().Value.ToString();
+                                }
+                            }
+                        }
+
+                    }
+                }
             },
              (error, ex) =>
              {
-                 List<object> errorMessage = error as List<object>;
-                 if (errorMessage.Count > 0) m_Result = (string)errorMessage[0];
+                 if (error.Count > 0)
+                 {
+                     foreach (var er in error)
+                     {
+                         MethodFaultResponse faultRes = er as MethodFaultResponse;
+                         response = faultRes.Message;
+                     }
+                 }
              });
-            return m_Result;
+
+            return response;
         }
 
         /// <summary>
