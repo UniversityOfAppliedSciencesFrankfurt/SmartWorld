@@ -127,20 +127,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CcuConnector\CcuConnector.csproj">
-      <Project>{66e361ac-29cf-4222-94a4-3eee427977c9}</Project>
-      <Name>CcuConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IoTBridge\IoTBridge.csproj">
-      <Project>{1ac3b3cd-9b8b-4e24-b3cc-97df39994015}</Project>
-      <Name>IoTBridge</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XmlRpcCoreFx\XmlRpcCoreFx.csproj">
-      <Project>{6aa118fa-7e25-46de-9422-b97233438469}</Project>
-      <Name>XmlRpcCoreFx</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

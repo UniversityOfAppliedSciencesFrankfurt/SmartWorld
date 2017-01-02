@@ -11,7 +11,7 @@ namespace IotApiTests
     public class XmlRpcTests
     {
         [Fact]
-        public void Open_Door()
+        public void TestOpen_Door()
         {
 
             IotApi connector = new IotApi()
@@ -20,7 +20,7 @@ namespace IotApiTests
             Dictionary<string, object> agr = new Dictionary<string, object>()
             {
                 { "Uri", "http://192.168.0.222:2001" },
-                {"Mock",true }
+                {"Mock",false }
             };
 
             connector.Open(agr);
