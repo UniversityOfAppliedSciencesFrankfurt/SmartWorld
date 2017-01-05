@@ -17,3 +17,4 @@
 /IotApi/Test.Desktop/obj/*
 /IotApi/Test.Uwp/bin/*
 /IotApi/Test.Uwp/obj/*
+/IotApi/.vs/*
