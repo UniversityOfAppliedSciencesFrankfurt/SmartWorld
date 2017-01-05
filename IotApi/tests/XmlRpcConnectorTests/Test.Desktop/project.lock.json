@@ -2123,44 +2123,44 @@
       },
       "CcuLib/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
+        "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "XmlRpcCore": "1.0.0"
         },
         "compile": {
-          "netstandard1.6/CcuLib.dll": {}
+          "netstandard1.4/CcuLib.dll": {}
         },
         "runtime": {
-          "netstandard1.6/CcuLib.dll": {}
+          "netstandard1.4/CcuLib.dll": {}
         }
       },
       "IotApi/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
+        "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
-          "netstandard1.6/IotApi.dll": {}
+          "netstandard1.4/IotApi.dll": {}
         },
         "runtime": {
-          "netstandard1.6/IotApi.dll": {}
+          "netstandard1.4/IotApi.dll": {}
         }
       },
       "XmlRpcCore/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
+        "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "IotApi": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "System.Runtime.Serialization.Xml": "4.1.1"
         },
         "compile": {
-          "netstandard1.6/XmlRpcCore.dll": {}
+          "netstandard1.4/XmlRpcCore.dll": {}
         },
         "runtime": {
-          "netstandard1.6/XmlRpcCore.dll": {}
+          "netstandard1.4/XmlRpcCore.dll": {}
         }
       }
     }
@@ -6999,7 +6999,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "CcuLib >= 1.0.0-*",
+      "CcuLib >= 1.0.0",
       "IotApi >= 1.0.0-*",
       "Microsoft.NETCore.App >= 1.0.0"
     ],
