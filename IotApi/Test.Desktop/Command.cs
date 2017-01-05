@@ -1,0 +1,163 @@
+﻿using Iot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using XmlRpcCore;
+using CentralControlUnit;
+
+namespace Test.Desktop
+{
+    public class Command
+    {
+        private static async Task<string> RequestAndReceive(IotApi iotApi, string request)
+        {
+            Ccu ccu = new Ccu();
+
+            var methodCall = ccu.PrepareMethodCall(request);
+            string response = "";
+
+            await iotApi.SendAsync(methodCall, (responseMsg) =>
+            {
+                if (responseMsg.Count > 0)
+                {
+                    foreach (var senMgs in responseMsg)
+                    {
+                        if (MethodResponse.isMethodResponse(senMgs))
+                        {
+                            MethodResponse res = senMgs as MethodResponse;
+                            
+                            if (ccu.isGetList)
+                            {
+                                response = ccu.GetListDevices(res);
+                            }
+                            else
+                            {
+                                if (!ccu.isGetMethod)
+                                {
+                                    // Set Methods do not return any value. Detecting no value means the operation is done
+                                    if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
+
+                                    // Set methods can not return any value
+                                    else throw new InvalidOperationException("The operation cannot return any value!");
+                                }
+                                else
+                                {
+                                    // Get methods must return a value, if not it must be an error
+                                    if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
+
+                                    // Collecting the returned value
+                                    else response = res.ReceiveParams.First().Value.ToString();
+                                }
+                            }
+                        }
+
+                    }
+                }
+            },
+             (error, ex) =>
+             {
+                 if (error.Count > 0)
+                 {
+                     foreach (var er in error)
+                     {
+                         MethodFaultResponse faultRes = er as MethodFaultResponse;
+                         response = faultRes.Message;
+                     }
+                 }
+             });
+
+            return response;
+        }
+
+        public static async Task<string> GetListDevices(IotApi ccu)
+        {
+            string request = "DEVICES LIST get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetDoorStatus(IotApi ccu)
+        {
+            string request = "DOOR STATUS get";
+            string result = await RequestAndReceive(ccu, request);
+            string state = "";
+            if (result.ToLower() == "true") state = "Opened";
+            if (result.ToLower() == "false") state = "Closed";
+            return state;
+        }
+
+        public static async Task<string> OpenDoor(IotApi ccu)
+        {
+            string request = "DOOR STATUS UNLOCK";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> CloseDoor(IotApi ccu)
+        {
+            string request = "DOOR STATUS LOCK";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetTempSensor(IotApi ccu)
+        {
+            string request = "TEMP_SENSOR TEMPERATURE get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetHumiditySensor(IotApi ccu)
+        {
+            string request = "TEMP_SENSOR HUMIDITY get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetHeaterMode(IotApi ccu)
+        {
+            string request = "HEATER MODE get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetHeaterTemp(IotApi ccu)
+        {
+            string request = "HEATER ACT_TEMP get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> SetHeaterMode(IotApi ccu, int mode)
+        {
+            string request = "HEATER MODE " + mode.ToString();
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> SetHeaterTemp(IotApi ccu, double tempVal)
+        {
+            if (tempVal <= 3.5) tempVal = 3.5;
+            else if (tempVal >= 30.5) tempVal = 30.5;
+            string request = "HEATER SET_TEMP " + tempVal.ToString();
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> SetDimmerMode(IotApi ccu, string mode)
+        {
+            string request = "DIMMER STATE " + mode;
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+
+        public static async Task<string> GetDimmerMode(IotApi ccu)
+        {
+            string request = "DIMMER STATE get";
+            string result = await RequestAndReceive(ccu, request);
+            return result;
+        }
+    }
+}
