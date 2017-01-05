@@ -196,6 +196,15 @@
             <param name="args"></param>
             <returns></returns>
         </member>
+        <member name="M:Iot.RetryExtension.RegisterRetryModule(Iot.IotApi,System.Int32,System.TimeSpan)">
+            <summary>
+            Helps registration of retry module.
+            </summary>
+            <param name="api">The instance of IoTApi.</param>
+            <param name="numOfRetries">Number of retries.</param>
+            <param name="delayTime">Delay between retries.</param>
+            <returns></returns>
+        </member>
         <member name="M:Iot.RetryModule.#ctor(System.Int32,System.TimeSpan)">
             <summary>
             

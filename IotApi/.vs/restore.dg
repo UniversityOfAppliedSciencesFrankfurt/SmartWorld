@@ -1,4 +1,5 @@
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\Test.Desktop\Test.Desktop.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\XmlRpcCore\XmlRpcCore.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\XmlRpcCore\XmlRpcCore.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
