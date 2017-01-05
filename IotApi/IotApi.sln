@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test.XmlRpc (Apps)", "Test.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Uwp", "Test.Uwp\Test.Uwp.csproj", "{ED8BD1CD-9D33-4262-8BE6-09E2E213443B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CentranControlUnit", "CentranControlUnit\CentranControlUnit.xproj", "{AFB36E87-0AB3-4DD1-BE0F-75CAB8EDB49E}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CentralControlUnit", "CentranControlUnit\CentralControlUnit.xproj", "{AFB36E87-0AB3-4DD1-BE0F-75CAB8EDB49E}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Test.Desktop", "Test.Desktop\Test.Desktop.xproj", "{D55E8CE8-08DB-46CD-B889-324B9B9E6EDA}"
 EndProject
