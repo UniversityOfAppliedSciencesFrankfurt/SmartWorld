@@ -13,6 +13,28 @@ namespace Test.Desktop
     class Program
     {
 
+        static void Main(string[] args)
+        {
+            IotApi iotApi = new IotApi()
+                .RegisterModule(new XmlRpc());
+
+            Dictionary<string, object> agr = new Dictionary<string, object>()
+            {
+                { "Uri", "http://192.168.0.222:2001" },
+                {"Mock",false }
+            };
+
+            iotApi.Open(agr);
+
+            Console.WriteLine("Welcome to IOT Bridge Gateway!");
+            Thread.Sleep(2000); // Wait two seconds
+            Console.Clear();
+
+            Functions(iotApi);
+
+        }
+
+
         static private int RecursiveChoice(int minVal, int maxVal)
         {
             Console.Write("You select: ");
@@ -301,27 +323,6 @@ namespace Test.Desktop
                     Environment.Exit(2);
                     break;
             }
-        }
-
-        static void Main(string[] args)
-        {
-            IotApi connectorXmlRpc = new IotApi()
-                .RegisterModule(new XmlRpc());
-
-            Dictionary<string, object> agr = new Dictionary<string, object>()
-            {
-                { "Uri", "http://192.168.0.222:2001" },
-                {"Mock",false }
-            };
-
-            connectorXmlRpc.Open(agr);
-
-            Console.WriteLine("Welcome to IOT Bridge Gateway!");
-            Thread.Sleep(2000); // Wait two seconds
-            Console.Clear();
-
-            Functions(connectorXmlRpc);
-
         }
 
 

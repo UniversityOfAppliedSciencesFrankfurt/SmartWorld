@@ -18,3 +18,9 @@
 /IotApi/Test.Uwp/bin/*
 /IotApi/Test.Uwp/obj/*
 /IotApi/.vs/*
+/IotApi/src/XmlRpcConnector/XmlRpcCore/obj/Debug/netstandard1.6
+/IotApi/tests/IotApiTests/IotApiCoreTests/bin/Debug/netcoreapp1.0
+/IotApi/tests/IotApiTests/IotApiCoreTests/obj/Debug/netcoreapp1.0
+/IotApi/tests/XmlRpcConnectorTests/Test.Desktop/bin/Debug/netcoreapp1.0
+/IotApi/tests/XmlRpcConnectorTests/Test.Desktop/obj/Debug/netcoreapp1.0
+/IotApi/tests/XmlRpcConnectorTests/Test.Uwp/obj/x86/Debug

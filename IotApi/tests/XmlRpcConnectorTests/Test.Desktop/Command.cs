@@ -1,11 +1,12 @@
-﻿using Iot;
+﻿using CcuLib;
+using Iot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XmlRpcCore;
-using CentralControlUnit;
+
 
 namespace Test.Desktop
 {
@@ -18,15 +19,15 @@ namespace Test.Desktop
             var methodCall = ccu.PrepareMethodCall(request);
             string response = "";
 
-            await iotApi.SendAsync(methodCall, (responseMsg) =>
+            await iotApi.SendAsync(methodCall, (responseMessages) =>
             {
-                if (responseMsg.Count > 0)
+                if (responseMessages.Count > 0)
                 {
-                    foreach (var senMgs in responseMsg)
+                    foreach (var responseMsg in responseMessages)
                     {
-                        if (MethodResponse.isMethodResponse(senMgs))
+                        if (MethodResponse.isMethodResponse(responseMsg))
                         {
-                            MethodResponse res = senMgs as MethodResponse;
+                            MethodResponse res = responseMsg as MethodResponse;
                             
                             if (ccu.isGetList)
                             {
@@ -71,10 +72,10 @@ namespace Test.Desktop
             return response;
         }
 
-        public static async Task<string> GetListDevices(IotApi ccu)
+        public static async Task<string> GetListDevices(IotApi iotApi)
         {
             string request = "DEVICES LIST get";
-            string result = await RequestAndReceive(ccu, request);
+            string result = await RequestAndReceive(iotApi, request);
             return result;
         }
 

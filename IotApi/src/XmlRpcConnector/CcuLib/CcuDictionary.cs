@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XmlRpcCore;
 
-namespace CentralControlUnit
+namespace CcuLib
 {
     /// <summary>
     /// Stores the dictionaries of sensors, actions and values in order to map from the global name to local (CCU world) name.
