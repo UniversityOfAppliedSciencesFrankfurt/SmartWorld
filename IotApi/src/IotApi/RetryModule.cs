@@ -7,6 +7,13 @@ namespace Iot
 {
     public static class RetryExtension
     {
+        /// <summary>
+        /// Helps registration of retry module.
+        /// </summary>
+        /// <param name="api">The instance of IoTApi.</param>
+        /// <param name="numOfRetries">Number of retries.</param>
+        /// <param name="delayTime">Delay between retries.</param>
+        /// <returns></returns>
         public static IotApi RegisterRetryModule(this IotApi api, int numOfRetries, TimeSpan delayTime)
         {
             RetryModule module = new RetryModule(numOfRetries, delayTime);

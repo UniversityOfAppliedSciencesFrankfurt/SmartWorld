@@ -130,12 +130,14 @@ namespace IotApiTests
             .RegisterPersistModule(new Dictionary<string, object>())
             .RegisterModule(getDefaultModule(false));
 
+        
             api.Open();
 
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
                 (msgs) =>
                 {
                     Assert.True(msgs.Count == 1);
+                    Assert.True(((dynamic)msgs[0]).Prop1 == 1.2);
                 },
                 (msgs, err) =>
                 {
@@ -203,7 +205,7 @@ namespace IotApiTests
 
             api.Open(new System.Collections.Generic.Dictionary<string, object>());
 
-            api.ReceiveAsync().Wait();
+            var msg = api.ReceiveAsync().Result;
         }
 
 
