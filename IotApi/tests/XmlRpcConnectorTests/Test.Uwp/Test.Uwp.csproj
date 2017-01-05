@@ -127,17 +127,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="CentranControlUnit">
-      <HintPath>..\CentranControlUnit\bin\Debug\netstandard1.6\CentranControlUnit.dll</HintPath>
-    </Reference>
-    <Reference Include="IotApi">
-      <HintPath>..\src\IotApi\bin\Debug\netstandard1.6\IotApi.dll</HintPath>
-    </Reference>
-    <Reference Include="XmlRpcCore">
-      <HintPath>..\XmlRpcCore\bin\Debug\netstandard1.6\XmlRpcCore.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -5,13 +5,12 @@
   },
 
   "dependencies": {
-    "CcuLib": "1.0.0-*",
+    "CcuLib": "1.0.0",
     "IotApi": "1.0.0-*",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0"
     }
-  
   },
 
   "frameworks": {

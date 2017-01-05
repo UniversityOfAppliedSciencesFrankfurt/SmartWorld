@@ -9,8 +9,6 @@
 /IotApi/IotApiTests/project.lock.json
 /IotApi/src/IotApi/bin/Debug/*
 /IotApi/src/IotApi/obj/Debug/*
-/IotApi/CentranControlUnit/bin/*
-/IotApi/CentranControlUnit/obj/*
 /IotApi/XmlRpcCore/bin/*
 /IotApi/XmlRpcCore/obj/*
 /IotApi/Test.Desktop/bin/*
@@ -24,3 +22,8 @@
 /IotApi/tests/XmlRpcConnectorTests/Test.Desktop/bin/Debug/netcoreapp1.0
 /IotApi/tests/XmlRpcConnectorTests/Test.Desktop/obj/Debug/netcoreapp1.0
 /IotApi/tests/XmlRpcConnectorTests/Test.Uwp/obj/x86/Debug
+/IotApi/src/XmlRpcConnector/CcuLib/bin/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/CcuLib/obj/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/XmlRpcCore/obj/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug

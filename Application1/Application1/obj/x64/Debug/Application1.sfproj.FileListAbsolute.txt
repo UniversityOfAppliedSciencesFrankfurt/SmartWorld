@@ -1,1 +1,0 @@
-C:\tfs\git\iotrepos\smartworld-netcore\Application1\Application1\obj\x64\Debug\Application1.sfprojResolveAssemblyReference.cache
