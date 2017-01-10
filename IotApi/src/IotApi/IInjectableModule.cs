@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Iot
 {
+    /// <summary>
+    /// Defines base interface for all injectable modules.
+    /// </summary>
     public interface IInjectableModule
     {
         /// <summary>

@@ -1,11 +1,3 @@
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\Test.Desktop.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
