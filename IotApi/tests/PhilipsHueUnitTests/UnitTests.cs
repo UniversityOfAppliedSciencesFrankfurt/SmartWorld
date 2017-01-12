@@ -10,9 +10,9 @@ namespace PhilipsHueUnitTests
 {
     public class UnitTests
     {
-        private string m_GtwUri = "TODO";
+        private string m_GtwUri = "http://../";
 
-        private string m_UsrName = "TODO";
+        private string m_UsrName = "..";
 
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace PhilipsHueUnitTests
         {
             IotApi api = new IotApi();
 
-            api.UsePhilpsQueueRest(m_UsrName, m_GtwUri);
+            api.UsePhilpsQueueRest(m_GtwUri, m_UsrName);
 
             api.Open();
 

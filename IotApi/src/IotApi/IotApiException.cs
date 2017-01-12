@@ -25,19 +25,19 @@ namespace Iot
 
         }
 
-        public IotApiException(string message, Exception innerException, IList<object> relatedMessages) : base(message, innerException)
+        public IotApiException(string message, Exception innerException, IList<object> states) : base(message, innerException)
         {
-            this.ReceivedMessages = relatedMessages;
+            this.ReceivedMessages = states;
         }
 
-        public IotApiException(string message,  IList<object> relatedMessages) : base(message)
+        public IotApiException(string message,  IList<object> state) : base(message)
         {
-            this.ReceivedMessages = relatedMessages;
+            this.ReceivedMessages = state;
         }
 
-        public IotApiException(string message, object relatedMessage) : base(message)
+        public IotApiException(string message, object state) : base(message)
         {
-            this.ReceivedMessages = new List<object> { relatedMessage };
+            this.ReceivedMessages = new List<object> { state };
         }
     }
 }

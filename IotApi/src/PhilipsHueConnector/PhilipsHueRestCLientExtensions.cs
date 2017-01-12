@@ -48,7 +48,7 @@ namespace PhilipsHueConnector
                             var res = result.Content.ReadAsStringAsync().Result;
                             var gtwResult = JsonConvert.DeserializeObject<JArray>(res);
 
-                            var err = lookupValue(gtwResult, "error");
+                            var err = PhilipsHueRestClient.LookupValue(gtwResult, "error");
                             if (err != null)
                             {
                                 if (--retries > 0)
@@ -58,7 +58,7 @@ namespace PhilipsHueConnector
                             }
                             else
                             {
-                                dynamic keyToken = lookupValue(gtwResult, "success");
+                                dynamic keyToken = PhilipsHueRestClient.LookupValue(gtwResult, "success");
 
                                 return keyToken.username.Value;
                             }
@@ -77,39 +77,39 @@ namespace PhilipsHueConnector
             throw new Exception("");
         }
 
-        private static JToken lookupValue(JArray arr, string propName)
-        {
-            foreach (var item in arr.Children<JObject>())
-            {
-                foreach (JProperty prop in item.Properties())
-                {
-                    if (prop.Name.ToLower() == propName)
-                    {   
-                        return prop.Value;
-                    }
-                }
-            }
+        //private static JToken lookupValue(JArray arr, string propName)
+        //{
+        //    foreach (var item in arr.Children<JObject>())
+        //    {
+        //        foreach (JProperty prop in item.Properties())
+        //        {
+        //            if (prop.Name.ToLower() == propName)
+        //            {   
+        //                return prop.Value;
+        //            }
+        //        }
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        private static JToken lookupError(JArray arr)
-        {
-            foreach (var item in arr.Children<JObject>())
-            {
-                foreach (JProperty prop in item.Properties())
-                {
-                    if (prop.Name.ToLower() == "error")
-                    {
-                        dynamic val = prop.Value;
-                        var code = val.type.Value;
-                        return prop.Value;
-                    }
-                }
-            }
+        //private static JToken lookupError(JArray arr)
+        //{
+        //    foreach (var item in arr.Children<JObject>())
+        //    {
+        //        foreach (JProperty prop in item.Properties())
+        //        {
+        //            if (prop.Name.ToLower() == "error")
+        //            {
+        //                dynamic val = prop.Value;
+        //                var code = val.type.Value;
+        //                return prop.Value;
+        //            }
+        //        }
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
 
 

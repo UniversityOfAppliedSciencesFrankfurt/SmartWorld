@@ -6,39 +6,41 @@ using System.Threading.Tasks;
 namespace PhilipsHueConnector
 {
 
-    public class HueCommand
+    public abstract class HueCommand
     {
         internal string Method { get; set; } = "get";
+
+        internal abstract string Path {get;set;}
     }
 
 
     public class GetConfig : HueCommand
     {
-         internal string Path { get; set; } = "config";
+         internal override string Path { get; set; } = "config";
     }
 
     public class GetLights : HueCommand
     {
-        internal string Path { get; set; } = "ligths";
+        internal override string Path { get; set; } = "lights";
     }
 
     public class GetSensors : HueCommand
     {
-        internal string Path { get; set; } = "sensors";
+        internal override string Path { get; set; } = "sensors";
     }
 
     public class GetGroups : HueCommand
     {
-        internal string Path { get; set; } = "groups";
+        internal override string Path { get; set; } = "groups";
     }
 
     public class GetScenes : HueCommand
     {
-        internal string Path { get; set; } = "scenes";
+        internal override string Path { get; set; } = "scenes";
     }
 
     public class GetRules : HueCommand
     {
-        internal string Path { get; set; } = "rules";
+        internal override string Path { get; set; } = "rules";
     }
 }
