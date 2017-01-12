@@ -56,8 +56,8 @@ namespace Iot
 
 
         public async Task SendAsync(object sensorMessage,
-           Action<IList<object>> onSuccess = null,
-           Action<IList<object>, Exception> onError = null,
+           Action<object> onSuccess = null,
+           Action<IotApiException> onError = null,
            Dictionary<string, object> args = null)
         {
             int cnt = m_NumOfRetries;
@@ -66,13 +66,13 @@ namespace Iot
             {
                 await NextSendModule.SendAsync(sensorMessage, (msgs) =>
                 {
-                    onSuccess?.Invoke(new List<object> { sensorMessage });
+                    onSuccess?.Invoke(sensorMessage);
                     cnt = 0;
                 },
-                (msgs, err) =>
+                (err) =>
                 {
                     if (cnt == 0)
-                        onError?.Invoke(new List<object> { sensorMessage }, err);
+                        onError?.Invoke(err);
                     else
                         Task.Delay(m_DelayTime).Wait();
                 },
@@ -85,7 +85,9 @@ namespace Iot
 
         }
 
-        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public Task SendAsync(IList<object> sensorMessages, 
+            Action<IList<object>> onSuccess = null, 
+            Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }

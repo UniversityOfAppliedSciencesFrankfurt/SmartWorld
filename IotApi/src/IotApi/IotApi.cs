@@ -168,7 +168,7 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <exception cref="IotApiException">Thrown if any exception has been thrown internally.</exception>
         /// <returns>Tesk</returns>
-        public async Task SendAsync(object sensorMessage,
+        public async Task<object> SendAsync(object sensorMessage,
          Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
@@ -181,14 +181,18 @@ namespace Iot
                     await module.SendAsync(sensorMessage,
                     (msgs) =>
                     {
-
+                       
                     },
-                    (msgs, err) =>
+                    (err) =>
                     {
-                        throw new IotApiException("Failed to send th emessage.", err);
+                        throw new IotApiException("Failed to send the message.", err);
                     },
                     args);
+
+                    return null; //TODO//
                 }
+                else
+                    return null;
             }
             catch (Exception ex)
             {
@@ -249,7 +253,7 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
-            Action<IList<object>> onSuccess, Action<IList<object>,
+            Action<object> onSuccess, Action<IList<object>,
                 Exception> onError, Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
@@ -265,7 +269,7 @@ namespace Iot
                     {
                         onSuccess?.Invoke(msgs);
                     },
-                    (msgs, err) =>
+                    (err) =>
                     {
                         onError?.Invoke(new List<object> { sensorMessage }, err);
                     },
