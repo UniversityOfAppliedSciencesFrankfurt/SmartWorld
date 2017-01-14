@@ -1,0 +1,6 @@
+#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
