@@ -5,20 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using PhilipsHueConnector;
+using PhilipsHueConnector.Entities;
 
 namespace PhilipsHueUnitTests
 {
     public class UnitTests
     {
-        private string m_GtwUri = "http://192.168.?.?/";
-
         /// <summary>
         /// To set username, you first have to run test GenerateUserTest().
         /// This method will connect to Hue Gateway. BEfore you run it, click 
         /// the link button on the gatewey. Method GenerateUserName will return
         /// username, which you should set as value of this member variable.
         /// </summary>
-        private string m_UsrName = "TODO: enter here your username.";
+        private string m_GtwUri = "http://192.168.?.?/";
+
+        private string m_UsrName = "";
 
         /// <summary>
         /// Used by all tests to create instance of IotApi.
@@ -26,7 +27,6 @@ namespace PhilipsHueUnitTests
         /// <returns></returns>
         private IotApi getApi()
         {
-
             IotApi api = new IotApi();
 
             api.UsePhilpsQueueRest(m_GtwUri, m_UsrName);
@@ -62,8 +62,9 @@ namespace PhilipsHueUnitTests
 
             Assert.NotNull(result);
 
-            Assert.Equal(result.Count, ExpectedResults.NumOfDevices);
+            Assert.Equal(result.Count, TestDriver.NumOfDevices);
         }
+
 
         [Fact]
         public void GetLightsJSApiStyleTest()
@@ -78,7 +79,7 @@ namespace PhilipsHueUnitTests
 
                 List<PhilipsHueConnector.Entities.Device> res = result as List<PhilipsHueConnector.Entities.Device>;
 
-                Assert.Equal(res.Count, ExpectedResults.NumOfDevices);
+                Assert.Equal(res.Count, TestDriver.NumOfDevices);
             },
             (err) =>
             {
@@ -88,11 +89,21 @@ namespace PhilipsHueUnitTests
 
 
         [Fact]
-        public void SetLightTest()
+        public void SwitchOnLightTest()
         {
             var iotApi = getApi();
 
-            iotApi.SendAsync(new GetLights()).Wait();
+            var result = iotApi.SendAsync(new SetLightState()
+            {
+                 Id = TestDriver.LightStateReferenceId,
+
+                 State = new State()
+                 {
+                     On = true,
+                     Bri = 254,
+                 },
+
+            }).Result;
         }
     }
 }

@@ -117,15 +117,25 @@ namespace PhilipsHueConnector
             }
             else if (cmd.Method == "put")
             {
-
+                string data = ((SetCommandBase)sensorMessage).State.ToLightStateJson();
+                //data = JsonConvert.SerializeObject(new { on = true, bri = 100 });
+                StringContent content = new StringContent(data);
+                string uri = getUri(cmd);
+                response = await httpClient.PutAsync(uri, content);
             }
 
             return response;
         }
-
+    
         private bool isError(JArray result, out GatewayError err)
         {
             var jToken = LookupValue(result, "error");
+            if (jToken == null)
+            {
+                err = null;
+                return false;
+            }
+
             err = JsonConvert.DeserializeObject<GatewayError>(jToken.ToString());
             return jToken != null;
         }

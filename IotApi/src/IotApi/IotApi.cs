@@ -198,7 +198,7 @@ namespace Iot
             }
             catch (Exception ex)
             {
-                throw new IotApiException("Failed to send th emessage.", ex);
+                throw new IotApiException("Failed to send the message.", ex);
             }
         }
 
