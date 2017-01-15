@@ -178,10 +178,12 @@ namespace Iot
                 var module = getServices<ISendModule>().FirstOrDefault();
                 if (module != null)
                 {
+                    object result = null;
+
                     await module.SendAsync(sensorMessage,
-                    (msgs) =>
+                    (data) =>
                     {
-                       
+                        result = data;
                     },
                     (err) =>
                     {
@@ -189,10 +191,10 @@ namespace Iot
                     },
                     args);
 
-                    return null; //TODO//
+                    return result;
                 }
                 else
-                    return null;
+                    throw new IotApiException(":( There is no 'ISendModule' registered in the sending pipeline!");
             }
             catch (Exception ex)
             {
@@ -253,8 +255,8 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
-            Action<object> onSuccess, Action<IList<object>,
-                Exception> onError, Dictionary<string, object> args = null)
+            Action<object> onSuccess, Action<IotApiException> onError,
+            Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -271,14 +273,14 @@ namespace Iot
                     },
                     (err) =>
                     {
-                        onError?.Invoke(new List<object> { sensorMessage }, err);
+                        onError?.Invoke(err);
                     },
                     args);
                 }
             }
             catch (Exception ex)
             {
-                onError?.Invoke(new List<object> { sensorMessage }, ex);
+                onError?.Invoke(new IotApiException(":( Method SendAsync() failed.", ex));
             }
         }
         #endregion

@@ -96,8 +96,6 @@ namespace PhilipsHueConnector
 
                 onSuccess?.Invoke(devices);
             }
-            
-            throw new NotImplementedException();
         }
 
         private async Task<HttpResponseMessage> executeMsg(object sensorMessage)
