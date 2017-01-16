@@ -80,7 +80,7 @@ namespace PhilipsHueConnector
                 }
                 else
                 {
-                    throw new IotApiException("Do not know meaning of this response", result);
+                    onSuccess?.Invoke(result);
                 }
             }
             else if (res is JObject)

@@ -29,6 +29,8 @@ namespace PhilipsHueConnector
         /// <returns></returns>
         public static string GenerateUserName(this IotApi api, string gatewayUri, int retries = 3, int delay = 5000)
         {
+            throw new IotApiException("");
+
             while (true)
             {
                 var http = PhilipsHueRestClient.GetHttpClient(gatewayUri);
@@ -54,7 +56,7 @@ namespace PhilipsHueConnector
                                 if (--retries > 0)
                                     Task.Delay(delay).Wait();
                                 else
-                                    throw new Exception($"{err}");
+                                    throw new IotApiException($"{err}");
                             }
                             else
                             {

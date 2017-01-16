@@ -24,24 +24,29 @@ namespace PhilipsHueConnector.Entities
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("{");
-            if(this.On)
-                sb.AppendLine($"\"on\" : true,");
+            if (this.On)
+                sb.AppendLine($"\"on\" : true");
             else
                 sb.AppendLine($"\"on\" : false");
 
-            sb.AppendLine($"\"bri\" : {this.Bri},");
-            sb.AppendLine($"\"hue\" : {this.Hue},");
-            sb.AppendLine($"\"sat\" : {this.Sat},");
-
-            if (this.Effect == null)
-                sb.AppendLine($"\"effect\" : \"none\"");
-            else
-                sb.AppendLine($",\"effect\" : \"{this.Effect}\"");
-
-            if (this.xy != null)
-            {                
+            if (this.On)
+            {
                 sb.AppendLine(",");
-                sb.AppendLine(JsonConvert.SerializeObject(this.xy));
+                sb.AppendLine($"\"bri\" : {this.Bri},");
+                sb.AppendLine($"\"hue\" : {this.Hue},");
+                sb.AppendLine($"\"sat\" : {this.Sat},");
+
+                if (this.Effect == null)
+                    sb.AppendLine($"\"effect\" : \"none\"");
+                else
+                    sb.AppendLine($",\"effect\" : \"{this.Effect}\"");
+
+                if (this.xy != null)
+                {
+                    sb.Append(",");
+                    sb.AppendLine($"\"xy\" : ");
+                    sb.AppendLine(JsonConvert.SerializeObject(this.xy));
+                }
             }
 
             sb.AppendLine("}");
