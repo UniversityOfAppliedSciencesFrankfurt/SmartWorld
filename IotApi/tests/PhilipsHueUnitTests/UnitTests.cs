@@ -1,11 +1,10 @@
 ﻿using Iot;
+using Iot.PhilipsHueConnector.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using PhilipsHueConnector;
-using PhilipsHueConnector.Entities;
 
 namespace PhilipsHueUnitTests
 {
@@ -15,7 +14,7 @@ namespace PhilipsHueUnitTests
         /// <summary>
         /// URL of the Hue gateway.
         /// </summary>
-        private string m_GtwUri = "http://192.168.?.?/";
+         private string m_GtwUri = "http://192.168.?.?/";
 
         /// <summary>
         /// To set username, you first have to run test GenerateUserTest().
@@ -23,7 +22,7 @@ namespace PhilipsHueUnitTests
         /// the link button on the gatewey. Method GenerateUserName will return
         /// username, which you should set as value of this member variable.
         /// </summary>
-        private string m_UsrName = "ENTER USER NAME HERE";
+        private string m_UsrName = "TODO";
 
         /// <summary>
         /// Used by all tests to create instance of IotApi.
@@ -61,7 +60,7 @@ namespace PhilipsHueUnitTests
         {
             var iotApi = getApi();
 
-            List<PhilipsHueConnector.Entities.Device> result = iotApi.SendAsync(new GetLights()).Result as List<PhilipsHueConnector.Entities.Device>;
+            List<Device> result = iotApi.SendAsync(new GetLights()).Result as List<Device>;
 
             Assert.NotNull(result);
 
@@ -78,9 +77,9 @@ namespace PhilipsHueUnitTests
             {
                 Assert.NotNull(result);
 
-                Assert.IsType<List<PhilipsHueConnector.Entities.Device>>(result);
+                Assert.IsType<List<Device>>(result);
 
-                List<PhilipsHueConnector.Entities.Device> res = result as List<PhilipsHueConnector.Entities.Device>;
+                List<Device> res = result as List<Device>;
 
                 Assert.Equal(res.Count, TestDriver.NumOfDevices);
             },
@@ -152,6 +151,44 @@ namespace PhilipsHueUnitTests
                 State = new State()
                 {
                     On = false,
+                },
+
+            }).Result;
+
+            Assert.IsType(typeof(Newtonsoft.Json.Linq.JArray), result);
+
+            Assert.True(((Newtonsoft.Json.Linq.JArray)result).Count == 1);
+        }
+
+
+        [Fact]
+        public void ToggleLightUntypedTest()
+        {
+            var iotApi = getApi();
+
+            var result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"lights/{TestDriver.LightStateReferenceId}/state",
+                Method = "put",
+                Body = new
+                {
+                    on = true,
+                    bri = 100
+                },
+
+            }).Result;
+
+            Assert.IsType(typeof(Newtonsoft.Json.Linq.JArray), result);
+
+            Assert.True(((Newtonsoft.Json.Linq.JArray)result).Count == 2);
+
+            result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"lights/{TestDriver.LightStateReferenceId}/state",
+                Method = "put",
+                Body = new
+                {
+                    on = false
                 },
 
             }).Result;

@@ -1,7 +1,8 @@
 ﻿using Iot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PhilipsHueConnector.Entities;
+using Iot.PhilipsHueConnector;
+using Iot.PhilipsHueConnector.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PhilipsHueConnector
+namespace Iot.PhilipsHueConnector
 {
     public class PhilipsHueRestClient : ISendModule
     {
@@ -52,9 +53,9 @@ namespace PhilipsHueConnector
                 throw new Exception("Username or gateay URL not specified.");
         }
 
-        public Task SendAsync(IList<object> sensorMessages, 
-            Action<IList<object>> onSuccess = null, 
-            Action<IList<IotApiException>> onError = null, 
+        public Task SendAsync(IList<object> sensorMessages,
+            Action<IList<object>> onSuccess = null,
+            Action<IList<IotApiException>> onError = null,
             Dictionary<string, object> args = null)
         {
 
@@ -115,18 +116,41 @@ namespace PhilipsHueConnector
             {
                 //httpClient.GetAsync(getUri(cmd));
             }
-            else if (cmd.Method == "put")
+            else if (cmd.Method == "put" || cmd.Method == "post")
             {
-                string data = ((SetCommandBase)sensorMessage).State.ToLightStateJson();
-                //data = JsonConvert.SerializeObject(new { on = true, bri = 100 });
-                StringContent content = new StringContent(data);
+                StringContent content = null;
                 string uri = getUri(cmd);
-                response = await httpClient.PutAsync(uri, content);
+                string data;
+
+                //
+                // If request is defined by typed message.
+                if (sensorMessage is SendCommandBase)
+                {
+                    data = ((SendCommandBase)sensorMessage).State.ToLightStateJson();
+                }
+                else if (sensorMessage is HueCommand)
+                {
+                    if (cmd.Body is string)
+                        data = cmd.Body as string;
+                    else
+                        data = JsonConvert.SerializeObject(cmd.Body);
+                }
+                else
+                    throw new IotApiException(":( Unknown command.");
+
+                content = new StringContent(data);
+
+                if (cmd.Method == "put")
+                    response = await httpClient.PutAsync(uri, content);
+                else
+                    response = await httpClient.PostAsync(uri, content);
             }
+            else
+                throw new IotApiException(":( Method property must be set.");
 
             return response;
         }
-    
+
         private bool isError(JArray result, out GatewayError err)
         {
             var jToken = LookupValue(result, "error");

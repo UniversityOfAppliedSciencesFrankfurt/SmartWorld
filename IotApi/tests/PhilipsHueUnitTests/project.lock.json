@@ -2493,17 +2493,17 @@
       },
       "PhilipsHueConnector/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
+        "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "IotApi": "1.0.0",
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.2-beta1"
         },
         "compile": {
-          "netstandard1.6/PhilipsHueConnector.dll": {}
+          "netstandard1.4/PhilipsHueConnector.dll": {}
         },
         "runtime": {
-          "netstandard1.6/PhilipsHueConnector.dll": {}
+          "netstandard1.4/PhilipsHueConnector.dll": {}
         }
       }
     }
@@ -7506,7 +7506,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "IotApi >= 1.0.0-*",
       "Microsoft.NETCore.App >= 1.0.1",
       "PhilipsHueConnector >= 1.0.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",

@@ -3,37 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PhilipsHueConnector.Entities
+namespace Iot.PhilipsHueConnector.Entities
 {
 
-    public abstract class HueCommand
+    public  class HueCommand
     {
         /// <summary>
         /// HTTP method used in REST operation.
         /// </summary>
-        internal abstract string Method { get; set; }
+        public virtual string Method { get; set; }
 
         /// <summary>
         /// REST path of the resource.
         /// </summary>
-        internal abstract string Path {get;set;}
+        public virtual string Path {get;set;}
+
+        /// <summary>
+        /// Used when bydy is directly set as untyped value.
+        /// </summary>
+        public object Body { get; set; }
     }
+
+
 
     public class GetCommandBase : HueCommand
     {
-        internal override string Method { get; set; } = "get";
+        public override string Method { get; set; } = "get";
 
-        internal override string Path { get; set; } 
+        public override string Path { get; set; }
     }
 
-    public class SetCommandBase : HueCommand
-    {
-        internal override string Method { get; set; } = "put";
 
-        internal override string Path { get; set; }
+    public class SendCommandBase : HueCommand
+    {
+        public override string Method { get; set; } = "put";
+
+        public override string Path { get; set; }
 
         /// <summary>
-        /// Identifier of device. USed in PU/POST operations only.
+        /// Identifier of device. USed in PUT/POST operations only.
         /// </summary>
         public string Id { get; set; }
 
@@ -47,33 +55,33 @@ namespace PhilipsHueConnector.Entities
 
     public class GetConfig : GetCommandBase
     {
-         internal override string Path { get; set; } = "config";
+        public override string Path { get; set; } = "config";
     }
 
     public class GetLights : GetCommandBase
     {
-        internal override string Path { get; set; } = "lights";
+        public override string Path { get; set; } = "lights";
     }
 
 
     public class GetSensors : GetCommandBase
     {
-        internal override string Path { get; set; } = "sensors";
+        public override string Path { get; set; } = "sensors";
     }
 
     public class GetGroups : GetCommandBase
     {
-        internal override string Path { get; set; } = "groups";
+        public override string Path { get; set; } = "groups";
     }
 
     public class GetScenes : GetCommandBase
     {
-        internal override string Path { get; set; } = "scenes";
+        public override string Path { get; set; } = "scenes";
     }
 
     public class GetRules : GetCommandBase
     {
-        internal override string Path { get; set; } = "rules";
+        public override string Path { get; set; } = "rules";
     }
     #endregion
 
@@ -82,11 +90,11 @@ namespace PhilipsHueConnector.Entities
     /// <summary>
     /// Sets the state of the light
     /// </summary>
-    public class SetLightState : SetCommandBase
+    public class SetLightState : SendCommandBase
     {
         private string m_Method;
 
-        internal override string Method
+        public override string Method
         {
             get
             {
@@ -101,7 +109,7 @@ namespace PhilipsHueConnector.Entities
 
         private string m_Path;
 
-        internal override string Path
+        public override string Path
         {
             get
             {

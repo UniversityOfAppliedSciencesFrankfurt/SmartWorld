@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Iot.PhilipsHueConnector;
 
-namespace PhilipsHueConnector
+namespace Iot
 {
     public static class PhilipsHueRestCLientExtensions
     {
@@ -29,8 +30,6 @@ namespace PhilipsHueConnector
         /// <returns></returns>
         public static string GenerateUserName(this IotApi api, string gatewayUri, int retries = 3, int delay = 5000)
         {
-            throw new IotApiException("");
-
             while (true)
             {
                 var http = PhilipsHueRestClient.GetHttpClient(gatewayUri);

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhilipsHueConnector.Entities
+namespace Iot.PhilipsHueConnector.Entities
 {
     public class State
     {
