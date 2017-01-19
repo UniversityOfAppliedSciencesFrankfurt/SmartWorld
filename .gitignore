@@ -27,3 +27,5 @@
 /IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug/netstandard1.4
 /IotApi/src/XmlRpcConnector/XmlRpcCore/obj/Debug/netstandard1.4
 /IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug
+/IotApi/CentranControlUnit/bin/Debug/netstandard1.6
+/IotApi/CentranControlUnit/obj/Debug/netstandard1.6
