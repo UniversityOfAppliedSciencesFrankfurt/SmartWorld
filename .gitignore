@@ -24,3 +24,21 @@
 /Connectors/IotApi/IotBridge.SbTransport/Readme
 /Connectors/IotApi/Receiver (CCU)/Readme
 /Connectors/IotApi/Sender (Console App)/Readme
+/IotApi/CentranControlUnit/obj/Debug/netstandard1.6
+/IotApi/IotApiTests/bin/Debug/netcoreapp1.0
+/IotApi/IotApiTests/obj/Debug/netcoreapp1.0
+/IotApi/src/IotApi/bin/Debug
+/IotApi/src/IotApi/obj/Debug/netstandard1.4
+/IotApi/src/IotApi/obj/Debug/netstandard1.6
+/IotApi/src/XmlRpcConnector/CcuLib/bin/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/CcuLib/obj/Debug/netstandard1.4
+/IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug/netstandard1.4
+/IotApi/Test.Desktop/bin/Debug/netcoreapp1.0
+/IotApi/.vs
+/IotApi/CentranControlUnit/bin/Debug/netstandard1.6
+/IotApi/IotApiTests/project.lock.json
+/IotApi/Test.Desktop/obj/Debug/netcoreapp1.0
+/IotApi/Test.Uwp/bin
+/IotApi/Test.Uwp/obj/x86/Debug
+/IotApi/tests/XmlRpcConnectorTests/Test.Desktop/bin/Debug/netcoreapp1.0
+/IotApi/tests/XmlRpcConnectorTests/Test.Uwp/obj/x86/Debug
