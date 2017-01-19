@@ -14,6 +14,10 @@ namespace XmlRpcCore
 
         public ISendModule NextSendModule { get; set; }
 
+        /// <summary>
+        /// Connection open
+        /// </summary>
+        /// <param name="args"> Necessary arguments to open connection </param>
         public void Open(Dictionary<string, object> args)
         {
             if (args == null || !args.ContainsKey("Uri"))
@@ -28,54 +32,55 @@ namespace XmlRpcCore
                 m_Mock = bool.Parse(args["Mock"].ToString());
         }
 
-        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        /// <summary>
+        /// Send list of object
+        /// </summary>
+        /// <param name="sensorMessages"> List or Sensor Messages </param>
+        /// <param name="onSuccess"></param>
+        /// <param name="onError"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public Task SendAsync(IList<object> sensorMessages,
+            Action<IList<object>> onSuccess = null,
+            Action<IList<IotApiException>> onError = null,
+            Dictionary<string, object> args = null)
         {
-            try
-            {
-                foreach (var msg in sensorMessages)
-                {
-                    await this.SendAsync(sensorMessages, (msgs) =>
-                    {
-                        onSuccess?.Invoke(msgs);
-                    },
-                    (msgs, err) =>
-                    {
-                        onError?.Invoke(new List<object> { msg }, err);
-                        return;
-                    },
-                    args);
-                }
-
-                onSuccess?.Invoke(sensorMessages);
-            }
-            catch (Exception ex)
-            {
-                onError?.Invoke(sensorMessages, ex);
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        /// <summary>
+        /// Send sensor message
+        /// </summary>
+        /// <param name="sensorMessage"> Sensor message </param>
+        /// <param name="onSuccess"> Sensor feedback </param>
+        /// <param name="onError"> Error while sending message to sensor </param>
+        /// <param name="args"> Arguments </param>
+        /// <returns></returns>
+        public async Task SendAsync(object sensorMessage, 
+            Action<object> onSuccess = null, 
+            Action<IotApiException> onError = null, 
+            Dictionary<string, object> args = null)
         {
-          
+
             XmlRpcProxy proxy = new XmlRpcProxy(m_Uri, m_TimeOut, m_Mock);
 
             await Task.Run(() =>
              {
                  try
                  {
-                     
+
                      var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
 
                      var requestStr = proxy.SerializeRequest(sensorMsg);
                      var res = proxy.SendRequest(requestStr).Result;
                      var response = proxy.DeserializeResponse(res);
 
-                     onSuccess?.Invoke(new List<object>() { response });
+                     onSuccess?.Invoke(response);
 
                  }
                  catch (XmlRpcFaultException faultEx)
                  {
-                     onError?.Invoke(new List<object> { faultEx.Message }, faultEx);
+                     onError?.Invoke(new IotApiException(faultEx.Message, faultEx));
                  }
              });
         }

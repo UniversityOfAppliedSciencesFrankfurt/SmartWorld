@@ -1,21 +1,12 @@
-﻿using CentralControlUnit;
+﻿using CcuLib;
 using Iot;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Test.Uwp;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using XmlRpcCore;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -53,60 +44,45 @@ namespace IOTBridge_GIT
         /// <returns></returns>
         private async Task<string> SendandReceive(IotApi iotApi, string request)
         {
-
             Ccu ccu = new Ccu();
 
             var methodCall = ccu.PrepareMethodCall(request);
             string response = "";
 
-            await iotApi.SendAsync(methodCall, (responseMsg) =>
+            await iotApi.SendAsync(methodCall, (responseMessages) =>
             {
-                if (responseMsg.Count > 0)
+                if (MethodResponse.isMethodResponse(responseMessages))
                 {
-                    foreach (var senMgs in responseMsg)
+                    MethodResponse res = responseMessages as MethodResponse;
+
+                    if (ccu.isGetList)
                     {
-                        if (MethodResponse.isMethodResponse(senMgs))
+                        response = ccu.GetListDevices(res);
+                    }
+                    else
+                    {
+                        if (!ccu.isGetMethod)
                         {
-                            MethodResponse res = senMgs as MethodResponse;
+                            // Set Methods do not return any value. Detecting no value means the operation is done
+                            if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
 
-                            if (ccu.isGetList)
-                            {
-                                response = ccu.GetListDevices(res);
-                            }
-                            else
-                            {
-                                if (!ccu.isGetMethod)
-                                {
-                                    // Set Methods do not return any value. Detecting no value means the operation is done
-                                    if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
-
-                                    // Set methods can not return any value
-                                    else throw new InvalidOperationException("The operation cannot return any value!");
-                                }
-                                else
-                                {
-                                    // Get methods must return a value, if not it must be an error
-                                    if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
-
-                                    // Collecting the returned value
-                                    else response = res.ReceiveParams.First().Value.ToString();
-                                }
-                            }
+                            // Set methods can not return any value
+                            else throw new InvalidOperationException("The operation cannot return any value!");
                         }
+                        else
+                        {
+                            // Get methods must return a value, if not it must be an error
+                            if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
 
+                            // Collecting the returned value
+                            else response = res.ReceiveParams.First().Value.ToString();
+                        }
                     }
                 }
             },
-             (error, ex) =>
+             (error) =>
              {
-                 if (error.Count > 0)
-                 {
-                     foreach (var er in error)
-                     {
-                         MethodFaultResponse faultRes = er as MethodFaultResponse;
-                         response = faultRes.Message;
-                     }
-                 }
+                 response = error.Message;
              });
 
             return response;

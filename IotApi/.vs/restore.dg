@@ -1,3 +1,5 @@
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+#:C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj
+C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj|C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj
+C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj|C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
+C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
