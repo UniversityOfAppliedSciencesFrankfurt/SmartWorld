@@ -168,7 +168,7 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <exception cref="IotApiException">Thrown if any exception has been thrown internally.</exception>
         /// <returns>Tesk</returns>
-        public async Task SendAsync(object sensorMessage,
+        public async Task<object> SendAsync(object sensorMessage,
          Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
@@ -178,21 +178,27 @@ namespace Iot
                 var module = getServices<ISendModule>().FirstOrDefault();
                 if (module != null)
                 {
-                    await module.SendAsync(sensorMessage,
-                    (msgs) =>
-                    {
+                    object result = null;
 
-                    },
-                    (msgs, err) =>
+                    await module.SendAsync(sensorMessage,
+                    (data) =>
                     {
-                        throw new IotApiException("Failed to send th emessage.", err);
+                        result = data;
+                    },
+                    (err) =>
+                    {
+                        throw new IotApiException("Failed to send the message.", err);
                     },
                     args);
+
+                    return result;
                 }
+                else
+                    throw new IotApiException(":( There is no 'ISendModule' registered in the sending pipeline!");
             }
             catch (Exception ex)
             {
-                throw new IotApiException("Failed to send th emessage.", ex);
+                throw new IotApiException("Failed to send the message.", ex);
             }
         }
 
@@ -249,8 +255,8 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
-            Action<IList<object>> onSuccess, Action<IList<object>,
-                Exception> onError, Dictionary<string, object> args = null)
+            Action<object> onSuccess, Action<IotApiException> onError,
+            Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -265,16 +271,16 @@ namespace Iot
                     {
                         onSuccess?.Invoke(msgs);
                     },
-                    (msgs, err) =>
+                    (err) =>
                     {
-                        onError?.Invoke(new List<object> { sensorMessage }, err);
+                        onError?.Invoke(err);
                     },
                     args);
                 }
             }
             catch (Exception ex)
             {
-                onError?.Invoke(new List<object> { sensorMessage }, ex);
+                onError?.Invoke(new IotApiException(":( Method SendAsync() failed.", ex));
             }
         }
         #endregion

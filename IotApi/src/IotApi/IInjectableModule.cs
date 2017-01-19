@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Iot
 {
+    /// <summary>
+    /// Defines base interface for all injectable modules.
+    /// </summary>
     public interface IInjectableModule
     {
         /// <summary>
@@ -23,20 +26,23 @@ namespace Iot
     /// </summary>
     public interface ISendModule : IInjectableModule
     {
+        /// <summary>
+        /// Next module in the pipeline, wich should be invoked.
+        /// </summary>
         ISendModule NextSendModule { set; get; }
 
         /// <summary>
         /// Sends the message to remote endpoint by using of JAVA Script API style.
         /// </summary>
         /// <param name="sensorMessage">The message to be sent.</param>
-        /// <param name="onSuccess">Callback function invoked after th emessage has been successfully
+        /// <param name="onSuccess">Callback function invoked after the message has been successfully
         /// sent to endpoint.</param>
         /// <param name="onError">Callback error function invoked if the message transfer ha failed.</param>
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         Task SendAsync(object sensorMessage,
-                        Action<IList<object>> onSuccess = null,
-                        Action<IList<object>, Exception> onError = null,
+                        Action<object> onSuccess = null,
+                        Action<IotApiException> onError = null,
                         Dictionary<string, object> args = null);
 
         /// <summary>
@@ -49,8 +55,8 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         Task SendAsync(IList<object> sensorMessages,
-        Action<IList<object>> onSuccess = null,
-                      Action<IList<object>, Exception> onError = null,
+                      Action<IList<object>> onSuccess = null,
+                      Action<IList<IotApiException>> onError = null,
                       Dictionary<string, object> args = null);
     }
 

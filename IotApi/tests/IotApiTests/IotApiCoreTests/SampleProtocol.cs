@@ -90,39 +90,51 @@ namespace IotApiTests
             });
         }
 
-     
-        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+
+        public async Task SendAsync(IList<object> sensorMessages, 
+            Action<IList<object>> onSuccess = null, 
+            Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
+            List<IotApiException> errors = new List<IotApiException>();
+            List<object> results = new List<object>();
+
             foreach (var msg in sensorMessages)
             {
-                await this.SendAsync(msg, (msgs) =>
+                await this.SendAsync(msg, (result) =>
                 {
-
+                    results.Add(result);
                 },
-                (msgs, err) =>
+                (err) =>
                 {
-                    onError?.Invoke(new List<object> { msg }, err);
+                    errors.Add(err);
                 },
                 args);
             }
 
-            onSuccess?.Invoke(sensorMessages);
+            if(results.Count > 0)
+                onSuccess?.Invoke(results);
+
+            if (errors.Count > 0)
+                onError?.Invoke(errors);
         }
 
 
-        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, 
+            Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             await Task.Run(() =>
             {
                 if (m_SimulateErrorOnSend)
                 {
-                    onError?.Invoke(new List<object> { sensorMessage }, new Exception("Simulated error."));
+                    onError?.Invoke(new IotApiException("Simulated error.", sensorMessage));
                 }
                 else
                 {
-                    onSuccess?.Invoke(new List<object> { sensorMessage });
+                    onSuccess?.Invoke(sensorMessage);
                 }
             });
         }
+
+      
     }
 }

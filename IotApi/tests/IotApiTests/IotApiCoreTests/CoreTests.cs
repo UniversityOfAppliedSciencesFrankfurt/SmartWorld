@@ -75,11 +75,10 @@ namespace IotApiTests
             api.Open(new System.Collections.Generic.Dictionary<string, object>());
             
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
-                (msgs) =>
+                (result) =>
                 {
-                    Assert.True(msgs.Count == 1);
-                    Assert.True(((dynamic)msgs[0]).Prop1 == 1.2);
-                    Assert.True(((dynamic)msgs[0]).Prop2 == ":)");
+                    Assert.True(((dynamic)result).Prop1 == 1.2);
+                    Assert.True(((dynamic)result).Prop2 == ":)");
                 },
                 (msgs, err) =>
                 {
@@ -134,10 +133,9 @@ namespace IotApiTests
             api.Open();
 
             api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
-                (msgs) =>
+                (result) =>
                 {
-                    Assert.True(msgs.Count == 1);
-                    Assert.True(((dynamic)msgs[0]).Prop1 == 1.2);
+                    Assert.True(((dynamic)result).Prop1 == 1.2);
                 },
                 (msgs, err) =>
                 {
@@ -164,9 +162,9 @@ namespace IotApiTests
                  api.Open(new System.Collections.Generic.Dictionary<string, object>());
 
                  api.SendAsync(new { Prop1 = 1.2, Prop2 = ":)" },
-                     (msgs) =>
+                     (result) =>
                      {
-                         Assert.True(msgs.Count == 1);
+                         Assert.True(((dynamic)result).Prop1 == 1.2);
                      },
                      (msgs, err) =>
                      {

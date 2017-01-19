@@ -56,11 +56,18 @@ namespace Iot
         /// <param name="onError"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(IList<object> sensorMessages, 
+            Action<IList<object>> onSuccess = null, 
+            Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
             foreach (var msg in sensorMessages)
             {
-                await SendAsync(msg, onSuccess, onError, args);
+                await SendAsync(msg, (result)=> {
+
+                },
+                (err)=> {
+
+                }, args);
             }
         }
 
@@ -74,16 +81,16 @@ namespace Iot
         /// <param name="args"></param>
         /// <returns></returns>
         public async Task SendAsync(object sensorMessage,
-            Action<IList<object>> onSuccess = null,
-            Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+            Action<object> onSuccess = null,
+            Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             await NextSendModule.SendAsync(sensorMessage, (msgs) =>
             {
                 onSuccess?.Invoke(new List<object> { sensorMessage });
             },
-            (msgs, err) =>
+            (err) =>
             {
-                onError?.Invoke(new List<object> { sensorMessage }, err);
+                onError?.Invoke(err);
             },
             args);
         }

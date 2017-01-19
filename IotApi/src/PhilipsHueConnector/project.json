@@ -1,18 +1,17 @@
-﻿{
+{
   "version": "1.0.0-*",
-  "buildOptions": {
-    "xmlDoc": "true"
-  },
+
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "IotApi": "1.0.0-*",
+    "NETStandard.Library": "1.6.0",
+    "Newtonsoft.Json": "9.0.2-beta1"
   },
 
   "frameworks": {
     "netstandard1.4": {
       "imports": "dnxcore50"
     },
-    "net461": {
 
-    }
+    "net461": { }
   }
 }

@@ -15,19 +15,29 @@ namespace Iot
         /// </summary>
         public IList<object> ReceivedMessages { get; protected set; }
 
-        public IotApiException(string message) : base(message)
+        public IotApiException(string errDesc) : base(errDesc)
         {
 
         }
 
-        public IotApiException(string message, Exception innerException) : base(message, innerException)
+        public IotApiException(string errDesc, Exception innerException) : base(errDesc, innerException)
         {
 
         }
 
-        public IotApiException(string message, Exception innerException, IList<object> receivedMessages) : base(message, innerException)
+        public IotApiException(string message, Exception innerException, IList<object> states) : base(message, innerException)
         {
-            this.ReceivedMessages = receivedMessages;
+            this.ReceivedMessages = states;
+        }
+
+        public IotApiException(string message,  IList<object> state) : base(message)
+        {
+            this.ReceivedMessages = state;
+        }
+
+        public IotApiException(string message, object state) : base(message)
+        {
+            this.ReceivedMessages = new List<object> { state };
         }
     }
 }
