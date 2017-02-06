@@ -1,3 +1,4 @@
-#:C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj
-C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj
-C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+#:G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
