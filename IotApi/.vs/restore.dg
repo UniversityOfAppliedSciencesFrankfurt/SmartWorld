@@ -1,6 +1,3 @@
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-#:C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
-C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\tfs\git\iotrepos\smartworld-netcore\IotApi\src\IotApi\IotApi.xproj
+#:C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj
+C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj
+C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\IotApi\IotApi.xproj
