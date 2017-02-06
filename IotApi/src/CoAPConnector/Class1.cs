@@ -9,6 +9,7 @@ namespace CoAPConnector
     {
         public Class1()
         {
+            
         }
     }
 }
