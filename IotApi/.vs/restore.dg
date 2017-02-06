@@ -1,5 +1,4 @@
-#:C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj
-C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\IotApi\IotApi.xproj
-#:C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj
-C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj
-C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\ModBusConnector\ModBusConnector.xproj|C:\Users\nbkhu\Source\Repos\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+#:E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj
+E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\CoAPConnector\CoAPConnector.xproj
+E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\IotApi\IotApi.xproj
+E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\CoAPConnector\CoAPConnector.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\IotApi\IotApi.xproj
