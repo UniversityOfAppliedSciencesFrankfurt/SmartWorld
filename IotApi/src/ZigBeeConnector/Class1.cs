@@ -9,6 +9,7 @@ namespace ZigBeeConnector
     {
         public Class1()
         {
+
         }
     }
 }
