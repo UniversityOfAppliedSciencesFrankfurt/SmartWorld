@@ -1,4 +1,4 @@
-#:E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj
-E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\CoAPConnector\CoAPConnector.xproj
-E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\tests\CoAPUnitTest\CoAPUnitTest.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\IotApi\IotApi.xproj
-E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\CoAPConnector\CoAPConnector.xproj|E:\Project\Software Engineering FRA-UAS\CoAPIotApi\IotApi\src\IotApi\IotApi.xproj
+#:G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
