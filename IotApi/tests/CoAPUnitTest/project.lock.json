@@ -490,7 +490,7 @@
           "System.Xml.XDocument": "4.0.11"
         }
       },
-      "Newtonsoft.Json/9.0.2-beta1": {
+      "Newtonsoft.Json/9.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -507,7 +507,6 @@
           "System.Resources.ResourceManager": "4.0.1",
           "System.Runtime": "4.1.0",
           "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.Numerics": "4.0.1",
           "System.Runtime.Serialization.Primitives": "4.1.1",
           "System.Text.Encoding": "4.0.11",
           "System.Text.Encoding.Extensions": "4.0.11",
@@ -518,10 +517,10 @@
           "System.Xml.XDocument": "4.0.11"
         },
         "compile": {
-          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.1/Newtonsoft.Json.dll": {}
+          "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
       "NuGet.Common/3.5.0-beta2-1484": {
@@ -2478,6 +2477,20 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
+      "CoAPConnector/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "IotApi": "1.0.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netstandard1.6/CoAPConnector.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/CoAPConnector.dll": {}
+        }
+      },
       "IotApi/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.4",
@@ -2489,21 +2502,6 @@
         },
         "runtime": {
           "netstandard1.4/IotApi.dll": {}
-        }
-      },
-      "PhilipsHueConnector/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "IotApi": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "Newtonsoft.Json": "9.0.2-beta1"
-        },
-        "compile": {
-          "netstandard1.6/PhilipsHueConnector.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/PhilipsHueConnector.dll": {}
         }
       }
     }
@@ -2966,12 +2964,12 @@
         "dotnet_library_license.txt"
       ]
     },
-    "Newtonsoft.Json/9.0.2-beta1": {
-      "sha512": "bq5DjCtCJpy9R5rsEeQlKz8qGF1Bh3wGaJKMlRwmCoKZ8WUCIFtU3JlyMOdAkSn66KCehCCAxMZFOQD4nNnH/w==",
+    "Newtonsoft.Json/9.0.1": {
+      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
       "type": "package",
-      "path": "Newtonsoft.Json/9.0.2-beta1",
+      "path": "Newtonsoft.Json/9.0.1",
       "files": [
-        "Newtonsoft.Json.9.0.2-beta1.nupkg.sha512",
+        "Newtonsoft.Json.9.0.1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -2983,8 +2981,6 @@
         "lib/net45/Newtonsoft.Json.xml",
         "lib/netstandard1.0/Newtonsoft.Json.dll",
         "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.1/Newtonsoft.Json.dll",
-        "lib/netstandard1.1/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
@@ -7493,22 +7489,22 @@
         "xunit.runner.utility.nuspec"
       ]
     },
+    "CoAPConnector/1.0.0": {
+      "type": "project",
+      "path": "../../src/CoAPConnector/project.json",
+      "msbuildProject": "../../src/CoAPConnector/CoAPConnector.xproj"
+    },
     "IotApi/1.0.0": {
       "type": "project",
       "path": "../../src/IotApi/project.json",
       "msbuildProject": "../../src/IotApi/IotApi.xproj"
-    },
-    "PhilipsHueConnector/1.0.0": {
-      "type": "project",
-      "path": "../../src/PhilipsHueConnector/project.json",
-      "msbuildProject": "../../src/PhilipsHueConnector/PhilipsHueConnector.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "CoAPConnector >= 1.0.0-*",
       "IotApi >= 1.0.0-*",
       "Microsoft.NETCore.App >= 1.0.1",
-      "PhilipsHueConnector >= 1.0.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta4-build3444"
     ],

@@ -1,1 +1,6 @@
-#:D:\ProjectOPCUA\IotApi\tests\OpcUAUnitTests\OpcUAUnitTests.xproj
+#:G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
+#:G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\tests\ZigBeeUnitTests\ZigBeeUnitTests.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj
+G:\Final Project SE\Zigbee_Project\IotApi\src\ZigBeeConnector\ZigBeeConnector.xproj|G:\Final Project SE\Zigbee_Project\IotApi\src\IotApi\IotApi.xproj
