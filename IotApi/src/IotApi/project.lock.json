@@ -2162,6 +2162,9 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "xunit.runners/2.0.0": {
+        "type": "package"
+      },
       "Opc.Ua.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.3",
@@ -6871,6 +6874,16 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
+    "xunit.runners/2.0.0": {
+      "sha512": "+dUmiiGf5IkoOreRr2MKqirWYPCa4MHQ4rEzUxSR7LiyQYko47DKz5x/fwFJCgfHTG5ClA+yuGDa6RYAvkDJjw==",
+      "type": "package",
+      "path": "xunit.runners/2.0.0",
+      "files": [
+        "readme.txt",
+        "xunit.runners.2.0.0.nupkg.sha512",
+        "xunit.runners.nuspec"
+      ]
+    },
     "Opc.Ua.Core/1.0.0": {
       "type": "project",
       "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\Stack\\Opc.Ua.Core\\project.json",
@@ -6880,7 +6893,8 @@
   "projectFileDependencyGroups": {
     "": [
       "NETStandard.Library >= 1.6.0",
-      "Opc.Ua.Core >= 1.0.0"
+      "Opc.Ua.Core >= 1.0.0",
+      "xunit.runners >= 2.0.0"
     ],
     ".NETStandard,Version=v1.4": []
   },
