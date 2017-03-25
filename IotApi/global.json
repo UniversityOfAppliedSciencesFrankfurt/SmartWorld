@@ -1,5 +1,5 @@
 {
-  "projects": [ "src", "test", "src/XmlRpcConnector", "C:/Users/Syed/Desktop/opc/opcua/Stack" ],
+  "projects": [ "src", "test", "src/XmlRpcConnector", "C:/Users/Syed/Desktop/opc/opcua/Stack", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/Samples", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/SDK" ],
   "sdk": {
     "version": "1.0.0-preview2-003131"
   }
