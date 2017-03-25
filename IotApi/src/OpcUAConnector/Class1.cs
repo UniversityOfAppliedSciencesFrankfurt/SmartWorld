@@ -6,7 +6,7 @@ using Iot;
 
 namespace OpcUAConnector
 {
-    public class Class1 : ISendModule, IReceiveModule
+    public class Class1 
     {
         public Class1()
         {
@@ -40,14 +40,16 @@ namespace OpcUAConnector
 
         public void Open(Dictionary<string, object> args)
         {
+            throw new NotImplementedException();
             //TODO: 
-            //Connection part with client and server part 
-          namespace  Opc.Ua.Server;
+                                                 //Connection part with client and server part 
+                                                 // namespace Opc.Ua.Server { };
 
         }
 
         public Task<object> ReceiveAsync(Dictionary<string, object> args = null)
         {
+            throw new NotImplementedException();
             //TODO: You have client now so receive part should be here
         }
 
@@ -63,7 +65,8 @@ namespace OpcUAConnector
 
         public Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-           //TODO: You have client now so send part should be here
+            //TODO: You have client now so send part should be here
+            throw new NotImplementedException();
         }
     }
 }

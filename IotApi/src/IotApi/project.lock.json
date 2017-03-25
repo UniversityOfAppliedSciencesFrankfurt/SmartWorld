@@ -2165,6 +2165,21 @@
       "xunit.runners/2.0.0": {
         "type": "package"
       },
+      "Opc.Ua.Client/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.3",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Opc.Ua.Core": "1.0.0",
+          "Opc.Ua.Server": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.3/Opc.Ua.Client.dll": {}
+        },
+        "runtime": {
+          "netstandard1.3/Opc.Ua.Client.dll": {}
+        }
+      },
       "Opc.Ua.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.3",
@@ -2183,6 +2198,20 @@
         },
         "runtime": {
           "netstandard1.3/Opc.Ua.Core.dll": {}
+        }
+      },
+      "Opc.Ua.Server/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.3",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Opc.Ua.Core": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.3/Opc.Ua.Server.dll": {}
+        },
+        "runtime": {
+          "netstandard1.3/Opc.Ua.Server.dll": {}
         }
       }
     }
@@ -6884,16 +6913,28 @@
         "xunit.runners.nuspec"
       ]
     },
+    "Opc.Ua.Client/1.0.0": {
+      "type": "project",
+      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\Opc.Ua.Client.xproj"
+    },
     "Opc.Ua.Core/1.0.0": {
       "type": "project",
       "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\Stack\\Opc.Ua.Core\\project.json",
       "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\Stack\\Opc.Ua.Core\\Opc.Ua.Core.xproj"
+    },
+    "Opc.Ua.Server/1.0.0": {
+      "type": "project",
+      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Server\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Server\\Opc.Ua.Server.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "NETStandard.Library >= 1.6.0",
+      "Opc.Ua.Client >= 1.0.0",
       "Opc.Ua.Core >= 1.0.0",
+      "Opc.Ua.Server >= 1.0.0",
       "xunit.runners >= 2.0.0"
     ],
     ".NETStandard,Version=v1.4": []

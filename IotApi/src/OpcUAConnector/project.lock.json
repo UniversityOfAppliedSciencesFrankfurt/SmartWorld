@@ -2394,7 +2394,9 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
+          "Opc.Ua.Client": "1.0.0",
           "Opc.Ua.Core": "1.0.0",
+          "Opc.Ua.Server": "1.0.0",
           "xunit.runners": "2.0.0"
         },
         "compile": {
@@ -2409,7 +2411,8 @@
         "framework": ".NETStandard,Version=v1.3",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Opc.Ua.Core": "1.0.0"
+          "Opc.Ua.Core": "1.0.0",
+          "Opc.Ua.Server": "1.0.0"
         },
         "compile": {
           "netstandard1.3/Opc.Ua.Client.dll": {}
@@ -7291,6 +7294,7 @@
       "IotApi >= 1.0.0-*",
       "NETStandard.Library >= 1.6.0",
       "Opc.Ua.Client >= 1.0.0-*",
+      "Opc.Ua.Core >= 1.0.0",
       "Opc.Ua.Sample >= 1.0.0-*",
       "Opc.Ua.Server >= 1.0.0-*"
     ],
