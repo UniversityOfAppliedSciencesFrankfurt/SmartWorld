@@ -2395,6 +2395,7 @@
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Opc.Ua.Client": "1.0.0",
+          "Opc.Ua.Configuration": "1.0.0",
           "Opc.Ua.Core": "1.0.0",
           "Opc.Ua.Server": "1.0.0",
           "xunit.runners": "2.0.0"
@@ -2419,6 +2420,20 @@
         },
         "runtime": {
           "netstandard1.3/Opc.Ua.Client.dll": {}
+        }
+      },
+      "Opc.Ua.Configuration/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.3",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Opc.Ua.Core": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.3/Opc.Ua.Configuration.dll": {}
+        },
+        "runtime": {
+          "netstandard1.3/Opc.Ua.Configuration.dll": {}
         }
       },
       "Opc.Ua.Core/1.0.0": {
@@ -7272,6 +7287,11 @@
       "type": "project",
       "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\project.json",
       "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\Opc.Ua.Client.xproj"
+    },
+    "Opc.Ua.Configuration/1.0.0": {
+      "type": "project",
+      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Configuration\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Configuration\\Opc.Ua.Configuration.xproj"
     },
     "Opc.Ua.Core/1.0.0": {
       "type": "project",

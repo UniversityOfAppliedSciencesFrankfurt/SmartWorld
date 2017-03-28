@@ -1,11 +1,13 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "xmlDoc": "true"
+    "xmlDoc": "true",
+   
   },
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Opc.Ua.Client": "1.0.0",
+    "Opc.Ua.Configuration": "1.0.0-*",
     "Opc.Ua.Core": "1.0.0",
     "Opc.Ua.Server": "1.0.0",
     "xunit.runners": "2.0.0"
@@ -16,4 +18,6 @@
       "imports": "dnxcore50"
     }
   }
+
 }
+
