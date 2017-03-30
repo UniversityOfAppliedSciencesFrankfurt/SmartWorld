@@ -4,13 +4,13 @@
     using System.Collections.Concurrent;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.IO;
     using System.Linq;
     using System.Net.Sockets;
-    using IO;
-    using System.Threading;
-    using System.Net;
     using System.Threading.Tasks;
+#if TIMER
+    using System.Timers;
+#endif
+    using IO;
 
     /// <summary>
     ///     Modbus TCP slave device.
@@ -20,36 +20,48 @@
         private const int TimeWaitResponse = 1000;
         private readonly object _serverLock = new object();
 
-        private readonly ConcurrentDictionary<string, ModbusMasterTcpConnection> m_ConnectedMasters =
+        private readonly ConcurrentDictionary<string, ModbusMasterTcpConnection> _masters =
             new ConcurrentDictionary<string, ModbusMasterTcpConnection>();
 
-        private Socket m_ListenerSocket;
+        private TcpListener _server;
+#if TIMER
         private Timer _timer;
-        private IPEndPoint m_ListenerEndpoint;
-
-        private ModbusTcpSlave(byte unitId, long ipAddress = 0, short port = 8081, int timeIntervalMs = 1000)
+#endif
+        private ModbusTcpSlave(byte unitId, TcpListener tcpListener)
             : base(unitId, new EmptyTransport())
         {
-            m_ListenerEndpoint = new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), port);
-            m_ListenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            // _timer = new Timer(new TimerCallback(OnTimer), null, 0, (int)timeIntervalMs);
+            if (tcpListener == null)
+            {
+                throw new ArgumentNullException(nameof(tcpListener));
+            }
+
+            _server = tcpListener;
         }
 
-
-        public static ModbusTcpSlave Create(byte unitId, long ipAddress = 0, short port = 8081, int timeIntervalMs = 1000)
+#if TIMER
+        private ModbusTcpSlave(byte unitId, TcpListener tcpListener, double timeInterval)
+            : base(unitId, new EmptyTransport())
         {
-            return new ModbusTcpSlave(unitId, ipAddress, port, timeIntervalMs);
-        }
+            if (tcpListener == null)
+            {
+                throw new ArgumentNullException(nameof(tcpListener));
+            }
 
+            _server = tcpListener;
+            _timer = new Timer(timeInterval);
+            _timer.Elapsed += OnTimer;
+            _timer.Enabled = true;
+        }
+#endif
 
         /// <summary>
         ///     Gets the Modbus TCP Masters connected to this Modbus TCP Slave.
         /// </summary>
-        public ReadOnlyCollection<Socket> Masters
+        public ReadOnlyCollection<TcpClient> Masters
         {
             get
             {
-                return new ReadOnlyCollection<Socket>(m_ConnectedMasters.Values.Select(masters => masters.TcpClient).ToList());
+                return new ReadOnlyCollection<TcpClient>(_masters.Values.Select(mc => mc.TcpClient).ToList());
             }
         }
 
@@ -60,53 +72,54 @@
         /// <remarks>
         ///     This property is not thread safe, it should only be consumed within a lock.
         /// </remarks>
-        private Socket Server
+        private TcpListener Server
         {
             get
             {
-                if (m_ListenerSocket == null)
+                if (_server == null)
                 {
                     throw new ObjectDisposedException("Server");
                 }
 
-                return m_ListenerSocket;
+                return _server;
             }
         }
 
+        /// <summary>
+        ///     Modbus TCP slave factory method.
+        /// </summary>
+        public static ModbusTcpSlave CreateTcp(byte unitId, TcpListener tcpListener)
+        {
+            return new ModbusTcpSlave(unitId, tcpListener);
+        }
 
+#if TIMER
+        /// <summary>
+        ///     Creates ModbusTcpSlave with timer which polls connected clients every
+        ///     <paramref name="pollInterval"/> milliseconds on that they are connected.
+        /// </summary>
+        public static ModbusTcpSlave CreateTcp(byte unitId, TcpListener tcpListener, double pollInterval)
+        {
+            return new ModbusTcpSlave(unitId, tcpListener, pollInterval);
+        }
+#endif
 
         /// <summary>
         ///     Start slave listening for requests.
         /// </summary>
-        public override void Listen()
+        public override async Task ListenAsync()
         {
-
             Debug.WriteLine("Start Modbus Tcp Server.");
+            // TODO: add state {stoped, listening} and check it before starting
+            Server.Start();
 
-            lock (_serverLock)
+            while (true)
             {
-                try
-                {
-                    m_ListenerSocket.Bind(m_ListenerEndpoint);
-                    m_ListenerSocket.Listen(100);
-                    acceptNewMasterSocket(this);
-                }
-                catch (ObjectDisposedException)
-                {
-                    // this happens when the server stops
-                }
+                TcpClient client = await Server.AcceptTcpClientAsync().ConfigureAwait(false);
+                var masterConnection = new ModbusMasterTcpConnection(client, this);
+                masterConnection.ModbusMasterTcpConnectionClosed += OnMasterConnectionClosedHandler;
+                _masters.TryAdd(client.Client.RemoteEndPoint.ToString(), masterConnection);
             }
-        }
-
-
-        private static void acceptNewMasterSocket(ModbusTcpSlave slave)
-        {
-            var arg = new SocketAsyncEventArgs();
-            //arg.AcceptSocket = slave.m_ListenerSocket;
-            arg.UserToken = slave;
-            arg.Completed += onMasterSocketAccepted;
-
-            slave.m_ListenerSocket.AcceptAsync(arg);
         }
 
         /// <summary>
@@ -122,26 +135,28 @@
             if (disposing)
             {
                 // double-check locking
-                if (m_ListenerSocket != null)
+                if (_server != null)
                 {
                     lock (_serverLock)
                     {
-                        if (m_ListenerSocket != null)
+                        if (_server != null)
                         {
-                            m_ListenerSocket.Shutdown(SocketShutdown.Both);
-                            m_ListenerSocket = null;
+                            _server.Stop();
+                            _server = null;
 
+#if TIMER
                             if (_timer != null)
                             {
                                 _timer.Dispose();
                                 _timer = null;
                             }
+#endif
 
-                            foreach (var key in m_ConnectedMasters.Keys)
+                            foreach (var key in _masters.Keys)
                             {
                                 ModbusMasterTcpConnection connection;
 
-                                if (m_ConnectedMasters.TryRemove(key, out connection))
+                                if (_masters.TryRemove(key, out connection))
                                 {
                                     connection.ModbusMasterTcpConnectionClosed -= OnMasterConnectionClosedHandler;
                                     connection.Dispose();
@@ -153,87 +168,30 @@
             }
         }
 
-        private static bool isSocketConnected(Socket socket)
+        private static bool IsSocketConnected(Socket socket)
         {
-            return socket.Connected;
-            //bool poll = socket.Poll(TimeWaitResponse, SelectMode.SelectRead);
-            //bool available = (socket.Available == 0);
-            //return poll && available;
+            bool poll = socket.Poll(TimeWaitResponse, SelectMode.SelectRead);
+            bool available = (socket.Available == 0);
+            return poll && available;
         }
 
-        private static void onMasterSocketAccepted(object sender, SocketAsyncEventArgs e)
+#if TIMER
+        private void OnTimer(object sender, ElapsedEventArgs e)
         {
-            var slave = e.UserToken as ModbusTcpSlave;
-            Socket connectedMasterSocket = e.AcceptSocket;
-
-            try
+            foreach (var master in _masters.ToList())
             {
-                try
-                {
-                    // use Socket async API for compact framework compat
-                    //Socket socket = null;
-                    lock (slave._serverLock)
-                    {
-                        // Checks for disposal to an otherwise unnecessary exception (which is slow and hinders debugging).
-                        if (slave.m_ListenerSocket == null)
-                        {
-                            return;
-                        }
-
-                        // socket = slave.Server.Server.EndAccept(ar);
-                    }
-
-
-                    //TcpClient client = new TcpClient { Client = socket };
-                    var masterConnection = new ModbusMasterTcpConnection(connectedMasterSocket, slave);
-                    masterConnection.ModbusMasterTcpConnectionClosed += slave.OnMasterConnectionClosedHandler;
-                    slave.m_ConnectedMasters.TryAdd(connectedMasterSocket.RemoteEndPoint.ToString(), masterConnection);
-
-                    Debug.WriteLine("Accept completed.");
-                }
-                catch (IOException ex)
-                {
-                    // Abandon the connection attempt and continue to accepting the next connection.
-                    Debug.WriteLine("Accept failed: " + ex.Message);
-                }
-
-                // Accept another client (master)
-                // use Socket async API for compact framework compat
-                lock (slave._serverLock)
-                {
-                    acceptNewMasterSocket(slave);
-                    // slave.Server.Server.BeginAccept(state => AcceptCompleted(state), slave);
-                }
-            }
-            catch (ObjectDisposedException)
-            {
-                // this happens when the server stops
-            }
-            finally
-            {
-                if (e != null)
-                    e.Dispose();
-            }
-        }
-
-
-
-        private void OnTimer(object state)
-        {
-            foreach (var master in m_ConnectedMasters.ToList())
-            {
-                if (isSocketConnected(master.Value.TcpClient) == false)
+                if (IsSocketConnected(master.Value.TcpClient.Client) == false)
                 {
                     master.Value.Dispose();
                 }
             }
         }
-
+#endif
         private void OnMasterConnectionClosedHandler(object sender, TcpConnectionEventArgs e)
         {
             ModbusMasterTcpConnection connection;
 
-            if (!m_ConnectedMasters.TryRemove(e.EndPoint, out connection))
+            if (!_masters.TryRemove(e.EndPoint, out connection))
             {
                 string msg = $"EndPoint {e.EndPoint} cannot be removed, it does not exist.";
                 throw new ArgumentException(msg);

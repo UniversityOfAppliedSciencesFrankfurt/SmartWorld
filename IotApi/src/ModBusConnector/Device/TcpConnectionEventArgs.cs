@@ -1,7 +1,6 @@
 ﻿namespace Modbus.Device
 {
     using System;
-    using Text_Messages;
 
     internal class TcpConnectionEventArgs : EventArgs
     {
@@ -14,7 +13,7 @@
 
             if (endPoint == string.Empty)
             {
-                throw new ArgumentException(Resources.EmptyEndPoint);
+                throw new ArgumentException(Text_Messages.Resources.EmptyEndPoint);
             }
 
             EndPoint = endPoint;

@@ -1,5 +1,5 @@
 {
-  "projects": [ "src", "test", "src/XmlRpcConnector", "C:/Users/Syed/Desktop/opc/opcua/Stack", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/Samples", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/SDK" ],
+  "projects": [ "src", "test", "src/XmlRpcConnector", "C:/Users/Syed/Desktop/opc/opcua/Stack", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/Samples", "C:/Users/Syed/Desktop/opc/opcua/SampleApplications/SDK", "../../MODBUS/NModbus4-portable-3.0" ],
   "sdk": {
     "version": "1.0.0-preview2-003131"
   }

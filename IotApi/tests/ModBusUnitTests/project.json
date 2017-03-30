@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "buildOptions": {
     "emitEntryPoint": true
@@ -13,6 +13,7 @@
     },
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "xunit": "2.2.0-beta4-build3444",
+    "IotApi": "1.0.0-*",
     "ModBusConnector": "1.0.0-*"
   },
 

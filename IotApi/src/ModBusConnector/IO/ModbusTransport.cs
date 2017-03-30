@@ -3,13 +3,11 @@
     using System;
     using System.Diagnostics;
     using System.IO;
-    using System.Threading;
+    using System.Threading.Tasks;
 
     using Message;
 
     using Unme.Common;
-    using System.Threading.Tasks;
-    using Text_Messages;
 
     /// <summary>
     /// Modbus transport.
@@ -73,7 +71,7 @@
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(Resources.WaitRetryGreaterThanZero);
+                    throw new ArgumentException(Text_Messages.Resources.WaitRetryGreaterThanZero);
                 }
 
                 _waitToRetryMilliseconds = value;
@@ -306,9 +304,7 @@
 
         private static void Sleep(int millisecondsTimeout)
         {
-
             Task.Delay(millisecondsTimeout).Wait();
-
         }
     }
 }

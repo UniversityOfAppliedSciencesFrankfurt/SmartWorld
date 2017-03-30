@@ -2,12 +2,14 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    //using System.IO.Ports;
+#if SERIAL
+    using System.IO.Ports;
+#endif
     using System.Net.Sockets;
     using System.Threading.Tasks;
 
     using IO;
-    using System.Net;
+
     /// <summary>
     ///    Modbus IP master device.
     /// </summary>
@@ -23,7 +25,6 @@
         {
         }
 
-        /*
         /// <summary>
         ///    Modbus IP master factory method.
         /// </summary>
@@ -37,49 +38,59 @@
             }
 
             return CreateIp(new TcpClientAdapter(tcpClient));
-        }*/
+        }
 
+        /// <summary>
+        ///    Modbus IP master factory method.
+        /// </summary>
+        /// <returns>New instance of Modbus IP master device using provided UDP client.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Breaking change.")]
+        public static ModbusIpMaster CreateIp(UdpClient udpClient)
+        {
+            if (udpClient == null)
+            {
+                throw new ArgumentNullException(nameof(udpClient));
+            }
 
+            if (!udpClient.Client.Connected)
+            {
+                throw new InvalidOperationException(Text_Messages.Resources.UdpClientNotConnected);
+            }
+
+            return CreateIp(new UdpClientAdapter(udpClient));
+        }
+
+#if SERIAL
+        /// <summary>
+        ///     Modbus IP master factory method.
+        /// </summary>
+        /// <returns>New instance of Modbus IP master device using provided serial port.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Breaking change.")]
+        public static ModbusIpMaster CreateIp(SerialPort serialPort)
+        {
+            if (serialPort == null)
+            {
+                throw new ArgumentNullException(nameof(serialPort));
+            }
+
+            return CreateIp(new SerialPortAdapter(serialPort));
+        }
+#endif
 
         /// <summary>
         ///     Modbus IP master factory method.
         /// </summary>
         /// <returns>New instance of Modbus IP master device using provided stream resource.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", Justification = "Breaking change.")]
-        public static ModbusIpMaster CreateIp(string ipAddress, short port)
+        public static ModbusIpMaster CreateIp(IStreamResource streamResource)
         {
-            // TODO...
-            //Method 1
-            IPAddress address = IPAddress.Parse(ipAddress);
+            if (streamResource == null)
+            {
+                throw new ArgumentNullException(nameof(streamResource));
+            }
 
-            //Method 2
-            //int[] ipbyte = new int[4];
-            //byte[] bite = new byte[4];
-            //byte[] bite1 = new byte[1];
-            //byte[] bite2 = new byte[1];
-            //byte[] bite3 = new byte[1];
-            //byte[] bite4 = new byte[1];
-            //string[] split = ipAddress.Split(new Char[] { '.' });
-            //for (int x=0; x !=4; x++)
-            //{
-            //    ipbyte[x] = Int32.Parse(split[x]);
-            //    bite = BitConverter.GetBytes(ipbyte[x]);
-            //}
-            //bite1 = BitConverter.GetBytes(ipbyte[0]);
-            //bite2 = BitConverter.GetBytes(ipbyte[1]);
-            //bite3 = BitConverter.GetBytes(ipbyte[2]);
-            //bite4 = BitConverter.GetBytes(ipbyte[3]);
-            //bite[0] = bite1[0];
-            //bite[1] = bite2[0];
-            //bite[2] = bite3[0];
-            //bite[3] = bite4[0];
-            //IPAddress address = new IPAddress(bite);
-
-            ModbusTcpClient client = new ModbusTcpClient(address, port);
-
-            return new ModbusIpMaster(new ModbusIpTransport(client /*streamResource*/));
+            return new ModbusIpMaster(new ModbusIpTransport(streamResource));
         }
-
 
         /// <summary>
         ///    Reads from 1 to 2000 contiguous coils status.
