@@ -10,9 +10,10 @@ namespace Iot
 {
     public class ConsoleApplicatonClient
 
-{
-        
-            public static void Main(string[] args)
+    {
+        #pragma warning disable 1591
+
+        public static void Main(string[] args)
             {
                 Console.WriteLine(".Net Core OPC UA Console Client sample");
                 string endpointURL;

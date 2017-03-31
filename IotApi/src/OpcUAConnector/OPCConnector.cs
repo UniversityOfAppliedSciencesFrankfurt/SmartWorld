@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Iot;
 
-using Opc.Ua.Client;
-using Opc.Ua;
-using System.Security.Cryptography.X509Certificates;
-using Opc.Ua.Server;
-using Opc.Ua.Sample;
-using System.Threading;
-
-
 
 
 
@@ -19,6 +11,7 @@ namespace OpcUAConnector
 {
     public class OPCConnector
     {
+       
 
 
         public IReceiveModule NextReceiveModule
@@ -49,8 +42,8 @@ namespace OpcUAConnector
 
         public void Open(Dictionary<string, object> args)
         {
-            throw new NotImplementedException();
-
+           
+           
             //TODO: 
             //Connection part with client and server part 
             // namespace Opc.Ua.Server { };
