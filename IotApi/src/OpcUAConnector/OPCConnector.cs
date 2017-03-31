@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Iot;
 using Opc.Ua.Client;
@@ -8,8 +7,9 @@ using Opc.Ua;
 using System.Security.Cryptography.X509Certificates;
 using Opc.Ua.Server;
 using Opc.Ua.Sample;
-using Opc.Ua.Configuration;
 using System.Threading;
+
+
 
 
 
@@ -46,36 +46,47 @@ namespace OpcUAConnector
             }
         }
 
-        //  public void Open(Dictionary<string, object> args
-        //{
-
-        public static void Open(string[] args)
+        public void Open(Dictionary<string, object> args)
         {
+            throw new NotImplementedException();
+
             //TODO: 
             //Connection part with client and server part 
             // namespace Opc.Ua.Server { };
 
-            Console.WriteLine(".Net Core OPC UA Console Client sample");
-            string endpointURL;
-            if (args.Length == 0)
-            {
-                // use OPC UA .Net Sample server 
-                endpointURL = "opc.tcp://" + Utils.GetHostName() + ":51210/UA/SampleServer";
-            }
-            else
-            {
-                endpointURL = args[0];
-            }
-            try
-            {
-                Task t = ConsoleSampleClient(endpointURL);
-                t.Wait();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exit due to Exception: {0}", e.Message);
-            }
+
         }
+
+        public Task<string> ReceiveAsync(string endpointURL)
+        {
+            // throw new NotImplementedException();
+
+            
+
+
+                Console.WriteLine(".Net Core OPC UA Console Client sample");
+                string endpointURL;
+                if (args.Length == 0)
+                {
+                    // use OPC UA .Net Sample server 
+                    endpointURL = "opc.tcp://" + Utils.GetHostName() + ":51210/UA/SampleServer";
+                }
+                else
+                {
+                    endpointURL = args[0];
+                }
+                try
+                {
+                    Task t = ConsoleSampleClient(endpointURL);
+                    t.Wait();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exit due to Exception: {0}", e.Message);
+                }
+            
+        }
+
 
         public static async Task ConsoleSampleClient(string endpointURL)
         {
@@ -163,7 +174,7 @@ namespace OpcUAConnector
             var endpointConfiguration = EndpointConfiguration.Create(config);
             var endpoint = new ConfiguredEndpoint(selectedEndpoint.Server, endpointConfiguration);
             endpoint.Update(selectedEndpoint);
-            var session = await Session.Create(config, endpoint, true, ".Net Core OPC UA Console Client", 60000, new UserIdentity(new AnonymousIdentityToken()), null);
+            var session = await Opc.Ua.Client.Session.Create(config, endpoint, true, ".Net Core OPC UA Console Client", 60000, new UserIdentity(new AnonymousIdentityToken()), null);
 
             Console.WriteLine("4 - Browse the OPC UA server namespace.");
             ReferenceDescriptionCollection references;
@@ -208,11 +219,11 @@ namespace OpcUAConnector
             }
 
             Console.WriteLine("5 - Create a subscription with publishing interval of 1 second.");
-            var subscription = new Subscription(session.DefaultSubscription) { PublishingInterval = 1000 };
+            var subscription = new Opc.Ua.Client.Subscription(session.DefaultSubscription) { PublishingInterval = 1000 };
 
             Console.WriteLine("6 - Add a list of items (server current time and status) to the subscription.");
-            var list = new List<MonitoredItem> {
-                new MonitoredItem(subscription.DefaultItem)
+            var list = new List<Opc.Ua.Client.MonitoredItem> {
+                new Opc.Ua.Client.MonitoredItem(subscription.DefaultItem)
                 {
                     DisplayName = "ServerStatusCurrentTime", StartNodeId = "i=2258"
                 }
@@ -228,7 +239,7 @@ namespace OpcUAConnector
             Console.ReadKey(true);
         }
 
-        private static void OnNotification(MonitoredItem item, MonitoredItemNotificationEventArgs e)
+        private static void OnNotification(Opc.Ua.Client.MonitoredItem item, MonitoredItemNotificationEventArgs e)
         {
             foreach (var value in item.DequeueValues())
             {
@@ -302,220 +313,22 @@ namespace OpcUAConnector
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        public Task<object> ReceiveAsync(Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
-            //TODO: You have client now so receive part should be here
-        }
-
-        public Task ReceiveAsync(Action<IList<object>> onSuccess, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public Task ReceiveAsync(Action<IList<string>> onSuccess, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
+        public Task SendAsync(IList<string> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
-
-
-            public class ApplicationMessageDlg : IApplicationMessageDlg
-        {
-            private string message = string.Empty;
-            private bool ask = false;
-
-            public override void Message(string text, bool ask)
-            {
-                this.message = text;
-                this.ask = ask;
-            }
-
-            public override async Task<bool> ShowAsync()
-            {
-                if (ask)
-                {
-                    message += " (y/n, default y): ";
-                    Console.Write(message);
-                }
-                else
-                {
-                    Console.WriteLine(message);
-                }
-                if (ask)
-                {
-                    try
-                    {
-                        ConsoleKeyInfo result = Console.ReadKey();
-                        Console.WriteLine();
-                        return await Task.FromResult((result.KeyChar == 'y') || (result.KeyChar == 'Y') || (result.KeyChar == '\r'));
-                    }
-                    catch
-                    {
-                        // intentionally fall through
-                    }
-                }
-                return await Task.FromResult(true);
-            }
-
+            throw new NotImplementedException();
         }
 
 
-        public class Program
-        {
-            public static void Main(string[] args)
-            {
-                MySampleServer server = new MySampleServer();
-                server.Start();
-            }
-        }
-
-        public class MySampleServer
-        {
-            SampleServer server;
-            Task status;
-            DateTime lastEventTime;
-
-            public void Start()
-            {
-
-                try
-                {
-                    ConsoleSampleServer().Wait();
-                    Console.WriteLine("Server started. Press any key to exit...");
-                }
-                catch (Exception ex)
-                {
-                    Utils.Trace("ServiceResultException:" + ex.Message);
-                    Console.WriteLine("Exception: {0}", ex.Message);
-                }
-
-                try
-                {
-                    Console.ReadKey(true);
-                }
-                catch
-                {
-                    // wait forever if there is no console
-                    Thread.Sleep(Timeout.Infinite);
-                }
-
-                if (server != null)
-                {
-                    Console.WriteLine("Server stopped. Waiting for exit...");
-
-                    server.Dispose();
-                    server = null;
-
-                    status.Wait();
-                }
-            }
-            private static void CertificateValidator_CertificateValidation(CertificateValidator validator, CertificateValidationEventArgs e)
-            {
-                if (e.Error.StatusCode == StatusCodes.BadCertificateUntrusted)
-                {
-                    e.Accept = false;
-                    Console.WriteLine("Rejected Certificate: {0}", e.Certificate.Subject);
-                }
-            }
-
-            private async Task ConsoleSampleServer()
-            {
-                ApplicationInstance.MessageDlg = new ApplicationMessageDlg();
-                ApplicationInstance application = new ApplicationInstance();
-
-                application.ApplicationName = "UA Core Sample Server";
-                application.ApplicationType = ApplicationType.Server;
-                application.ConfigSectionName = "Opc.Ua.SampleServer";
-
-                // load the application configuration.
-                ApplicationConfiguration config = await application.LoadApplicationConfiguration(false);
-
-                // check the application certificate.
-                bool haveAppCertificate = await application.CheckApplicationInstanceCertificate(false, 0);
-                if (!haveAppCertificate)
-                {
-                    throw new Exception("Application instance certificate invalid!");
-                }
-
-                if (!config.SecurityConfiguration.AutoAcceptUntrustedCertificates)
-                {
-                    config.CertificateValidator.CertificateValidation += new CertificateValidationEventHandler(CertificateValidator_CertificateValidation);
-                }
-
-                // start the server.
-                server = new SampleServer();
-                await application.Start(server);
-
-                // start the status thread
-                status = Task.Run(new Action(StatusThread));
-
-                // print notification on session events
-                server.CurrentInstance.SessionManager.SessionActivated += EventStatus;
-                server.CurrentInstance.SessionManager.SessionClosing += EventStatus;
-                server.CurrentInstance.SessionManager.SessionCreated += EventStatus;
-
-            }
-
-            private void EventStatus(Session session, SessionEventReason reason)
-            {
-                lastEventTime = DateTime.UtcNow;
-                PrintSessionStatus(session, reason.ToString());
-            }
-
-            void PrintSessionStatus(Session session, string reason, bool lastContact = false)
-            {
-                lock (session.DiagnosticsLock)
-                {
-                    string item = String.Format("{0,9}:{1,20}:", reason, session.SessionDiagnostics.SessionName);
-                    if (lastContact)
-                    {
-                        item += String.Format("Last Event:{0:HH:mm:ss}", session.SessionDiagnostics.ClientLastContactTime.ToLocalTime());
-                    }
-                    else
-                    {
-                        if (session.Identity != null)
-                        {
-                            item += String.Format(":{0,20}", session.Identity.DisplayName);
-                        }
-                        item += String.Format(":{0}", session.Id);
-                    }
-                    Console.WriteLine(item);
-                }
-            }
-
-            private void StatusThread()
-            {
-                while (server != null)
-                {
-                    if (DateTime.UtcNow - lastEventTime > TimeSpan.FromMilliseconds(6000))
-                    {
-                        IList<Session> sessions = server.CurrentInstance.SessionManager.GetSessions();
-                        for (int ii = 0; ii < sessions.Count; ii++)
-                        {
-                            Session session = sessions[ii];
-                            PrintSessionStatus(session, "-Status-", true);
-                        }
-                        lastEventTime = DateTime.UtcNow;
-                    }
-                    Thread.Sleep(1000);
-                }
-            }
-
-        }
 
     }
-
 }
+
+
 
 
 
