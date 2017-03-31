@@ -2,70 +2,51 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Iot;
-
+using Opc.Ua.Configuration;
+using Opc.Ua;
+using Opc.Ua.Client;
+using Opc.Ua.Sample;
+using Iot;
 
 
 
 
 namespace OpcUAConnector
 {
-    public class OPCConnector
+    public class OPCConnector : ISendModule
     {
-       
-
-
-        public IReceiveModule NextReceiveModule
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public ISendModule NextSendModule
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        {get; set;}
 
         public void Open(Dictionary<string, object> args)
         {
-           
-           
-            //TODO: 
-            //Connection part with client and server part 
-            // namespace Opc.Ua.Server { };
 
+            string endpoint = args["endpoint"].ToString();
+            try
+            {
+
+                MySampleServer server = new MySampleServer();
+                server.Start();
+
+                Task t = Client.ConsoleSampleClient(endpoint);
+                t.Wait();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exit due to Exception: {0}", e.Message);
+            }
 
         }
 
-        public Task<string> ReceiveAsync(string endpointURL)
+        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task ReceiveAsync(Action<IList<string>> onSuccess, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             throw new NotImplementedException();
         }
-
-        public Task SendAsync(IList<string> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
 

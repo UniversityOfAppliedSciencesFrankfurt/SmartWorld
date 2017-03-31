@@ -1,8 +1,7 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "xmlDoc": "true",
-    "emitEntryPoint": true,
+    "xmlDoc": "true"
    
   },
   "dependencies": {
@@ -17,6 +16,9 @@
   "frameworks": {
     "netstandard1.4": {
       "imports": "dnxcore50"
+    },
+    "net461": {
+
     }
   }
 
