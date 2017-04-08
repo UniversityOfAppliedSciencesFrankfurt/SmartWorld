@@ -1,8 +1,8 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "xmlDoc": "true"
-   
+    "xmlDoc": "true",
+    "emitEntryPoint": false
   },
   "dependencies": {
     "NETStandard.Library": "1.6.0",
