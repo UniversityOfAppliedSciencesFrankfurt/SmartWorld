@@ -14,7 +14,6 @@ namespace MySample
         {
             try
             {
-                
                 ModbusTcpMasterReadInputsFromModbusSlave();
             }
             catch (Exception e)
@@ -37,15 +36,15 @@ namespace MySample
             IPAddress address = new IPAddress(new byte[] { 127, 0, 0, 1 });
 
             // create and start the TCP slave
-            TcpListener slaveTcp = new TcpListener(address, port);
-            slaveTcp.Start();
-            ModbusSlave slave = ModbusTcpSlave.CreateTcp(slaveId, slaveTcp);
+            TcpListener slaveTcpListener = new TcpListener(address, port);
+            slaveTcpListener.Start();
+            ModbusSlave slave = ModbusTcpSlave.CreateTcp(slaveId, slaveTcpListener);
             var listenTask = slave.ListenAsync();
 
             // create the master
-            TcpClient masterTcp = new TcpClient();
-            masterTcp.ConnectAsync(address.ToString(), port);
-            ModbusIpMaster master = ModbusIpMaster.CreateIp(masterTcp);
+            TcpClient masterTcpClient = new TcpClient();
+            masterTcpClient.ConnectAsync(address.ToString(), port);
+            ModbusIpMaster master = ModbusIpMaster.CreateIp(masterTcpClient);
 
             ushort numInputs = 4;
             ushort startAddress = 100;
@@ -60,8 +59,8 @@ namespace MySample
             }
 
             // clean up
-            masterTcp.Dispose();
-            slaveTcp.Stop();
+            masterTcpClient.Dispose();
+            slaveTcpListener.Stop();
 
             //    // output
             //    // Register 100=0

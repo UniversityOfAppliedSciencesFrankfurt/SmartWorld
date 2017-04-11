@@ -71,7 +71,7 @@
 
             if (!udpClient.Client.Connected)
             {
-                throw new InvalidOperationException(Resources.UdpClientNotConnected);
+                throw new InvalidOperationException(Exceptions_Resources.UdpClientNotConnected);
             }
 
             return CreateAscii(new UdpClientAdapter(udpClient));
@@ -130,7 +130,7 @@
 
             if (!udpClient.Client.Connected)
             {
-                throw new InvalidOperationException(Resources.UdpClientNotConnected);
+                throw new InvalidOperationException(Exceptions_Resources.UdpClientNotConnected);
             }
 
             return CreateRtu(new UdpClientAdapter(udpClient));

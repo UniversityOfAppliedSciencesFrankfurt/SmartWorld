@@ -40,11 +40,11 @@
         {
             string msg = _exceptionMessages.ContainsKey(SlaveExceptionCode)
                 ? _exceptionMessages[SlaveExceptionCode]
-                : Resources.Unknown;
+                : Exceptions_Resources.Unknown;
 
             return string.Format(
                 CultureInfo.InvariantCulture,
-                Resources.SlaveExceptionResponseFormat,
+                Exceptions_Resources.SlaveExceptionResponseFormat,
                 Environment.NewLine,
                 FunctionCode,
                 SlaveExceptionCode,
@@ -55,15 +55,15 @@
         {
             Dictionary<byte, string> messages = new Dictionary<byte, string>(9);
 
-            messages.Add(1, Resources.IllegalFunction);
-            messages.Add(2, Resources.IllegalDataAddress);
-            messages.Add(3, Resources.IllegalDataValue);
-            messages.Add(4, Resources.SlaveDeviceFailure);
-            messages.Add(5, Resources.Acknowledge);
-            messages.Add(6, Resources.SlaveDeviceBusy);
-            messages.Add(8, Resources.MemoryParityError);
-            messages.Add(10, Resources.GatewayPathUnavailable);
-            messages.Add(11, Resources.GatewayTargetDeviceFailedToRespond);
+            messages.Add(1, Exceptions_Resources.IllegalFunction);
+            messages.Add(2, Exceptions_Resources.IllegalDataAddress);
+            messages.Add(3, Exceptions_Resources.IllegalDataValue);
+            messages.Add(4, Exceptions_Resources.SlaveDeviceFailure);
+            messages.Add(5, Exceptions_Resources.Acknowledge);
+            messages.Add(6, Exceptions_Resources.SlaveDeviceBusy);
+            messages.Add(8, Exceptions_Resources.MemoryParityError);
+            messages.Add(10, Exceptions_Resources.GatewayPathUnavailable);
+            messages.Add(11, Exceptions_Resources.GatewayTargetDeviceFailedToRespond);
 
             return messages;
         }
@@ -72,7 +72,7 @@
         {
             if (FunctionCode <= Modbus.ExceptionOffset)
             {
-                throw new FormatException(Resources.SlaveExceptionResponseInvalidFunctionCode);
+                throw new FormatException(Exceptions_Resources.SlaveExceptionResponseInvalidFunctionCode);
             }
 
             SlaveExceptionCode = frame[2];
