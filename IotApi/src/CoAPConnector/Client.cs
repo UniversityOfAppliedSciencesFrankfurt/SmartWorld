@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace CoAPConnector
 {
-    public class Class1
+    public class Client
     {
-        public Class1()
+        public Client()
         {
-            Console.WriteLine("Test");
+            Console.WriteLine("Test2");
         }
     }
 }
