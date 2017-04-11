@@ -13,14 +13,6 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Opc.Ua.Client" Version="1.0.0" />
-    <PackageReference Include="Opc.Ua.Configuration" Version="1.0.0-*" />
-    <PackageReference Include="Opc.Ua.Core" Version="1.0.0-*" />
-    <PackageReference Include="Opc.Ua.Sample" Version="1.0.0-*" />
-    <PackageReference Include="Opc.Ua.Server" Version="1.0.0-*" />
-  </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
