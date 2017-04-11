@@ -2386,9 +2386,6 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "xunit.runners/2.0.0": {
-        "type": "package"
-      },
       "IotApi/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.4",
@@ -2397,8 +2394,8 @@
           "Opc.Ua.Client": "1.0.0",
           "Opc.Ua.Configuration": "1.0.0",
           "Opc.Ua.Core": "1.0.0",
-          "Opc.Ua.Server": "1.0.0",
-          "xunit.runners": "2.0.0"
+          "Opc.Ua.Sample": "1.0.0",
+          "Opc.Ua.Server": "1.0.0"
         },
         "compile": {
           "netstandard1.4/IotApi.dll": {}
@@ -2412,8 +2409,7 @@
         "framework": ".NETStandard,Version=v1.3",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Opc.Ua.Core": "1.0.0",
-          "Opc.Ua.Server": "1.0.0"
+          "Opc.Ua.Core": "1.0.0"
         },
         "compile": {
           "netstandard1.3/Opc.Ua.Client.dll": {}
@@ -7268,16 +7264,6 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "xunit.runners/2.0.0": {
-      "sha512": "+dUmiiGf5IkoOreRr2MKqirWYPCa4MHQ4rEzUxSR7LiyQYko47DKz5x/fwFJCgfHTG5ClA+yuGDa6RYAvkDJjw==",
-      "type": "package",
-      "path": "xunit.runners/2.0.0",
-      "files": [
-        "readme.txt",
-        "xunit.runners.2.0.0.nupkg.sha512",
-        "xunit.runners.nuspec"
-      ]
-    },
     "IotApi/1.0.0": {
       "type": "project",
       "path": "../IotApi/project.json",
@@ -7285,35 +7271,36 @@
     },
     "Opc.Ua.Client/1.0.0": {
       "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Client\\Opc.Ua.Client.xproj"
+      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Client\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Client\\Opc.Ua.Client.xproj"
     },
     "Opc.Ua.Configuration/1.0.0": {
       "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Configuration\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Configuration\\Opc.Ua.Configuration.xproj"
+      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Configuration\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Configuration\\Opc.Ua.Configuration.xproj"
     },
     "Opc.Ua.Core/1.0.0": {
       "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\Stack\\Opc.Ua.Core\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\Stack\\Opc.Ua.Core\\Opc.Ua.Core.xproj"
+      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\Stack\\Opc.Ua.Core\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\Stack\\Opc.Ua.Core\\Opc.Ua.Core.xproj"
     },
     "Opc.Ua.Sample/1.0.0": {
       "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\Samples\\Opc.Ua.Sample\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\Samples\\Opc.Ua.Sample\\Opc.Ua.Sample.xproj"
+      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\Samples\\Opc.Ua.Sample\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\Samples\\Opc.Ua.Sample\\Opc.Ua.Sample.xproj"
     },
     "Opc.Ua.Server/1.0.0": {
       "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Server\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\opc\\opcua\\SampleApplications\\SDK\\Opc.Ua.Server\\Opc.Ua.Server.xproj"
+      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Server\\project.json",
+      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Server\\Opc.Ua.Server.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "IotApi >= 1.0.0-*",
+      "IotApi >= 1.0.0",
       "NETStandard.Library >= 1.6.0",
-      "Opc.Ua.Client >= 1.0.0-*",
+      "Opc.Ua.Client >= 1.0.0",
+      "Opc.Ua.Configuration >= 1.0.0-*",
       "Opc.Ua.Core >= 1.0.0",
       "Opc.Ua.Sample >= 1.0.0-*",
       "Opc.Ua.Server >= 1.0.0-*"
