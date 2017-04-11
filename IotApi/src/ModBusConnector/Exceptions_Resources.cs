@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Text_Messages
 {
-    public static class Resources
+    public static class Exceptions_Resources
     {
         public static string Acknowledge = "Specialized use in conjunction with programming commands.The server (or slave) has accepted the request and is processing it, but a long duration of time will be required to do so.This response is returned to prevent a timeout error from occurring in the client(or master). The client(or master) can next issue a Poll Program Complete message to determine if processing is completed.";
         public static string EmptyEndPoint = "Argument endPoint cannot be empty.";

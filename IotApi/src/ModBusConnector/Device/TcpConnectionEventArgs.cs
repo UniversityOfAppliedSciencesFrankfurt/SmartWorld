@@ -13,7 +13,7 @@
 
             if (endPoint == string.Empty)
             {
-                throw new ArgumentException(Text_Messages.Resources.EmptyEndPoint);
+                throw new ArgumentException(Text_Messages.Exceptions_Resources.EmptyEndPoint);
             }
 
             EndPoint = endPoint;

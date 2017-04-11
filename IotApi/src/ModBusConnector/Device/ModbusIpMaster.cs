@@ -54,7 +54,7 @@
 
             if (!udpClient.Client.Connected)
             {
-                throw new InvalidOperationException(Text_Messages.Resources.UdpClientNotConnected);
+                throw new InvalidOperationException(Text_Messages.Exceptions_Resources.UdpClientNotConnected);
             }
 
             return CreateIp(new UdpClientAdapter(udpClient));
