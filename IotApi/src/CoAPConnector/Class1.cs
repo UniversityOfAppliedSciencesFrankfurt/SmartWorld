@@ -9,7 +9,7 @@ namespace CoAPConnector
     {
         public Class1()
         {
-            
+            Console.WriteLine("Test");
         }
     }
 }
