@@ -2,9 +2,8 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "IotApi": "1.0.0",
-    "NETStandard.Library": "1.6.0",
-    "runtime.any.System.Private.DataContractSerialization": "4.1.0"
+    "IotApi": "1.0.0-*",
+    "NETStandard.Library": "1.6.0"
   },
 
   "frameworks": {
