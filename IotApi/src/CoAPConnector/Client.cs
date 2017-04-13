@@ -43,9 +43,8 @@ namespace CoAPConnector
         }
 
         public bool IsListening
-        {
-            get => _receiveCancellationToken != null && !_receiveCancellationToken.IsCancellationRequested; }
-
+        { get => _receiveCancellationToken != null && !_receiveCancellationToken.IsCancellationRequested; }
+        
         public void Listen()
         {
             if (IsListening)
