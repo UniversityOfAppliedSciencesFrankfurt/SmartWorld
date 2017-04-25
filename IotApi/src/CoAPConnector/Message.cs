@@ -67,9 +67,7 @@ namespace CoAPConnector
     public class CoapMessageFormatException : Exception
     {
         public CoapMessageFormatException() : base() { }
-
         public CoapMessageFormatException(string message) : base(message) { }
-
         public CoapMessageFormatException(string message, Exception innerException) : base(message, innerException) { }
     }
 

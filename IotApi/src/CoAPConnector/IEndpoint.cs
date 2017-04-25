@@ -7,13 +7,11 @@ namespace CoAPConnetor
     public class CoapPayload
     {
         public virtual int MessageId { get; set; }
-
         public virtual byte[] Payload { get; set; }
-
         public virtual ICoapEndpoint Endpoint { get; set; }
     }
 
-    // Provided by Application  Layer
+    // Provided by Application Layer
     public interface ICoapEndpoint
     {
         /// <summary>

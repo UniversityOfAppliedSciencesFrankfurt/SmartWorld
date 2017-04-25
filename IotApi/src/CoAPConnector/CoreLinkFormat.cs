@@ -4,43 +4,39 @@ using System.Linq;
 
 namespace CoAPConnector
 {
+    #region Class: Setup CoAP resources
+    /// <description>
+    /// Create message and endpoint field
+    /// </description>
     public class CoapResource
     {
-        private readonly string _uriReference;
+        private readonly string m_uriReference;
         public string URIReference
         {
-            get => _uriReference;
+            get => m_uriReference;
         }
 
-        public List<string> Rel;
-
+        
         public string Anchor;
-
-        public List<string> Rev;
-
         public string HrefLang;
-
         public string Media;
-
         public string Title;
-
         public string TitleExt;
-
         public string Type;
 
+        public List<string> Rel;
         public List<string> ResourceTypes;
-
         public List<string> InterfaceDescription;
+        public List<string> Rev;
+        public List<Options.ContentFormatType> SuggestedContentTypes;
 
         public ulong MaxSize;
-
-        public List<Options.ContentFormatType> SuggestedContentTypes;
 
         public Dictionary<string, string> Extentions = new Dictionary<string, string>();
 
         public CoapResource(string uri)
         {
-            _uriReference = uri;
+            m_uriReference = uri;
         }
 
         private bool nullableSequenceEquals<T>(ICollection<T> a, ICollection<T> b)
@@ -54,7 +50,6 @@ namespace CoAPConnector
 
             if (other == null)
                 return base.Equals(obj);
-
             if (URIReference != other.URIReference)
                 return false;
             if (Anchor != other.Anchor)
@@ -88,10 +83,15 @@ namespace CoAPConnector
 
         public override int GetHashCode()
         {
-            return _uriReference.GetHashCode();
+            return m_uriReference.GetHashCode();
         }
     }
+    #endregion
 
+    #region Class: Setup core CoAP template for create linking 
+    /// <description>
+    /// Create CoAP template for setup linking connection
+    /// </description>
     public static class CoreLinkFormat
     {
         private enum _formatState { LinkValue, LinkParam }
@@ -189,7 +189,6 @@ namespace CoAPConnector
                             }
                             else if (param == "title*")
                             {
-                                // Todo: No idea what to do here...?
                                 var charset = value.Substring(0, value.IndexOf('\''));
                                 var lang = value.Substring(charset.Length + 1, value.IndexOf('\'', charset.Length + 1) - charset.Length - 1);
                                 value = value.Substring(charset.Length + lang.Length + 3, value.Length - charset.Length - lang.Length - 4);
@@ -278,7 +277,6 @@ namespace CoAPConnector
             }
             catch (IndexOutOfRangeException)
             {
-                // Moving on...
             }
 
             if (currentResource != null)
@@ -287,4 +285,5 @@ namespace CoAPConnector
             return result;
         }
     }
+    #endregion
 }
