@@ -111,7 +111,11 @@ namespace CoAPConnector
         /// </summary>
         public int OptionNumber
         {
-            get => _optionNumber; }
+            get
+            {
+                return _optionNumber;
+            }
+        }
 
         private readonly int _minLength;
 
@@ -120,7 +124,11 @@ namespace CoAPConnector
         /// </summary>
         public int MinLength
         {
-            get => _minLength; }
+            get
+            {
+                return _minLength;
+            }
+        }
 
         private readonly int _maxLength;
 
@@ -129,7 +137,11 @@ namespace CoAPConnector
         /// </summary>
         public int MaxLength
         {
-            get => _maxLength; }
+            get
+            {
+                return _maxLength;
+            }
+        }
 
         private bool _isRepeatable;
 
@@ -138,7 +150,11 @@ namespace CoAPConnector
         /// </summary>
         public bool IsRepeatable
         {
-            get => _isRepeatable; }
+            get
+            {
+                return _isRepeatable;
+            }
+        }
 
         private readonly OptionType _type;
 
@@ -147,7 +163,11 @@ namespace CoAPConnector
         /// </summary>
         public OptionType Type
         {
-            get => _type; }
+            get
+            {
+                return _type;
+            }
+        }
 
         protected readonly object _default;
 
@@ -246,7 +266,11 @@ namespace CoAPConnector
 
         public int Length
         {
-            get => _length; }
+            get
+            {
+                return _length;
+            }
+        }
 
         public byte[] GetBytes()
         {
@@ -346,7 +370,8 @@ namespace CoAPConnector
         private static Dictionary<Type, int> _hashCode = new Dictionary<System.Type, int>();
         public override int GetHashCode()
         {
-            if (_hashCode.TryGetValue(GetType(), out int hashcode) == false)
+            int hashcode;
+            if (_hashCode.TryGetValue(_hashCode.GetType(), out hashcode) == false)
             {
                 hashcode = GetType().FullName.GetHashCode();
                 _hashCode.Add(GetType(), hashcode);

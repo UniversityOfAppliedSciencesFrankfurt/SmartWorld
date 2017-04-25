@@ -81,14 +81,17 @@ namespace CoAPConnector
         /// </summary>
         public int Version
         {
-            get => _version;
+            get
+            {
+                return _version;
+            }
             set
             {
                 if (value != 1)
                     throw new ArgumentException("Only version 1 is supported");
                 _version = value;
             }
-            }
+        }
 
         /// <summary>
         /// Gets or Sets if the message should be responded to by the server. 
@@ -111,14 +114,18 @@ namespace CoAPConnector
         /// </summary>
         public byte[] Token
         {
-            get => _token;
+            get
+            {
+                return _token;
+
+            }
             set
             {
                 if (value.Length > 8)
                     throw new ArgumentException("Token length can not be more than 8 bytes long");
                 _token = value;
             }
-            }
+        }
 
         /// <summary>
         /// Gets or Sets a Message ID to pair Requests to their immediate Responses.
@@ -319,7 +326,7 @@ namespace CoAPConnector
                     dataLen = data[i++ + 1] << 8;
                     dataLen |= data[i++ + 1] + 269;
                 }
-                Options.Add(Net.Options.Factory.Create(optCode + optionDelta, data.Skip(i + 1).Take(dataLen).ToArray()));
+                Options.Add(CoAPConnector.Options.Factory.Create(optCode + optionDelta, data.Skip(i + 1).Take(dataLen).ToArray()));
                 i += dataLen;
                 optionDelta += optCode;
             }

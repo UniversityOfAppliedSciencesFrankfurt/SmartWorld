@@ -65,7 +65,11 @@ namespace CoAPConnector
         #endregion
 
         public bool m_IsListening
-        { get => ReceiveCancellationToken != null && !ReceiveCancellationToken.IsCancellationRequested; }
+        { get
+            {
+                return ReceiveCancellationToken != null && !ReceiveCancellationToken.IsCancellationRequested;
+            }
+        }
 
         #region Method: CoAP Listener
             /// <summary>

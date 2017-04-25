@@ -13,7 +13,10 @@ namespace CoAPConnector
         private readonly string m_uriReference;
         public string URIReference
         {
-            get => m_uriReference;
+            get
+            {
+                return m_uriReference;
+            }
         }
 
         
