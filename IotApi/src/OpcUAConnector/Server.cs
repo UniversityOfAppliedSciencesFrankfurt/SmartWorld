@@ -89,15 +89,15 @@ namespace OpcUAConnector
                 Console.WriteLine("Exception: {0}", ex.Message);
             }
 
-            try
-            {
-                Console.ReadKey(true);
-            }
-            catch
-            {
-                // wait forever if there is no console
-                Thread.Sleep(Timeout.Infinite);
-            }
+            //try
+            //{
+            //    Console.ReadKey(true);
+            //}
+            //catch
+            //{
+            //    // wait forever if there is no console
+            //    Thread.Sleep(Timeout.Infinite);
+            //}
 
             if (server != null)
             {

@@ -16,9 +16,9 @@
     "netstandard1.4": {
       "imports": "dnxcore50"
     },
-  "net461": {
+    "net461": {
 
-      }
+    }
 
     }
   }
