@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using System.Globalization;
 
 namespace PhilipsHueUnitTests
 {
@@ -14,7 +15,7 @@ namespace PhilipsHueUnitTests
         /// <summary>
         /// URL of the Hue gateway.
         /// </summary>
-         private string m_GtwUri = "http://192.168.?.?/";
+         private string m_GtwUri = "http://192.168.0.115/";
 
         /// <summary>
         /// To set username, you first have to run test GenerateUserTest().
@@ -22,7 +23,7 @@ namespace PhilipsHueUnitTests
         /// the link button on the gatewey. Method GenerateUserName will return
         /// username, which you should set as value of this member variable.
         /// </summary>
-        private string m_UsrName = "TODO";
+        private string m_UsrName = "GEX70ryKiblxzsHVWswfs4E49zuI00nnhMOBkxcH";
 
         /// <summary>
         /// Used by all tests to create instance of IotApi.
@@ -165,7 +166,6 @@ namespace PhilipsHueUnitTests
         public void ToggleLightUntypedTest()
         {
             var iotApi = getApi();
-
             var result = iotApi.SendAsync(new HueCommand()
             {
                 Path = $"lights/{TestDriver.LightStateReferenceId}/state",
@@ -196,6 +196,59 @@ namespace PhilipsHueUnitTests
             Assert.IsType(typeof(Newtonsoft.Json.Linq.JArray), result);
 
             Assert.True(((Newtonsoft.Json.Linq.JArray)result).Count == 1);
+        }
+        [Fact]
+        public void SetSchedulesTest()
+        {
+            var iotApi = getApi();
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+            DateTime dateTime = DateTime.Now;
+            int d = dateTime.Day;
+            int m = dateTime.Month;
+            int y = dateTime.Year;
+            int h = dateTime.Hour;
+            int min = dateTime.Minute;
+            int s = dateTime.Second;
+            String Time = "";
+            String localTime = y + "-" + m + "-" + d + "T" + h + ":" + min + ":" + s;
+            //Console.WriteLine(localTime);
+            //Console.ReadLine();
+            Schedule sch = new Schedule()
+            {
+                name = "wake up",
+                description = "wake up",
+                command = new Command()
+                {
+                    address = "/api/GEX70ryKiblxzsHVWswfs4E49zuI00nnhMOBkxcH/schedules",
+                    method = "POST",
+                    body = new body()
+                    {
+                        On = true
+                    },
+                },
+                localtime = localTime,  
+            };
+
+            var result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"schedules",
+                Method = "post",
+                Body = sch
+            }).Result;
+            Assert.True(result != null);
+        }
+        [Fact]
+        public void GetScheduleTest()
+        {
+            var iotApi = getApi();
+            var result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"schedules",
+                Method = "get",
+
+            }).Result;
+            Assert.True(result != null);
+
         }
     }
 }

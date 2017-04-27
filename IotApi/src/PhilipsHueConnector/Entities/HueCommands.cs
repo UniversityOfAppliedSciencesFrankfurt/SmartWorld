@@ -8,6 +8,7 @@ namespace Iot.PhilipsHueConnector.Entities
 
     public  class HueCommand
     {
+
         /// <summary>
         /// HTTP method used in REST operation.
         /// </summary>
@@ -19,11 +20,11 @@ namespace Iot.PhilipsHueConnector.Entities
         public virtual string Path {get;set;}
 
         /// <summary>
-        /// Used when bydy is directly set as untyped value.
+        /// Used when body is directly set as untyped value.
         /// </summary>
         public object Body { get; set; }
+        
     }
-
 
 
     public class GetCommandBase : HueCommand
