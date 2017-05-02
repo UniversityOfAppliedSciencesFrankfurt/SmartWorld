@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-using CoAP;
+using CoAPConnector;
 
 namespace CoAPConnector.Options
 {

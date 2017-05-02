@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
-using CoAP;
+using CoAPConnector;
 
 namespace CoAPConnector.Options
 {
@@ -62,7 +61,15 @@ namespace CoAPConnector.Options
     {
         public ContentFormatType MediaType
         {
-            get => (ContentFormatType)ValueUInt; set => ValueUInt = (uint)value; }
+            get
+            {
+                return (ContentFormatType)ValueUInt;
+            }
+            set
+            {
+                ValueUInt = (uint)value;
+            }
+        }
 
         public ContentFormat() : base(optionNumber: RegisteredOptionNumber.ContentFormat, maxLength: 2, type: OptionType.UInt)
         {
@@ -85,7 +92,15 @@ namespace CoAPConnector.Options
     {
         public ContentFormatType MediaType
         {
-            get => (ContentFormatType)ValueUInt; set => ValueUInt = (uint)value; }
+            get
+            {
+                return (ContentFormatType)ValueUInt;
+            }
+            set
+            {
+                ValueUInt = (uint)value;
+            }
+        }
 
         public Accept() : base(optionNumber: RegisteredOptionNumber.Accept, maxLength: 2, type: OptionType.UInt)
         {
