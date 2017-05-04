@@ -1,5 +1,4 @@
-﻿using CoAPConnetor;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,6 +61,7 @@ namespace CoAPConnector
             Transport = transport;
             m_MessageId = (ushort)(new Random().Next() & 0xFFFFu);
         }
+
         #endregion
 
         public bool m_IsListening
