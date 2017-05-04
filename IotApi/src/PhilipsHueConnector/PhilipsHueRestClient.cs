@@ -112,7 +112,7 @@ namespace Iot.PhilipsHueConnector
             {
                 response = await httpClient.GetAsync(getUri(cmd));
             }
-            else if (cmd.Method == "post")
+            else if (cmd.Method == "post"||cmd.Method == "put" )
             {
                 //httpClient.GetAsync(getUri(cmd));
             //}

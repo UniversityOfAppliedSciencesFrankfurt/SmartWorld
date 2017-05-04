@@ -84,6 +84,10 @@ namespace Iot.PhilipsHueConnector.Entities
     {
         public override string Path { get; set; } = "rules";
     }
+    public class GetSchedules : GetCommandBase
+    {
+        public override string Path { get; set; } = "schedules";
+    }
     #endregion
 
     #region Set Commands
@@ -122,7 +126,6 @@ namespace Iot.PhilipsHueConnector.Entities
                 throw new NotSupportedException();
             }
         }
-
     }
     #endregion
 }
