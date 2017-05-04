@@ -10,6 +10,7 @@ namespace CoAPConnector
     public class CoAPConnector : ISendModule
     {
         private ISendModule m_NextSendModule;
+        private ICoapEndpoint m_Transport;
 
         public ISendModule NextSendModule
         {
@@ -33,20 +34,28 @@ namespace CoAPConnector
                 Type type = obj.GetType();
                 TypeInfo info = type.GetTypeInfo();
                 info.GetInterface("ICoapEndpoint");
-                //if (nameof(obj) == )
+                if (nameof(obj) != "endPoint")
+                {
+                    throw new Exception("must use ICoapEndpoint interface.");
+                }
             }
         }
 
         public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, 
                                 Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
-            //TODO: Create client with ICoApEndpoint and send message 
             throw new NotImplementedException();
         }
 
         public Task SendAsync(object sensorMessage, Action<object> onSuccess = null, 
                                 Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
+            //TODO: Create client with ICoApEndpoint and send message 
+
+            CoapClient client = new CoapClient(m_Transport);
+            client.listen();
+            client.SendAsync();
+
             throw new NotImplementedException();
         }
     }

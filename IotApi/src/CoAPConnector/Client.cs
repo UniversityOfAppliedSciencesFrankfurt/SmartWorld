@@ -173,9 +173,9 @@ namespace CoAPConnector
         }
         #endregion
 
-        #region Method: CoAP response message
+        #region Method: CoAP request message
         /// <summary>
-        ///  Method to proceed sending back response 
+        ///  Method to proceed request message 
         /// <see also cref="https://tools.ietf.org/html/rfc7252"/>
         /// <see cref=""/>
         /// </summary>

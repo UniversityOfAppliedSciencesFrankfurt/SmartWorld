@@ -25,7 +25,7 @@ namespace CoAPUnitTest
             api.SendAsync(new CoapMessage
             {
                 Type = CoapMessageType.Confirmable,
-                Code = CoapMessageCode.None
+                Code = CoapMessageCode.Get
             }).Wait();
         }
     }
