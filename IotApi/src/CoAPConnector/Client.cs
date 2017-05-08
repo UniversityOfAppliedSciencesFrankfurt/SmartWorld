@@ -62,6 +62,10 @@ namespace CoAPConnector
             m_MessageId = (ushort)(new Random().Next() & 0xFFFFu);
         }
 
+        public CoapClient()
+        {
+        }
+
         #endregion
 
         public bool m_IsListening

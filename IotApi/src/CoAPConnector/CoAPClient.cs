@@ -7,10 +7,9 @@ using System.Reflection;
 
 namespace CoAPConnector
 {
-    public class CoAPConnector : ISendModule
+    public class CoAPClient : ISendModule
     {
         private ISendModule m_NextSendModule;
-        private ICoapEndpoint m_Transport;
 
         public ISendModule NextSendModule
         {
@@ -24,7 +23,7 @@ namespace CoAPConnector
                 m_NextSendModule = value;
             }
         }
-
+        ICoapEndpoint endpoint;
         public void Open(Dictionary<string, object> args)
         {
            if(args != null)
@@ -38,6 +37,8 @@ namespace CoAPConnector
                 {
                     throw new Exception("must use ICoapEndpoint interface.");
                 }
+
+                endpoint = obj as ICoapEndpoint;
             }
         }
 
@@ -52,9 +53,11 @@ namespace CoAPConnector
         {
             //TODO: Create client with ICoApEndpoint and send message 
 
-            CoapClient client = new CoapClient(m_Transport);
+            CoapClient client = new CoapClient(endpoint);
+
             client.listen();
-            client.SendAsync();
+            var mgs = sensorMessage as CoapMessage;
+            client.SendAsync(mgs);
 
             throw new NotImplementedException();
         }

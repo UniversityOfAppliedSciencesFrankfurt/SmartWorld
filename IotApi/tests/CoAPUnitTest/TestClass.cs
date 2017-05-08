@@ -15,7 +15,7 @@ namespace CoAPUnitTest
         public void Test()
         {
             IotApi api = new IotApi()
-                .RegisterModule(new CoAPConnector.CoAPConnector());
+                .RegisterModule(new CoAPConnector.CoAPClient());
 
             Dictionary<string, object> agr = new Dictionary<string, object>();
             agr.Add("endPoint", new Mock<ICoapEndpoint>());
@@ -26,7 +26,8 @@ namespace CoAPUnitTest
             {
                 Type = CoapMessageType.Confirmable,
                 Code = CoapMessageCode.Get
-            }).Wait();
+            }
+            ).Wait();
         }
     }
 }
