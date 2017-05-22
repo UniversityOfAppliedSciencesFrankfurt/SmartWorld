@@ -15,26 +15,13 @@ namespace OpcUAConnector
 {
     public class OPCConnector : ISendModule
     {
-        public ISendModule NextSendModule
-        {get; set;}
-
+        public ISendModule NextSendModule{get; set;}
+        private string endpoint;
         public void Open(Dictionary<string, object> args)
         {
 
-            string endpoint = args["endpoint"].ToString();
-            try
-            {
-
-                MySampleServer server = new MySampleServer();
-                server.Start();
-
-                Task t = Client.ConsoleSampleClient(endpoint);
-                t.Wait();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exit due to Exception: {0}", e.Message);
-            }
+             endpoint = args["endpoint"].ToString();
+           
 
         }
 
@@ -43,9 +30,22 @@ namespace OpcUAConnector
             throw new NotImplementedException();
         }
 
-        public Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                MySampleServer server = new MySampleServer();
+                server.Start();
+
+                await Client.ConsoleSampleClient(endpoint);
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exit due to Exception: {0}", e.Message);
+                throw e;
+            }
         }
     }
 }

@@ -620,6 +620,43 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
+      "OPCFoundation.NetStandard.Opc.Ua.Core/0.2.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+          "Microsoft.AspNetCore.Server.Kestrel.Https": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
+          "Portable.BouncyCastle": "1.8.1.2",
+          "System.Data.Common": "4.1.0",
+          "System.Private.ServiceModel": "4.1.0",
+          "System.ServiceModel.Primitives": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Opc.Ua.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Opc.Ua.Core.dll": {}
+        }
+      },
+      "OPCFoundation.NetStandard.Opc.Ua.SDK/0.2.4": {
+        "type": "package",
+        "dependencies": {
+          "OPCFoundation.NetStandard.Opc.Ua.Core": "0.2.4"
+        },
+        "compile": {
+          "lib/netstandard1.3/Opc.Ua.Client.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Configuration.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Sample.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Server.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Opc.Ua.Client.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Configuration.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Sample.dll": {},
+          "lib/netstandard1.3/Opc.Ua.Server.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.8.1.2": {
         "type": "package",
         "dependencies": {
@@ -2959,6 +2996,54 @@
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
+      ]
+    },
+    "OPCFoundation.NetStandard.Opc.Ua.Core/0.2.4": {
+      "sha512": "y6X9H4d/39wXCwPkAYnWImowiSkAU4RMsbwAKLj8ldbM+U78JWLBCGs2ENebdpvDPfsjunNdwWHVH+4mNkHMLQ==",
+      "type": "package",
+      "path": "OPCFoundation.NetStandard.Opc.Ua.Core/0.2.4",
+      "files": [
+        "OPCFoundation.NetStandard.Opc.Ua.Core.0.2.4.nupkg.sha512",
+        "OPCFoundation.NetStandard.Opc.Ua.Core.nuspec",
+        "lib/net46/Opc.Ua.Core.dll",
+        "lib/net46/Opc.Ua.Core.pdb",
+        "lib/netstandard1.3/Opc.Ua.Core.dll",
+        "lib/netstandard1.3/Opc.Ua.Core.pdb",
+        "lib/uap10.0/Opc.Ua.Core.dll",
+        "lib/uap10.0/Opc.Ua.Core.pdb"
+      ]
+    },
+    "OPCFoundation.NetStandard.Opc.Ua.SDK/0.2.4": {
+      "sha512": "xu8OSIhRSStdxBeMefH//AYcqhF+pMc3in+F723BOyRgtfa0W/SwU7ykjk4xy9v9p7zfk/ACZ8rMi7HBgGSC/w==",
+      "type": "package",
+      "path": "OPCFoundation.NetStandard.Opc.Ua.SDK/0.2.4",
+      "files": [
+        "OPCFoundation.NetStandard.Opc.Ua.SDK.0.2.4.nupkg.sha512",
+        "OPCFoundation.NetStandard.Opc.Ua.SDK.nuspec",
+        "lib/net46/Opc.Ua.Client.dll",
+        "lib/net46/Opc.Ua.Client.pdb",
+        "lib/net46/Opc.Ua.Configuration.dll",
+        "lib/net46/Opc.Ua.Configuration.pdb",
+        "lib/net46/Opc.Ua.Sample.dll",
+        "lib/net46/Opc.Ua.Sample.pdb",
+        "lib/net46/Opc.Ua.Server.dll",
+        "lib/net46/Opc.Ua.Server.pdb",
+        "lib/netstandard1.3/Opc.Ua.Client.dll",
+        "lib/netstandard1.3/Opc.Ua.Client.pdb",
+        "lib/netstandard1.3/Opc.Ua.Configuration.dll",
+        "lib/netstandard1.3/Opc.Ua.Configuration.pdb",
+        "lib/netstandard1.3/Opc.Ua.Sample.dll",
+        "lib/netstandard1.3/Opc.Ua.Sample.pdb",
+        "lib/netstandard1.3/Opc.Ua.Server.dll",
+        "lib/netstandard1.3/Opc.Ua.Server.pdb",
+        "lib/uap10.0/Opc.Ua.Client.dll",
+        "lib/uap10.0/Opc.Ua.Client.pdb",
+        "lib/uap10.0/Opc.Ua.Configuration.dll",
+        "lib/uap10.0/Opc.Ua.Configuration.pdb",
+        "lib/uap10.0/Opc.Ua.Sample.dll",
+        "lib/uap10.0/Opc.Ua.Sample.pdb",
+        "lib/uap10.0/Opc.Ua.Server.dll",
+        "lib/uap10.0/Opc.Ua.Server.pdb"
       ]
     },
     "Portable.BouncyCastle/1.8.1.2": {
@@ -7299,6 +7384,8 @@
     "": [
       "IotApi >= 1.0.0",
       "NETStandard.Library >= 1.6.0",
+      "OPCFoundation.NetStandard.Opc.Ua.Core >= 0.2.4",
+      "OPCFoundation.NetStandard.Opc.Ua.SDK >= 0.2.4",
       "Opc.Ua.Client >= 1.0.0",
       "Opc.Ua.Configuration >= 1.0.0-*",
       "Opc.Ua.Core >= 1.0.0",
