@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>efc88167-604b-4cea-bc04-e41896479c62</ProjectGuid>
-    <RootNamespace>ModBusConnector</RootNamespace>
+    <ProjectGuid>bd66a99d-2e9f-46fb-92a9-5560dc371d1e</ProjectGuid>
+    <RootNamespace>TestProgram</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>

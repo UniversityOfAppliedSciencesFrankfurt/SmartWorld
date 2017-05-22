@@ -21,10 +21,10 @@ namespace PhilipsHueConnector
 
         private string m_ApiSuffix = "api";
 
-        public PhilipsHueRestClient()
-        {
+        //public PhilipsHueRestClient()
+        //{
 
-        }
+        //}
 
         public PhilipsHueRestClient(string userName, string gatewayUrl)
         {
@@ -52,16 +52,15 @@ namespace PhilipsHueConnector
                 throw new Exception("Username or gateay URL not specified.");
         }
 
-        public Task SendAsync(IList<object> sensorMessages, 
-            Action<IList<object>> onSuccess = null, 
-            Action<IList<IotApiException>> onError = null, 
-            Dictionary<string, object> args = null)
+        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, 
+                               Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
 
             throw new NotImplementedException();
         }
 
-        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, 
+                                Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             HttpResponseMessage response = await executeMsg(sensorMessage);
 

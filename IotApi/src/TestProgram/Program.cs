@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CoAPConnector
+namespace TestProgram
 {
-    public class Class1
+    public class Program
     {
-        public Class1()
+        public static void Main(string[] args)
         {
-            
         }
     }
 }

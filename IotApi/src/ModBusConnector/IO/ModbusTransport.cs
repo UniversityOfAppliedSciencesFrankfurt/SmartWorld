@@ -71,7 +71,7 @@
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(Text_Messages.Resources.WaitRetryGreaterThanZero);
+                    throw new ArgumentException(Text_Messages.Exceptions_Resources.WaitRetryGreaterThanZero);
                 }
 
                 _waitToRetryMilliseconds = value;

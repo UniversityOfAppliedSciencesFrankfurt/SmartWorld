@@ -127,7 +127,7 @@
 
             if (networkBytes.Length % 2 != 0)
             {
-                throw new FormatException(Resources.NetworkBytesNotEven);
+                throw new FormatException(Exceptions_Resources.NetworkBytesNotEven);
             }
 
             ushort[] result = new ushort[networkBytes.Length / 2];
@@ -154,7 +154,7 @@
 
             if (hex.Length % 2 != 0)
             {
-                throw new FormatException(Resources.HexCharacterCountNotEven);
+                throw new FormatException(Exceptions_Resources.HexCharacterCountNotEven);
             }
 
             byte[] bytes = new byte[hex.Length / 2];
