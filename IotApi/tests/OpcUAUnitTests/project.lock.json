@@ -3295,31 +3295,14 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Opc.Ua.Client": "1.0.0",
-          "Opc.Ua.Configuration": "1.0.0",
-          "Opc.Ua.Core": "1.0.0",
-          "Opc.Ua.Sample": "1.0.0",
-          "Opc.Ua.Server": "1.0.0"
+          "OPCFoundation.NetStandard.Opc.Ua.Core": "0.2.4",
+          "OPCFoundation.NetStandard.Opc.Ua.SDK": "0.2.4"
         },
         "compile": {
           "netstandard1.4/IotApi.dll": {}
         },
         "runtime": {
           "netstandard1.4/IotApi.dll": {}
-        }
-      },
-      "Opc.Ua.Client/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.3",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "Opc.Ua.Core": "1.0.0"
-        },
-        "compile": {
-          "netstandard1.3/Opc.Ua.Client.dll": {}
-        },
-        "runtime": {
-          "netstandard1.3/Opc.Ua.Client.dll": {}
         }
       },
       "Opc.Ua.Configuration/1.0.0": {
@@ -3393,7 +3376,6 @@
           "NETStandard.Library": "1.6.0",
           "OPCFoundation.NetStandard.Opc.Ua.Core": "0.2.4",
           "OPCFoundation.NetStandard.Opc.Ua.SDK": "0.2.4",
-          "Opc.Ua.Client": "1.0.0",
           "Opc.Ua.Configuration": "1.0.0",
           "Opc.Ua.Core": "1.0.0",
           "Opc.Ua.Sample": "1.0.0",
@@ -9358,11 +9340,6 @@
       "type": "project",
       "path": "../../src/IotApi/project.json",
       "msbuildProject": "../../src/IotApi/IotApi.xproj"
-    },
-    "Opc.Ua.Client/1.0.0": {
-      "type": "project",
-      "path": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Client\\project.json",
-      "msbuildProject": "C:\\Users\\Syed\\Desktop\\UA-.NETStandardLibrary-master\\SampleApplications\\SDK\\Opc.Ua.Client\\Opc.Ua.Client.xproj"
     },
     "Opc.Ua.Configuration/1.0.0": {
       "type": "project",

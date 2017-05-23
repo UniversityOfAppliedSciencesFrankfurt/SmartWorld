@@ -4,7 +4,6 @@
   "dependencies": {
     "IotApi": "1.0.0",
     "NETStandard.Library": "1.6.0",
-    "Opc.Ua.Client": "1.0.0",
     "Opc.Ua.Configuration": "1.0.0-*",
     "Opc.Ua.Core": "1.0.0",
     "Opc.Ua.Sample": "1.0.0-*",
