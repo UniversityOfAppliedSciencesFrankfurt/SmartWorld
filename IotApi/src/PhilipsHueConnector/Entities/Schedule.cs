@@ -26,5 +26,6 @@ namespace Iot.PhilipsHueConnector.Entities
    public class body
     {
         public bool on;
+        public int bri;
     }
 }
