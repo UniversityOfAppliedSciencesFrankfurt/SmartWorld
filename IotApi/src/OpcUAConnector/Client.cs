@@ -122,10 +122,10 @@ namespace OpcUAConnector
 
             Console.WriteLine("2 - Discover endpoints of {0}.", endpointURL);
             Uri endpointURI = new Uri(endpointURL);
-            var endpointCollection = DiscoverEndpoints(config, endpointURI, 10);
+           var endpointCollection = DiscoverEndpoints(config, endpointURI, 10);
             var selectedEndpoint = SelectUaTcpEndpoint(endpointCollection, haveAppCertificate);
             Console.WriteLine("    Selected endpoint uses: {0}", 
-                selectedEndpoint.SecurityPolicyUri.Substring(selectedEndpoint.SecurityPolicyUri.LastIndexOf('#') + 1));
+               selectedEndpoint.SecurityPolicyUri.Substring(selectedEndpoint.SecurityPolicyUri.LastIndexOf('#') + 1));
 
             Console.WriteLine("3 - Create a session with OPC UA server.");
             var endpointConfiguration = EndpointConfiguration.Create(config);
