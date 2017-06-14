@@ -14,7 +14,7 @@ namespace OpcUAUnitTests
         public void OpenTest()
         {
             Dictionary<string, object> arg = new Dictionary<string, object>();
-            arg.Add("endpoint", "opc.tcp://myserver:51210/UA/SampleServer");
+            arg.Add("endpoint", "opc.tcp://aqib:51210/UA/SampleServer"); 
             
             IotApi api = new IotApi();
             api.RegisterModule(new OPCConnector());

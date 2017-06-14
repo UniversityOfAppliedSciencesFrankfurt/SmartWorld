@@ -31,8 +31,8 @@ namespace OpcUAConnector
             try
             {
 
-                MySampleServer server = new MySampleServer();
-                server.Start();
+                //MySampleServer server = new MySampleServer();
+                //server.Start();
 
                 await Client.ConsoleSampleClient(endpoint);
                
