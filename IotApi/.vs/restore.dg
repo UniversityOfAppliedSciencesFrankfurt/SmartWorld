@@ -1,6 +1,6 @@
-#:D:\ProjectOPCUA\IotApi\src\OpcUAConnector\OpcUAConnector.xproj
-D:\ProjectOPCUA\IotApi\src\OpcUAConnector\OpcUAConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
-#:D:\ProjectOPCUA\IotApi\tests\OpcUAUnitTests\OpcUAUnitTests.xproj
-D:\ProjectOPCUA\IotApi\tests\OpcUAUnitTests\OpcUAUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
-D:\ProjectOPCUA\IotApi\tests\OpcUAUnitTests\OpcUAUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\OpcUAConnector\OpcUAConnector.xproj
-D:\ProjectOPCUA\IotApi\src\OpcUAConnector\OpcUAConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
+#:C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\IotApi\IotApi.xproj
+#:C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
+C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\IotApi\IotApi.xproj
+C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|C:\Users\Mrhie\Documents\Visual Studio 2015\Projects\CoAP\IotApi\src\IotApi\IotApi.xproj

@@ -62,10 +62,6 @@ namespace CoAPConnector
             m_MessageId = (ushort)(new Random().Next() & 0xFFFFu);
         }
 
-        public CoapClient()
-        {
-        }
-
         #endregion
 
         public bool m_IsListening
@@ -195,6 +191,26 @@ namespace CoAPConnector
             if (message.Type == CoapMessageType.Confirmable)
                 MessageReponses.TryAdd(message.Id, new TaskCompletionSource<CoapMessage>());
             await Transport.SendAsync(new CoapPayload { Payload = message.Serialise(), MessageId = message.Id, Endpoint = endpoint });
+            return message.Id;
+        }
+
+        /// <summary>
+        ///  Method to proceed request message 
+        /// <see also cref="https://tools.ietf.org/html/rfc7252"/>
+        /// <see cref=""/>
+        /// </summary>
+        /// <param name="message">field of sending message</param>
+        /// <param name="endpoint">CoAP endpoint field</param>
+        /// <remarks>By protected and private method is not mandatory. Use if useful</remarks>
+        /// <permission cref="">This method can be called by: Administrator, Orderer, PurchasingAgent and OrderManager
+        public async Task<int> SendAsync(CoapMessage message)
+        {
+            if (message.Id == 0)
+                message.Id = m_MessageId++;
+
+            if (message.Type == CoapMessageType.Confirmable)
+                MessageReponses.TryAdd(message.Id, new TaskCompletionSource<CoapMessage>());
+            await Transport.SendAsync(new CoapPayload { Payload = message.Serialise(), MessageId = message.Id, Endpoint = this.Transport });
             return message.Id;
         }
         #endregion
