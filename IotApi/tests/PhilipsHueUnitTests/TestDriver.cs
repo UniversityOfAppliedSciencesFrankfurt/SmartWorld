@@ -19,6 +19,6 @@ namespace PhilipsHueUnitTests
         /// <summary>
         /// The identifier of the light, which will be used for lighting tests.
         /// </summary>
-        public const string LightStateReferenceId = "4";
+        public const string LightStateReferenceId = "1";
     }
 }

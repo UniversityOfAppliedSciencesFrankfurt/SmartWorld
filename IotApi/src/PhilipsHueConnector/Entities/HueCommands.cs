@@ -33,6 +33,12 @@ namespace Iot.PhilipsHueConnector.Entities
 
         public override string Path { get; set; }
     }
+    public class DeleteCommandBase : HueCommand
+    {
+        public override string Method { get; set; } = "delete";
+
+        public override string Path { get; set; }
+    }
 
 
     public class SendCommandBase : HueCommand

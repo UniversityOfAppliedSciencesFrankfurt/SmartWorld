@@ -8,6 +8,7 @@ using Xunit;
 using System.Globalization;
 using System.Net.Http;
 using Newtonsoft.Json;
+using PhilipsHueConnector.Entities;
 
 namespace PhilipsHueUnitTests
 {
@@ -17,7 +18,7 @@ namespace PhilipsHueUnitTests
         /// <summary>
         /// URL of the Hue gateway.
         /// </summary>
-         private string m_GtwUri = "http://192.168.0.84";
+         private string m_GtwUri = "http://192.168.0.109";
 
         /// <summary>
         /// To set username, you first have to run test GenerateUserTest().
@@ -25,7 +26,7 @@ namespace PhilipsHueUnitTests
         /// the link button on the gatewey. Method GenerateUserName will return
         /// username, which you should set as value of this member variable.
         /// </summary>
-        private string m_UsrName = "QjOEkaXeTrVni4nVXdxeanFQ9cokgEmeeoRarHDE";
+        private string m_UsrName = "x5sfUaeLQ1YE3np5E5AUhyjWkNnVxHxdFxXoWupp";
 
         /// <summary>
         /// Used by all tests to create instance of IotApi.
@@ -204,25 +205,7 @@ namespace PhilipsHueUnitTests
         public void SetSchedulesTest()
         {
             var iotApi = getApi();
-            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
-            DateTime dateTime = DateTime.Now;
-            String localTime = dateTime.ToString("yyyy-MM-ddT17:05:00");
-            Schedule sch = new Schedule()
-            {
-                name = "New Schedule",
-                description = "Turn the light on",
-                command = new Command()
-                {
-                    address = "/api/QjOEkaXeTrVni4nVXdxeanFQ9cokgEmeeoRarHDE/lights/4/state",
-                    method = "PUT",
-                    body = new body()
-                    {
-                        on = true,
-                        bri = 254
-                    },
-                },
-                localtime = localTime,
-            };
+            Schedule sch = SetSchedule(m_UsrName);
             var result = iotApi.SendAsync(new HueCommand()
             {
                 Path = $"schedules",
@@ -234,7 +217,7 @@ namespace PhilipsHueUnitTests
         [Fact]
         public void GetScheduleTest()
         {
-            GetSchedules(18, m_UsrName);
+            GetSchedules(2, m_UsrName);
             //var iotApi = getApi();
             //var result = iotApi.SendAsync(new HueCommand()
             //{ 
@@ -248,7 +231,7 @@ namespace PhilipsHueUnitTests
         private Schedule GetSchedules(int scnumber, string username)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri($"http://192.168.0.84/");
+            client.BaseAddress = new Uri("http://192.168.0.109");
             var res = client.GetAsync($"api/{username}/schedules/{scnumber}").Result;
             Schedule sc = null;
             if(res.IsSuccessStatusCode)
@@ -257,6 +240,91 @@ namespace PhilipsHueUnitTests
             }
             return sc;
             
+        }
+        [Fact]
+        public void DeleteScheduleTest()
+        {
+            String result = DeleteSchedule(1,m_UsrName);
+            Assert.True(result != null);
+        }
+
+
+        public String DeleteSchedule(int id, string username)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://192.168.0.109/");
+            var res = client.DeleteAsync($"api/{username}/schedules/{id}").Result;
+            String sc = null;
+            if (res.IsSuccessStatusCode)
+            {
+                sc = $"Successfully deleted id {id}";
+            }
+            return sc;
+        }
+        public Schedule SetSchedule(string username)
+        {
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+            DateTime dateTime = DateTime.Now;
+            String localTime = dateTime.ToString("yyyy-MM-ddT16:48:00");
+            Schedule sc = new Schedule()
+            {
+                name = "New Schedule",
+                description = "Turn the light on",
+                command = new Command()
+                {
+                    address = $"/api/{username}/group/4/action",
+                    method = "PUT",
+                    body = new body()
+                    {
+                        on = true,
+                        bri = 2000
+                    },
+                },
+                localtime = localTime,
+            };
+            return sc;
+        }
+
+        [Fact]
+        public void testSetGroup()
+        {
+            var iotApi = getApi();
+            Group gr = SetGroup();
+            var result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"groups",
+                Method = "post",
+                Body = gr
+            }).Result;
+            Assert.True(result != null);
+        }
+        public Group SetGroup()
+        {
+            Group gr = new Group()
+            {
+                lights = new string[] {"1","4"},
+                name = "group SE",
+                type = "LightGroup"
+            };
+            return gr;
+        }
+
+        [Fact]
+        public void testSetGroupAction()
+        {
+            var iotApi = getApi();
+            var result = iotApi.SendAsync(new HueCommand()
+            {
+                Path = $"groups/4/action",
+                Method = "put",
+                Body = new
+                {
+                    on = true,
+                    hue = 2000,
+                    effect = "colorloop"
+                }
+            }).Result;
+            Assert.True(result != null);
         }
     }
 }
