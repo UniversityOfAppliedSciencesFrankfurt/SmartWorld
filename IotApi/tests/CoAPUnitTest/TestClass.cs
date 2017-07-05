@@ -24,9 +24,9 @@ namespace CoAPUnitTest
             return api;
         }
 
-        // Test num 1
+
         [Fact]
-        public void TestClientRequest()
+        public void TestClientRequestGet()
         {
             // Arrange
             var mock = new Mock<ICoapEndpoint>();
@@ -46,7 +46,74 @@ namespace CoAPUnitTest
             mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
         }
 
-        // test num 2
+
+        [Fact]
+        public void TestClientRequestPost()
+        {
+            // Arrange
+            var mock = new Mock<ICoapEndpoint>();
+            mock
+                .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            getApi(mock).SendAsync(new CoapMessage
+            {
+                Type = CoapMessageType.Confirmable,
+                Code = CoapMessageCode.Post
+            }
+            ).Wait();
+
+            // Assert
+            mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
+        }
+
+ 
+        [Fact]
+        public void TestClientRequestDelete()
+        {
+            // Arrange
+            var mock = new Mock<ICoapEndpoint>();
+            mock
+                .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            getApi(mock).SendAsync(new CoapMessage
+            {
+                Type = CoapMessageType.Confirmable,
+                Code = CoapMessageCode.Delete
+            }
+            ).Wait();
+
+            // Assert
+            mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
+        }
+
+     
+        [Fact]
+        public void TestClientRequestPut()
+        {
+            // Arrange
+            var mock = new Mock<ICoapEndpoint>();
+            mock
+                .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
+                .Returns(Task.CompletedTask);
+
+            // Act
+            var api = getApi(mock);
+            api.SendAsync(new CoapMessage
+            {
+                Type = CoapMessageType.Confirmable,
+                Code = CoapMessageCode.Put
+            }
+            ).Wait();
+
+            // Assert
+            mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
+        }
+
+
         [Fact]
         public void TestClientResponse()
         {
@@ -78,15 +145,32 @@ namespace CoAPUnitTest
                 .Returns(Task.FromResult(mockPayload.Object))
                 .Throws(new CoapEndpointException("Endpoint closed"));
 
-            // Ack
-            getApi(mock).ReceiveAsync().Wait();
- 
+            // Act
+            var api = getApi(mock);
+            Dictionary<string, object> agr = new Dictionary<string, object>();
+            string uri = "coap://example.com/.well-known/core";
+            agr.Add("URI", uri);
+            await api.ReceiveAsync(agr);
+
             // Assert
             mock.Verify(x => x.ReceiveAsync(), Times.AtLeastOnce);
         }
 
+        // a prototype test, but failed
+        //[Fact]
+        //public void TestInc()
+        //{
+        //    List<IInjectableModule> list = new List<IInjectableModule>();
+        //    list.Add(new CoAPClientConnectorExtensions());
+        //    IotApi api = new IotApi(list);
 
-        // test num 3
+        //    Dictionary<string, object> agr = new Dictionary<string, object>();
+        //    agr.Add("endPoint", "");
+        //    api.Open(agr);
+        //    api.SendAsync("");
+            
+        //}
+
         //[Fact]
         //public void TestClientOnMessageReceivedEvent()
         //{
@@ -128,7 +212,7 @@ namespace CoAPUnitTest
         //}
 
 
-        // test num 4
+
         //[Fact]
         //public void TestRejectEmptyMessageWithFormatError()
         //{
@@ -163,7 +247,7 @@ namespace CoAPUnitTest
         //            Times.Exactly(1));
         //}
 
-        // test num 5
+
         //public void TestRequestWithSeperateResponse()
         //{
         //    // Arrange
@@ -244,7 +328,7 @@ namespace CoAPUnitTest
         //    }
         //}
 
-        //test num 6
+
         //public void TestMulticastMessagFromMulticastEndpoint()
         //{
         //    // Arrange
@@ -292,7 +376,7 @@ namespace CoAPUnitTest
         //    Assert.IsTrue(messageReceived.Task.Result, "Message is not marked as Multicast");
         //}
 
-        //test num 7
+
         //public void TestMulticastMessageIsNonConfirmable()
         //{
         //    // Arrange

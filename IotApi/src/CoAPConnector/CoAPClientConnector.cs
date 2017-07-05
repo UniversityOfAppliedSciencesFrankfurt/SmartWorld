@@ -41,16 +41,13 @@ namespace CoAPConnector
                 m_NextReceiveModule = value;
             }
         }
+        private CoapClient client;
 
-
-
-
-
-        ICoapEndpoint endpoint;
 
         public void Open(Dictionary<string, object> args)
         {
-           if(args != null)
+            ICoapEndpoint endpoint;
+            if (args != null)
             {
                 var obj = args["endPoint"];
                 if (obj != null)
@@ -61,6 +58,7 @@ namespace CoAPConnector
                 {
                     throw new Exception("Must use ICoapEndpoint interface.");
                 }
+                client = new CoapClient(endpoint);
             }
         }
 
@@ -71,8 +69,6 @@ namespace CoAPConnector
         {
             try
             {
-                CoapClient client = new CoapClient(endpoint);
-
                 client.listen();
                 var mgs = sensorMessage as CoapMessage;
                 var result = await client.SendAsync(mgs);
@@ -98,7 +94,13 @@ namespace CoAPConnector
                                        Action<IList<object>, Exception> onError,
                                        Dictionary<string, object> args)
         {
-            CoapClient client = new CoapClient(endpoint);
+            throw new NotImplementedException();
+        }
+
+
+
+        public async Task<object> ReceiveAsync(Dictionary<string, object> args)
+        {
 
             var sendTask = client.GetAsync("coap://example.com/.well-known/core");
             sendTask.Wait(MaxTaskTimeout);
@@ -113,11 +115,8 @@ namespace CoAPConnector
 
             if (!responseTask.IsCompleted)
                 throw new NUnit.Framework.AssertionException("responseTask took too long to complete");
-        }
 
-        public async Task<object> ReceiveAsync(Dictionary<string, object> args = null)
-        {
-            throw new NotImplementedException();
+            return await responseTask;
         }
 
     }
