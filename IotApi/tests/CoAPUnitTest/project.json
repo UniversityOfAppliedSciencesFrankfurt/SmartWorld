@@ -5,18 +5,19 @@
   "dependencies": {
     "IotApi": "1.0.0-*",
     "CoAPConnector": "1.0.0-*",
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.1"
-    },
+    "Microsoft.NETCore.App": "1.0.1",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "xunit": "2.2.0-beta4-build3444",
-    "Moq": "4.7.9",
-    "NUnit": "3.7.1"  },
+    "xunit": "2.2.0",
+    "Moq": "4.7.63",
+    "NUnit": "3.7.1"
+  },
 
   "frameworks": {
     "netcoreapp1.0": {
       "imports": "dnxcore50"
     }
+  },
+  "runtimes": {
+    "win10-x64": { }
   }
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using NUnit;
+using Moq;
+
 
 namespace CoAPConnector
 {
@@ -41,8 +43,8 @@ namespace CoAPConnector
                 m_NextReceiveModule = value;
             }
         }
-        private CoapClient client;
 
+        private CoapClient client;
 
         public void Open(Dictionary<string, object> args)
         {
@@ -62,14 +64,15 @@ namespace CoAPConnector
             }
         }
 
+        // Asynchronous sending 1
         public async Task SendAsync(object sensorMessage, 
                                 Action<object> onSuccess = null, 
                                 Action<IotApiException> onError = null, 
                                 Dictionary<string, object> args = null)
         {
+            client.Listen();
             try
             {
-                client.listen();
                 var mgs = sensorMessage as CoapMessage;
                 var result = await client.SendAsync(mgs);
 
@@ -81,7 +84,7 @@ namespace CoAPConnector
                 onError?.Invoke(new IotApiException(ex.Message));
             }
         }
-
+        // Asynchronous sending 2
         public Task SendAsync(IList<object> sensorMessages, 
                                 Action<IList<object>> onSuccess = null, 
                                 Action<IList<IotApiException>> onError = null, 
@@ -89,26 +92,24 @@ namespace CoAPConnector
         {
             throw new NotImplementedException();
         }
-
+        // Asynchronous receiving 1
         public async Task ReceiveAsync (Action<IList<object>> onSuccess,
                                        Action<IList<object>, Exception> onError,
                                        Dictionary<string, object> args)
         {
             throw new NotImplementedException();
         }
-
-
-
+        // Asynchronous receiving 2
         public async Task<object> ReceiveAsync(Dictionary<string, object> args)
         {
-
-            var sendTask = client.GetAsync("coap://example.com/.well-known/core");
+            string uri = args["URI"].ToString();
+            var sendTask = client.GetAsync(uri);
             sendTask.Wait(MaxTaskTimeout);
 
             if (!sendTask.IsCompleted)
                 throw new NUnit.Framework.AssertionException("sendTask took too long to complete");
 
-            client.listen();
+            client.Listen();
 
             var responseTask = client.GetResponseAsync(sendTask.Result);
             responseTask.Wait(MaxTaskTimeout);
@@ -119,5 +120,20 @@ namespace CoAPConnector
             return await responseTask;
         }
 
+        public bool listenertest(Mock<ICoapEndpoint> mock)
+        { 
+            var clientOnMessageReceivedEventCalled = false;
+            var task = new TaskCompletionSource<bool>();
+            client.OnMessageReceived += (s, e) =>
+            {
+                clientOnMessageReceivedEventCalled = true;
+                task.SetResult(true);
+            };
+
+            client.Listen();
+
+            task.Task.Wait(MaxTaskTimeout);
+            return clientOnMessageReceivedEventCalled;
+        }
     }
 }
