@@ -99,7 +99,8 @@ namespace Iot
         }
 
         public async Task ReceiveAsync(Action<IList<object>> onSuccess,
-            Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+                                        Action<IList<object>, Exception> onError = null, 
+                                        Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -252,8 +253,9 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
-            Action<object> onSuccess, Action<IList<object>,
-                Exception> onError, Dictionary<string, object> args = null)
+                                    Action<object> onSuccess, 
+                                    Action<IList<object>,Exception> onError, 
+                                    Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");

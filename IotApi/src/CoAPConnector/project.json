@@ -3,12 +3,18 @@
 
   "dependencies": {
     "IotApi": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "Moq": "4.7.63",
+    "NETStandard.Library": "1.6.0",
+    "NUnit": "3.7.1",
+    "TestToolsToXunitProxy": "0.0.4"
   },
 
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+  "runtimes": {
+    "win10-x64": { }
   }
 }
