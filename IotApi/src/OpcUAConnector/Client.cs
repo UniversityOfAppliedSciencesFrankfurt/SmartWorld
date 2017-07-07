@@ -139,6 +139,7 @@ namespace OpcUAConnector
 
             references = session.FetchReferences(ObjectIds.ObjectsFolder);
 
+            
             session.Browse(
                 null,
                 null,
@@ -157,6 +158,7 @@ namespace OpcUAConnector
                 Console.WriteLine(" {0}, {1}, {2}", rd.DisplayName, rd.BrowseName, rd.NodeClass);
                 ReferenceDescriptionCollection nextRefs;
                 byte[] nextCp;
+                
                 session.Browse(
                     null,
                     null,
@@ -193,7 +195,8 @@ namespace OpcUAConnector
             subscription.Create();
 
             Console.WriteLine("8 - Running...Press any key to exit...");
-            Console.ReadKey(true);
+         //   Console.ReadKey(true);
+
         }
 
         private static void OnNotification(MonitoredItem item, MonitoredItemNotificationEventArgs e)
