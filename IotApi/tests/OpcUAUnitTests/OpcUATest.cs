@@ -39,7 +39,7 @@ namespace OpcUAUnitTests
             var list = new List<MonitoredItem> {
                 new MonitoredItem(new Subscription().DefaultItem)
                 {
-                    DisplayName = "ServerStatusCurrentTime", StartNodeId = "i=2258"
+                    DisplayName = "ServerStatusCurrentTime", StartNodeId = "i=2267"
                 } };
             api.SendAsync(list).Wait();
             //
