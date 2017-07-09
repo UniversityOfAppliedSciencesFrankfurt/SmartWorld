@@ -1,12 +1,9 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Iot;
 using OpcUAConnector;
 using Xunit;
 using Opc.Ua.Client;
-using Opc.Ua;
 
 namespace OpcUAUnitTests
 {
