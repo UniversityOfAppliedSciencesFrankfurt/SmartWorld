@@ -18,8 +18,8 @@ namespace OpcUAUnitTests
             Dictionary<string, object> arg = new Dictionary<string, object>();
             arg.Add("endpoint", "opc.tcp://aqib:51210/UA/SampleServer");
 
-            IotApi api = new IotApi();
-            api.RegisterModule(new OPCConnector());
+            IotApi api = new IotApi();  
+            api.RegisterModule(new OPCConnector()); 
             api.Open(arg);
             api.SendAsync("ffff").Wait();
 
@@ -34,7 +34,7 @@ namespace OpcUAUnitTests
             IotApi api = new IotApi();
             api.RegisterModule(new OPCConnector());
             api.Open(arg);
-           
+
 
             var list = new List<MonitoredItem> {
                 new MonitoredItem(new Subscription().DefaultItem)
