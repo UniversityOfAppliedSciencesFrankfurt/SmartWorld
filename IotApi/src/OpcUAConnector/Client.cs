@@ -144,7 +144,7 @@ namespace OpcUAConnector
             List<WriteValue> writelist2 = new List<WriteValue>();
             writelist2.Add(new WriteValue() {NodeId = 1231231});
             //Code to write on Node
-            session.Write(new RequestHeader() { AuthenticationToken = 1232321}, 
+            session.Write(new RequestHeader() { AuthenticationToken = 1231}, 
                 new WriteValueCollection(writelist2), 
                 out statuscode, out info);
 
