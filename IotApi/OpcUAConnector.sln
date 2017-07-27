@@ -24,12 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		C:\Users\Syed\Desktop\Implementation of IOT API Using OPC UA.pptx = C:\Users\Syed\Desktop\Implementation of IOT API Using OPC UA.pptx
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{95361602-7FFB-4814-AEA7-01364886CF8E}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\Syed\Desktop\Implematation of IOT API Using OPC UA .docx = C:\Users\Syed\Desktop\Implematation of IOT API Using OPC UA .docx
-		C:\Users\Syed\Desktop\Implementation of IOT API Using OPC UA.pptx = C:\Users\Syed\Desktop\Implementation of IOT API Using OPC UA.pptx
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +92,5 @@ Global
 		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
 		{AF41911B-8504-42BE-8CE3-34A29C708825} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
 		{8D7F9B1C-EC7F-44B0-B414-51A13D693462} = {AA6BA545-29E2-4107-827C-3C737F386131}
-		{95361602-7FFB-4814-AEA7-01364886CF8E} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
 	EndGlobalSection
 EndGlobal
