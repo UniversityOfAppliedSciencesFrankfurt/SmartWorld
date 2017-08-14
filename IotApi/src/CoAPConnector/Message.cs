@@ -23,7 +23,7 @@ namespace CoAPConnector
     {
         Request = 0,
         Success = 200,
-        ClientError = 400,
+        clientError = 400,
         ServerError = 500
     }
 
@@ -45,7 +45,7 @@ namespace CoAPConnector
         Valid = 203,
         Changed = 204,
         Content = 205,
-        // 4.xx Client Error
+        // 4.xx m_client Error
         BadRequest = 400,
         Unauthorized = 401,
         BadOption = 402,
@@ -103,7 +103,7 @@ namespace CoAPConnector
 
         /// <summary>
         /// Gets or Sets the Message Code. 
-        /// <para>The class indicates if the message is <see cref="CoapMessageCodeClass.Request"/>, <see cref="CoapMessageCodeClass.Success"/>, <see cref="CoapMessageCodeClass.ClientError"/>, or a <see cref="CoapMessageCodeClass.ServerError"/></para>
+        /// <para>The class indicates if the message is <see cref="CoapMessageCodeClass.Request"/>, <see cref="CoapMessageCodeClass.Success"/>, <see cref="CoapMessageCodeClass.clientError"/>, or a <see cref="CoapMessageCodeClass.ServerError"/></para>
         /// <para>See section 2.2 of [RFC7252]</para>
         /// </summary>
         public CoapMessageCode Code { get; set; }

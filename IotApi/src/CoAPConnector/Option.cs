@@ -25,9 +25,10 @@ namespace CoAPConnector
         String
     }
 
-    /// <summary>
-    /// Helper extension methods for handling collections of <see cref="CoapOption"/>s
+    /// <summary> 
+    /// Description
     /// </summary>
+    /// Implement CoAP Option field
     public static class CoapOptionExtensions
     {
         /// <summary>

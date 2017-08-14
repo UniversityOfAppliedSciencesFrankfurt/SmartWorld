@@ -8,7 +8,7 @@
 
 //namespace CoAPConnector
 //{
-//    public class CoAPClientConnectorExtensions
+//    public class CoAPclientConnectorExtensions
 //    {
 //        private ICoapEndpoint Transport;
 //        private ushort m_MessageId;
@@ -18,13 +18,13 @@
 //        public IotApi getApi(Mock<ICoapEndpoint> mock)
 //        {
 //            Dictionary<string, object> agr = new Dictionary<string, object>();
-//            IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPClientConnector());
+//            IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPclientConnector());
 //            agr.Add("endPoint", mock.Object);
 //            api.Open(agr);
 //            return api;
 //        }
 
-//        public CoAPClientConnectorExtensions(ICoapEndpoint transport)
+//        public CoAPclientConnectorExtensions(ICoapEndpoint transport)
 //        {
 //            Transport = transport;
 //            m_MessageId = (ushort)(new Random().Next() & 0xFFFFu);

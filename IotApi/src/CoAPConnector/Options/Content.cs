@@ -83,7 +83,7 @@ namespace CoAPConnector.Options
     }
 
     /// <summary>
-    /// The CoAP Accept option can be used to indicate which Content-Format is acceptable to the client.
+    /// The CoAP Accept option can be used to indicate which Content-Format is acceptable to the m_client.
     /// The representation format is given as a numeric Content-Format identifier that is defined in the 
     /// "CoAP Content-Formats" registry (Section 12.3 of [RFC7252]).
     /// <para>See section 5.10.4 of [RFC7252]</para>

@@ -12,23 +12,47 @@ using Xunit;
 
 namespace CoAPUnitTest
 {
+    /// <summary>
+    /// Description
+    /// </summary>
+    /// Unit test classes
     public class UnitTests
     {
-        /// Timout for any Tasks
-        public readonly int MaxTaskTimeout = System.Diagnostics.Debugger.IsAttached ? -1 : 2000;
-        // Every task use this
+        #region member variables
+        public readonly int m_MaxTaskTimeout = System.Diagnostics.Debugger.IsAttached ? -1 : 2000;
+        #endregion
+
+        /// <summary>
+        /// Register CoAP module to IotApi module
+        /// </summary>
+        /// <param name="mock">read in a Mock Object of ICoAPEndpoint</param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         private IotApi getApi(Mock<ICoapEndpoint> mock)
         {
             Dictionary<string, object> agr = new Dictionary<string, object>();
-            IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPClientConnector());
+            IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPclientConnector());
             agr.Add("endPoint", mock.Object);
             api.Open(agr);
             return api;
         }
 
-
+        /// <summary>
+        /// Test Get Request
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
-        public void TestClientRequestGet()
+        public void TestclientRequestGet()
         {
             // Arrange
             var mock = new Mock<ICoapEndpoint>();
@@ -49,9 +73,18 @@ namespace CoAPUnitTest
             mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
         }
 
-
+        /// <summary>
+        /// Test Post Request
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
-        public void TestClientRequestPost()
+        public void TestclientRequestPost()
         {
             // Arrange
             var mock = new Mock<ICoapEndpoint>();
@@ -72,9 +105,18 @@ namespace CoAPUnitTest
             mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
         }
 
-
+        /// <summary>
+        /// Test Delete Request
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
-        public void TestClientRequestDelete()
+        public void TestclientRequestDelete()
         {
             // Arrange
             var mock = new Mock<ICoapEndpoint>();
@@ -94,9 +136,18 @@ namespace CoAPUnitTest
             mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
         }
 
-
+        /// <summary>
+        /// Test Put Request
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
-        public void TestClientRequestPut()
+        public void TestclientRequestPut()
         {
             // Arrange
             var mock = new Mock<ICoapEndpoint>();
@@ -117,9 +168,18 @@ namespace CoAPUnitTest
             mock.Verify(cep => cep.SendAsync(It.IsAny<CoapPayload>()));
         }
 
-
+        /// <summary>
+        /// Test receive response from GET request
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref=""></exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
-        public void TestClientResponseGet()
+        public void TestclientResponseGet()
         {
             // Arrange
             var expected = new CoapMessage
@@ -141,7 +201,7 @@ namespace CoAPUnitTest
             var mock = new Mock<ICoapEndpoint>();
             mock
                 .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
-                // Copy the ID from the message sent out, to the message for the client to receive
+                // Copy the ID from the message sent out, to the message for the m_client to receive
                 .Callback<CoapPayload>((p) => expected.Id = p.MessageId)
                 .Returns(Task.CompletedTask);
             mock
@@ -160,11 +220,21 @@ namespace CoAPUnitTest
             mock.Verify(x => x.ReceiveAsync(), Times.AtLeastOnce);
         }
 
+        /// <summary>
+        /// Test receiving multicast message from multicast endpoint
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref="CoapEndpointException">Close CoAP Endpoint</exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
         public void TestMulticastMessagFromMulticastEndpoint()
         {
             // Arrange
-            var mockClientEndpoint = new Mock<ICoapEndpoint>();
+            var mockclientEndpoint = new Mock<ICoapEndpoint>();
             var mockPayload = new Mock<CoapPayload>();
 
             var messageReceived = new TaskCompletionSource<bool>();
@@ -184,23 +254,23 @@ namespace CoAPUnitTest
                 .Setup(p => p.Payload)
                 .Returns(() => expected.Serialise());
 
-            mockClientEndpoint.Setup(c => c.IsMulticast).Returns(true);
-            mockClientEndpoint
+            mockclientEndpoint.Setup(c => c.IsMulticast).Returns(true);
+            mockclientEndpoint
                 .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
                 .Returns(Task.CompletedTask);
-            mockClientEndpoint
+            mockclientEndpoint
                 .SetupSequence(c => c.ReceiveAsync())
                 .Returns(Task.FromResult(mockPayload.Object))
                 .Throws(new CoapEndpointException("Endpoint closed"));
 
 
             // Ack
-            using (var client = new CoapClient(mockClientEndpoint.Object))
+            using (var m_client = new Coapclient(mockclientEndpoint.Object))
             {
-                client.OnMessageReceived += (s, e) => messageReceived.SetResult(e?.Message?.IsMulticast ?? false);
-                client.Listen(); // enable loop back thingy
+                m_client.OnMessageReceived += (s, e) => messageReceived.SetResult(e?.m_Message?.IsMulticast ?? false);
+                m_client.Listen(); // enable loop back thingy
 
-                messageReceived.Task.Wait(MaxTaskTimeout);
+                messageReceived.Task.Wait(m_MaxTaskTimeout);
             }
 
             // Assert
@@ -208,18 +278,28 @@ namespace CoAPUnitTest
             Assert.True(messageReceived.Task.Result, "Message is not marked as Multicast");
         }
 
+        /// <summary>
+        /// Test Non-confirmable message
+        /// </summary>
+        /// <param name=""></param>
+        /// <exception cref="CoapEndpointException">Close CoAP endpoint</exception>
+        /// <remarks>N/a</remarks>
+        /// <seealso cref=""/>
+        /// <see cref=""/>
+        /// <permission cref="">This method can be called by: every user</permission>
+        /// <exception cref=""></exception>
         [Fact]
         public void TestMulticastMessageIsNonConfirmable()
         {
             // Arrange
-            var mockClientEndpoint = new Mock<ICoapEndpoint>();
+            var mockclientEndpoint = new Mock<ICoapEndpoint>();
             var closedEventSource = new TaskCompletionSource<bool>();
 
-            mockClientEndpoint.Setup(c => c.IsMulticast).Returns(true);
-            mockClientEndpoint
+            mockclientEndpoint.Setup(c => c.IsMulticast).Returns(true);
+            mockclientEndpoint
                 .Setup(c => c.SendAsync(It.IsAny<CoapPayload>()))
                 .Returns(Task.CompletedTask);
-            mockClientEndpoint
+            mockclientEndpoint
                 .SetupSequence(c => c.ReceiveAsync())
                 .Returns(Task.FromResult(new CoapPayload
                 {
@@ -233,21 +313,21 @@ namespace CoAPUnitTest
 
 
             // Ack
-            using (var client = new CoapClient(mockClientEndpoint.Object))
+            using (var m_client = new Coapclient(mockclientEndpoint.Object))
             {
-                client.OnClosed += (s, e) => closedEventSource.SetResult(true);
-                client.Listen(); // enable loop back thingy
+                m_client.OnClosed += (s, e) => closedEventSource.SetResult(true);
+                m_client.Listen(); // enable loop back thingy
 
-                closedEventSource.Task.Wait(MaxTaskTimeout);
+                closedEventSource.Task.Wait(m_MaxTaskTimeout);
             }
 
             // Assert
             Assert.True(closedEventSource.Task.IsCompleted, "Took too long to receive message");
-            mockClientEndpoint.Verify(x => x.SendAsync(It.IsAny<CoapPayload>()), Times.Never, "Multicast Message was responded to whenn it shouldn't");
+            mockclientEndpoint.Verify(x => x.SendAsync(It.IsAny<CoapPayload>()), Times.Never, "Multicast Message was responded to whenn it shouldn't");
         }
 
         //[Fact]
-        //public void TestClientOnMessageReceivedEvent()
+        //public void TestclientOnMessageReceivedEvent()
         //{
         //    // Arrange
         //    var expected = new CoapMessage
@@ -256,9 +336,9 @@ namespace CoAPUnitTest
         //        Type = CoapMessageType.Acknowledgement,
         //        Code = CoapMessageCode.None,
         //    };
-        //    var mockClientEndpoint = new Mock<ICoapEndpoint>();
+        //    var mockclientEndpoint = new Mock<ICoapEndpoint>();
 
-        //    mockClientEndpoint
+        //    mockclientEndpoint
         //        .SetupSequence(c => c.ReceiveAsync())
         //        .Returns(Task.FromResult(new CoapPayload
         //        {
@@ -267,13 +347,13 @@ namespace CoAPUnitTest
         //        .Throws(new CoapEndpointException("Endpoint closed"));
 
         //    // Act
-        //    var test = new CoAPClientConnector();
+        //    var test = new CoAPclientConnector();
         //    Dictionary<string, object> agr = new Dictionary<string, object>();
-        //    IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPClientConnector());
-        //    agr.Add("endPoint", mockClientEndpoint.Object);
+        //    IotApi api = new IotApi().RegisterModule(new CoAPConnector.CoAPclientConnector());
+        //    agr.Add("endPoint", mockclientEndpoint.Object);
         //    api.Open(agr);
 
-        //    bool result = test.listenertest(mockClientEndpoint);
+        //    bool result = test.listenertest(mockclientEndpoint);
 
         //    // Assert
         //    Assert.True(result);
@@ -292,8 +372,8 @@ namespace CoAPUnitTest
         //        Code = CoapMessageCode.None,
         //    };
 
-        //    var mockClientEndpoint = new Mock<ICoapEndpoint>();
-        //    mockClientEndpoint
+        //    var mockclientEndpoint = new Mock<ICoapEndpoint>();
+        //    mockclientEndpoint
         //        .SetupSequence(c => c.ReceiveAsync())
         //        .Returns(Task.FromResult(new CoapPayload
         //        {
@@ -306,12 +386,12 @@ namespace CoAPUnitTest
         //        .Throws(new CoapEndpointException("Endpoint closed"));
 
         //    // Act
-        //    using (var mockClient = new CoapClient(mockClientEndpoint.Object))
+        //    using (var mockclient = new Coapclient(mockclientEndpoint.Object))
         //    {
-        //        mockClient.Listen();
+        //        mockclient.Listen();
 
         //        // Assert
-        //        mockClientEndpoint.Verify(
+        //        mockclientEndpoint.Verify(
         //            cep => cep.SendAsync(It.Is<CoapPayload>(p => p.Payload.SequenceEqual(expected.Serialise()))),
         //            Times.Exactly(1));
         //    }
@@ -342,8 +422,8 @@ namespace CoAPUnitTest
         //        Token = token
         //    };
 
-        //    var mockClientEndpoint = new Mock<ICoapEndpoint>();
-        //    mockClientEndpoint
+        //    var mockclientEndpoint = new Mock<ICoapEndpoint>();
+        //    mockclientEndpoint
         //        .SetupSequence(c => c.ReceiveAsync())
         //        .Returns(Task.FromResult(new CoapPayload
         //        {
@@ -368,32 +448,32 @@ namespace CoAPUnitTest
         //        .Throws(new CoapEndpointException("Endpoint closed"));
 
         //    // Act
-        //    using (var mockClient = new CoapClient(mockClientEndpoint.Object))
+        //    using (var mockclient = new Coapclient(mockclientEndpoint.Object))
         //    {
-        //        mockClient.OnMessageReceived += (s, e) =>
+        //        mockclient.OnMessageReceived += (s, e) =>
         //        {
-        //            mockClient.SendAsync(acknowledgeMessage).Wait(MaxTaskTimeout);
+        //            mockclient.SendAsync(acknowledgeMessage).Wait(m_MaxTaskTimeout);
         //        };
 
-        //        var requestTask = mockClient.SendAsync(requestMessage);
-        //        requestTask.Wait(MaxTaskTimeout);
+        //        var requestTask = mockclient.SendAsync(requestMessage);
+        //        requestTask.Wait(m_MaxTaskTimeout);
         //        if (!requestTask.IsCompleted)
         //            throw new NUnit.Framework.AssertionException("Took too long to send Get request");
 
 
-        //        mockClient.Listen();
+        //        mockclient.Listen();
 
-        //        var reponseTask = mockClient.GetResponseAsync(requestTask.Result);
-        //        reponseTask.Wait(MaxTaskTimeout);
+        //        var reponseTask = mockclient.GetResponseAsync(requestTask.Result);
+        //        reponseTask.Wait(m_MaxTaskTimeout);
         //        if (!reponseTask.IsCompleted)
         //            throw new NUnit.Framework.AssertionException("Took too long to get reponse");
 
         //        // Assert
-        //        mockClientEndpoint.Verify(
+        //        mockclientEndpoint.Verify(
         //            cep => cep.SendAsync(It.Is<CoapPayload>(p => p.Payload.SequenceEqual(requestMessage.Serialise()))),
         //            Times.Exactly(1));
 
-        //        mockClientEndpoint.Verify(
+        //        mockclientEndpoint.Verify(
         //            cep => cep.SendAsync(It.Is<CoapPayload>(p => p.Payload.SequenceEqual(acknowledgeMessage.Serialise()))),
         //            Times.Exactly(1));
         //    }

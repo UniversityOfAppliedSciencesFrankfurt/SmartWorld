@@ -8,7 +8,7 @@ namespace CoAPConnector
     {
         public virtual int MessageId { get; set; }
         public virtual byte[] Payload { get; set; }
-        public virtual ICoapEndpoint Endpoint { get; set; }
+        public virtual ICoapEndpoint m_Endpoint { get; set; }
     }
 
     // Provided by Application Layer
@@ -23,7 +23,7 @@ namespace CoAPConnector
         bool IsMulticast { get; }
 
         /// <summary>
-        /// Called by [Service] to send a <see cref="CoapPayload.Payload"/> to the specified <see cref="CoapPayload.Endpoint"/> using the transport layer provided by the Application Layer
+        /// Called by [Service] to send a <see cref="CoapPayload.Payload"/> to the specified <see cref="CoapPayload.m_Endpoint"/> using the transport layer provided by the Application Layer
         /// </summary>
         /// <param name="payload"></param>
         /// <returns></returns>
