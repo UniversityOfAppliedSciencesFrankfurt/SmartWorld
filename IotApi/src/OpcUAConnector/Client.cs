@@ -138,6 +138,15 @@ namespace OpcUAConnector
             Byte[] continuationPoint;
 
             references = session.FetchReferences(ObjectIds.ObjectsFolder);
+            DiagnosticInfoCollection info;
+            StatusCodeCollection statuscode;
+             
+            List<WriteValue> writelist2 = new List<WriteValue>();
+            writelist2.Add(new WriteValue() {NodeId = 1231231});
+            //Code to write on Node
+            session.Write(new RequestHeader() { AuthenticationToken = 1231}, 
+                new WriteValueCollection(writelist2), 
+                out statuscode, out info);
 
             session.Browse(
                 null,
@@ -157,6 +166,7 @@ namespace OpcUAConnector
                 Console.WriteLine(" {0}, {1}, {2}", rd.DisplayName, rd.BrowseName, rd.NodeClass);
                 ReferenceDescriptionCollection nextRefs;
                 byte[] nextCp;
+                
                 session.Browse(
                     null,
                     null,
@@ -179,7 +189,7 @@ namespace OpcUAConnector
             var subscription = new Subscription(session.DefaultSubscription) { PublishingInterval = 1000 };
 
             Console.WriteLine("6 - Add a list of items (server current time and status) to the subscription.");
-            var list = new List<MonitoredItem> {
+           var list = new List<MonitoredItem> {
                 new MonitoredItem(subscription.DefaultItem)
                 {
                     DisplayName = "ServerStatusCurrentTime", StartNodeId = "i=2258"
@@ -192,8 +202,9 @@ namespace OpcUAConnector
             session.AddSubscription(subscription);
             subscription.Create();
 
-            Console.WriteLine("8 - Running...Press any key to exit...");
-            Console.ReadKey(true);
+           Console.WriteLine("8 - Running...Press any key to exit...");
+           Console.ReadKey(true);
+
         }
 
         private static void OnNotification(MonitoredItem item, MonitoredItemNotificationEventArgs e)

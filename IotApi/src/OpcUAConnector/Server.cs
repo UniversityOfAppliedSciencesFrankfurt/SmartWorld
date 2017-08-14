@@ -158,14 +158,14 @@ namespace OpcUAConnector
 
         private void EventStatus(Session session, SessionEventReason reason)
         {
-            lastEventTime = DateTime.UtcNow;
+           lastEventTime = DateTime.UtcNow;
             PrintSessionStatus(session, reason.ToString());
         }
 
         void PrintSessionStatus(Session session, string reason, bool lastContact = false)
         {
             lock (session.DiagnosticsLock)
-            {
+            {     
                 string item = String.Format("{0,9}:{1,20}:", reason, session.SessionDiagnostics.SessionName);
                 if (lastContact)
                 {
