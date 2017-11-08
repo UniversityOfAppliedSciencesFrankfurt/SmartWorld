@@ -99,8 +99,8 @@ namespace Iot
         }
 
         public async Task ReceiveAsync(Action<IList<object>> onSuccess,
-            Action<IList<object>, Exception> onError = null, 
-            Dictionary<string, object> args = null)
+                                        Action<IList<object>, Exception> onError = null, 
+                                        Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -169,7 +169,7 @@ namespace Iot
         /// <exception cref="IotApiException">Thrown if any exception has been thrown internally.</exception>
         /// <returns>Tesk</returns>
         public async Task<object> SendAsync(object sensorMessage,
-         Dictionary<string, object> args = null)
+                                            Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -178,12 +178,10 @@ namespace Iot
                 var module = getServices<ISendModule>().FirstOrDefault();
                 if (module != null)
                 {
-                    object result = null;
-
                     await module.SendAsync(sensorMessage,
-                    (data) =>
+                    (msgs) =>
                     {
-                        result = data;
+                       
                     },
                     (err) =>
                     {
@@ -191,14 +189,14 @@ namespace Iot
                     },
                     args);
 
-                    return result;
+                    return null;
                 }
                 else
-                    throw new IotApiException(":( There is no 'ISendModule' registered in the sending pipeline!");
+                    return null;
             }
             catch (Exception ex)
             {
-                throw new IotApiException("Failed to send the message.", ex);
+                throw new IotApiException("Failed to send th emessage.", ex);
             }
         }
 
@@ -213,9 +211,9 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(IList<object> sensorMessages,
-        Action<IList<object>> onSuccess,
-        Action<IList<object>, Exception> onError,
-        Dictionary<string, object> args = null)
+                                    Action<IList<object>> onSuccess,
+                                    Action<IList<object>, Exception> onError,
+                                    Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -255,8 +253,9 @@ namespace Iot
         /// <param name="args">Any protocol required parameters.</param>
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
-            Action<object> onSuccess, Action<IotApiException> onError,
-            Dictionary<string, object> args = null)
+                                    Action<object> onSuccess, 
+                                    Action<IList<object>,Exception> onError, 
+                                    Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
                 throw new IotApiException("Method Open must be called first.");
@@ -273,14 +272,14 @@ namespace Iot
                     },
                     (err) =>
                     {
-                        onError?.Invoke(err);
+                        onError?.Invoke(new List<object> { sensorMessage }, err);
                     },
                     args);
                 }
             }
             catch (Exception ex)
             {
-                onError?.Invoke(new IotApiException(":( Method SendAsync() failed.", ex));
+                onError?.Invoke(new List<object> { sensorMessage }, ex);
             }
         }
         #endregion

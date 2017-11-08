@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63CFB394-0A50-43F7-B7FE-2F999A7623D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1281C610-8FDC-4E9F-9141-8CF217F19854}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AA6BA545-29E2-4107-827C-3C737F386131}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoAPConnector", "src\CoAPConnector\CoAPConnector.csproj", "{B6B7576C-96C5-4E1B-97D5-2F4A960423CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoAPUnitTest", "tests\CoAPUnitTest\CoAPUnitTest.csproj", "{86557064-C4AA-466A-B6F5-77AC4537B462}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApi", "src\IotApi\IotApi.csproj", "{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6B7576C-96C5-4E1B-97D5-2F4A960423CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B7576C-96C5-4E1B-97D5-2F4A960423CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B7576C-96C5-4E1B-97D5-2F4A960423CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B7576C-96C5-4E1B-97D5-2F4A960423CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86557064-C4AA-466A-B6F5-77AC4537B462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86557064-C4AA-466A-B6F5-77AC4537B462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86557064-C4AA-466A-B6F5-77AC4537B462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86557064-C4AA-466A-B6F5-77AC4537B462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B6B7576C-96C5-4E1B-97D5-2F4A960423CC} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+		{86557064-C4AA-466A-B6F5-77AC4537B462} = {AA6BA545-29E2-4107-827C-3C737F386131}
+		{31D9E409-5B80-44BA-8FB3-F7BDAB8443C5} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAE38415-A137-422F-96CE-F17EFA6D4015}
+	EndGlobalSection
+EndGlobal

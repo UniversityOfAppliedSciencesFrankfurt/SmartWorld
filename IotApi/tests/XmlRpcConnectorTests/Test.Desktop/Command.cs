@@ -19,11 +19,11 @@ namespace Test.Desktop
             var methodCall = ccu.PrepareMethodCall(request);
             string response = "";
 
-            await iotApi.SendAsync(methodCall, (responseMessages) =>
-            {
-                if (MethodResponse.isMethodResponse(responseMessages))
+            await iotApi.SendAsync(methodCall, (responseMsg) => {
+
+                if (MethodResponse.isMethodResponse(responseMsg))
                 {
-                    MethodResponse res = responseMessages as MethodResponse;
+                    MethodResponse res = responseMsg as MethodResponse;
 
                     if (ccu.isGetList)
                     {
@@ -50,10 +50,18 @@ namespace Test.Desktop
                     }
                 }
             },
-             (error) =>
-             {
-                 response = error.Message;
-             });
+            (error, ex) =>
+            {
+                if (error.Count > 0)
+                {
+                    foreach (var er in error)
+                    {
+                        MethodFaultResponse faultRes = er as MethodFaultResponse;
+                        response = faultRes.Message;
+                    }
+                }
+            });
+
 
             return response;
         }

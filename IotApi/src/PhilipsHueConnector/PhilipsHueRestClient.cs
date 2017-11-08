@@ -1,8 +1,7 @@
 ﻿using Iot;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Iot.PhilipsHueConnector;
-using Iot.PhilipsHueConnector.Entities;
+using PhilipsHueConnector.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Iot.PhilipsHueConnector
+namespace PhilipsHueConnector
 {
     public class PhilipsHueRestClient : ISendModule
     {
@@ -21,11 +20,6 @@ namespace Iot.PhilipsHueConnector
         private string m_GatewayUrl;
 
         private string m_ApiSuffix = "api";
-
-        public PhilipsHueRestClient()
-        {
-
-        }
 
         public PhilipsHueRestClient(string userName, string gatewayUrl)
         {
@@ -53,16 +47,15 @@ namespace Iot.PhilipsHueConnector
                 throw new Exception("Username or gateay URL not specified.");
         }
 
-        public Task SendAsync(IList<object> sensorMessages,
-            Action<IList<object>> onSuccess = null,
-            Action<IList<IotApiException>> onError = null,
-            Dictionary<string, object> args = null)
+        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, 
+                               Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
 
             throw new NotImplementedException();
         }
 
-        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, 
+                                Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             HttpResponseMessage response = await executeMsg(sensorMessage);
 
@@ -81,7 +74,7 @@ namespace Iot.PhilipsHueConnector
                 }
                 else
                 {
-                    onSuccess?.Invoke(result);
+                    throw new IotApiException("Do not know meaning of this response", result);
                 }
             }
             else if (res is JObject)
@@ -97,6 +90,8 @@ namespace Iot.PhilipsHueConnector
 
                 onSuccess?.Invoke(devices);
             }
+            
+            throw new NotImplementedException();
         }
 
         private async Task<HttpResponseMessage> executeMsg(object sensorMessage)
@@ -112,41 +107,14 @@ namespace Iot.PhilipsHueConnector
             {
                 response = await httpClient.GetAsync(getUri(cmd));
             }
-            else if (cmd.Method == "post"||cmd.Method == "put" )
+            else if (cmd.Method == "post")
             {
                 //httpClient.GetAsync(getUri(cmd));
-            //}
-            //else if (cmd.Method == "put" || cmd.Method == "post")
-            //{
-                StringContent content = null;
-                string uri = getUri(cmd);
-                string data;
-
-                //
-                // If request is defined by typed message.
-                if (sensorMessage is SendCommandBase)
-                {
-                    data = ((SendCommandBase)sensorMessage).State.ToLightStateJson();
-                }
-                else if (sensorMessage is HueCommand)
-                {
-                    if (cmd.Body is string)
-                        data = cmd.Body as string;
-                    else
-                        data = JsonConvert.SerializeObject(cmd.Body);
-                }
-                else
-                    throw new IotApiException(":( Unknown command.");
-
-                content = new StringContent(data);
-
-                if (cmd.Method == "put")
-                    response = await httpClient.PutAsync(uri, content);
-                else
-                    response = await httpClient.PostAsync(uri, content);
             }
-            else
-                throw new IotApiException(":( Method property must be set.");
+            else if (cmd.Method == "put")
+            {
+
+            }
 
             return response;
         }
@@ -154,12 +122,6 @@ namespace Iot.PhilipsHueConnector
         private bool isError(JArray result, out GatewayError err)
         {
             var jToken = LookupValue(result, "error");
-            if (jToken == null)
-            {
-                err = null;
-                return false;
-            }
-
             err = JsonConvert.DeserializeObject<GatewayError>(jToken.ToString());
             return jToken != null;
         }

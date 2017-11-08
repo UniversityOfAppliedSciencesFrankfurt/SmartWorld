@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Iot;
 
 namespace XmlRpcCore
 {
     /// <summary>
     /// Throws XMLRPC Exception in case of error.
     /// </summary>
-    public class XmlRpcFaultException : Exception
+    public class XmlRpcFaultException : IotApiException
     {
         /// <summary>
         /// Fault Code number

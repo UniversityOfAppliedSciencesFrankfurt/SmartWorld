@@ -15,9 +15,9 @@ namespace XmlRpcCore
         public ISendModule NextSendModule { get; set; }
 
         /// <summary>
-        /// Connection open
+        /// Open connection 
         /// </summary>
-        /// <param name="args"> Necessary arguments to open connection </param>
+        /// <param name="args"></param>
         public void Open(Dictionary<string, object> args)
         {
             if (args == null || !args.ContainsKey("Uri"))
@@ -33,56 +33,77 @@ namespace XmlRpcCore
         }
 
         /// <summary>
-        /// Send list of object
+        /// Send message
         /// </summary>
-        /// <param name="sensorMessages"> List or Sensor Messages </param>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
+        /// <param name="sensorMessage"Sensor message></param>
+        /// <param name="onSuccess">Success message</param>
+        /// <param name="onError">Error message</param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public Task SendAsync(IList<object> sensorMessages,
-            Action<IList<object>> onSuccess = null,
-            Action<IList<IotApiException>> onError = null,
-            Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Send sensor message
-        /// </summary>
-        /// <param name="sensorMessage"> Sensor message </param>
-        /// <param name="onSuccess"> Sensor feedback </param>
-        /// <param name="onError"> Error while sending message to sensor </param>
-        /// <param name="args"> Arguments </param>
-        /// <returns></returns>
-        public async Task SendAsync(object sensorMessage, 
-            Action<object> onSuccess = null, 
-            Action<IotApiException> onError = null, 
-            Dictionary<string, object> args = null)
-        {
-
             XmlRpcProxy proxy = new XmlRpcProxy(m_Uri, m_TimeOut, m_Mock);
 
             await Task.Run(() =>
-             {
-                 try
-                 {
+            {
+                try
+                {
+                    var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
 
-                     var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
+                    var requestStr = proxy.SerializeRequest(sensorMsg);
+                    var res = proxy.SendRequest(requestStr).Result;
+                    var response = proxy.DeserializeResponse(res);
 
-                     var requestStr = proxy.SerializeRequest(sensorMsg);
-                     var res = proxy.SendRequest(requestStr).Result;
-                     var response = proxy.DeserializeResponse(res);
+                    onSuccess?.Invoke(new List<object> { response });
+                }
+                catch (XmlRpcFaultException faultEx)
+                {
+                    onError?.Invoke(faultEx);
+                }
+            });
+        }
 
-                     onSuccess?.Invoke(response);
+        /// <summary>
+        /// Send collection of messages 
+        /// </summary>
+        /// <param name="sensorMessages">Message collection</param>
+        /// <param name="onSuccess">Success messages</param>
+        /// <param name="onError">Error list</param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
+        {
+            try
+            {
+                List<object> onSuccList = new List<object>();
+                List<IotApiException> onErrList = new List<IotApiException>();
 
-                 }
-                 catch (XmlRpcFaultException faultEx)
-                 {
-                     onError?.Invoke(new IotApiException(faultEx.Message, faultEx));
-                 }
-             });
+                foreach (var msg in sensorMessages)
+                {
+                    await this.SendAsync(sensorMessages, (sucMgs) =>
+                    {
+                        onSuccList.Add(sucMgs);
+                    },
+                    (err) =>
+                    {
+                        onErrList.Add(err);
+                    },
+                    args);
+                }
+
+                onSuccess?.Invoke(onSuccList);
+
+                if(onErrList != null)
+                {
+                    onError?.Invoke(onErrList);
+                    return;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                onError?.Invoke(new List<IotApiException> { (IotApiException)ex });
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-#:C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj
-C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
-C:\GitHub\SmartWorld\IotApi\tests\XmlRpcUnitTest\XmlRpcUnitTest.xproj|C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj
-C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\CcuLib\CcuLib.xproj|C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj
-C:\GitHub\SmartWorld\IotApi\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.xproj|C:\GitHub\SmartWorld\IotApi\src\IotApi\IotApi.xproj
+#:D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
+#:D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
+#:D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
+D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
+D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
+D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj

@@ -19,10 +19,10 @@ namespace Test.Desktop
                 .RegisterModule(new XmlRpc());
 
             Dictionary<string, object> agr = new Dictionary<string, object>()
-            {
-                { "Uri", "http://192.168.0.222:2001" },
-                {"Mock",false }
-            };
+                {
+                    { "Uri", "http://192.168.0.222:2001" },
+                    {"Mock",false }
+                };
 
             iotApi.Open(agr);
 
@@ -123,7 +123,7 @@ namespace Test.Desktop
                     break;
             }
         }
-        
+
         private static async void Doors(IotApi iotApi)
         {
             // Door
@@ -160,11 +160,13 @@ namespace Test.Desktop
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No");
 
-            switch(RecursiveChoice(1,2))
+            switch (RecursiveChoice(1, 2))
             {
-                case 1: Functions(iotApi);
+                case 1:
+                    Functions(iotApi);
                     break;
-                case 2: Environment.Exit(2);
+                case 2:
+                    Environment.Exit(2);
                     break;
             }
         }
@@ -324,7 +326,5 @@ namespace Test.Desktop
                     break;
             }
         }
-
-
     }
 }

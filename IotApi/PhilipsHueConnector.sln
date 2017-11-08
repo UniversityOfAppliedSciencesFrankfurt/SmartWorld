@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63CFB394-0A50-43F7-B7FE-2F999A7623D3}"
 EndProject
@@ -10,13 +10,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhilipsHueConnector", "src\PhilipsHueConnector\PhilipsHueConnector.xproj", "{8476C6B6-225F-4F92-A22D-12E6DEB9B088}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IotApi", "src\IotApi\IotApi.xproj", "{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AA6BA545-29E2-4107-827C-3C737F386131}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PhilipsHueUnitTests", "tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj", "{723E133C-1C12-457A-ACF8-FE6399A42A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhilipsHueConnector", "src\PhilipsHueConnector\PhilipsHueConnector.csproj", "{8476C6B6-225F-4F92-A22D-12E6DEB9B088}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhilipsHueUnitTests", "tests\PhilipsHueUnitTests\PhilipsHueUnitTests.csproj", "{723E133C-1C12-457A-ACF8-FE6399A42A55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApi", "src\IotApi\IotApi.csproj", "{B765C07F-153A-4192-8D33-95C4D3A2FA63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,21 +28,24 @@ Global
 		{8476C6B6-225F-4F92-A22D-12E6DEB9B088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8476C6B6-225F-4F92-A22D-12E6DEB9B088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8476C6B6-225F-4F92-A22D-12E6DEB9B088}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{723E133C-1C12-457A-ACF8-FE6399A42A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{723E133C-1C12-457A-ACF8-FE6399A42A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{723E133C-1C12-457A-ACF8-FE6399A42A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{723E133C-1C12-457A-ACF8-FE6399A42A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B765C07F-153A-4192-8D33-95C4D3A2FA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B765C07F-153A-4192-8D33-95C4D3A2FA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B765C07F-153A-4192-8D33-95C4D3A2FA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B765C07F-153A-4192-8D33-95C4D3A2FA63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8476C6B6-225F-4F92-A22D-12E6DEB9B088} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
-		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
 		{723E133C-1C12-457A-ACF8-FE6399A42A55} = {AA6BA545-29E2-4107-827C-3C737F386131}
+		{B765C07F-153A-4192-8D33-95C4D3A2FA63} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF6486F8-8B75-4E32-BF5A-387B334BD28C}
 	EndGlobalSection
 EndGlobal
