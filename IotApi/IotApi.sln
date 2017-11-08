@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3B783F52-F0FA-4B0A-87CF-7E4EB2D53547}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6390CF1D-87F8-498F-9C75-06F407110AAA}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{394B56D6-EE63-4F68-971B-AAD95816D6D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApiCoreTests", "tests\IotApiTests\IotApiCoreTests\IotApiCoreTests.csproj", "{4922A7B9-6932-4C18-A629-5C52C889C164}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApi", "src\IotApi\IotApi.csproj", "{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|ARM.Build.0 = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|x64.Build.0 = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Debug|x86.Build.0 = Debug|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|ARM.Build.0 = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|x64.ActiveCfg = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|x64.Build.0 = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|x86.ActiveCfg = Release|Any CPU
+		{4922A7B9-6932-4C18-A629-5C52C889C164}.Release|x86.Build.0 = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Debug|x86.Build.0 = Debug|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|ARM.Build.0 = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|x64.Build.0 = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4922A7B9-6932-4C18-A629-5C52C889C164} = {394B56D6-EE63-4F68-971B-AAD95816D6D9}
+		{6701F6E0-019B-42A9-9D74-B8D3DCAE37E7} = {3B783F52-F0FA-4B0A-87CF-7E4EB2D53547}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB868AB5-7BF7-4045-AB73-06EC22C09695}
+	EndGlobalSection
+EndGlobal
