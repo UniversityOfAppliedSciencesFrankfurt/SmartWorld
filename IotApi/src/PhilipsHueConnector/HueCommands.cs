@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PhilipsHueConnector.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Iot.PhilipsHueConnector.Entities
+namespace PhilipsHueConnector
 {
 
     public  class HueCommand

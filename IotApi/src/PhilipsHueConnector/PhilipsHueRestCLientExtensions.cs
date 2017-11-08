@@ -6,9 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Iot.PhilipsHueConnector;
 
-namespace Iot
+namespace PhilipsHueConnector
 {
     public static class PhilipsHueRestCLientExtensions
     {
