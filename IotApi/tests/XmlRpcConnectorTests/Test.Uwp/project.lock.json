@@ -23025,7 +23025,9 @@
   "projectFileDependencyGroups": {
     "": [
       "CcuLib >= 1.0.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2"
+      "IotApi >= 1.0.0",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
+      "XmlRpcCore >= 1.0.0"
     ],
     "UAP,Version=v10.0.10240": []
   },
@@ -23053,7 +23055,9 @@
     },
     "dependencies": {
       "CcuLib": "1.0.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+      "IotApi": "1.0.0",
+      "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+      "XmlRpcCore": "1.0.0"
     },
     "frameworks": {
       "uap10.0.10240": {}

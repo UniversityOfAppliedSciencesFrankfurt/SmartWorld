@@ -1,5 +1,5 @@
 ﻿using Iot;
-using Iot.PhilipsHueConnector.Entities;
+using PhilipsHueConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +77,7 @@ namespace PhilipsHueUnitTests
         public void GetLightsJSApiStyleTest()
         {
             var iotApi = getApi();
-
+            
             iotApi.SendAsync(new GetLights(), (result) =>
             {
                 Assert.NotNull(result);
@@ -88,9 +88,9 @@ namespace PhilipsHueUnitTests
 
                 Assert.Equal(res.Count, TestDriver.NumOfDevices);
             },
-            (err) =>
+            (err,ex) =>
             {
-                throw err;
+                throw ex;
             }).Wait();
         }
 
