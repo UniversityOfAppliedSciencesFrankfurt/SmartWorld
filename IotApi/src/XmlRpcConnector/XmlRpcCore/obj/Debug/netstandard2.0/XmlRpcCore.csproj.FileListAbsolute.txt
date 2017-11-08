@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\bin\Debug\netstandard2.0\XmlRpcCore.deps.json
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\bin\Debug\netstandard2.0\XmlRpcCore.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\bin\Debug\netstandard2.0\XmlRpcCore.pdb
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\obj\Debug\netstandard2.0\XmlRpcCore.pdb
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\XmlRpcCore\bin\Debug\netstandard2.0\IotApi.pdb

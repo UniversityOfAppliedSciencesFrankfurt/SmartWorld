@@ -1,0 +1,62 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "Test.Desktop/1.0.0": {
+        "dependencies": {
+          "CcuLib": "1.0.0"
+        },
+        "runtime": {
+          "Test.Desktop.dll": {}
+        }
+      },
+      "CcuLib/1.0.0": {
+        "dependencies": {
+          "XmlRpcCore": "1.0.0"
+        },
+        "runtime": {
+          "CcuLib.dll": {}
+        }
+      },
+      "IotApi/1.0.0": {
+        "runtime": {
+          "IotApi.dll": {}
+        }
+      },
+      "XmlRpcCore/1.0.0": {
+        "dependencies": {
+          "IotApi": "1.0.0"
+        },
+        "runtime": {
+          "XmlRpcCore.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Test.Desktop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CcuLib/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IotApi/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "XmlRpcCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

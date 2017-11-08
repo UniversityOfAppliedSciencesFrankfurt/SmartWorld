@@ -1,0 +1,9 @@
+C:\Temp\SW\IotApi\src\IotApi\bin\Debug\netstandard1.1\IotApi.deps.json
+C:\Temp\SW\IotApi\src\IotApi\bin\Debug\netstandard1.1\IotApi.dll
+C:\Temp\SW\IotApi\src\IotApi\bin\Debug\netstandard1.1\IotApi.pdb
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.dll
+C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard1.1\IotApi.pdb

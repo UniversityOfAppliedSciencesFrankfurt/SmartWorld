@@ -1,0 +1,15 @@
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.AssemblyInfo.cs
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusUnitTests.deps.json
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusUnitTests.runtimeconfig.json
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusUnitTests.runtimeconfig.dev.json
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusUnitTests.dll
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusUnitTests.pdb
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\IotApi.dll
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusConnector.dll
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\ModBusConnector.pdb
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\bin\Debug\netcoreapp2.0\IotApi.pdb
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.dll
+C:\Temp\SW\IotApi\tests\ModBusUnitTests\obj\Debug\netcoreapp2.0\ModBusUnitTests.pdb

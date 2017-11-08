@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\CoAPConnector\bin\Debug\netstandard2.0\CoAPConnector.deps.json
+C:\Temp\SW\IotApi\src\CoAPConnector\bin\Debug\netstandard2.0\CoAPConnector.dll
+C:\Temp\SW\IotApi\src\CoAPConnector\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\CoAPConnector\bin\Debug\netstandard2.0\IotApi.pdb
+C:\Temp\SW\IotApi\src\CoAPConnector\bin\Debug\netstandard2.0\CoAPConnector.pdb
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.dll
+C:\Temp\SW\IotApi\src\CoAPConnector\obj\Debug\netstandard2.0\CoAPConnector.pdb

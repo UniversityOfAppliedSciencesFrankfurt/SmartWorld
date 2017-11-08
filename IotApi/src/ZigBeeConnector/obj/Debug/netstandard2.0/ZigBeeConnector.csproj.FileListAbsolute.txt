@@ -1,0 +1,3 @@
+C:\Temp\SW\IotApi\src\ZigBeeConnector\obj\Debug\netstandard2.0\ZigBeeConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\ZigBeeConnector\obj\Debug\netstandard2.0\ZigBeeConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\ZigBeeConnector\obj\Debug\netstandard2.0\ZigBeeConnector.AssemblyInfo.cs

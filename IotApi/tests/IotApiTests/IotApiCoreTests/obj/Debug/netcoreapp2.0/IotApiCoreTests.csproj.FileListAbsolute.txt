@@ -1,0 +1,16 @@
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.AssemblyInfo.cs
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netstandard15.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netstandard15.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApiCoreTests.deps.json
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApiCoreTests.runtimeconfig.json
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApiCoreTests.runtimeconfig.dev.json
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApiCoreTests.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApiCoreTests.pdb
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApi.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\bin\Debug\netcoreapp2.0\IotApi.pdb
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.dll
+C:\Temp\SW\IotApi\tests\IotApiTests\IotApiCoreTests\obj\Debug\netcoreapp2.0\IotApiCoreTests.pdb

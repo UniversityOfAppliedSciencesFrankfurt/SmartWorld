@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\bin\Debug\netstandard2.0\PhilipsHueConnector.deps.json
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\bin\Debug\netstandard2.0\PhilipsHueConnector.dll
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\bin\Debug\netstandard2.0\PhilipsHueConnector.pdb
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\bin\Debug\netstandard2.0\IotApi.pdb
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.dll
+C:\Temp\SW\IotApi\src\PhilipsHueConnector\obj\Debug\netstandard2.0\PhilipsHueConnector.pdb

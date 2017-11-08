@@ -1,0 +1,13 @@
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\CcuLib.deps.json
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\CcuLib.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\CcuLib.pdb
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\XmlRpcCore.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\XmlRpcCore.pdb
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\obj\Debug\netstandard2.0\CcuLib.pdb
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\XmlRpcConnector\CcuLib\bin\Debug\netstandard2.0\IotApi.pdb

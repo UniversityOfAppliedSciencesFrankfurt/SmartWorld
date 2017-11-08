@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\ModBusConnector\bin\Debug\netstandard2.0\ModBusConnector.deps.json
+C:\Temp\SW\IotApi\src\ModBusConnector\bin\Debug\netstandard2.0\ModBusConnector.dll
+C:\Temp\SW\IotApi\src\ModBusConnector\bin\Debug\netstandard2.0\ModBusConnector.pdb
+C:\Temp\SW\IotApi\src\ModBusConnector\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\ModBusConnector\bin\Debug\netstandard2.0\IotApi.pdb
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.dll
+C:\Temp\SW\IotApi\src\ModBusConnector\obj\Debug\netstandard2.0\ModBusConnector.pdb

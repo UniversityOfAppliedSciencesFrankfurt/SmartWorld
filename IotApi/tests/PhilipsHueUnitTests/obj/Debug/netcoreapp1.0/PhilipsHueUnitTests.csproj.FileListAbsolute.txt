@@ -1,0 +1,4 @@
+C:\Temp\SW\IotApi\tests\PhilipsHueUnitTests\obj\Debug\netcoreapp1.0\PhilipsHueUnitTests.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\PhilipsHueUnitTests\obj\Debug\netcoreapp1.0\PhilipsHueUnitTests.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\PhilipsHueUnitTests\obj\Debug\netcoreapp1.0\PhilipsHueUnitTests.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\PhilipsHueUnitTests\obj\Debug\netcoreapp1.0\PhilipsHueUnitTests.AssemblyInfo.cs

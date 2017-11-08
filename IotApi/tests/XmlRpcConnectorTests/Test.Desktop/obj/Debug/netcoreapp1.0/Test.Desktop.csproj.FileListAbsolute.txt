@@ -1,0 +1,4 @@
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netcoreapp1.0\Test.Desktop.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netcoreapp1.0\Test.Desktop.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netcoreapp1.0\Test.Desktop.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netcoreapp1.0\Test.Desktop.AssemblyInfo.cs

@@ -1,0 +1,4 @@
+C:\Temp\SW\IotApi\tests\CoAPUnitTest\obj\Debug\netcoreapp1.0\CoAPUnitTest.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\CoAPUnitTest\obj\Debug\netcoreapp1.0\CoAPUnitTest.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\CoAPUnitTest\obj\Debug\netcoreapp1.0\CoAPUnitTest.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\CoAPUnitTest\obj\Debug\netcoreapp1.0\CoAPUnitTest.AssemblyInfo.cs

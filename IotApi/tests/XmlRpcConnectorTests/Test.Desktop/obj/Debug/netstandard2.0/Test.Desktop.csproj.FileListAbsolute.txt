@@ -1,0 +1,9 @@
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.AssemblyInfo.cs
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\bin\Debug\netstandard2.0\Test.Desktop.deps.json
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\bin\Debug\netstandard2.0\Test.Desktop.dll
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\bin\Debug\netstandard2.0\Test.Desktop.pdb
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.dll
+C:\Temp\SW\IotApi\tests\XmlRpcConnectorTests\Test.Desktop\obj\Debug\netstandard2.0\Test.Desktop.pdb

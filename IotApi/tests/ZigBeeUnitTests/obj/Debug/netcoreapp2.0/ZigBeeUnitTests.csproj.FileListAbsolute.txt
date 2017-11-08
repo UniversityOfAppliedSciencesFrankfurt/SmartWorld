@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.AssemblyInfo.cs
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\bin\Debug\netcoreapp2.0\ZigBeeUnitTests.deps.json
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\bin\Debug\netcoreapp2.0\ZigBeeUnitTests.runtimeconfig.json
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\bin\Debug\netcoreapp2.0\ZigBeeUnitTests.runtimeconfig.dev.json
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\bin\Debug\netcoreapp2.0\ZigBeeUnitTests.dll
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\bin\Debug\netcoreapp2.0\ZigBeeUnitTests.pdb
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.dll
+C:\Temp\SW\IotApi\tests\ZigBeeUnitTests\obj\Debug\netcoreapp2.0\ZigBeeUnitTests.pdb

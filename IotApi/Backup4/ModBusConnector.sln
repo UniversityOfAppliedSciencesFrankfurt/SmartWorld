@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63CFB394-0A50-43F7-B7FE-2F999A7623D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1281C610-8FDC-4E9F-9141-8CF217F19854}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IotApi", "src\IotApi\IotApi.xproj", "{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AA6BA545-29E2-4107-827C-3C737F386131}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ModBusConnector", "src\ModBusConnector\ModBusConnector.xproj", "{EFC88167-604B-4CEA-BC04-E41896479C62}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ModBusUnitTests", "tests\ModBusUnitTests\ModBusUnitTests.xproj", "{856B1955-2339-496F-9D6E-7D59971C3E3A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NModbus4", "..\..\MODBUS\NModbus4-portable-3.0\NModbus4\NModbus4.xproj", "{9B07ED72-3AD9-45EC-AAE9-295849B309AA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestProgram", "src\TestProgram\TestProgram.xproj", "{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFC88167-604B-4CEA-BC04-E41896479C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC88167-604B-4CEA-BC04-E41896479C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC88167-604B-4CEA-BC04-E41896479C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC88167-604B-4CEA-BC04-E41896479C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856B1955-2339-496F-9D6E-7D59971C3E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856B1955-2339-496F-9D6E-7D59971C3E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856B1955-2339-496F-9D6E-7D59971C3E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856B1955-2339-496F-9D6E-7D59971C3E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B07ED72-3AD9-45EC-AAE9-295849B309AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B07ED72-3AD9-45EC-AAE9-295849B309AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B07ED72-3AD9-45EC-AAE9-295849B309AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B07ED72-3AD9-45EC-AAE9-295849B309AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BECC6CE9-36B3-4BAF-92CA-58639569CEDA} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+		{EFC88167-604B-4CEA-BC04-E41896479C62} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+		{856B1955-2339-496F-9D6E-7D59971C3E3A} = {AA6BA545-29E2-4107-827C-3C737F386131}
+		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+	EndGlobalSection
+EndGlobal

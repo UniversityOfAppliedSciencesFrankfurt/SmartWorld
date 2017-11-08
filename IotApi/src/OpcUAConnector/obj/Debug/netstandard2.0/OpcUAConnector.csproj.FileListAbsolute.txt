@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\OpcUAConnector\bin\Debug\netstandard2.0\OpcUAConnector.deps.json
+C:\Temp\SW\IotApi\src\OpcUAConnector\bin\Debug\netstandard2.0\OpcUAConnector.dll
+C:\Temp\SW\IotApi\src\OpcUAConnector\bin\Debug\netstandard2.0\OpcUAConnector.pdb
+C:\Temp\SW\IotApi\src\OpcUAConnector\bin\Debug\netstandard2.0\IotApi.dll
+C:\Temp\SW\IotApi\src\OpcUAConnector\bin\Debug\netstandard2.0\IotApi.pdb
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.dll
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard2.0\OpcUAConnector.pdb

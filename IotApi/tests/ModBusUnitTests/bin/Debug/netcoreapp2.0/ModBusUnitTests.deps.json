@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "ModBusUnitTests/1.0.0": {
+        "dependencies": {
+          "ModBusConnector": "1.0.0"
+        },
+        "runtime": {
+          "ModBusUnitTests.dll": {}
+        }
+      },
+      "IotApi/1.0.0": {
+        "runtime": {
+          "IotApi.dll": {}
+        }
+      },
+      "ModBusConnector/1.0.0": {
+        "dependencies": {
+          "IotApi": "1.0.0"
+        },
+        "runtime": {
+          "ModBusConnector.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ModBusUnitTests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "IotApi/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ModBusConnector/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

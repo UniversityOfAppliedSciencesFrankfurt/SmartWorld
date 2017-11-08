@@ -1,0 +1,4 @@
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfo.cs

@@ -1,0 +1,11 @@
+C:\Temp\SW\IotApi\src\TestProgram\bin\Debug\netcoreapp1.0\TestProgram.deps.json
+C:\Temp\SW\IotApi\src\TestProgram\bin\Debug\netcoreapp1.0\TestProgram.runtimeconfig.json
+C:\Temp\SW\IotApi\src\TestProgram\bin\Debug\netcoreapp1.0\TestProgram.runtimeconfig.dev.json
+C:\Temp\SW\IotApi\src\TestProgram\bin\Debug\netcoreapp1.0\TestProgram.dll
+C:\Temp\SW\IotApi\src\TestProgram\bin\Debug\netcoreapp1.0\TestProgram.pdb
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.csprojResolveAssemblyReference.cache
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.csproj.CoreCompileInputs.cache
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.AssemblyInfoInputs.cache
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.AssemblyInfo.cs
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.dll
+C:\Temp\SW\IotApi\src\TestProgram\obj\Debug\netcoreapp1.0\TestProgram.pdb
