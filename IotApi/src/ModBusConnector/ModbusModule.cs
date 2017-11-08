@@ -75,11 +75,11 @@ namespace ModBusConnector
 
                 try
                 {
-                    onSuccess?.Invoke(new List<object>())
+                    onSuccess?.Invoke(new List<object>());
                 }
-                catch
+                catch(Exception ex)
                 {
-                    onError?.Invoke(new List<object>)
+                    onError?.Invoke((IotApiException)ex);
                 }
             });
             

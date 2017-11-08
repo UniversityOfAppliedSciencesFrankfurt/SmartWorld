@@ -19,55 +19,49 @@ namespace Test.Desktop
             var methodCall = ccu.PrepareMethodCall(request);
             string response = "";
 
-            await iotApi.SendAsync(methodCall, (responseMessages) =>
-            {
-                if (responseMessages.Count > 0)
+            await iotApi.SendAsync(methodCall, (responseMsg) => {
+
+                if (MethodResponse.isMethodResponse(responseMsg))
                 {
-                    foreach (var responseMsg in responseMessages)
+                    MethodResponse res = responseMsg as MethodResponse;
+
+                    if (ccu.isGetList)
                     {
-                        if (MethodResponse.isMethodResponse(responseMsg))
+                        response = ccu.GetListDevices(res);
+                    }
+                    else
+                    {
+                        if (!ccu.isGetMethod)
                         {
-                            MethodResponse res = responseMsg as MethodResponse;
-                            
-                            if (ccu.isGetList)
-                            {
-                                response = ccu.GetListDevices(res);
-                            }
-                            else
-                            {
-                                if (!ccu.isGetMethod)
-                                {
-                                    // Set Methods do not return any value. Detecting no value means the operation is done
-                                    if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
+                            // Set Methods do not return any value. Detecting no value means the operation is done
+                            if (res.ReceiveParams.Count() == 0) response = "Operation is done!";
 
-                                    // Set methods can not return any value
-                                    else throw new InvalidOperationException("The operation cannot return any value!");
-                                }
-                                else
-                                {
-                                    // Get methods must return a value, if not it must be an error
-                                    if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
-
-                                    // Collecting the returned value
-                                    else response = res.ReceiveParams.First().Value.ToString();
-                                }
-                            }
+                            // Set methods can not return any value
+                            else throw new InvalidOperationException("The operation cannot return any value!");
                         }
+                        else
+                        {
+                            // Get methods must return a value, if not it must be an error
+                            if (res.ReceiveParams.Count() == 0) throw new InvalidOperationException("No value returned or error");
 
+                            // Collecting the returned value
+                            else response = res.ReceiveParams.First().Value.ToString();
+                        }
                     }
                 }
             },
-             (error, ex) =>
-             {
-                 if (error.Count > 0)
-                 {
-                     foreach (var er in error)
-                     {
-                         MethodFaultResponse faultRes = er as MethodFaultResponse;
-                         response = faultRes.Message;
-                     }
-                 }
-             });
+            (error, ex) =>
+            {
+                if (error.Count > 0)
+                {
+                    foreach (var er in error)
+                    {
+                        MethodFaultResponse faultRes = er as MethodFaultResponse;
+                        response = faultRes.Message;
+                    }
+                }
+            });
+
 
             return response;
         }

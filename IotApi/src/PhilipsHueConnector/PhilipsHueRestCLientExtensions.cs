@@ -76,43 +76,5 @@ namespace PhilipsHueConnector
 
             throw new Exception("");
         }
-
-        //private static JToken lookupValue(JArray arr, string propName)
-        //{
-        //    foreach (var item in arr.Children<JObject>())
-        //    {
-        //        foreach (JProperty prop in item.Properties())
-        //        {
-        //            if (prop.Name.ToLower() == propName)
-        //            {   
-        //                return prop.Value;
-        //            }
-        //        }
-        //    }
-
-        //    return null;
-        //}
-
-        //private static JToken lookupError(JArray arr)
-        //{
-        //    foreach (var item in arr.Children<JObject>())
-        //    {
-        //        foreach (JProperty prop in item.Properties())
-        //        {
-        //            if (prop.Name.ToLower() == "error")
-        //            {
-        //                dynamic val = prop.Value;
-        //                var code = val.type.Value;
-        //                return prop.Value;
-        //            }
-        //        }
-        //    }
-
-        //    return null;
-        //}
-
-
-
-
     }
 }

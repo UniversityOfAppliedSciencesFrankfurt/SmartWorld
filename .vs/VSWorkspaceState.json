@@ -3,8 +3,14 @@
     "",
     "\\IotApi",
     "\\IotApi\\src",
-    "\\IotApi\\src\\CoAPConnector"
+    "\\IotApi\\src\\IotApi",
+    "\\IotApi\\src\\XmlRpcConnector",
+    "\\IotApi\\src\\XmlRpcConnector\\CcuLib",
+    "\\IotApi\\src\\XmlRpcConnector\\XmlRpcCore",
+    "\\IotApi\\tests",
+    "\\IotApi\\tests\\XmlRpcConnectorTests",
+    "\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Desktop"
   ],
-  "SelectedNode": "\\IotApi\\CoAPConnector.sln",
+  "SelectedNode": "\\IotApi\\src\\XmlRpcConnector\\XmlRpcCore\\XmlRpc.cs",
   "PreviewInSolutionExplorer": false
 }

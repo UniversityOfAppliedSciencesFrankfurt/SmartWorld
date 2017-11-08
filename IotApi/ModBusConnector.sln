@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{63CFB394-0A50-43F7-B7FE-2F999A7623D3}"
 EndProject
@@ -10,17 +10,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IotApi", "src\IotApi\IotApi.xproj", "{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AA6BA545-29E2-4107-827C-3C737F386131}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ModBusConnector", "src\ModBusConnector\ModBusConnector.xproj", "{EFC88167-604B-4CEA-BC04-E41896479C62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApi", "src\IotApi\IotApi.csproj", "{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ModBusUnitTests", "tests\ModBusUnitTests\ModBusUnitTests.xproj", "{856B1955-2339-496F-9D6E-7D59971C3E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModBusConnector", "src\ModBusConnector\ModBusConnector.csproj", "{EFC88167-604B-4CEA-BC04-E41896479C62}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NModbus4", "..\..\MODBUS\NModbus4-portable-3.0\NModbus4\NModbus4.xproj", "{9B07ED72-3AD9-45EC-AAE9-295849B309AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModBusUnitTests", "tests\ModBusUnitTests\ModBusUnitTests.csproj", "{856B1955-2339-496F-9D6E-7D59971C3E3A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestProgram", "src\TestProgram\TestProgram.xproj", "{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbus4", "..\..\MODBUS\NModbus4-portable-3.0\NModbus4\NModbus4.xproj", "{9B07ED72-3AD9-45EC-AAE9-295849B309AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProgram", "src\TestProgram\TestProgram.csproj", "{BD66A99D-2E9F-46FB-92A9-5560DC371D1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,5 +58,8 @@ Global
 		{EFC88167-604B-4CEA-BC04-E41896479C62} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
 		{856B1955-2339-496F-9D6E-7D59971C3E3A} = {AA6BA545-29E2-4107-827C-3C737F386131}
 		{BD66A99D-2E9F-46FB-92A9-5560DC371D1E} = {63CFB394-0A50-43F7-B7FE-2F999A7623D3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBFB9968-7BDE-42D4-A4EE-352801028B13}
 	EndGlobalSection
 EndGlobal
