@@ -1,7 +1,2 @@
-#:D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
-#:D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
-D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
-#:D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj
-D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
-D:\ProjectOPCUA\IotApi\tests\PhilipsHueUnitTests\PhilipsHueUnitTests.xproj|D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj
-D:\ProjectOPCUA\IotApi\src\PhilipsHueConnector\PhilipsHueConnector.xproj|D:\ProjectOPCUA\IotApi\src\IotApi\IotApi.xproj
+#:C:\GitHub\SmartWorld Backup\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj
+C:\GitHub\SmartWorld Backup\IotApi\tests\ModBusUnitTests\ModBusUnitTests.xproj|C:\GitHub\SmartWorld Backup\IotApi\src\IotApi\IotApi.xproj

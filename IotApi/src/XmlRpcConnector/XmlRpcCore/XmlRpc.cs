@@ -28,56 +28,64 @@ namespace XmlRpcCore
                 m_Mock = bool.Parse(args["Mock"].ToString());
         }
 
-        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
+
+        {
+            XmlRpcProxy proxy = new XmlRpcProxy(m_Uri, m_TimeOut, m_Mock);
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
+
+                    var requestStr = proxy.SerializeRequest(sensorMsg);
+                    var res = proxy.SendRequest(requestStr).Result;
+                    var response = proxy.DeserializeResponse(res);
+
+                    onSuccess?.Invoke(new List<object> { response });
+                }
+                catch (XmlRpcFaultException faultEx)
+                {
+                    onError?.Invoke(faultEx);
+                }
+            });
+        }
+
+        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
             try
             {
+                List<object> onSuccList = new List<object>();
+                List<IotApiException> onErrList = new List<IotApiException>();
+
                 foreach (var msg in sensorMessages)
                 {
-                    await this.SendAsync(sensorMessages, (msgs) =>
+                    await this.SendAsync(sensorMessages, (sucMgs) =>
                     {
-                        onSuccess?.Invoke(msgs);
+                        onSuccList.Add(sucMgs);
                     },
-                    (msgs, err) =>
+                    (err) =>
                     {
-                        onError?.Invoke(new List<object> { msg }, err);
-                        return;
+                        onErrList.Add(err);
                     },
                     args);
                 }
 
-                onSuccess?.Invoke(sensorMessages);
+                onSuccess?.Invoke(onSuccList);
+
+                if (onErrList != null)
+                {
+                    onError?.Invoke(onErrList);
+                    return;
+                }
+
             }
             catch (Exception ex)
             {
-                onError?.Invoke(sensorMessages, ex);
+                onError?.Invoke(new List<IotApiException> { (IotApiException)ex });
             }
-        }
-
-        public async Task SendAsync(object sensorMessage, Action<IList<object>> onSuccess = null, Action<IList<object>, Exception> onError = null, Dictionary<string, object> args = null)
-        {
-          
-            XmlRpcProxy proxy = new XmlRpcProxy(m_Uri, m_TimeOut, m_Mock);
-
-            await Task.Run(() =>
-             {
-                 try
-                 {
-                     
-                     var sensorMsg = new Message(sensorMessage).GetBody<MethodCall>();
-
-                     var requestStr = proxy.SerializeRequest(sensorMsg);
-                     var res = proxy.SendRequest(requestStr).Result;
-                     var response = proxy.DeserializeResponse(res);
-
-                     onSuccess?.Invoke(new List<object>() { response });
-
-                 }
-                 catch (XmlRpcFaultException faultEx)
-                 {
-                     onError?.Invoke(new List<object> { faultEx.Message }, faultEx);
-                 }
-             });
         }
     }
 }
+
