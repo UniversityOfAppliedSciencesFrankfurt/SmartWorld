@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
-using NUnit;
-using Moq;
 
 
 namespace CoAPConnector
@@ -164,7 +162,7 @@ namespace CoAPConnector
             sendTask.Wait(m_MaxTaskTimeout);
 
             if (!sendTask.IsCompleted)
-                throw new NUnit.Framework.AssertionException("sendTask took too long to complete");
+                throw new Exception("sendTask took too long to complete");
 
             m_client.Listen();
 
@@ -172,7 +170,7 @@ namespace CoAPConnector
             responseTask.Wait(m_MaxTaskTimeout);
 
             if (!responseTask.IsCompleted)
-                throw new NUnit.Framework.AssertionException("responseTask took too long to complete");
+                throw new Exception("responseTask took too long to complete");
 
             return await responseTask;
         }

@@ -7,3 +7,12 @@ C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.AssemblyInfo.cs
 C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.dll
 C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.pdb
 C:\Temp\SW\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.csprojResolveAssemblyReference.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\bin\Debug\netstandard2.0\IotApi.deps.json
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\bin\Debug\netstandard2.0\IotApi.dll
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\bin\Debug\netstandard2.0\IotApi.pdb
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.csprojResolveAssemblyReference.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.csproj.CoreCompileInputs.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.AssemblyInfoInputs.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.AssemblyInfo.cs
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.dll
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\IotApi\obj\Debug\netstandard2.0\IotApi.pdb

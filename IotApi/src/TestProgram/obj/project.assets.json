@@ -6718,11 +6718,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Temp\\SW\\IotApi\\src\\TestProgram\\TestProgram.csproj",
+      "projectUniqueName": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\TestProgram\\TestProgram.csproj",
       "projectName": "TestProgram",
-      "projectPath": "C:\\Temp\\SW\\IotApi\\src\\TestProgram\\TestProgram.csproj",
+      "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\TestProgram\\TestProgram.csproj",
       "packagesPath": "C:\\Users\\mhoshen\\.nuget\\packages\\",
-      "outputPath": "C:\\Temp\\SW\\IotApi\\src\\TestProgram\\obj\\",
+      "outputPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\TestProgram\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mhoshen\\AppData\\Roaming\\NuGet\\NuGet.Config",

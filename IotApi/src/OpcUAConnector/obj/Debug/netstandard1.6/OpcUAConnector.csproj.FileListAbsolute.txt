@@ -2,3 +2,15 @@ C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csp
 C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csproj.CoreCompileInputs.cache
 C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfoInputs.cache
 C:\Temp\SW\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfo.cs
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\OpcUAConnector.deps.json
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\OpcUAConnector.dll
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\OpcUAConnector.pdb
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\IotApi.dll
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\IotApi.pdb
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\bin\Debug\netstandard1.6\IotApi.xml
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csprojResolveAssemblyReference.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.csproj.CoreCompileInputs.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfoInputs.cache
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.AssemblyInfo.cs
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.dll
+C:\Users\mhoshen\Source\Repos\SmartWorld\IotApi\src\OpcUAConnector\obj\Debug\netstandard1.6\OpcUAConnector.pdb
