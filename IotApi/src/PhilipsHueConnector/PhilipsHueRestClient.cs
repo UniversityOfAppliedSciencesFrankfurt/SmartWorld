@@ -21,11 +21,6 @@ namespace PhilipsHueConnector
 
         private string m_ApiSuffix = "api";
 
-        //public PhilipsHueRestClient()
-        //{
-
-        //}
-
         public PhilipsHueRestClient(string userName, string gatewayUrl)
         {
             this.m_UserName = userName;

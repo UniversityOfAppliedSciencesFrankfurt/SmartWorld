@@ -110,6 +110,7 @@ namespace CcuLib
             valueDictionary.Add("off", 0.0);
 
         }
+
         /// <summary>
         /// Create a new MethodCall based all given parameters
         /// </summary>
