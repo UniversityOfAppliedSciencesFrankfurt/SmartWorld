@@ -1,4 +1,0 @@
-C:\TFS\Daenet\SE-2015-2016\IOT Bridge_GIT\CcuConnector\CcuConnector.csproj;neutral
-C:\TFS\Daenet\SE-2015-2016\IOT Bridge_GIT\IoTBridge\IoTBridge.csproj;neutral
-C:\TFS\Daenet\SE-2015-2016\IOT Bridge_GIT\IOTBridge_GIT\Test.Uwp.csproj;x64
-C:\TFS\Daenet\SE-2015-2016\IOT Bridge_GIT\XmlRpcCoreFx\XmlRpcCoreFx.csproj;neutral

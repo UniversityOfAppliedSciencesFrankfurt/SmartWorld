@@ -2752,7 +2752,7 @@
       ]
     },
     "Microsoft.NETCore.App/1.0.4": {
-      "sha512": "4XIOd4F9xV6gTalmKVW5bO24LhHTi7FA+UpscU1tQKMe778Q444TmrYgHdvUVJEFJZjanEZdZBROKU+Jc9YyWQ==",
+      "sha512": "RG6hwo9ifKnbhPeNkp3X+oBE7EoImdRC2ntt+I3iLlhc5WV7DPg5/gNa6OH0qM3BbmRvfsgO0CNTjNU/hrIUbw==",
       "type": "package",
       "path": "microsoft.netcore.app/1.0.4",
       "files": [
@@ -7936,7 +7936,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mhoshen\\.nuget\\packages\\": {}
+    "C:\\Users\\DamirDobric\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -7944,30 +7944,30 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\IotApiCoreTests.csproj",
+      "projectUniqueName": "C:\\dev\\git\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\IotApiCoreTests.csproj",
       "projectName": "IotApiCoreTests",
-      "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\IotApiCoreTests.csproj",
-      "packagesPath": "C:\\Users\\mhoshen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\obj\\",
+      "projectPath": "C:\\dev\\git\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\IotApiCoreTests.csproj",
+      "packagesPath": "C:\\Users\\DamirDobric\\.nuget\\packages\\",
+      "outputPath": "C:\\dev\\git\\SmartWorld\\IotApi\\tests\\IotApiTests\\IotApiCoreTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mhoshen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DamirDobric\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp1.0"
       ],
       "sources": {
-        "C:\\GitHub\\Pack": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
+        "C:\\temp\\TestPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp1.0": {
           "projectReferences": {
-            "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj": {
-              "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj"
+            "C:\\dev\\git\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj": {
+              "projectPath": "C:\\dev\\git\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj"
             }
           }
         }

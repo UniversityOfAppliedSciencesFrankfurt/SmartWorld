@@ -3475,7 +3475,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mhoshen\\.nuget\\packages\\": {},
+    "C:\\Users\\DamirDobric\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -3484,18 +3484,18 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj",
+      "projectUniqueName": "C:\\dev\\git\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj",
       "projectName": "IotApi",
-      "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj",
-      "packagesPath": "C:\\Users\\mhoshen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\obj\\",
+      "projectPath": "C:\\dev\\git\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj",
+      "packagesPath": "C:\\Users\\DamirDobric\\.nuget\\packages\\",
+      "outputPath": "C:\\dev\\git\\SmartWorld\\IotApi\\src\\IotApi\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mhoshen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DamirDobric\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3503,8 +3503,8 @@
         "net461"
       ],
       "sources": {
-        "C:\\GitHub\\Pack": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\temp\\TestPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
