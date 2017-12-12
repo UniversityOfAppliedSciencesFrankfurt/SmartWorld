@@ -7,16 +7,16 @@ namespace PhilipsHueConnector.Entities
 {
     public class State
     {
-        public bool ON { get; set; }
-        public int Bri { get; set; }
-        public int Hue { get; set; }
-        public int Sat { get; set; }
-        public string Effect { get; set; }
-        public List<double> Xy { get; set; }
-        public int Ct { get; set; }
-        public string Alert { get; set; }
-        public string Colormode { get; set; }
-        public bool Reachable { get; set; }
+        public bool? on { get; set; }
+        public int? bri { get; set; }
+        public int? hue { get; set; }
+        public int? sat { get; set; }
+        public string effect { get; set; }
+        public List<double> xy { get; set; }
+        public int? ct { get; set; }
+        public string alert { get; set; }
+        public string colormode { get; set; }
+        public bool? reachable { get; set; }
     }
 
 }

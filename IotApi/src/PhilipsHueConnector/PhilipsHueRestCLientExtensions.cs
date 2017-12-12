@@ -73,8 +73,6 @@ namespace PhilipsHueConnector
                         throw ex;
                 }
             }
-
-            throw new Exception("");
         }
     }
 }

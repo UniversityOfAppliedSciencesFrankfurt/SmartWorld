@@ -178,10 +178,11 @@ namespace Iot
                 var module = getServices<ISendModule>().FirstOrDefault();
                 if (module != null)
                 {
+                    object result = null;
                     await module.SendAsync(sensorMessage,
                     (msgs) =>
                     {
-                       
+                        result = msgs;
                     },
                     (err) =>
                     {
@@ -189,10 +190,10 @@ namespace Iot
                     },
                     args);
 
-                    return null;
+                    return result;
                 }
                 else
-                    return null;
+                    throw new IotApiException(":( There is no 'ISendModule' registered in the sending pipeline!");
             }
             catch (Exception ex)
             {

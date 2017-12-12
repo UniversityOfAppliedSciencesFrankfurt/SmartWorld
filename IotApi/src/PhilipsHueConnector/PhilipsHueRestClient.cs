@@ -68,9 +68,13 @@ namespace PhilipsHueConnector
                 var result = JsonConvert.DeserializeObject<JArray>(str);
                 GatewayError err = null;
 
-                if (isError(result, out err))
+                if (isError(result, ref err))
                 {
                     onError?.Invoke(new IotApiException(":( An error has ocurred!", err));
+
+                } else if (isSuccess(result))
+                {
+                    onSuccess?.Invoke(result);
                 }
                 else
                 {
@@ -79,21 +83,37 @@ namespace PhilipsHueConnector
             }
             else if (res is JObject)
             {
+              var devices = getDevices(sensorMessage, res);
+
+                onSuccess?.Invoke(devices);
+            }
+
+        }
+
+        private object getDevices(object sensorMessage, object res)
+        {
+            if (sensorMessage is GetLightStates)
+            {
+                return  JsonConvert.DeserializeObject<Device>(((JObject)res).Root.ToString());
+            }
+            else if (sensorMessage is GetLights)
+            {
                 List<Device> devices = new List<Entities.Device>();
 
                 foreach (var prop in ((JObject)res).Properties())
                 {
-                    var dev = JsonConvert.DeserializeObject<Device>(prop.Value.ToString());
+                    Device dev = JsonConvert.DeserializeObject<Device>(prop.Value.ToString());
                     dev.Id = prop.Name;
                     devices.Add(dev);
                 }
 
-                onSuccess?.Invoke(devices);
+                return devices;
             }
-            
-            throw new NotImplementedException();
+
+            throw new IotApiException("Device not fount");            
         }
 
+        
         private async Task<HttpResponseMessage> executeMsg(object sensorMessage)
         {
             HueCommand cmd = sensorMessage as HueCommand;
@@ -103,29 +123,46 @@ namespace PhilipsHueConnector
             HttpResponseMessage response = null;
 
             var httpClient = GetHttpClient(m_GatewayUrl);
+
             if (cmd.Method == "get")
             {
                 response = await httpClient.GetAsync(getUri(cmd));
             }
             else if (cmd.Method == "post")
             {
-                //httpClient.GetAsync(getUri(cmd));
+                StringContent str = new StringContent(JsonConvert.SerializeObject(cmd));
+                response = await httpClient.PostAsync(getUri(cmd),str);
             }
             else if (cmd.Method == "put")
             {
+                dynamic command = (dynamic)cmd;
+                var sta = JsonConvert.SerializeObject(command.State, new JsonSerializerSettings() {  DefaultValueHandling = DefaultValueHandling.Ignore});
 
+                StringContent str = new StringContent(sta);
+                response = await httpClient.PutAsync(getUri(cmd), str);
             }
 
             return response;
         }
 
-        private bool isError(JArray result, out GatewayError err)
+        private bool isError(JArray result, ref GatewayError err)
         {
             var jToken = LookupValue(result, "error");
-            err = JsonConvert.DeserializeObject<GatewayError>(jToken.ToString());
-            return jToken != null;
+
+            if (jToken != null)
+            {
+                err = JsonConvert.DeserializeObject<GatewayError>(jToken.ToString());
+                return true;
+            }
+
+            return false;
         }
 
+        private bool isSuccess(JArray result)
+        {
+            var jToken = LookupValue(result, "success");
+            return jToken != null;
+        }
         private string getUri(HueCommand cmd)
         {
             return $"/{m_ApiSuffix}/{m_UserName}/{cmd.Path}";
