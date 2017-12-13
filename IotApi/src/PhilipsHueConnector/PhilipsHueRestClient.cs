@@ -13,14 +13,28 @@ namespace PhilipsHueConnector
 {
     public class PhilipsHueRestClient : ISendModule
     {
+        /// <summary>
+        /// Next module object
+        /// </summary>
         private ISendModule m_NextSendModule;
-
+        /// <summary>
+        /// Philips hue gateway user name
+        /// </summary>
         private string m_UserName;
-
+        /// <summary>
+        /// Philips hue gateway url
+        /// </summary>
         private string m_GatewayUrl;
-
+        /// <summary>
+        /// Philips hue api suffix
+        /// </summary>
         private string m_ApiSuffix = "api";
 
+        /// <summary>
+        /// Contractor of PhilipsHueRestClient
+        /// </summary>
+        /// <param name="userName"> Gateway user name</param>
+        /// <param name="gatewayUrl"> Gateway url</param>
         public PhilipsHueRestClient(string userName, string gatewayUrl)
         {
             this.m_UserName = userName;
@@ -28,6 +42,9 @@ namespace PhilipsHueConnector
             this.m_GatewayUrl = gatewayUrl;
         }
 
+        /// <summary>
+        /// Property of next module
+        /// </summary>
         public ISendModule NextSendModule
         {
             get
@@ -41,19 +58,53 @@ namespace PhilipsHueConnector
             }
         }
 
+        /// <summary>
+        /// Establish a connection with Philips hue gateway
+        /// </summary>
+        /// <param name="args"></param>
         public void Open(Dictionary<string, object> args)
         {
             if (m_UserName == null || m_GatewayUrl == null)
                 throw new Exception("Username or gateay URL not specified.");
         }
 
-        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null,
+        /// <summary>
+        /// Send command to Philips hue devices
+        /// </summary>
+        /// <param name="sensorMessages">Collection of commands</param>
+        /// <param name="onSuccess">Success responses from Philips hue device</param>
+        /// <param name="onError">Error messages from Philips hue device</param>
+        /// <param name="args">Arguments but in Philips hue did not use</param>
+        /// <returns></returns>
+        public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null,
                                Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
+            List<object> succList = new List<object>();
+            List<IotApiException> errList = new List<IotApiException>();
 
-            throw new NotImplementedException();
+            foreach (var mgs in sensorMessages)
+            {
+                await this.SendAsync(mgs, (suc) =>
+                 {
+                     succList.Add(suc);
+                 }, (err) =>
+                 {
+                     errList.Add(err);
+                 }, args);
+            }
+
+            onSuccess?.Invoke(succList);
+            onError?.Invoke(errList);
         }
 
+        /// <summary>
+        /// Send command to Philips hue device
+        /// </summary>
+        /// <param name="sensorMessage">Command to send</param>
+        /// <param name="onSuccess">Success message from Philips hue device</param>
+        /// <param name="onError">Error message from Philips hue device</param>
+        /// <param name="args">Arguments but in Philips hue did not use</param>
+        /// <returns></returns>
         public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null,
                                 Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
@@ -91,6 +142,12 @@ namespace PhilipsHueConnector
 
         }
 
+        /// <summary>
+        /// Get device/lights list 
+        /// </summary>
+        /// <param name="sensorMessage"></param>
+        /// <param name="res"></param>
+        /// <returns></returns>
         private object getDevices(object sensorMessage, object res)
         {
             if (sensorMessage is GetLightStates)
@@ -121,7 +178,11 @@ namespace PhilipsHueConnector
             throw new IotApiException("Device not fount");
         }
 
-
+        /// <summary>
+        /// Command execute with HttpClient 
+        /// </summary>
+        /// <param name="sensorMessage"></param>
+        /// <returns></returns>
         private async Task<HttpResponseMessage> executeMsg(object sensorMessage)
         {
             HueCommand cmd = sensorMessage as HueCommand;
@@ -156,6 +217,12 @@ namespace PhilipsHueConnector
             return response;
         }
 
+        /// <summary>
+        /// Check error is occurred or not 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="err"></param>
+        /// <returns></returns>
         private bool isError(JArray result, ref GatewayError err)
         {
             var jToken = LookupValue(result, "error");
@@ -169,16 +236,32 @@ namespace PhilipsHueConnector
             return false;
         }
 
+        /// <summary>
+        /// Look for success message
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         private bool isSuccess(JArray result)
         {
             var jToken = LookupValue(result, "success");
             return jToken != null;
         }
+
+        /// <summary>
+        /// Get uri of api
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         private string getUri(HueCommand cmd)
         {
             return $"/{m_ApiSuffix}/{m_UserName}/{cmd.Path}";
         }
 
+        /// <summary>
+        /// Get Http client
+        /// </summary>
+        /// <param name="gatewayUri"></param>
+        /// <returns></returns>
         internal static HttpClient GetHttpClient(string gatewayUri)
         {
             HttpClient client = new HttpClient();
@@ -187,11 +270,21 @@ namespace PhilipsHueConnector
             return client;
         }
 
+        /// <summary>
+        /// Throw an exception
+        /// </summary>
+        /// <param name="response"></param>
         internal static void Throw(HttpResponseMessage response)
         {
             throw new Exception($"{response.StatusCode} - {response.Content.ReadAsStringAsync().Result}");
         }
 
+        /// <summary>
+        /// Look up value in JArray
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="propName"></param>
+        /// <returns></returns>
         internal static JToken LookupValue(JArray arr, string propName)
         {
             foreach (var item in arr.Children<JObject>())

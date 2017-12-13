@@ -43,8 +43,10 @@ namespace PhilipsHueUnitTest
 
             Assert.IsTrue(!string.IsNullOrEmpty(username));
         }
-        
 
+        /// <summary>
+        /// Get list of lights which connected with Philips hue gateway
+        /// </summary>
         [TestMethod]
         public void GetLightTest()
         {
@@ -53,6 +55,9 @@ namespace PhilipsHueUnitTest
             iotApi.SendAsync(new GetLights()).Wait();
         }
 
+        /// <summary>
+        /// Get list of lights which connected with Philips hue gateway as a list of devices 
+        /// </summary>
         [TestMethod]
         public void GetLightsTest()
         {
@@ -65,6 +70,9 @@ namespace PhilipsHueUnitTest
             Assert.AreEqual(result.Count, TestDriver.NumOfDevices);
         }
 
+        /// <summary>
+        /// Get list of lights which connected with Philips hue gateway using api style 
+        /// </summary>
         [TestMethod]
         public void GetLightsJSApiStyleTest()
         {
@@ -86,6 +94,9 @@ namespace PhilipsHueUnitTest
             }).Wait();
         }
 
+        /// <summary>
+        /// Get new lights as list of devices
+        /// </summary>
         [TestMethod]
         public void GetNewLightTest()
         {
@@ -95,6 +106,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result.Count == 0);
         }
 
+        /// <summary>
+        /// Get light states for example, light is on/off, color values and so on
+        /// </summary>
         [TestMethod]
         public void GetLisghtStatesTest()
         {
@@ -108,6 +122,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result != null);
         }
 
+        /// <summary>
+        /// Switch off the light
+        /// </summary>
         [TestMethod]
         public void SwitchOffLightTest()
         {
@@ -127,6 +144,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result is JArray);
         }
 
+        /// <summary>
+        /// Switch on the light
+        /// </summary>
         [TestMethod]
         public void SwitchOnLightTest()
         {
@@ -147,6 +167,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result is JArray);
         }
 
+        /// <summary>
+        /// Set light colors
+        /// </summary>
         [TestMethod]
         public void SetLightColorChangeTest()
         {
@@ -171,6 +194,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result is JArray);
         }
 
+        /// <summary>
+        /// Change attributes of light for example, light name
+        /// </summary>
         [TestMethod]
         public void SetLightAttributesTest()
         {
@@ -187,6 +213,9 @@ namespace PhilipsHueUnitTest
             Assert.IsTrue(result is JArray);
         }
 
+        /// <summary>
+        /// Search new light connected with Philips hue gateway
+        /// </summary>
         [TestMethod]
         public void SearchForNewLightTest()
         {
