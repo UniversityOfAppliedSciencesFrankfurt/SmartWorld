@@ -27,13 +27,19 @@ namespace PhilipsHueConnector
 
     }
 
-
+    /// <summary>
+    /// HTTP Get method in REST operation 
+    /// </summary>
     public class GetCommandBase : HueCommand
     {
         public override string Method { get; set; } = "get";
 
         public override string Path { get; set; }
     }
+
+    /// <summary>
+    /// HTTP Delete method in REST operation 
+    /// </summary>
     public class DeleteCommandBase : HueCommand
     {
         public override string Method { get; set; } = "delete";
@@ -41,7 +47,9 @@ namespace PhilipsHueConnector
         public override string Path { get; set; }
     }
 
-
+    /// <summary>
+    /// HTTP Put or Post method in REST operation 
+    /// </summary>
     public class SendCommandBase : HueCommand
     {
         public override string Method { get; set; } = "put";
@@ -60,41 +68,65 @@ namespace PhilipsHueConnector
     }
 
     #region Get Commands
-
+    /// <summary>
+    /// Get Philips hue configurations
+    /// </summary>
     public class GetConfig : GetCommandBase
     {
         public override string Path { get; set; } = "config";
     }
 
+    /// <summary>
+    /// Get all lights connected with Philips hue gateway
+    /// </summary>
     public class GetLights : GetCommandBase
     {
         public override string Path { get; set; } = "lights";
     }
 
+    /// <summary>
+    /// Get new light
+    /// </summary>
     public class GetNewLight : GetLights
     {
         public override string Path { get; set; } = "lights/new";
     }
 
+    /// <summary>
+    /// Get sensors connected with Philips hue gateway
+    /// </summary>
     public class GetSensors : GetCommandBase
     {
         public override string Path { get; set; } = "sensors";
     }
 
+    /// <summary>
+    /// Get groups
+    /// </summary>
     public class GetGroups : GetCommandBase
     {
         public override string Path { get; set; } = "groups";
     }
 
+    /// <summary>
+    /// Get Scenes
+    /// </summary>
     public class GetScenes : GetCommandBase
     {
         public override string Path { get; set; } = "scenes";
     }
 
+    /// <summary>
+    /// Get rules
+    /// </summary>
     public class GetRules : GetCommandBase
     {
         public override string Path { get; set; } = "rules";
     }
+
+    /// <summary>
+    /// Get schedules
+    /// </summary>
     public class GetSchedules : GetCommandBase
     {
         public override string Path { get; set; } = "schedules";
@@ -154,6 +186,9 @@ namespace PhilipsHueConnector
         
     }
 
+    /// <summary>
+    /// Set light attributes
+    /// </summary>
     public class SetLightAttributes : SendCommandBase
     {
         public override string Path
@@ -171,6 +206,9 @@ namespace PhilipsHueConnector
 
     }
     
+    /// <summary>
+    /// Search for new lights
+    /// </summary>
     public class SerarchNewLights : SendCommandBase
     {
         public override string Method { get
