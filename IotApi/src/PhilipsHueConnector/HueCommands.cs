@@ -49,14 +49,14 @@ namespace PhilipsHueConnector
         public override string Path { get; set; }
 
         /// <summary>
-        /// Identifier of device. USed in PUT/POST operations only.
+        /// Identifier of device. Used in PUT/POST operations only.
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
         /// Used by PUT/POST commands only.
         /// </summary>
-        public State State { get; set; }
+        //public State State { get; set; }
     }
 
     #region Get Commands
@@ -71,6 +71,10 @@ namespace PhilipsHueConnector
         public override string Path { get; set; } = "lights";
     }
 
+    public class GetNewLight : GetLights
+    {
+        public override string Path { get; set; } = "lights/new";
+    }
 
     public class GetSensors : GetCommandBase
     {
@@ -129,23 +133,12 @@ namespace PhilipsHueConnector
             }
         }
     }
+
     /// <summary>
     /// Sets the state of the light
     /// </summary>
     public class SetLightStates : SendCommandBase
     {
-        public override string Method
-        {
-            get
-            {
-                return "put";
-            }
-
-            set
-            {
-                throw new NotSupportedException();
-            }
-        }
         public override string Path
         {
             get
@@ -159,6 +152,37 @@ namespace PhilipsHueConnector
             }
         }
         
+    }
+
+    public class SetLightAttributes : SendCommandBase
+    {
+        public override string Path
+        {
+            get
+            {
+                return $"lights/{this.Id}";
+            }
+
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+    }
+    
+    public class SerarchNewLights : SendCommandBase
+    {
+        public override string Method { get
+            {
+                return "post";
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+        public override string Path { get; set; } = "lights";
     }
     #endregion
 }

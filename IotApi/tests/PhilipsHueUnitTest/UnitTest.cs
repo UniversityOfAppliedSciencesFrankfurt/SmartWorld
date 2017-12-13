@@ -39,11 +39,11 @@ namespace PhilipsHueUnitTest
         [TestMethod]
         public void GenerateUserTest()
         {
-           
-           var username = new IotApi().GenerateUserName(m_GtwUri);
+            var username = new IotApi().GenerateUserName(m_GtwUri);
 
             Assert.IsTrue(!string.IsNullOrEmpty(username));
         }
+        
 
         [TestMethod]
         public void GetLightTest()
@@ -73,7 +73,7 @@ namespace PhilipsHueUnitTest
             iotApi.SendAsync(new GetLights(), (result) =>
             {
                 Assert.IsNotNull(result);
-                
+
                 Assert.IsTrue(result is List<Device>);
 
                 List<Device> res = result as List<Device>;
@@ -87,7 +87,16 @@ namespace PhilipsHueUnitTest
         }
 
         [TestMethod]
-        public void GetLisghtStates()
+        public void GetNewLightTest()
+        {
+            var api = getApi();
+            var result = api.SendAsync(new GetNewLight()).Result as List<Device>;
+
+            Assert.IsTrue(result.Count == 0);
+        }
+
+        [TestMethod]
+        public void GetLisghtStatesTest()
         {
             var api = getApi();
 
@@ -108,7 +117,7 @@ namespace PhilipsHueUnitTest
             {
                 Id = "4",
 
-                State = new State()
+                Body = new State()
                 {
                     on = false
                 },
@@ -127,7 +136,7 @@ namespace PhilipsHueUnitTest
             {
                 Id = "4",
 
-                State = new State()
+                Body = new State()
                 {
                     on = true,
                     bri = 120
@@ -139,7 +148,7 @@ namespace PhilipsHueUnitTest
         }
 
         [TestMethod]
-        public void SetLightOnGreenTest()
+        public void SetLightColorChangeTest()
         {
             var iotApi = getApi();
 
@@ -147,21 +156,50 @@ namespace PhilipsHueUnitTest
             {
                 Id = "4",
 
-                State = new State()
+                Body = new State()
                 {
                     on = true,
-                    bri = 254,
+                    bri = 120,
                     xy = new List<double>()
                      {
-                        0.1, 0.85
+                        0.692, 0.308
                      }
                 },
 
             }).Result;
 
             Assert.IsTrue(result is JArray);
+        }
 
-            Assert.IsTrue(((JArray)result).Count == 6);
+        [TestMethod]
+        public void SetLightAttributesTest()
+        {
+            var api = getApi();
+            var result = api.SendAsync(new SetLightAttributes()
+            {
+                Id = "1",
+                Body = new
+                {
+                    name = "Bedroom Light"
+                }
+            }).Result;
+
+            Assert.IsTrue(result is JArray);
+        }
+
+        [TestMethod]
+        public void SearchForNewLightTest()
+        {
+            var api = getApi();
+            var result = api.SendAsync(new SerarchNewLights()
+            {
+                Body = new
+                {
+                    deviceid = new []{"45AF34","543636","34AFBE" }
+                }
+            }).Result;
+
+            Assert.IsTrue(result is JArray);
         }
     }
 }

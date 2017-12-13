@@ -47,14 +47,14 @@ namespace PhilipsHueConnector
                 throw new Exception("Username or gateay URL not specified.");
         }
 
-        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, 
+        public Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null,
                                Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
 
             throw new NotImplementedException();
         }
 
-        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, 
+        public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null,
                                 Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
             HttpResponseMessage response = await executeMsg(sensorMessage);
@@ -72,7 +72,8 @@ namespace PhilipsHueConnector
                 {
                     onError?.Invoke(new IotApiException(":( An error has ocurred!", err));
 
-                } else if (isSuccess(result))
+                }
+                else if (isSuccess(result))
                 {
                     onSuccess?.Invoke(result);
                 }
@@ -83,7 +84,7 @@ namespace PhilipsHueConnector
             }
             else if (res is JObject)
             {
-              var devices = getDevices(sensorMessage, res);
+                var devices = getDevices(sensorMessage, res);
 
                 onSuccess?.Invoke(devices);
             }
@@ -94,7 +95,7 @@ namespace PhilipsHueConnector
         {
             if (sensorMessage is GetLightStates)
             {
-                return  JsonConvert.DeserializeObject<Device>(((JObject)res).Root.ToString());
+                return JsonConvert.DeserializeObject<Device>(((JObject)res).Root.ToString());
             }
             else if (sensorMessage is GetLights)
             {
@@ -102,18 +103,25 @@ namespace PhilipsHueConnector
 
                 foreach (var prop in ((JObject)res).Properties())
                 {
-                    Device dev = JsonConvert.DeserializeObject<Device>(prop.Value.ToString());
-                    dev.Id = prop.Name;
-                    devices.Add(dev);
+                    try
+                    {
+                        Device dev = JsonConvert.DeserializeObject<Device>(prop.Value.ToString());
+                        dev.Id = prop.Name;
+                        devices.Add(dev);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
                 }
 
                 return devices;
             }
 
-            throw new IotApiException("Device not fount");            
+            throw new IotApiException("Device not fount");
         }
 
-        
+
         private async Task<HttpResponseMessage> executeMsg(object sensorMessage)
         {
             HueCommand cmd = sensorMessage as HueCommand;
@@ -130,16 +138,19 @@ namespace PhilipsHueConnector
             }
             else if (cmd.Method == "post")
             {
-                StringContent str = new StringContent(JsonConvert.SerializeObject(cmd));
-                response = await httpClient.PostAsync(getUri(cmd),str);
+                StringContent str = new StringContent(JsonConvert.SerializeObject(cmd.Body, new JsonSerializerSettings() { DefaultValueHandling = DefaultValueHandling.Ignore }));
+                response = await httpClient.PostAsync(getUri(cmd), str);
             }
             else if (cmd.Method == "put")
             {
-                dynamic command = (dynamic)cmd;
-                var sta = JsonConvert.SerializeObject(command.State, new JsonSerializerSettings() {  DefaultValueHandling = DefaultValueHandling.Ignore});
+                var sta = JsonConvert.SerializeObject(cmd.Body, new JsonSerializerSettings() { DefaultValueHandling = DefaultValueHandling.Ignore });
 
                 StringContent str = new StringContent(sta);
                 response = await httpClient.PutAsync(getUri(cmd), str);
+            }
+            else
+            {
+                throw new IotApiException("HueCommand method is not assigned.");
             }
 
             return response;
