@@ -5,6 +5,7 @@ using PhilipsHueConnector;
 using PhilipsHueConnector.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PhilipsHueUnitTest
 {
@@ -192,6 +193,30 @@ namespace PhilipsHueUnitTest
             }).Result;
 
             Assert.IsTrue(result is JArray);
+        }
+
+        [TestMethod]
+        public void RandomColorChangeTest()
+        {
+            var iotApi = getApi();
+
+            while (true)
+            {
+                var result = iotApi.SendAsync(new SetLightStates()
+                {
+                    Id = "4",
+
+                    Body = new State()
+                    {
+                        on = true,
+                        bri = new Random().Next(120, 253),
+                        hue = new Random().Next(1, 65534)
+                    },
+
+                }).Result;
+
+                Task.Delay(3000).Wait();
+            }
         }
 
         /// <summary>
