@@ -127,6 +127,20 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\IotApi\IotApi.csproj">
+      <Project>{BECC6CE9-36B3-4BAF-92CA-58639569CEDA}</Project>
+      <Name>IotApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\XmlRpcConnector\CcuLib\CcuLib.csproj">
+      <Project>{afb36e87-0ab3-4dd1-be0f-75cab8edb49e}</Project>
+      <Name>CcuLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\XmlRpcConnector\XmlRpcCore\XmlRpcCore.csproj">
+      <Project>{121ACB95-CEC9-43E7-AE72-B9410F828B01}</Project>
+      <Name>XmlRpcCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

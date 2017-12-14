@@ -14,12 +14,17 @@ namespace XmlRpcCore
 
         public ISendModule NextSendModule { get; set; }
 
+        /// <summary>
+        /// XmlRpc contractor
+        /// </summary>
+        /// <param name="uri">Uri of CCU</param>
+        public XmlRpc(string uri)
+        {
+            this.m_Uri = new Uri(uri);
+        }
+
         public void Open(Dictionary<string, object> args)
         {
-            if (args == null || !args.ContainsKey("Uri"))
-                throw new ArgumentException("Arguments must contain value for 'Uri'!");
-            else
-                m_Uri = new Uri(args["Uri"] as string);
 
             if (args.ContainsKey("TimeOut"))
                 m_TimeOut = new TimeSpan(Convert.ToInt32(args["TimeOut"] as string));

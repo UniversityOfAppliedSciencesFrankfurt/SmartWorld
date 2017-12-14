@@ -16,15 +16,9 @@ namespace Test.Desktop
         static void Main(string[] args)
         {
             IotApi iotApi = new IotApi()
-                .RegisterModule(new XmlRpc());
-
-            Dictionary<string, object> agr = new Dictionary<string, object>()
-                {
-                    { "Uri", "http://192.168.0.222:2001" },
-                    {"Mock",false }
-                };
-
-            iotApi.Open(agr);
+                .UseXmlRpc("http://192.168.0.222:2001");
+            
+            iotApi.Open();
 
             Console.WriteLine("Welcome to IOT Bridge Gateway!");
             Thread.Sleep(2000); // Wait two seconds
