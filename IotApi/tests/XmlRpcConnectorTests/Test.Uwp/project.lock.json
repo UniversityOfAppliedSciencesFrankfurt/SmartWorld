@@ -23034,12 +23034,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\GitHub\\SmartWorld backup 2\\SmartWorld Backup1\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\Test.Uwp.csproj",
+      "projectUniqueName": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\Test.Uwp.csproj",
       "projectName": "Test.Uwp",
-      "projectPath": "C:\\GitHub\\SmartWorld backup 2\\SmartWorld Backup1\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\Test.Uwp.csproj",
-      "projectJsonPath": "C:\\GitHub\\SmartWorld backup 2\\SmartWorld Backup1\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\project.json",
+      "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\Test.Uwp.csproj",
+      "projectJsonPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\project.json",
       "packagesPath": "C:\\Users\\mhoshen\\.nuget\\packages\\",
-      "outputPath": "C:\\GitHub\\SmartWorld backup 2\\SmartWorld Backup1\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\obj\\",
+      "outputPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\mhoshen\\AppData\\Roaming\\NuGet\\NuGet.Config",
