@@ -22929,11 +22929,11 @@
       "frameworks": {
         "uap10.0.10240": {
           "projectReferences": {
-            "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\CcuLib\\CcuLib.csproj": {
-              "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\CcuLib\\CcuLib.csproj"
-            },
             "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj": {
               "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\IotApi\\IotApi.csproj"
+            },
+            "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\CcuLib\\CcuLib.csproj": {
+              "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\CcuLib\\CcuLib.csproj"
             },
             "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\XmlRpcCore\\XmlRpcCore.csproj": {
               "projectPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\src\\XmlRpcConnector\\XmlRpcCore\\XmlRpcCore.csproj"
