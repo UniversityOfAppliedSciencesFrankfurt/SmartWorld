@@ -66,6 +66,11 @@ namespace Test.Desktop
             return response;
         }
 
+        /// <summary>
+        /// Get list of devices
+        /// </summary>
+        /// <param name="iotApi"></param>
+        /// <returns></returns>
         public static async Task<string> GetListDevices(IotApi iotApi)
         {
             string request = "DEVICES LIST get";
@@ -73,6 +78,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Get door status
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> GetDoorStatus(IotApi ccu)
         {
             string request = "DOOR STATUS get";
@@ -83,6 +93,11 @@ namespace Test.Desktop
             return state;
         }
 
+        /// <summary>
+        /// Open the door
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> OpenDoor(IotApi ccu)
         {
             string request = "DOOR STATUS UNLOCK";
@@ -90,6 +105,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Close the door
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> CloseDoor(IotApi ccu)
         {
             string request = "DOOR STATUS LOCK";
@@ -104,6 +124,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Get humidity
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> GetHumiditySensor(IotApi ccu)
         {
             string request = "TEMP_SENSOR HUMIDITY get";
@@ -111,6 +136,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Get heater mode
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> GetHeaterMode(IotApi ccu)
         {
             string request = "HEATER MODE get";
@@ -118,6 +148,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Get heater temperature 
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> GetHeaterTemp(IotApi ccu)
         {
             string request = "HEATER ACT_TEMP get";
@@ -125,6 +160,12 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Set heater mode
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         public static async Task<string> SetHeaterMode(IotApi ccu, int mode)
         {
             string request = "HEATER MODE " + mode.ToString();
@@ -132,6 +173,12 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Set heater temperature 
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <param name="tempVal"></param>
+        /// <returns></returns>
         public static async Task<string> SetHeaterTemp(IotApi ccu, double tempVal)
         {
             if (tempVal <= 3.5) tempVal = 3.5;
@@ -141,6 +188,12 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Set dimmer mode
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
         public static async Task<string> SetDimmerMode(IotApi ccu, string mode)
         {
             string request = "DIMMER STATE " + mode;
@@ -148,6 +201,11 @@ namespace Test.Desktop
             return result;
         }
 
+        /// <summary>
+        /// Get dimmer mode
+        /// </summary>
+        /// <param name="ccu"></param>
+        /// <returns></returns>
         public static async Task<string> GetDimmerMode(IotApi ccu)
         {
             string request = "DIMMER STATE get";
