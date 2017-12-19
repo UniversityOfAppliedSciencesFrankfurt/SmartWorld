@@ -23,6 +23,10 @@ namespace XmlRpcCore
             this.m_Uri = new Uri(uri);
         }
 
+        /// <summary>
+        /// Connection open
+        /// </summary>
+        /// <param name="args"></param>
         public void Open(Dictionary<string, object> args)
         {
             if (args != null)
@@ -35,6 +39,14 @@ namespace XmlRpcCore
             }
         }
 
+        /// <summary>
+        /// Send message 
+        /// </summary>
+        /// <param name="sensorMessage">Sensor message</param>
+        /// <param name="onSuccess">Success message</param>
+        /// <param name="onError">Error message</param>
+        /// <param name="args">Arguments</param>
+        /// <returns></returns>
         public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
 
         {
@@ -59,6 +71,14 @@ namespace XmlRpcCore
             });
         }
 
+        /// <summary>
+        /// Send list of sensor message 
+        /// </summary>
+        /// <param name="sensorMessages">sensor message to send</param>
+        /// <param name="onSuccess">Success message </param>
+        /// <param name="onError">Error message</param>
+        /// <param name="args">Arguments</param>
+        /// <returns></returns>
         public async Task SendAsync(IList<object> sensorMessages, Action<IList<object>> onSuccess = null, Action<IList<IotApiException>> onError = null, Dictionary<string, object> args = null)
         {
             try
