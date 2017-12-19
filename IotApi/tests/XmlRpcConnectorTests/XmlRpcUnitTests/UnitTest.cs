@@ -58,7 +58,7 @@ namespace XmlRpcUnitTests
         }
 
         /// <summary>
-        /// Close the door
+        /// Close the door 
         /// </summary>
         [TestMethod]
         public void CloseDoor()
