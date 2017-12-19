@@ -60,20 +60,13 @@ namespace CoAPConnector
         /// <exception cref=""></exception>
         public void Open(Dictionary<string, object> args)
         {
-            ICoapEndpoint endPoint;
-            if (args != null)
-            {
-                var obj = args["endPoint"];
-                if (obj != null)
-                {
-                    endPoint = obj as ICoapEndpoint;
-                }
-                else
-                {
-                    throw new Exception("Must use ICoapEndpoint interface.");
-                }
-                m_client = new Coapclient(endPoint);
-            }
+            
+        }
+        
+        public CoAPclientConnector(ICoapEndpoint endPoint)
+        {
+            this.m_client = new Coapclient(endPoint);
+            m_client.Listen();
         }
 
         /// <summary>
@@ -92,14 +85,12 @@ namespace CoAPConnector
                                 Action<IotApiException> onError = null, 
                                 Dictionary<string, object> args = null)
         {
-            m_client.Listen();
             try
             {
                 var mgs = sensorMessage as CoapMessage;
                 var result = await m_client.SendAsync(mgs);
 
-                if (result != 0)
-                    onSuccess?.Invoke(result);
+                onSuccess?.Invoke(result);
             }
             catch (Exception ex)
             {
@@ -118,12 +109,26 @@ namespace CoAPConnector
         /// <remarks>Required by public methods</remarks>
         /// <permission cref=""></permission>
         /// <exception cref=""></exception>
-        public Task SendAsync(IList<object> sensorMessages, 
+        public async Task SendAsync(IList<object> sensorMessages, 
                                 Action<IList<object>> onSuccess = null, 
                                 Action<IList<IotApiException>> onError = null, 
                                 Dictionary<string, object> args = null)
         {
-            throw new NotImplementedException();
+            List<object> success = new List<object>();
+            List<IotApiException> exception = new List<IotApiException>();
+            foreach (var mgs in sensorMessages)
+            {
+                await this.SendAsync(mgs, (succ) =>
+                 {
+                     success.Add(succ);
+                 }, (err) =>
+                 {
+                     exception.Add(err);
+                 },
+                args);
+            }
+            onSuccess?.Invoke(success);
+            onError?.Invoke(exception);
         }
 
         /// <summary>
@@ -137,7 +142,7 @@ namespace CoAPConnector
         /// <remarks>Required by public methods</remarks>
         /// <permission cref=""></permission>
         /// <exception cref=""></exception>
-        public async Task ReceiveAsync (Action<IList<object>> onSuccess,
+        public Task ReceiveAsync (Action<IList<object>> onSuccess,
                                        Action<IList<object>, Exception> onError,
                                        Dictionary<string, object> args)
         {
@@ -163,9 +168,7 @@ namespace CoAPConnector
 
             if (!sendTask.IsCompleted)
                  throw new Exception("sendTask took too long to complete");
-
-            m_client.Listen();
-
+            
             var responseTask = m_client.GetResponseAsync(sendTask.Result);
             responseTask.Wait(m_MaxTaskTimeout);
 
@@ -175,21 +178,5 @@ namespace CoAPConnector
 
             return await responseTask;
         }
-
-        //public bool listenertest(Mock<ICoapEndpoint> mock)
-        //{ 
-        //    var clientOnMessageReceivedEventCalled = false;
-        //    var task = new TaskCompletionSource<bool>();
-        //    m_client.OnMessageReceived += (s, e) =>
-        //    {
-        //        clientOnMessageReceivedEventCalled = true;
-        //        task.SetResult(true);
-        //    };
-
-        //    m_client.Listen();
-
-        //    task.Task.Wait(m_MaxTaskTimeout);
-        //    return clientOnMessageReceivedEventCalled;
-        //}
     }
 }
