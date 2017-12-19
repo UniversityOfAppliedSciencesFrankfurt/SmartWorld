@@ -34,7 +34,7 @@ namespace IOTBridge_GIT
         {
             this.InitializeComponent();
             Settings sett = new Settings(); //default setting
-            m_Ccu.UseXmlRpc("http://192.168.0.222:2001");
+            m_Ccu.UseXmlRpc(sett.CcuUrl);
             m_Ccu.Open();
         }
 
