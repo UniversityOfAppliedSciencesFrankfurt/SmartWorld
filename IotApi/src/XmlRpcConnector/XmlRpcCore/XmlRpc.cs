@@ -25,12 +25,14 @@ namespace XmlRpcCore
 
         public void Open(Dictionary<string, object> args)
         {
+            if (args != null)
+            {
+                if (args.ContainsKey("TimeOut"))
+                    m_TimeOut = new TimeSpan(Convert.ToInt32(args["TimeOut"] as string));
 
-            if (args.ContainsKey("TimeOut"))
-                m_TimeOut = new TimeSpan(Convert.ToInt32(args["TimeOut"] as string));
-
-            if (args.ContainsKey("Mock"))
-                m_Mock = bool.Parse(args["Mock"].ToString());
+                if (args.ContainsKey("Mock"))
+                    m_Mock = bool.Parse(args["Mock"].ToString());
+            }
         }
 
         public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
