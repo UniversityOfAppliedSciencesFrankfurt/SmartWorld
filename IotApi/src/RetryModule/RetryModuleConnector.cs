@@ -69,17 +69,17 @@ namespace RetryModule
         public async Task Retry(object sensorMessage, Action<object> onSuccess = null,
             Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-            for (int a = 0; a < m_RetryCount; a++)
+            while (--m_RetryCount > 0)
             {
                 await NextSendModule.SendAsync(sensorMessage,
                         (succ) =>
                         {
                             onSuccess?.Invoke(succ);
-                            a = 0;
+                            m_RetryCount = 0;
                         },
                         (err) =>
                         {
-                            if (a == 0)
+                            if (m_RetryCount == 0)
                                 onError?.Invoke(err);
                             else
                                 Thread.Sleep(TimeSpan.FromMilliseconds(m_DelayInMlliseconds));
@@ -92,54 +92,54 @@ namespace RetryModule
         public async Task RetryExponentially(object sensorMessage, Action<object> onSuccess = null,
             Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-            for (int a = 0; a < m_RetryCount; a = a + 1)
+            while (--m_RetryCount > 0)
             {
-
-                try
-                {
-                    await NextSendModule.SendAsync(sensorMessage,
+                await NextSendModule.SendAsync(sensorMessage,
                         (succ) =>
                         {
                             onSuccess?.Invoke(succ);
+                            m_RetryCount = 0;
                         },
                         (err) =>
                         {
-                            onError?.Invoke(err);
+                            if (m_RetryCount == 0)
+                            {
+                                onError?.Invoke(err);
+                            }
+                            else
+                            {
+                                var delayTime = System.Convert.ToInt32(Math.Pow(Convert.ToDouble(m_DelayInMlliseconds), Convert.ToDouble(a)));
+                                Thread.Sleep(TimeSpan.FromMilliseconds(delayTime));
+                            }
+
                         }, args);
-                }
-                catch
-                {
-                    var delayTime = System.Convert.ToInt32(Math.Pow(Convert.ToDouble(m_DelayInMlliseconds), Convert.ToDouble(a)));
-                    Thread.Sleep(TimeSpan.FromMilliseconds(delayTime));
-                    continue;
-                }
             }
         }
 
         public async Task RetryGeometrically(object sensorMessage, Action<object> onSuccess = null,
             Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-            for (int a = 0; a < m_RetryCount; a = a + 1)
+            while (--m_RetryCount > 0)
             {
-
-                try
-                {
-                    await NextSendModule.SendAsync(sensorMessage,
+                await NextSendModule.SendAsync(sensorMessage,
                         (succ) =>
                         {
                             onSuccess?.Invoke(succ);
+                            m_RetryCount = 0;
                         },
                         (err) =>
                         {
-                            onError?.Invoke(err);
+                            if (m_RetryCount == 0)
+                            {
+                                onError?.Invoke(err);
+                            }
+                            else
+                            {
+                                var delayTime = m_DelayInMlliseconds * a;
+                                Thread.Sleep(TimeSpan.FromMilliseconds(delayTime));
+                            }
+
                         }, args);
-                }
-                catch
-                {
-                    var delayTime = m_DelayInMlliseconds * a;
-                    Thread.Sleep(TimeSpan.FromMilliseconds(delayTime));
-                    continue;
-                }
 
             }
         }

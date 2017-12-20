@@ -14,6 +14,8 @@ namespace RetryModuleUnitTest
         {
             string selectedCase = "Retry";
             var api = getIotApi(selectedCase, 5, 1000);
+            api.UseDummyModule();
+            api.Open();
             try
             {
                 api.SendAsync("my message",(succ)=>
@@ -72,7 +74,6 @@ namespace RetryModuleUnitTest
         {
             var api = new IotApi();
             api.UseRetryModule(selectCase, retryCount, delay);
-            api.Open();
             return api;
         }
     }
