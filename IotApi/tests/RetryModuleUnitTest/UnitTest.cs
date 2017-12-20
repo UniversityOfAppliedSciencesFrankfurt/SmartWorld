@@ -12,10 +12,8 @@ namespace RetryModuleUnitTest
         [TestMethod]
         public void PerformRetryTest()
         {
-            string selectedCase = "Retry";
-            var api = getIotApi(selectedCase, 5, 1000);
-            api.UseDummyModule();
-            api.Open();
+            var api = getIotApi(Case.Retry, 5, 1000);
+
             try
             {
                 api.SendAsync("my message",(succ)=>
@@ -35,45 +33,80 @@ namespace RetryModuleUnitTest
         }
 
         [TestMethod]
+        public void PerformRetryWithExTest()
+        {
+            var api = getIotApi(Case.Retry, 5, 1000);
+
+            api.SendAsync("", (succ) =>
+                {
+                    var s = succ;
+                }, (obj, err) =>
+                {
+                    var r = err;
+                    Assert.IsNotNull(r);
+                }).Wait();
+                
+        }
+
+        [TestMethod]
         public void PerformRetryExponentialTest()
         {
-            string selectedCase = "Exponential";
+            IotApi connector = getIotApi(Case.Exponential, 5, 1000);
+            
+            var result = connector.SendAsync("my message").Result;
 
-            IotApi connector = getIotApi(selectedCase, 5, 1000);
+            Assert.IsNotNull(result);
 
-            try
+        }
+
+        [TestMethod]
+        public void PerformRetryExponentialWithExTest()
+        {
+            var api = getIotApi(Case.Exponential, 3, 10);
+
+            api.SendAsync("", (succ) =>
             {
-                connector.SendAsync("my message").Wait();
-            }
-            catch (Exception ex)
+                var s = succ;
+            }, (obj, err) =>
             {
-                Assert.IsTrue(ex == null);
-            }
+                var r = err;
+                Assert.IsNotNull(r);
+            }).Wait();
 
         }
 
         [TestMethod]
         public void PerformRetryGeometricalTest()
         {
-            string selectedCase = "Geometric";
+            IotApi connector = getIotApi(Case.Geometric, 5, 10);
+            
+            var result = connector.SendAsync("my message").Result;
 
-            IotApi connector = getIotApi(selectedCase, 5, 1000);
-            try
-            {
-                connector.SendAsync("my message").Wait();
-
-            }
-            catch (Exception ex)
-            {
-                Assert.IsTrue(ex == null);
-            }
-
+            Assert.IsNotNull(result);
         }
 
-        private IotApi getIotApi(string selectCase, int retryCount, int delay)
+        [TestMethod]
+        public void PerformRetryGeometricalWithExTest()
+        {
+            IotApi connector = getIotApi(Case.Geometric, 3, 10);
+
+            connector.SendAsync("",
+                (succ) =>{
+                    var s = succ;
+                },
+                (k,e)=>{
+                    var er = e;
+                    Assert.IsNotNull(er);
+                }
+                ).Wait();
+        }
+
+        private IotApi getIotApi(Case selectCase, int retryCount, int delay)
         {
             var api = new IotApi();
             api.UseRetryModule(selectCase, retryCount, delay);
+            api.UseDummyModule();
+            api.Open();
             return api;
         }
     }

@@ -16,7 +16,8 @@ namespace RetryModuleUnitTest
 
         public async Task SendAsync(object sensorMessage, Action<object> onSuccess = null, Action<IotApiException> onError = null, Dictionary<string, object> args = null)
         {
-           await Task.Run(()=>{ if (!String.IsNullOrEmpty((string)sensorMessage))
+           await Task.Run(()=>{
+              if (!String.IsNullOrEmpty((string)sensorMessage))
                 {
                     onSuccess?.Invoke(sensorMessage);
                 }
