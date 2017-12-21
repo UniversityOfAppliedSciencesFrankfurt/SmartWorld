@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Microsoft.Data.Sqlite;
 using System.Threading;
 using MQTTSnClient.Entity.Message;
+using System.IO;
 
 namespace MQTTSnBroker
 {
@@ -26,17 +27,16 @@ namespace MQTTSnBroker
         {
             Console.Title = "Server";
             SetupServer();
-            Console.ReadLine(); // When we press enter close everything
+            Console.ReadLine();
             CloseAllSockets();
         }
 
         private static void SetupServer()
         {
             Console.WriteLine("Setting up server...");
-            sqliteConnection = new SqliteConnection(@"Data Source=/C:/Users/saisg/August_2017/SQLLite/MQTTSn/data.db");
+            var sql = $"{Directory.GetCurrentDirectory()}\\Database\\data.db";
+            sqliteConnection = new SqliteConnection($"Data Source=\\{sql}");
 
-            //C:/Users/saisg/August_2017/SQLLite/MQTTSn/
-            //sqliteConnection = new SqliteConnection(@"Data Source=/C:/Users/saisg/August_2017/SQLLite/MQTTSn/data.db");
             Console.WriteLine("Server setup complete");
             CreateSockets();
         }
