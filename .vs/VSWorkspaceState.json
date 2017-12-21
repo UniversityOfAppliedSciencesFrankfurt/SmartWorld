@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\IotApi",
-    "\\IotApi\\src\\XmlRpcConnector",
-    "\\IotApi\\src\\XmlRpcConnector\\CcuLib",
-    "\\IotApi\\src\\XmlRpcConnector\\XmlRpcCore",
-    "\\IotApi\\tests\\XmlRpcConnectorTests",
-    "\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Desktop"
+    "\\IotApi"
   ],
   "SelectedNode": "\\IotApi",
   "PreviewInSolutionExplorer": false

@@ -255,7 +255,7 @@ namespace Iot
         /// <returns>Task</returns>
         public async Task SendAsync(object sensorMessage,
                                     Action<object> onSuccess, 
-                                    Action<IList<object>,Exception> onError, 
+                                    Action<object,Exception> onError, 
                                     Dictionary<string, object> args = null)
         {
             if (m_IsOpenCalled == false)
@@ -273,7 +273,7 @@ namespace Iot
                     },
                     (err) =>
                     {
-                        onError?.Invoke(new List<object> { sensorMessage }, err);
+                        onError?.Invoke(sensorMessage, err);
                     },
                     args);
                 }
