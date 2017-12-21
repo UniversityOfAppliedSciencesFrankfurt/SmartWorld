@@ -103,7 +103,7 @@ namespace AQTTsnClientUnitTest
         private IotApi getApi()
         {
             var api = new IotApi()
-                .UseMQTTSnClient("", 2);
+                .UseMQTTSnClient("127.0.0.1", 100);
             api.Open();
             return api;
         }
