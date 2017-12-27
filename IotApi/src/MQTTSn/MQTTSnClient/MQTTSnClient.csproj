@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MQTTSn.Common\MQTTSn.Common.csproj" />
-    <ProjectReference Include="..\IotApi\IotApi.csproj" />
+    <ProjectReference Include="..\..\IotApi\IotApi.csproj" />
+    <ProjectReference Include="..\MQTTSn.Common\MQTTSn.Common.csproj" />
   </ItemGroup>
 
 </Project>

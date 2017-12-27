@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MQTTSnClient\MQTTSnClient.csproj" />
+    <ProjectReference Include="..\..\src\MQTTSn\MQTTSnClient\MQTTSnClient.csproj" />
   </ItemGroup>
 
 </Project>

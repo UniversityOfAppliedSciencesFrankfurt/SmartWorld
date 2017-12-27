@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MQTTSn.Common\MQTTSn.Common.csproj" />
+    <ProjectReference Include="..\MQTTSn.Common\MQTTSn.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
