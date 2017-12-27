@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTSnClient", "src\MQTTSnClient\MQTTSnClient.csproj", "{27C8AA3E-9249-4ED3-BFF1-E41CFA612262}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AQTTsnClientUnitTest", "tests\AQTTsnClientUnitTest\AQTTsnClientUnitTest.csproj", "{6C9253C3-7764-444C-A115-B3E54664AD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTsnClientUnitTest", "tests\MQTTsnClientUnitTest\MQTTsnClientUnitTest.csproj", "{6C9253C3-7764-444C-A115-B3E54664AD6D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotApi", "src\IotApi\IotApi.csproj", "{1D654888-F12A-4ABB-93F4-D36D56022BDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTSnBroker", "src\MQTTSnBroker\MQTTSnBroker.csproj", "{6E3251DB-5037-421B-BA1C-3140AECAEDFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTSnBroker", "src\MQTTSnBroker\MQTTSnBroker.csproj", "{6E3251DB-5037-421B-BA1C-3140AECAEDFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTSn.Common", "MQTTSn.Common\MQTTSn.Common.csproj", "{2797C4DD-AB38-4011-842F-551AE82A811B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6E3251DB-5037-421B-BA1C-3140AECAEDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E3251DB-5037-421B-BA1C-3140AECAEDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E3251DB-5037-421B-BA1C-3140AECAEDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2797C4DD-AB38-4011-842F-551AE82A811B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2797C4DD-AB38-4011-842F-551AE82A811B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2797C4DD-AB38-4011-842F-551AE82A811B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2797C4DD-AB38-4011-842F-551AE82A811B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

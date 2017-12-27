@@ -54,7 +54,7 @@ namespace MQTTSnBroker
             }
         }
 
-        public static int Insert(MQTTSnClient.Entity.Message.Register register, SqliteConnection sConnect)
+        public static int Insert(MQTTSn.Common.Entity.Message.Register register, SqliteConnection sConnect)
         {
             string sql = "insert into Register(TopicID, TopicName) values (@TopicID, @TopicName)";
             SqliteCommand sCommand = new SqliteCommand(sql, sConnect);

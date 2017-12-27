@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using System.Text;
-using MQTTSnClient.Entity.Message;
+using MQTTSn.Common.Entity.Message;
 
 namespace MQTTSnBroker
 {

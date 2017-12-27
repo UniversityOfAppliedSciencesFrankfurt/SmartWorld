@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace MQTTSnClient.Entity.Message
+namespace MQTTSn.Common.Entity.Message
 {
     public struct Puback
     {

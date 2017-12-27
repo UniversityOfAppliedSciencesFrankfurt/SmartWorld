@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MQTTSnClient.Entity.Message
+namespace MQTTSn.Common.Entity.Message
 {
     public static class Flag
     {

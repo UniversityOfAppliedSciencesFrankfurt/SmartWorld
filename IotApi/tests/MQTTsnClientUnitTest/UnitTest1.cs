@@ -1,7 +1,7 @@
 using Iot;
 using MQTTSnClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MQTTSnClient.Entity.Message;
+using MQTTSn.Common.Entity.Message;
 using System.Text;
 using System;
 
@@ -13,6 +13,12 @@ namespace AQTTsnClientUnitTest
         static int subID = 1;
         static int pubId = 1;
         static int regId = 1;
+
+        [TestMethod]
+        public void MyMethod()
+        {
+            
+        }
 
         [TestMethod]
         public void ConnectTest()

@@ -6,16 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MQTTSnClient\MQTTSnClient.csproj" />
+    <Folder Include="Database\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
+    <ProjectReference Include="..\..\MQTTSn.Common\MQTTSn.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

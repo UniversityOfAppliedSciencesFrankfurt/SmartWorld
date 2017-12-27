@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Iot;
 using System.Net.Sockets;
 using System.Net;
-using MQTTSnClient.Entity.Message;
+using MQTTSn.Common.Entity.Message;
 
 namespace MQTTSnClient
 {
