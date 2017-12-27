@@ -187,30 +187,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-
-
-/IotApi/src/IotApi/IotApi/bin/*
-/IotApi/src/IotApi/IotApi/obj/*
-/IotApi/IotApiTests/bin/*
-/IotApi/IotApiTests/obj/*
-/IotApi/IotApiTests/project.lock.json
-/IotApi/src/IotApi/bin/Debug/*
-/IotApi/src/IotApi/obj/Debug/*
-/IotApi/XmlRpcCore/bin/*
-/IotApi/XmlRpcCore/obj/*
-/IotApi/Test.Desktop/bin/*
-/IotApi/Test.Desktop/obj/*
-/IotApi/Test.Uwp/bin/*
-/IotApi/Test.Uwp/obj/*
-/IotApi/.vs/*
-/IotApi/src/XmlRpcConnector/XmlRpcCore/obj/Debug/netstandard1.6
-/IotApi/tests/IotApiTests/IotApiCoreTests/bin/Debug/netcoreapp1.0
-/IotApi/tests/IotApiTests/IotApiCoreTests/obj/Debug/netcoreapp1.0
-/IotApi/tests/XmlRpcConnectorTests/Test.Desktop/bin/Debug/netcoreapp1.0
-/IotApi/tests/XmlRpcConnectorTests/Test.Desktop/obj/Debug/netcoreapp1.0
-/IotApi/tests/XmlRpcConnectorTests/Test.Uwp/obj/x86/Debug
-/IotApi/src/XmlRpcConnector/CcuLib/bin/Debug/netstandard1.4
-/IotApi/src/XmlRpcConnector/CcuLib/obj/Debug/netstandard1.4
-/IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug/netstandard1.4
-/IotApi/src/XmlRpcConnector/XmlRpcCore/obj/Debug/netstandard1.4
-/IotApi/src/XmlRpcConnector/XmlRpcCore/bin/Debug
+*.vs
