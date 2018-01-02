@@ -1,0 +1,39 @@
+﻿{
+  "modules": [      
+    {
+      "name": "startUp",
+      "loader": {
+        "name": "dotnetcore",
+        "entrypoint": {
+          "assemblyname": "StartUpModule",
+          "entrytype": "StartUpModule.StartUp"
+        }
+      },
+      "LogLevel": "Trace",
+      "args": {
+        "IpAddress": "192.168.1.20",
+        "Port": "502",
+        "StartRegister": "1032"
+      }
+    },
+    {
+      "name": "print",
+      "loader": {
+        "name": "dotnetcore",
+        "entrypoint": {
+          "assemblyname": "PrintMdule",
+          "entrytype": "PrintMdule.PrintModule"
+        }
+      },
+      "LogLevel": "Trace",
+      "args": {
+      }
+    }
+  ],
+  "links": [
+    {
+      "source": "startUp",
+      "sink": "print"
+    }
+  ]
+}

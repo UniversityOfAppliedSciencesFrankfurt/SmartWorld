@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{77D636A3-066F-4016-895C-7E89B09BB901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartUpModule", "StartUpModule\StartUpModule.csproj", "{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintMdule", "PrintMdule\PrintMdule.csproj", "{5A480635-C1BE-4821-BF21-B3D833E11FDE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayConsole", "GatewayConsole\GatewayConsole.csproj", "{DF350A51-82A0-4B39-885A-96339AF61F47}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{DB14B914-621B-40FB-AC7F-4E33D5C7BF44}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\..\GitHub\Pack\Daenet.Azure.Devices.Gateway.1.0.0.nupkg = ..\..\..\..\..\..\GitHub\Pack\Daenet.Azure.Devices.Gateway.1.0.0.nupkg
+		..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg = ..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF350A51-82A0-4B39-885A-96339AF61F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF350A51-82A0-4B39-885A-96339AF61F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF350A51-82A0-4B39-885A-96339AF61F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF350A51-82A0-4B39-885A-96339AF61F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4} = {77D636A3-066F-4016-895C-7E89B09BB901}
+		{5A480635-C1BE-4821-BF21-B3D833E11FDE} = {77D636A3-066F-4016-895C-7E89B09BB901}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCA29EEA-5C26-45CD-BA05-26A7BDB1CC8D}
+	EndGlobalSection
+EndGlobal
