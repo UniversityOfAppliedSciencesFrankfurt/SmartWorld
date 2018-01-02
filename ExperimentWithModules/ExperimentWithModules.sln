@@ -13,12 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayConsole", "GatewayCo
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3418644C-4F4E-4975-BAD1-9AB0E4A6564F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{DB14B914-621B-40FB-AC7F-4E33D5C7BF44}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\GitHub\Pack\Daenet.Azure.Devices.Gateway.1.0.0.nupkg = ..\..\..\..\..\..\GitHub\Pack\Daenet.Azure.Devices.Gateway.1.0.0.nupkg
-		..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg = ..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
