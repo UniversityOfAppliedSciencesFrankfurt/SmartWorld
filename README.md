@@ -18,4 +18,4 @@ Here describe architectural concept of IotApi
 - AbandonAsync: Abandon asynchronously the message to remote endpoint.
 - Modules/Connectors: IotApi has some predefined modules/connectors, for example PhilipsHue, Retry, XmlRpc etc.
 
-![](./Images/ArConcept.png)
+![](SmartWorld/Images/ArConcept.PNG)
