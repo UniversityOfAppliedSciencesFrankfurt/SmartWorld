@@ -3,7 +3,7 @@ Projects related to IoT, Industrie 4.0 and IoT. This repository contains a C#/.N
 By using of various connector implementations, one can connect to different IoT devices and/or cloud services via same API.  
 
 ## Architectural Concept
-Here describe architectural concept of IotApi
+Here describe architectural concept of IotApi -
 
 - RegisterModule: You can register your module or connector using RegisterModule, takes IInjectableModule type parameter.
 - Open: You have to open connection before sending message using module/connector, Open takes Dictionary<string, object> type parameter for passing some arguments in module/connector, if module/connector requires arguments otherwise parameter is null. 
@@ -18,4 +18,7 @@ Here describe architectural concept of IotApi
 - AbandonAsync: Abandon asynchronously the message to remote endpoint.
 - Modules/Connectors: IotApi has some predefined modules/connectors, for example PhilipsHue, Retry, XmlRpc etc.
 
-![](./Images/ArConcept.png)
+![](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/Images/ArConcept.PNG "Architectural Concept")
+
+
+
