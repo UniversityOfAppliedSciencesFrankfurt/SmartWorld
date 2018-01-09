@@ -23,3 +23,19 @@ api.SendAsync("my message",(succ)=>
     }).Wait();
 
 ```
+
+```C#
+var api = new IotApi();
+    api.UseRetryModule(Case.Exponential, 5, 100);
+    api.UseDummyModule();
+    api.Open();
+var result = connector.SendAsync("my message").Result;
+```
+
+```C#
+var api = new IotApi();
+    api.UseRetryModule(Case.Geometric, 5, 10);
+    api.UseDummyModule();
+    api.Open();
+var result = connector.SendAsync("my message").Result;
+```
