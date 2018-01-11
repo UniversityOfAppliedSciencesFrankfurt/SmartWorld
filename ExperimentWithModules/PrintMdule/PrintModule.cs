@@ -21,10 +21,7 @@ namespace PrintMdule
 
         public void Receive(Message received_message)
         {
-           if(received_message.Properties.ContainsKey("name"))
-            {
-                Console.WriteLine(Encoding.UTF8.GetString(received_message.Content));
-            }
+                Console.WriteLine($"Print Module: {Encoding.UTF8.GetString(received_message.Content)}");
         }
     }
 }

@@ -11,10 +11,23 @@ namespace GatewayConsole
     {
         static void Main(string[] args)
         {
+            startGateway(10);
+            Console.WriteLine("Project finished");
+            Console.ReadLine();
+        }
+
+        private static void startGateway(int interval)
+        {
+
             var p = $"{AppDomain.CurrentDomain.BaseDirectory}GatewayConfig.json";
             var path = $"{Directory.GetCurrentDirectory()}\\GatewayConfig.json";
             var config = JsonConvert.DeserializeObject<GatewayConfiguration>(File.ReadAllText(p));
-            var gw1 = GatewayInterop.CreateFromConfig(config, new List<IGatewayLogger>() { new Logger() });
+
+            //while (interval > 0)
+            //{
+                var gw1 = GatewayInterop.CreateFromConfig(config, new List<IGatewayLogger>() { new Logger() });
+            //    interval--;
+            //}
         }
     }
 }

@@ -6,14 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Daenet.IotGateway.BluetoothLEModule\Daenet.IotGateway.BluetoothLEModule.csproj" />
     <ProjectReference Include="..\PrintMdule\PrintMdule.csproj" />
-    <ProjectReference Include="..\StartUpModule\StartUpModule.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update=".dockerignore">
-      <DependentUpon>Dockerfile</DependentUpon>
-    </None>
     <None Update="GatewayConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
