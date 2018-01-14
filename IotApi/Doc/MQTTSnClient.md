@@ -9,9 +9,28 @@ If you want to run test you have to follow bellow described procedure -
 2. We have used SQLite database with MQTTSnBrocker, remvoe all data from each table.
 3. Run test. for example -
 
+###  Setup a Connection with Brocker
+```C#
+var port = "100".PadLeft(4, '0');
+IotApi api = new IotApi()
+           .UseMQTTSnClient("127.0.0.1", 100);
+       api.Open();
+            
+       ConnectWrk connect = new ConnectWrk();
+       connect.connect.clientId = ASCIIEncoding.ASCII.GetBytes(port);
+       connect.connect.flags = Flag.cleanSession;
+
+       api.SendAsync(connect, (succ) =>
+        {
+            var result = succ;
+        }, (obj, err) =>
+        {
+            var er = err;
+        }).Wait();
+```
 ### Register Yout Topic
 ```C#
-IotApi api = var api = new IotApi()
+IotApi api = new IotApi()
            .UseMQTTSnClient("127.0.0.1", 100);
        api.Open();
 
@@ -35,5 +54,45 @@ IotApi api = var api = new IotApi()
        }).Wait();
 ```
 
-### 
+### Subscribe 
+```C#
+IotApi api = new IotApi()
+           .UseMQTTSnClient("127.0.0.1", 100);
+       api.Open();
 
+      SubscribeWrk subscribe = new SubscribeWrk();
+      subscribe.subscribe.topicId = ASCIIEncoding.ASCII.GetBytes("66".PadLeft(2, '0'));
+      subscribe.subscribe.messageId = ASCIIEncoding.ASCII.GetBytes(Convert.ToString(subID).PadLeft(2, '0'));
+
+      api.SendAsync(subscribe, (succ) =>
+      {
+          var r = succ;
+          Assert.IsNotNull(r);
+
+      }, (obj, error) =>
+      {
+          var er = error;
+      }).Wait();
+```
+### Publish 
+```C#
+IotApi api = new IotApi()
+           .UseMQTTSnClient("127.0.0.1", 100);
+       api.Open();
+
+       PublishWrk publish = new PublishWrk();
+       publish.publish.topicId = ASCIIEncoding.ASCII.GetBytes("33".PadLeft(2, '0')); ;
+       publish.publish.data = ASCIIEncoding.ASCII.GetBytes("lights off");
+       publish.publish.messageId = ASCIIEncoding.ASCII.GetBytes(Convert.ToString(pubId).PadLeft(2, '0'));
+       publish.publish.length = Convert.ToByte(7 + "Lights off".Length);
+       
+       api.SendAsync(publish, (succ) =>
+       {
+           var suc = succ;
+           Assert.IsNotNull(suc);
+       
+       }, (obj, error) =>
+       {
+           var er = error;
+       }).Wait();
+```

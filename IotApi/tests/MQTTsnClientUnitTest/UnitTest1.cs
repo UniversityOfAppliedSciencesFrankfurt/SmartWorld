@@ -23,10 +23,11 @@ namespace AQTTsnClientUnitTest
         [TestMethod]
         public void ConnectTest()
         {
+            var port = "100".PadLeft(4, '0');
             IotApi api = getApi();
-
+            
             ConnectWrk connect = new ConnectWrk();
-            connect.connect.clientId = ASCIIEncoding.ASCII.GetBytes("010");
+            connect.connect.clientId = ASCIIEncoding.ASCII.GetBytes(port);
             connect.connect.flags = Flag.cleanSession;
 
             api.SendAsync(connect, (succ) =>
@@ -44,7 +45,7 @@ namespace AQTTsnClientUnitTest
             IotApi api = getApi();
 
             byte[] topicId = ASCIIEncoding.ASCII.GetBytes("21".PadLeft(2, '0'));
-            string topicName = "21jk";
+            string topicName = "2121jk";
 
             RegisterWrk register = new RegisterWrk();
             register.register.topicId = topicId;
