@@ -11,12 +11,12 @@ namespace GatewayConsole
     {
         static void Main(string[] args)
         {
-            startGateway(10);
-            Console.WriteLine("Project finished");
-            Console.ReadLine();
+            startGateway();
+            Console.WriteLine("Press any key to exit!!");
+            Console.ReadKey();
         }
 
-        private static void startGateway(int interval)
+        private static void startGateway()
         {
 
             var p = $"{AppDomain.CurrentDomain.BaseDirectory}GatewayConfig.json";

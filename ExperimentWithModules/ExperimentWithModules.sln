@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{77D636A3-066F-4016-895C-7E89B09BB901}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartUpModule", "StartUpModule\StartUpModule.csproj", "{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintMdule", "PrintMdule\PrintMdule.csproj", "{5A480635-C1BE-4821-BF21-B3D833E11FDE}"
 EndProject
@@ -17,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{DB
 		..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg = ..\..\..\..\..\..\GitHub\Pack\Daenet.IotGateway.Common.1.0.0.nupkg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daenet.IotGateway.BluetoothLEModule", "Daenet.IotGateway.BluetoothLEModule\Daenet.IotGateway.BluetoothLEModule.csproj", "{FBEDEA41-FF96-4044-B9DC-176354ACE988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daenet.IotGateway.BluetoothLEModule", "Daenet.IotGateway.BluetoothLEModule\Daenet.IotGateway.BluetoothLEModule.csproj", "{FBEDEA41-FF96-4044-B9DC-176354ACE988}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8B27228C-B58E-4A16-B765-48AB4B87BAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +31,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|ARM.Build.0 = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|x64.Build.0 = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Debug|x86.Build.0 = Debug|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|ARM.ActiveCfg = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|ARM.Build.0 = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|x64.ActiveCfg = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|x64.Build.0 = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|x86.ActiveCfg = Release|Any CPU
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4}.Release|x86.Build.0 = Release|Any CPU
 		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A480635-C1BE-4821-BF21-B3D833E11FDE}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -95,12 +79,27 @@ Global
 		{FBEDEA41-FF96-4044-B9DC-176354ACE988}.Release|x64.Build.0 = Release|Any CPU
 		{FBEDEA41-FF96-4044-B9DC-176354ACE988}.Release|x86.ActiveCfg = Release|Any CPU
 		{FBEDEA41-FF96-4044-B9DC-176354ACE988}.Release|x86.Build.0 = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|ARM.Build.0 = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|x64.Build.0 = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B27228C-B58E-4A16-B765-48AB4B87BAFC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D0F172DF-E6DC-4F46-8468-AAC3638ABFE4} = {77D636A3-066F-4016-895C-7E89B09BB901}
 		{5A480635-C1BE-4821-BF21-B3D833E11FDE} = {77D636A3-066F-4016-895C-7E89B09BB901}
 		{FBEDEA41-FF96-4044-B9DC-176354ACE988} = {77D636A3-066F-4016-895C-7E89B09BB901}
 	EndGlobalSection
