@@ -26,7 +26,7 @@ namespace AQTTsnClientUnitTest
             IotApi api = getApi();
 
             ConnectWrk connect = new ConnectWrk();
-            connect.connect.clientId = ASCIIEncoding.ASCII.GetBytes("0100");
+            connect.connect.clientId = ASCIIEncoding.ASCII.GetBytes("010");
             connect.connect.flags = Flag.cleanSession;
 
             api.SendAsync(connect, (succ) =>
