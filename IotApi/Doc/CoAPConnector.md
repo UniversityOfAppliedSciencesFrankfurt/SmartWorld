@@ -3,7 +3,7 @@ The Constrained Application Protocol (CoAP) was designed by the Constrained REST
 It is a specialized web transfer protocol for use with constrained nodes and constrained networks. In the IoT, constraints on nodes 
 typically emerge in terms of limited power supply, manufacturing costs, RAM, ROM, and generally low processing capabilities. 
 Yet, constrained nodes, i.e., devices, are powerful enough to send and receive network packets and benefit from a connection to the Internet 
-as they can be integrated into a distributed service 
+as they can be integrated into a distributed service.
 
 ## Guides
 This section described how to use CoAP protocol with IotApi -
