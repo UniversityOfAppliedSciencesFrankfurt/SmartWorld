@@ -3,10 +3,11 @@ MQTT stands for Message Queue Telemetry Transport, which is an open and lightwei
 machine-to-machine and mobile applications. It is optimized for communications over networks where bandwidth is at a premium or where the 
 network connection could be intermittent. However, MQTT requires an underlying network, such as TCP/IP, that provides an ordered lossless 
 connection capability and this is too complex for very simple, small footprint, and low-cost devices such as wireless SAs.
+
 ## How To Run Test
 If you want to run test you have to follow bellow described procedure -
 1. Run MQTTSnBrocker 
-2. We have used SQLite database with MQTTSnBrocker, remvoe all data from each table.
+2. We have used SQLite database with MQTTSnBrocker (MQTTSnBrocker/Database), edit or remove data from each table.
 3. Run test. for example -
 
 ###  Setup a Connection with Brocker
