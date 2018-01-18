@@ -11,9 +11,10 @@ throw an exception. Retry module uses three Case
 
 ```C#
 var api = new IotApi();
-    api.UseRetryModule(Case.Retry, 5, 1000);
-    api.UseDummyModule();
-    api.Open();
+api.UseRetryModule(Case.Retry, 5, 1000);
+api.UseDummyModule();
+api.Open();
+
 api.SendAsync("my message",(succ)=>
     {
         var s = succ;
@@ -26,16 +27,18 @@ api.SendAsync("my message",(succ)=>
 
 ```C#
 var api = new IotApi();
-    api.UseRetryModule(Case.Exponential, 5, 100);
-    api.UseDummyModule();
-    api.Open();
+api.UseRetryModule(Case.Exponential, 5, 100);
+api.UseDummyModule();
+api.Open();
+
 var result = connector.SendAsync("my message").Result;
 ```
 
 ```C#
 var api = new IotApi();
-    api.UseRetryModule(Case.Geometric, 5, 10);
-    api.UseDummyModule();
-    api.Open();
+api.UseRetryModule(Case.Geometric, 5, 10);
+api.UseDummyModule();
+api.Open();
+
 var result = connector.SendAsync("my message").Result;
 ```

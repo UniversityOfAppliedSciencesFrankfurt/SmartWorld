@@ -8,7 +8,7 @@ Bellow describe how to send the message to endpoint -
 ```C#
 var api = new IotApi()
                 .UseXmlRpc("CCU uri");
-    api.Open();
+api.Open();
 
 var result = api.SendAsync(new MethodCall()
   {
@@ -30,7 +30,8 @@ var result = api.SendAsync(new MethodCall()
 ```C#
 var api = new IotApi()
                 .UseXmlRpc("CCU uri");
-    api.Open();
+api.Open();
+
 var result = api.SendAsync(new MethodCall()
   {
       MethodName = "setValue",
@@ -56,7 +57,8 @@ var result = api.SendAsync(new MethodCall()
 ```C#
 var api = new IotApi()
                 .UseXmlRpc("CCU uri");
-    api.Open();
+api.Open();
+
  var result = api.SendAsync(new MethodCall()
    {
        MethodName = "setValue",

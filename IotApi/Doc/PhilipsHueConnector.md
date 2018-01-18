@@ -15,9 +15,7 @@ var username = new IotApi().GenerateUserName(Bridge_Uri);
 ### Get Lights 
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 iotApi.SendAsync(new GetLights(), (result) =>
@@ -32,9 +30,7 @@ iotApi.SendAsync(new GetLights(), (result) =>
 ### Get Light State 
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = api.SendAsync(new GetLightStates()
@@ -46,9 +42,7 @@ var result = api.SendAsync(new GetLightStates()
 ### Switch On the Light
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = iotApi.SendAsync(new SetLightStates()
@@ -67,9 +61,7 @@ var result = iotApi.SendAsync(new SetLightStates()
 ### Switch Off the Light
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = iotApi.SendAsync(new SetLightStates()
@@ -86,9 +78,7 @@ var result = iotApi.SendAsync(new SetLightStates()
 ### Set Light Color
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = iotApi.SendAsync(new SetLightStates()
@@ -110,9 +100,7 @@ var result = iotApi.SendAsync(new SetLightStates()
 ### Set Light attributes 
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = api.SendAsync(new SetLightAttributes()
@@ -128,9 +116,7 @@ var result = api.SendAsync(new SetLightAttributes()
 
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = api.SendAsync(new GetNewLight()).Result as List<Device>;
@@ -139,9 +125,7 @@ var result = api.SendAsync(new GetNewLight()).Result as List<Device>;
 ### Search for new Lights
 ```C#
 IotApi api = new IotApi();
-
 api.UsePhilpsQueueRest(GtwUri, UsrName);
-
 api.Open();
 
 var result = api.SendAsync(new SerarchNewLights()
