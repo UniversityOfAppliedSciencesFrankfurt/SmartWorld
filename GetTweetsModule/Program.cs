@@ -1,4 +1,4 @@
-namespace GetTweetsMention
+namespace GetTweetsModule
 {
     using System;
     using System.IO;
@@ -12,8 +12,6 @@ namespace GetTweetsMention
     using Microsoft.Azure.Devices.Client.Transport.Mqtt;
     using Microsoft.Azure.Devices.Shared;
     using Newtonsoft.Json;
-    using LinqToTwitter;
-    using System.Linq;
 
     class Program
     {
@@ -26,13 +24,9 @@ namespace GetTweetsMention
         /// </summary>
         private static string m_ConsumerSecret;
         /// <summary>
-        /// Twitter Access Token
+        /// Twitter user name
         /// </summary>
-        private static string m_AccessToken;
-        /// <summary>
-        /// Twitter Access Token Secret 
-        /// </summary>
-        private static string m_AccessTokenSecret;
+        private static string m_TwitterUserName;
 
         static void Main(string[] args)
         {
@@ -105,8 +99,8 @@ namespace GetTweetsMention
 
             // Open a connection to the Edge runtime
             DeviceClient ioTHubModuleClient = DeviceClient.CreateFromConnectionString(connectionString, settings);
-
-            //Call back for desired properties update
+             
+             //Call back for desired properties update
             await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdate, ioTHubModuleClient);
             var twin = await ioTHubModuleClient.GetTwinAsync();
             await onDesiredPropertiesUpdate(twin.Properties.Desired, ioTHubModuleClient);
@@ -114,25 +108,30 @@ namespace GetTweetsMention
             await ioTHubModuleClient.OpenAsync();
             Console.WriteLine("IoT Hub module client initialized.");
 
-           
-                var thread = new Thread(()=> PipeMessage(ioTHubModuleClient));
-                thread.Start();
+            var thread = new Thread(()=>threadBody(ioTHubModuleClient));
+            thread.Start();
 
-            Thread.Sleep(60000);
+            Thread.Sleep(5000);
         }
 
         /// <summary>
-        /// This method is called whenever the module is sent a message from the EdgeHub. 
-        /// It just pipe the messages without any change.
-        /// It prints all the incoming messages.
+        /// Preparing message and send to IotHub
         /// </summary>
-        private static void PipeMessage(object userContext)
+        /// <param name="userContext"></param>
+        private static void threadBody(object userContext)
         {
-            var tweetId = getMention();
-            var deviceClient = userContext as DeviceClient;
-            var mgs = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("tweetId")));
+             var deviceClient = userContext as DeviceClient;
+            if (deviceClient == null)
+            {
+                throw new InvalidOperationException("UserContext doesn't contain " + "expected values");
+            }
 
-            deviceClient.SendEventAsync("output1",mgs).Wait();
+            var credential = Twitter.getCredential(m_ConsumerKey,m_ConsumerSecret);
+            var token = Twitter.getToken(credential);
+            var tweetId = Twitter.getTweetId(m_TwitterUserName,1,token);
+            var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tweetId)));
+
+            deviceClient.SendEventAsync("output1",message).Wait();
         }
 
         private static async Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
@@ -200,70 +199,17 @@ namespace GetTweetsMention
                 throw new AggregateException("Argument \"ConsumerSecret\" not found.");
             }
 
-            if (desiredProperties.Contains("AccessToken"))
+            if (desiredProperties.Contains("UserName"))
             {
-                m_AccessToken = desiredProperties["AccessToken"];
-                reportedProperties["AccessToken"] = desiredProperties["AccessToken"];
+                m_TwitterUserName = desiredProperties["UserName"];
+                reportedProperties["UserName"] = desiredProperties["UserName"];
             }
             else
             {
-                throw new AggregateException("Argument \"AccessToken\" not found.");
-            }
-
-            if (desiredProperties.Contains("AccessTokenSecret"))
-            {
-                m_AccessTokenSecret = desiredProperties["AccessTokenSecret"];
-                reportedProperties["AccessTokenSecret"] = desiredProperties["AccessTokenSecret"];
-            }
-            else
-            {
-                throw new AggregateException("Argument \"AccessTokenSecret\" not found.");
+                throw new AggregateException("Argument \"UserName\" not found.");
             }
 
             return reportedProperties;
-        }
-
-        /// <summary>
-        /// Get tweet mentions 
-        /// </summary>
-        /// <returns></returns>
-        private static string getMention()
-        {
-            string tweetId = string.Empty;
-           try
-            {
-                var auth = new SingleUserAuthorizer()
-                {
-                    CredentialStore = new SingleUserInMemoryCredentialStore()
-                    {
-                        ConsumerKey = m_ConsumerKey,
-                        ConsumerSecret = m_ConsumerSecret,
-                        AccessToken = m_AccessToken,
-                        AccessTokenSecret = m_AccessTokenSecret
-                    },
-                };
-
-                auth.AuthorizeAsync().Wait();
-                var twitterCtx = new TwitterContext(auth);
-
-                var tweets = (from t in twitterCtx.Status
-                            where t.Type == StatusType.Mentions &&
-                            t.Count == 1
-                            select t).ToList();
-
-                foreach (var tweet in tweets)
-                {
-                    tweetId = tweet.StatusID.ToString();
-                    System.Console.WriteLine($"Mention Id: {tweet.StatusID}");
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return tweetId;
         }
     }
 }
