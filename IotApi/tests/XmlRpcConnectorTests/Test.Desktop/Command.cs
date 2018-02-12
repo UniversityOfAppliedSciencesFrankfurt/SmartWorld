@@ -17,6 +17,7 @@ namespace Test.Desktop
             Ccu ccu = new Ccu();
 
             var methodCall = ccu.PrepareMethodCall(request);
+
             string response = "";
 
             await iotApi.SendAsync(methodCall, (responseMsg) => {
@@ -52,14 +53,7 @@ namespace Test.Desktop
             },
             (error,ex) =>
             {
-                if (error.Count > 0)
-                {
-                    foreach (var er in error)
-                    {
-                        MethodFaultResponse faultRes = er as MethodFaultResponse;
-                        response = faultRes.Message;
-                    }
-                }
+                    response = ex.Message;
             });
 
 

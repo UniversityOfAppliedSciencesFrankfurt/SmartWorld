@@ -16,7 +16,7 @@ namespace Test.Desktop
         static void Main(string[] args)
         {
             IotApi iotApi = new IotApi()
-                .UseXmlRpc("http://192.168.0.222:2001");
+                .UseXmlRpc("http://192.168.204.99:2001");
             
             iotApi.Open();
 
@@ -24,14 +24,13 @@ namespace Test.Desktop
             Thread.Sleep(2000); // Wait two seconds
             Console.Clear();
 
-            Functions(iotApi);
+            Functions(iotApi).Wait();
 
         }
 
 
         static private int RecursiveChoice(int minVal, int maxVal)
         {
-            Console.Write("You select: ");
             int input = Convert.ToInt32(Console.ReadLine());
             if (!(minVal <= input && input <= maxVal))
             {
@@ -47,7 +46,7 @@ namespace Test.Desktop
             Console.WriteLine(stringToDisplay);
         }
 
-        private static async void Functions(IotApi iotApi)
+        private static async Task Functions(IotApi iotApi)
         {
             // Function
             int funcChoice;
@@ -67,7 +66,7 @@ namespace Test.Desktop
                     break;
                 case 2:
                     Console.Clear();
-                    Sensors(iotApi);
+                    await Sensors(iotApi);
                     break;
             }
 
@@ -78,7 +77,7 @@ namespace Test.Desktop
             switch (RecursiveChoice(1, 2))
             {
                 case 1:
-                    Functions(iotApi);
+                    await Functions(iotApi);
                     break;
                 case 2:
                     Environment.Exit(2);
@@ -86,7 +85,7 @@ namespace Test.Desktop
             }
         }
 
-        private static void Sensors(IotApi ccu)
+        private static async Task Sensors(IotApi ccu)
         {
             int sensorChoice;
             Console.WriteLine("Choose the sensor you want to control: ");
@@ -101,24 +100,24 @@ namespace Test.Desktop
             switch (sensorChoice)
             {
                 case 1:
-                    Doors(ccu);
+                    await Doors(ccu);
                     break;
                 case 2:
-                    Weather(ccu);
+                    await Weather(ccu);
                     break;
                 case 3:
-                    Heater(ccu);
+                    await Heater(ccu);
                     break;
                 case 4:
-                    Dimmer(ccu);
+                    await Dimmer(ccu);
                     break;
                 case 5:
-                    Functions(ccu);
+                    await Functions(ccu);
                     break;
             }
         }
 
-        private static async void Doors(IotApi iotApi)
+        private static async Task Doors(IotApi iotApi)
         {
             // Door
             int commandChoice;
@@ -146,7 +145,7 @@ namespace Test.Desktop
                     Console.WriteLine(text);
                     break;
                 case 4:
-                    Sensors(iotApi);
+                    await Sensors(iotApi);
                     break;
             }
 
@@ -157,7 +156,7 @@ namespace Test.Desktop
             switch (RecursiveChoice(1, 2))
             {
                 case 1:
-                    Functions(iotApi);
+                    await Functions(iotApi);
                     break;
                 case 2:
                     Environment.Exit(2);
@@ -165,7 +164,7 @@ namespace Test.Desktop
             }
         }
 
-        private static async void Weather(IotApi iotApi)
+        private static async Task Weather(IotApi iotApi)
         {
             // Weather
             int commandChoice;
@@ -188,7 +187,7 @@ namespace Test.Desktop
                     Console.WriteLine("Humidity: " + text);
                     break;
                 case 3:
-                    Sensors(iotApi);
+                    await Sensors(iotApi);
                     break;
             }
 
@@ -199,7 +198,7 @@ namespace Test.Desktop
             switch (RecursiveChoice(1, 2))
             {
                 case 1:
-                    Functions(iotApi);
+                    await Functions(iotApi);
                     break;
                 case 2:
                     Environment.Exit(2);
@@ -207,7 +206,7 @@ namespace Test.Desktop
             }
         }
 
-        private static async void Heater(IotApi iotApi)
+        private static async Task Heater(IotApi iotApi)
         {
             // Heater
             int commandChoice;
@@ -250,7 +249,7 @@ namespace Test.Desktop
                     Console.WriteLine(text);
                     break;
                 case 5:
-                    Sensors(iotApi);
+                    await Sensors(iotApi);
                     break;
             }
 
@@ -261,7 +260,7 @@ namespace Test.Desktop
             switch (RecursiveChoice(1, 2))
             {
                 case 1:
-                    Functions(iotApi);
+                    await Functions(iotApi);
                     break;
                 case 2:
                     Environment.Exit(2);
@@ -269,7 +268,7 @@ namespace Test.Desktop
             }
         }
 
-        private static async void Dimmer(IotApi iotApi)
+        private static async Task Dimmer(IotApi iotApi)
         {
             // Dimmer
             int commandChoice;
@@ -297,12 +296,12 @@ namespace Test.Desktop
                     Console.WriteLine("5. MAXIMUM");
                     Console.WriteLine("6. Back to Dimmer Control");
                     int modeChoice = RecursiveChoice(1, 6);
-                    if (modeChoice == 6) Dimmer(iotApi);
+                    if (modeChoice == 6) await Dimmer(iotApi);
                     else text = await Command.SetHeaterMode(iotApi, modeChoice);
                     Console.WriteLine(text);
                     break;
                 case 3:
-                    Sensors(iotApi);
+                    await Sensors(iotApi);
                     break;
             }
 
@@ -313,7 +312,7 @@ namespace Test.Desktop
             switch (RecursiveChoice(1, 2))
             {
                 case 1:
-                    Functions(iotApi);
+                    await Functions(iotApi);
                     break;
                 case 2:
                     Environment.Exit(2);

@@ -22906,7 +22906,8 @@
     "UAP,Version=v10.0.10240": []
   },
   "packageFolders": {
-    "C:\\Users\\mhoshen\\.nuget\\packages\\": {}
+    "C:\\Users\\mhoshen\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "restore": {
@@ -22917,9 +22918,13 @@
       "packagesPath": "C:\\Users\\mhoshen\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\mhoshen\\Source\\Repos\\SmartWorld\\IotApi\\tests\\XmlRpcConnectorTests\\Test.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
       "configFilePaths": [
         "C:\\Users\\mhoshen\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "sources": {
         "C:\\GitHub\\Pack": {},
@@ -22943,7 +22948,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.2.2, )"
     },
     "frameworks": {
       "uap10.0.10240": {}

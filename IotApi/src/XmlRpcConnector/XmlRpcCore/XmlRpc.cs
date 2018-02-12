@@ -62,7 +62,7 @@ namespace XmlRpcCore
                     var res = proxy.SendRequest(requestStr).Result;
                     var response = proxy.DeserializeResponse(res);
 
-                    onSuccess?.Invoke(new List<object> { response });
+                    onSuccess?.Invoke(response);
                 }
                 catch (XmlRpcFaultException faultEx)
                 {
