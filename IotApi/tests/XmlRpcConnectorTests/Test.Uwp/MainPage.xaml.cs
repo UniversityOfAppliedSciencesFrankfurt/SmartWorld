@@ -27,15 +27,15 @@ namespace IOTBridge_GIT
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private IotApi m_Ccu = new IotApi();
+        private IotApi m_Api = new IotApi();
         int tagHeaterMode;
         int tagDimmerMode;
         public MainPage()
         {
             this.InitializeComponent();
             Settings sett = new Settings(); //default setting
-            m_Ccu.UseXmlRpc(sett.CcuUrl);
-            m_Ccu.Open();
+            m_Api.UseXmlRpc(sett.CcuUrl);
+            m_Api.Open();
         }
 
         /// <summary>
@@ -85,14 +85,7 @@ namespace IOTBridge_GIT
             },
             (error,ex) =>
             {
-                if (error.Count > 0)
-                {
-                    foreach (var er in error)
-                    {
-                        MethodFaultResponse faultRes = er as MethodFaultResponse;
-                        response = faultRes.Message;
-                    }
-                }
+                response = ex.Message;
             });
 
 
@@ -107,7 +100,7 @@ namespace IOTBridge_GIT
         private async void GetListDevices_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "DEVICES LIST get";
-            string m_Result =  await SendandReceive(m_Ccu, m_Request);
+            string m_Result =  await SendandReceive(m_Api, m_Request);
 
             ListDevices.Text = m_Result;
         }
@@ -121,7 +114,7 @@ namespace IOTBridge_GIT
         {
             string m_Request = "DOOR STATUS get";
             string m_State = "";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
             
             if (m_Result.ToLower() == "true") m_State = "Opened";
             if (m_Result.ToLower() == "false") m_State = "Closed";
@@ -138,7 +131,7 @@ namespace IOTBridge_GIT
         private async void OpenDoor_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "DOOR STATUS UNLOCK";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             DoorStatusValue.Text = m_Result;
 
@@ -153,7 +146,7 @@ namespace IOTBridge_GIT
         private async void CloseDoor_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "DOOR STATUS LOCK";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             DoorStatusValue.Text = m_Result;
 
@@ -168,7 +161,7 @@ namespace IOTBridge_GIT
         private async void GetTempSensor_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "TEMP_SENSOR TEMPERATURE get";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             WeatherResponse.Text = m_Result;
         }
@@ -181,7 +174,7 @@ namespace IOTBridge_GIT
         private async void GetHumiditySensor_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "TEMP_SENSOR HUMIDITY get";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             WeatherResponse.Text = m_Result;
         }
@@ -194,7 +187,7 @@ namespace IOTBridge_GIT
         private async void GetMode_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "HEATER MODE get";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             HeaterResponse.Text = m_Result;
         }
@@ -207,7 +200,7 @@ namespace IOTBridge_GIT
         private async void GetTempHeater_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "HEATER ACT_TEMP get";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             HeaterResponse.Text = m_Result;
         }
@@ -249,7 +242,7 @@ namespace IOTBridge_GIT
             }
 
             string m_Request = "HEATER MODE " + mode;
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             HeaterResponse.Text = m_Result;
         }
@@ -268,7 +261,7 @@ namespace IOTBridge_GIT
 
             tempValue = HeaterTempValue.Text;
             string m_Request = "HEATER SET_TEMP " + tempValue;
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             HeaterResponse.Text = m_Result;
         }
@@ -320,7 +313,7 @@ namespace IOTBridge_GIT
             }
 
             string m_Request = "DIMMER STATE " + mode;
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             DimmerResponse.Text = m_Result;
         }
@@ -333,7 +326,7 @@ namespace IOTBridge_GIT
         private async void GetDimmer_Click(object sender, RoutedEventArgs e)
         {
             string m_Request = "DIMMER STATE get";
-            string m_Result = await SendandReceive(m_Ccu, m_Request);
+            string m_Result = await SendandReceive(m_Api, m_Request);
 
             switch (m_Result)
             {
