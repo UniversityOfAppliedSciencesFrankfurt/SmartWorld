@@ -58,19 +58,19 @@ namespace ProfinetConnector
         {
             if (args != null)
             {
-                var value = args.Where(d => d.Value.GetType() == typeof(IReadMessage)).FirstOrDefault();
+                var value = args.Where(d => d.Value is IReadMessage).FirstOrDefault();
 
                 if (value.Value is IReadMessage)
                 {
-                    var iRmgs = value.Value as IReadMessage;
+                    var iRmgs = propertiesValidate(value.Value) as IReadMessage;
 
-                    var result = await m_Client.ReadAnyAsync(iRmgs.Area, iRmgs.Offset, iRmgs.Type, iRmgs.Arg);
+                    var result = await m_Client.ReadAnyAsync(iRmgs.Area, iRmgs.Offset, iRmgs.Type, iRmgs.Args);
 
                     return result;
                 }
                 else
                 {
-                    throw new Exception("");
+                    throw new Exception("You have to give 'IReadMessage' as value of 'args'");
                 }
             }else
             {
@@ -142,7 +142,7 @@ namespace ProfinetConnector
         {
             if (sensorMessage is ISensorMessage)
             {
-                var iSMgs = sensorMessage as ISensorMessage;
+                var iSMgs = propertiesValidate(sensorMessage)  as ISensorMessage;
 
                 //Write an array of bytes to the PLC. 
                 await m_Client.WriteAnyAsync(iSMgs.Area, iSMgs.Offset, iSMgs.Value, iSMgs.Args);
@@ -151,6 +151,49 @@ namespace ProfinetConnector
             {
                 onError?.Invoke(new ProfinetException($"You have to send '{nameof(ISensorMessage)}'."));
             }
+        }
+
+
+        /// <summary>
+        /// Validate properties of ISensorMessage and IReadMessage
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private object propertiesValidate(object obj)
+        {
+            if(obj is ISensorMessage)
+            {
+                var send = obj as ISensorMessage;
+
+                if (send.Area == 0)
+                    throw new ProfinetException("ISensorMessage.Area should not be null");
+                if (send.Offset == 0)
+                    throw new ProfinetException("ISensorMessage.Offset should not be null");
+                if(send.Value == null)
+                    throw new ProfinetException("ISensorMessage.Value should not be null");
+                if (send.Args.Count() <= 0)
+                    throw new ProfinetException("ISensorMessage.Args should not be null");
+                
+                return send;
+
+            }
+            else if(obj is IReadMessage)
+            {
+                var read = obj as IReadMessage;
+
+                if (read.Area == 0)
+                    throw new ProfinetException("IReadMessage.Area should not be null");
+                if (read.Offset == 0)
+                    throw new ProfinetException("IReadMessage.Offset should not be null");
+                if (read.Type == null)
+                    throw new ProfinetException("IReadMessage.Type should not be null");
+                if (read.Args.Count() <= 0)
+                    throw new ProfinetException("IReadMessage.Args should not be null");
+                
+                return read;
+            }
+            
+            return null;
         }
     }
 }
