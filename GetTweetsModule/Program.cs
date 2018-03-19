@@ -99,8 +99,8 @@ namespace GetTweetsModule
 
             // Open a connection to the Edge runtime
             DeviceClient ioTHubModuleClient = DeviceClient.CreateFromConnectionString(connectionString, settings);
-             
-             //Call back for desired properties update
+
+            //Call back for desired properties update
             await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(onDesiredPropertiesUpdate, ioTHubModuleClient);
             var twin = await ioTHubModuleClient.GetTwinAsync();
             await onDesiredPropertiesUpdate(twin.Properties.Desired, ioTHubModuleClient);
@@ -108,10 +108,8 @@ namespace GetTweetsModule
             await ioTHubModuleClient.OpenAsync();
             Console.WriteLine("IoT Hub module client initialized.");
 
-            var thread = new Thread(()=>threadBody(ioTHubModuleClient));
+            var thread = new Thread(() => threadBody(ioTHubModuleClient));
             thread.Start();
-
-            Thread.Sleep(5000);
         }
 
         /// <summary>
@@ -120,18 +118,25 @@ namespace GetTweetsModule
         /// <param name="userContext"></param>
         private static void threadBody(object userContext)
         {
-             var deviceClient = userContext as DeviceClient;
+            var deviceClient = userContext as DeviceClient;
             if (deviceClient == null)
             {
                 throw new InvalidOperationException("UserContext doesn't contain " + "expected values");
             }
 
-            var credential = Twitter.getCredential(m_ConsumerKey,m_ConsumerSecret);
-            var token = Twitter.getToken(credential);
-            var tweetId = Twitter.getTweetId(m_TwitterUserName,1,token);
-            var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tweetId)));
+            var credential = Twitter.getCredential(m_ConsumerKey, m_ConsumerSecret);
+            
+            while (true)
+            {
+                var token = Twitter.getToken(credential);
+                var tweetId = Twitter.getTweetId(m_TwitterUserName, 1, token);
+                var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tweetId)));
 
-            deviceClient.SendEventAsync("output1",message).Wait();
+                deviceClient.SendEventAsync("tweetOutput", message).Wait();
+                Console.WriteLine("Event has been sent to tweetOutput endpoint.");
+
+                Thread.Sleep(5000);
+            }
         }
 
         private static async Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
@@ -148,12 +153,12 @@ namespace GetTweetsModule
                 }
 
                 //Update device twin
-               var reportedProperties =  getDesiredProperties(desiredProperties);
+                var reportedProperties = getDesiredProperties(desiredProperties);
 
-               if(reportedProperties.Count > 0)
-               {
-                   await deviceClient.UpdateReportedPropertiesAsync(reportedProperties).ConfigureAwait(false);
-               }
+                if (reportedProperties.Count > 0)
+                {
+                    await deviceClient.UpdateReportedPropertiesAsync(reportedProperties).ConfigureAwait(false);
+                }
 
             }
             catch (AggregateException ex)
@@ -164,7 +169,7 @@ namespace GetTweetsModule
                     Console.WriteLine("Error when receiving desired property: {0}", exception);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }

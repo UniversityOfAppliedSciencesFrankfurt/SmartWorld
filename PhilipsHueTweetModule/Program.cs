@@ -217,10 +217,12 @@ namespace PhilipsHueTweetModule
                     var tweet = Interlocked.Exchange<string>(ref oldTweetId, newTweetId);
 
                     await SwitchOnLight();
-                    Task.Delay(500).Wait();
+                    Task.Delay(5000).Wait();
                     await SwitchOffLight();
                 }
             }
+            await deviceClient.SendEventAsync("hueOutput", new Message(messageBytes));
+            
             return MessageResponse.Completed;
         }
 
