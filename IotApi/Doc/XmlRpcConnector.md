@@ -78,4 +78,4 @@ api.Open();
        }
    }).Result;
 ```
-
+You can see more test and application with XmlRpc [here](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/tree/netcore-dev/IotApi/tests/XmlRpcConnectorTests)

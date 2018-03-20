@@ -97,3 +97,5 @@ api.SendAsync(publish, (succ) =>
     var er = error;
 }).Wait();
 ```
+
+For more test see [here.](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/IotApi/tests/MQTTsnClientUnitTest/UnitTest1.cs)

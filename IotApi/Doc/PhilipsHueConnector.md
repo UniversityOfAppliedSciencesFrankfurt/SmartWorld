@@ -137,3 +137,5 @@ var result = api.SendAsync(new SerarchNewLights()
  }).Result;
 ```
 
+For more tests click [here](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/IotApi/tests/PhilipsHueUnitTest/UnitTest.cs)
+
