@@ -118,4 +118,4 @@ IotApi api = new IotApi().
                 null).Wait();
 ```
 ## How-to guides
-Read more about IotApi modules in 'IotApi/Doc'
+Read more about IotApi modules in [documentation](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/tree/netcore-dev/IotApi/Doc).
