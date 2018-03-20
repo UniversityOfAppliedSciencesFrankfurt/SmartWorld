@@ -114,11 +114,9 @@ namespace GetTweetsMention
             await ioTHubModuleClient.OpenAsync();
             Console.WriteLine("IoT Hub module client initialized.");
 
-           
-                var thread = new Thread(()=> PipeMessage(ioTHubModuleClient));
-                thread.Start();
 
-            Thread.Sleep(60000);
+            var thread = new Thread(() => PipeMessage(ioTHubModuleClient));
+            thread.Start();
         }
 
         /// <summary>
@@ -128,11 +126,16 @@ namespace GetTweetsMention
         /// </summary>
         private static void PipeMessage(object userContext)
         {
-            var tweetId = getMention();
-            var deviceClient = userContext as DeviceClient;
-            var mgs = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("tweetId")));
+            while (true)
+            {
+                var tweetId = getMention();
+                var deviceClient = userContext as DeviceClient;
+                var mgs = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tweetId)));
 
-            deviceClient.SendEventAsync("output1",mgs).Wait();
+                deviceClient.SendEventAsync("output1", mgs).Wait();
+
+                Thread.Sleep(60000);
+            }
         }
 
         private static async Task onDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
@@ -149,12 +152,12 @@ namespace GetTweetsMention
                 }
 
                 //Update device twin
-               var reportedProperties =  getDesiredProperties(desiredProperties);
+                var reportedProperties = getDesiredProperties(desiredProperties);
 
-               if(reportedProperties.Count > 0)
-               {
-                   await deviceClient.UpdateReportedPropertiesAsync(reportedProperties).ConfigureAwait(false);
-               }
+                if (reportedProperties.Count > 0)
+                {
+                    await deviceClient.UpdateReportedPropertiesAsync(reportedProperties).ConfigureAwait(false);
+                }
 
             }
             catch (AggregateException ex)
@@ -165,7 +168,7 @@ namespace GetTweetsMention
                     Console.WriteLine("Error when receiving desired property: {0}", exception);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -230,7 +233,7 @@ namespace GetTweetsMention
         private static string getMention()
         {
             string tweetId = string.Empty;
-           try
+            try
             {
                 var auth = new SingleUserAuthorizer()
                 {
@@ -247,16 +250,16 @@ namespace GetTweetsMention
                 var twitterCtx = new TwitterContext(auth);
 
                 var tweets = (from t in twitterCtx.Status
-                            where t.Type == StatusType.Mentions &&
-                            t.Count == 1
-                            select t).ToList();
+                              where t.Type == StatusType.Mentions &&
+                              t.Count == 1
+                              select t).ToList();
 
                 foreach (var tweet in tweets)
                 {
                     tweetId = tweet.StatusID.ToString();
                     System.Console.WriteLine($"Mention Id: {tweet.StatusID}");
                 }
-                
+
             }
             catch (Exception ex)
             {
