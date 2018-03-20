@@ -1,6 +1,7 @@
 # SmartWorld - .NET Core
 Projects related to IoT, Industrie 4.0 and IoT. This repository contains a C#/.NET IotApi, which wraps up a several protocols under unified API. 
 By using of various connector implementations, one can connect to different IoT devices and/or cloud services via same API.  
+![](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/IotApi/Doc/Images/apiapp.jpg "IoT API with App")
 
 ## Architectural Concept
 Architectural concept of IotApi -
