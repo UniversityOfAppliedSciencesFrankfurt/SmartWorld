@@ -21,9 +21,15 @@ Architectural concept of IotApi -
 ![](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/IotApi/Doc/Images/ArConcept.jpg "Architectural Concept")
 
 ## Develop a module
-Showing step by step how to create a module  
+IInjectableModule should be inherited from one of the class of newly integrated module (protocol) solution, shown in Figure and in Code Snippet. 
+It is very simple to integrate a new module with IoT API just follow three steps below. 
+
+![](https://github.com/UniversityOfAppliedSciencesFrankfurt/SmartWorld/blob/netcore-dev/IotApi/Doc/Images/moduleImplement.jpg "Inherited IInjectableModule")
+
 1. Clone or create nuget package for IotApi for using in your project. 
-2. Add a class in project and inherits one of the modules (ISendModule, IReceiveModule, IAcknowledgeModule),  for example, DummyModule.cs inherits ISendModule. 
+2. Add a class with the module solution and inherits one of IInjectableModule or IInjectableModule itself. In Code Snippet DummyModule class inherits ISendModule.
+3. Write all overridden functions, for example, two SendAsync function for sending message to remote endpoint, Open function for establishing the connection with endpoint and NexSendModule property is for having the next module in the pipeline.
+
 ```C#
  public class DummyModule : ISendModule
     {
