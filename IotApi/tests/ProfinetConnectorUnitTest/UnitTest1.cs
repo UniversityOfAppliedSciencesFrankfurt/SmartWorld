@@ -19,7 +19,7 @@ namespace ProfinetConnectorUnitTest
             int offset = 10; //The offset is the number of bytes from the beginning of the area
             int dbNumber = 560;
 
-            var mgs = new SensorMessage()
+            var mgs = new SensorMessage() //ISensorMessage
             {
                 Area = PlcArea.DB,
                 Offset = offset,
@@ -52,7 +52,7 @@ namespace ProfinetConnectorUnitTest
             var dbNumber = 1;
 
             var rMgs = new Dictionary<string, object>();
-            rMgs.Add("readMessage", new ReadMessage()
+            rMgs.Add("readMessage", new ReadMessage() //IReadMessage
             {
                 Area = PlcArea.DB,
                 Offset = offset * 8,
