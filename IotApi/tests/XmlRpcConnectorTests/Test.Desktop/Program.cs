@@ -16,7 +16,7 @@ namespace Test.Desktop
         static void Main(string[] args)
         {
             IotApi iotApi = new IotApi()
-                .UseXmlRpc("http://192.168.204.99:2001");
+                .UseXmlRpc("http://192.168.0.222:2001");
             
             iotApi.Open();
 

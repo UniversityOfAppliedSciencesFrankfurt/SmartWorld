@@ -13,7 +13,7 @@ namespace Test.Uwp
 
         public Settings()
         {
-            CcuUrl = "http://192.168.204.99:2001";
+            CcuUrl = "http://192.168.0.222:2001";
             Timeout = new TimeSpan(5000);
         }
 
